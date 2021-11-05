@@ -127,7 +127,7 @@ def plot(filename):
         "sample_" + filename[42:-4] + ".jpg"
     print("save_filename", save_filename)
     plt.savefig(save_filename)
-    # plt.show()
+    plt.show()
 
     return figure
 
@@ -143,12 +143,19 @@ if __name__ == "__main__":
             # print(file_name,"\n")
             files.append(file_name)
 
-    print("name of folder_signal :  ", *files, sep="\n")
+            file = "signals_TEST/live_scan_data.csv"
+        #file_name = os.path.join(folder_signal, file)
+
+    file = "signals_TEST/live_scan_data.csv"
+
+    fig =plot(file)
+
 
     # exit()
 
     for file in files:
         print("\n \n loop", file)
         plot(file)
+
         break
     # plt.plot(tdx,tdy)

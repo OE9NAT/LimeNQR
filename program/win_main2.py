@@ -167,7 +167,7 @@ class window_main(tk.Tk):
 
         try:
             # for linux
-             log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+            log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
             self.wm_iconbitmap(bitmap=log_path)
         except:
             # for windows
@@ -521,8 +521,8 @@ class window_main(tk.Tk):
 
     def plot_live(self, s1="", t1="", s2="", t2=""):
         t = np.arange(0.0, 2.0, 0.01)
-        s1 = np.sin(2*np.pi*t)
-        s2 = np.sin(4*np.pi*t)
+        s1 = np.sin(20*np.pi*t)
+        s2 = np.sin(40*np.pi*t)
 
         #file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
         #file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
@@ -538,9 +538,11 @@ class window_main(tk.Tk):
         #print("data firt list ", data[0])
         del data[0]  # ['frequency', 'amplitude'] remove description from colems
 
-        data_fequency = [data[i][0] for i, val in enumerate(data)]
-        data_amplitude = [data[i][1] for i, val in enumerate(data)]
+        data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
+        data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
         #print("data_feq", *data_fequency, sep="\n")
+        #print("data_fequency",type(data_fequen[0])
+        #print("data_amplitude",data_amplitude)
 
         #fig = plt.figure(figsize=(1, 2))
         fig = plt.figure()
@@ -549,17 +551,21 @@ class window_main(tk.Tk):
         fig.set_canvas(self)
 
         # set the spacing between subplots
-        plt.subplots_adjust(left=0.07, bottom=0.06, right=0.99,
-                            top=0.9, wspace=0.4, hspace=0.4)
+        plt.subplots_adjust(left=0.1, bottom=0.12, right=0.99,
+                            top=0.9, wspace=0.4, hspace=0.6)
 
         time_plot = plt.subplot(211)
         plt.plot(t, s1)
         time_plot.title.set_text("Time")
+        time_plot.set_xlabel('time [s]')
+        time_plot.set_ylabel('Amplituden [V]')
         plt.grid()
 
         feq_plot = plt.subplot(212)
-        plt.plot(data_fequency, data_amplitude)
+        plt.plot(data_fequency,data_amplitude)
         feq_plot.title.set_text("Frequency")
+        feq_plot.set_xlabel('Frequency [kHz]')
+        feq_plot.set_ylabel('Amplituden [V]')
         plt.grid()
 
         return fig
