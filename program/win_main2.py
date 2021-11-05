@@ -10,6 +10,8 @@ import PIL.Image as image
 import tkinter.ttk as TTK  # use for Combobox
 from PIL import ImageTk, Image  # .jpg
 
+import csv
+
 import logging  # DEBUG INFO WARNING ERROR
 #from logging.handlers import QueueHandler
 # logging.basicConfig(filename="../log/win_main_log.log",
@@ -518,6 +520,24 @@ class window_main(tk.Tk):
         s1 = np.sin(2*np.pi*t)
         s2 = np.sin(4*np.pi*t)
 
+        #file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
+        #file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
+
+        file = "signals_TEST/live_scan_data.csv"
+        #file_name = os.path.join(folder_signal, file)
+
+        with open(file, newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+            data = [data for data in spamreader]
+        #print("data .csv\n", *data)
+
+        #print("data firt list ", data[0])
+        del data[0]  # ['frequency', 'amplitude'] remove description from colems
+
+        data_fequency = [data[i][0] for i, val in enumerate(data)]
+        data_amplitude = [data[i][1] for i, val in enumerate(data)]
+        #print("data_feq", *data_fequency, sep="\n")
+
         #fig = plt.figure(figsize=(1, 2))
         fig = plt.figure()
         fig.set_size_inches(6, 4.0, forward=True)
@@ -534,25 +554,9 @@ class window_main(tk.Tk):
         plt.grid()
 
         feq_plot = plt.subplot(212)
-        plt.plot(t, 2*s1)
+        plt.plot(data_fequency, data_amplitude)
         feq_plot.title.set_text("Frequency")
         plt.grid()
-
-        #file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
-        file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
-
-        csv = np.genfromtxt(file, delimiter=",")
-        print("csv file", csv)
-
-        import csv
-        with open(file, newline='') as csvfile:
-            spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-
-        # with open(file,'r') as dest_f:
-            print("test")
-            # data_iter = csv.reader(dest_f,delimiter=' ')#,quotechar = '"')
-            data = [data for data in spamreader]
-        print("data .csv/n", *data)
 
         return fig
 
