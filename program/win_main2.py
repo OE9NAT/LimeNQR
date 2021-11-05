@@ -162,13 +162,17 @@ class window_main(tk.Tk):
         self.title(
             "Magnetic Resonance Imaging - Contrast Agent Analyser Controller - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-        log_path = "@/" + \
-            os.path.abspath(os.path.dirname(
-                sys.argv[0])) + "/program/stethoskop.xbm"
-        # linux
-        log_path = os.path.abspath(os.path.dirname(
-            sys.argv[0])) + "/program/stethoskop.xbm"
-        self.wm_iconbitmap(bitmap=log_path)
+       
+    
+
+        try:
+            # for linux
+             log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+            self.wm_iconbitmap(bitmap=log_path)
+        except:
+            # for windows
+            log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+            self.wm_iconbitmap(bitmap=log_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.geometry("1000x750+100+10")
         self.option_add("Helvetica", '10')  # Frischart und groesse

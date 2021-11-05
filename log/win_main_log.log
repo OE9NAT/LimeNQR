@@ -44315,3 +44315,223 @@ root ______  2021-11-05 15:32:08,952 : INFO :
  Values were correktly imported
 win_main ______  2021-11-05 15:32:08,953 : INFO : 
  __ END win_main2 start class window_main 
+matplotlib ______  2021-11-05 21:19:25,689 : DEBUG : 
+ CONFIGDIR=/home/pi/.config/matplotlib
+matplotlib ______  2021-11-05 21:19:25,697 : DEBUG : 
+ matplotlib data path: /usr/share/matplotlib/mpl-data
+matplotlib ______  2021-11-05 21:19:25,697 : DEBUG : 
+ loaded rc file /etc/matplotlibrc
+matplotlib ______  2021-11-05 21:19:25,706 : DEBUG : 
+ matplotlib version 3.0.2
+matplotlib ______  2021-11-05 21:19:25,707 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 21:19:25,707 : DEBUG : 
+ platform is linux
+matplotlib ______  2021-11-05 21:19:25,707 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'posix', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'posixpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'sitecustomize', 'pip', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'fnmatch', 'ntpath', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', '_posixsubprocess', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'pwd', 'grp', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_23', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'urllib.request', 'email', 'http', 'http.client', 'email.parser', 'email.feedparser', 'email.errors', 'email._policybase', 'email.header', 'email.quoprimime', 'email.base64mime', 'email.charset', 'email.encoders', 'quopri', 'email.utils', 'email._parseaddr', 'calendar', 'email.message', 'uu', 'email._encoded_words', 'email.iterators', 'ssl', '_ssl', 'urllib.error', 'urllib.response', 'matplotlib.cbook', 'glob', 'gzip', 'matplotlib.cbook.deprecation', 'matplotlib.rcsetup', 'matplotlib.fontconfig_pattern', 'pyparsing', 'copy', 'matplotlib.colors', 'matplotlib._color_data', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'dateutil', 'dateutil._version']
+matplotlib ______  2021-11-05 21:19:25,835 : DEBUG : 
+ $HOME=/home/pi
+matplotlib ______  2021-11-05 21:19:25,836 : DEBUG : 
+ CACHEDIR=/home/pi/.cache/matplotlib
+matplotlib.font_manager ______  2021-11-05 21:19:25,841 : DEBUG : 
+ Using fontManager instance from /home/pi/.cache/matplotlib/fontlist-v300.json
+matplotlib.pyplot ______  2021-11-05 21:19:26,269 : DEBUG : 
+ Loaded backend TkAgg version unknown.
+GUI ______  2021-11-05 21:19:26,289 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 21:19:26,297 : INFO : 
+ logger import function
+win_main ______  2021-11-05 21:19:26,297 : INFO : 
+ logging from start up
+h5py._conv ______  2021-11-05 21:19:26,360 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:19:26,360 : DEBUG : 
+ Creating converter from 5 to 7
+h5py._conv ______  2021-11-05 21:19:26,361 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:19:26,361 : DEBUG : 
+ Creating converter from 5 to 7
+win_main ______  2021-11-05 21:19:26,460 : INFO : 
+ logging from win_main2 start up
+win_main ______  2021-11-05 21:19:26,495 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 21:19:26,499 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 21:19:26,707 : INFO : 
+ start__ win_main2 start class window_main init
+matplotlib ______  2021-11-05 21:21:24,877 : DEBUG : 
+ CONFIGDIR=/home/pi/.config/matplotlib
+matplotlib ______  2021-11-05 21:21:24,887 : DEBUG : 
+ matplotlib data path: /usr/share/matplotlib/mpl-data
+matplotlib ______  2021-11-05 21:21:24,887 : DEBUG : 
+ loaded rc file /etc/matplotlibrc
+matplotlib ______  2021-11-05 21:21:24,896 : DEBUG : 
+ matplotlib version 3.0.2
+matplotlib ______  2021-11-05 21:21:24,896 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 21:21:24,896 : DEBUG : 
+ platform is linux
+matplotlib ______  2021-11-05 21:21:24,897 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'posix', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'posixpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'sitecustomize', 'pip', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'fnmatch', 'ntpath', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', '_posixsubprocess', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'pwd', 'grp', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_23', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'urllib.request', 'email', 'http', 'http.client', 'email.parser', 'email.feedparser', 'email.errors', 'email._policybase', 'email.header', 'email.quoprimime', 'email.base64mime', 'email.charset', 'email.encoders', 'quopri', 'email.utils', 'email._parseaddr', 'calendar', 'email.message', 'uu', 'email._encoded_words', 'email.iterators', 'ssl', '_ssl', 'urllib.error', 'urllib.response', 'matplotlib.cbook', 'glob', 'gzip', 'matplotlib.cbook.deprecation', 'matplotlib.rcsetup', 'matplotlib.fontconfig_pattern', 'pyparsing', 'copy', 'matplotlib.colors', 'matplotlib._color_data', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'dateutil', 'dateutil._version']
+matplotlib ______  2021-11-05 21:21:25,014 : DEBUG : 
+ $HOME=/home/pi
+matplotlib ______  2021-11-05 21:21:25,015 : DEBUG : 
+ CACHEDIR=/home/pi/.cache/matplotlib
+matplotlib.font_manager ______  2021-11-05 21:21:25,019 : DEBUG : 
+ Using fontManager instance from /home/pi/.cache/matplotlib/fontlist-v300.json
+matplotlib.pyplot ______  2021-11-05 21:21:25,321 : DEBUG : 
+ Loaded backend TkAgg version unknown.
+GUI ______  2021-11-05 21:21:25,336 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 21:21:25,339 : INFO : 
+ logger import function
+win_main ______  2021-11-05 21:21:25,340 : INFO : 
+ logging from start up
+h5py._conv ______  2021-11-05 21:21:25,386 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:21:25,386 : DEBUG : 
+ Creating converter from 5 to 7
+h5py._conv ______  2021-11-05 21:21:25,386 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:21:25,387 : DEBUG : 
+ Creating converter from 5 to 7
+win_main ______  2021-11-05 21:21:25,470 : INFO : 
+ logging from win_main2 start up
+win_main ______  2021-11-05 21:21:25,476 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 21:21:25,479 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 21:21:25,664 : INFO : 
+ start__ win_main2 start class window_main init
+win_main ______  2021-11-05 21:21:26,415 : INFO : 
+ win_main2 start class window_main init
+win_main ______  2021-11-05 21:21:26,526 : INFO : 
+ win_main2 start class window_main menuleiste
+win_main ______  2021-11-05 21:21:26,581 : INFO : 
+ win_main2 start class window_main lable and button
+matplotlib.axes._base ______  2021-11-05 21:21:26,830 : DEBUG : 
+ update_title_pos
+matplotlib.font_manager ______  2021-11-05 21:21:26,869 : DEBUG : 
+ findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/usr/share/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+matplotlib.font_manager ______  2021-11-05 21:21:26,975 : DEBUG : 
+ findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('/usr/share/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+matplotlib.axes._base ______  2021-11-05 21:21:26,979 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:21:28,249 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:21:28,323 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:21:29,226 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:21:29,298 : DEBUG : 
+ update_title_pos
+win_main ______  2021-11-05 21:21:30,203 : INFO : 
+ win_main2 start class window_main plot update
+win_main ______  2021-11-05 21:21:30,218 : INFO : 
+ win_main2 start class window_main logger
+root ______  2021-11-05 21:21:30,223 : INFO : 
+ Values were correktly imported
+win_main ______  2021-11-05 21:21:30,226 : INFO : 
+ __ END win_main2 start class window_main 
+matplotlib ______  2021-11-05 21:23:53,843 : DEBUG : 
+ CONFIGDIR=/home/pi/.config/matplotlib
+matplotlib ______  2021-11-05 21:23:53,851 : DEBUG : 
+ matplotlib data path: /usr/share/matplotlib/mpl-data
+matplotlib ______  2021-11-05 21:23:53,851 : DEBUG : 
+ loaded rc file /etc/matplotlibrc
+matplotlib ______  2021-11-05 21:23:53,859 : DEBUG : 
+ matplotlib version 3.0.2
+matplotlib ______  2021-11-05 21:23:53,859 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 21:23:53,859 : DEBUG : 
+ platform is linux
+matplotlib ______  2021-11-05 21:23:53,859 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'posix', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'posixpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'sitecustomize', 'pip', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'fnmatch', 'ntpath', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', '_posixsubprocess', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'pwd', 'grp', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_23', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'urllib.request', 'email', 'http', 'http.client', 'email.parser', 'email.feedparser', 'email.errors', 'email._policybase', 'email.header', 'email.quoprimime', 'email.base64mime', 'email.charset', 'email.encoders', 'quopri', 'email.utils', 'email._parseaddr', 'calendar', 'email.message', 'uu', 'email._encoded_words', 'email.iterators', 'ssl', '_ssl', 'urllib.error', 'urllib.response', 'matplotlib.cbook', 'glob', 'gzip', 'matplotlib.cbook.deprecation', 'matplotlib.rcsetup', 'matplotlib.fontconfig_pattern', 'pyparsing', 'copy', 'matplotlib.colors', 'matplotlib._color_data', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'dateutil', 'dateutil._version']
+matplotlib ______  2021-11-05 21:23:53,968 : DEBUG : 
+ $HOME=/home/pi
+matplotlib ______  2021-11-05 21:23:53,969 : DEBUG : 
+ CACHEDIR=/home/pi/.cache/matplotlib
+matplotlib.font_manager ______  2021-11-05 21:23:53,973 : DEBUG : 
+ Using fontManager instance from /home/pi/.cache/matplotlib/fontlist-v300.json
+matplotlib.pyplot ______  2021-11-05 21:23:54,287 : DEBUG : 
+ Loaded backend TkAgg version unknown.
+GUI ______  2021-11-05 21:23:54,301 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 21:23:54,306 : INFO : 
+ logger import function
+win_main ______  2021-11-05 21:23:54,306 : INFO : 
+ logging from start up
+matplotlib ______  2021-11-05 21:29:39,877 : DEBUG : 
+ CONFIGDIR=/home/pi/.config/matplotlib
+matplotlib ______  2021-11-05 21:29:39,885 : DEBUG : 
+ matplotlib data path: /usr/share/matplotlib/mpl-data
+matplotlib ______  2021-11-05 21:29:39,885 : DEBUG : 
+ loaded rc file /etc/matplotlibrc
+matplotlib ______  2021-11-05 21:29:39,893 : DEBUG : 
+ matplotlib version 3.0.2
+matplotlib ______  2021-11-05 21:29:39,893 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 21:29:39,893 : DEBUG : 
+ platform is linux
+matplotlib ______  2021-11-05 21:29:39,893 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'posix', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'posixpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'sitecustomize', 'pip', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'fnmatch', 'ntpath', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', '_posixsubprocess', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'pwd', 'grp', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_23', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'urllib.request', 'email', 'http', 'http.client', 'email.parser', 'email.feedparser', 'email.errors', 'email._policybase', 'email.header', 'email.quoprimime', 'email.base64mime', 'email.charset', 'email.encoders', 'quopri', 'email.utils', 'email._parseaddr', 'calendar', 'email.message', 'uu', 'email._encoded_words', 'email.iterators', 'ssl', '_ssl', 'urllib.error', 'urllib.response', 'matplotlib.cbook', 'glob', 'gzip', 'matplotlib.cbook.deprecation', 'matplotlib.rcsetup', 'matplotlib.fontconfig_pattern', 'pyparsing', 'copy', 'matplotlib.colors', 'matplotlib._color_data', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'dateutil', 'dateutil._version']
+matplotlib ______  2021-11-05 21:29:40,004 : DEBUG : 
+ $HOME=/home/pi
+matplotlib ______  2021-11-05 21:29:40,004 : DEBUG : 
+ CACHEDIR=/home/pi/.cache/matplotlib
+matplotlib.font_manager ______  2021-11-05 21:29:40,009 : DEBUG : 
+ Using fontManager instance from /home/pi/.cache/matplotlib/fontlist-v300.json
+matplotlib.pyplot ______  2021-11-05 21:29:40,310 : DEBUG : 
+ Loaded backend TkAgg version unknown.
+GUI ______  2021-11-05 21:29:40,325 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 21:29:40,329 : INFO : 
+ logger import function
+win_main ______  2021-11-05 21:29:40,329 : INFO : 
+ logging from start up
+h5py._conv ______  2021-11-05 21:29:40,375 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:29:40,375 : DEBUG : 
+ Creating converter from 5 to 7
+h5py._conv ______  2021-11-05 21:29:40,375 : DEBUG : 
+ Creating converter from 7 to 5
+h5py._conv ______  2021-11-05 21:29:40,376 : DEBUG : 
+ Creating converter from 5 to 7
+win_main ______  2021-11-05 21:29:40,459 : INFO : 
+ logging from win_main2 start up
+win_main ______  2021-11-05 21:29:40,465 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 21:29:40,467 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 21:29:40,659 : INFO : 
+ start__ win_main2 start class window_main init
+win_main ______  2021-11-05 21:29:41,408 : INFO : 
+ win_main2 start class window_main init
+win_main ______  2021-11-05 21:29:41,528 : INFO : 
+ win_main2 start class window_main menuleiste
+win_main ______  2021-11-05 21:29:41,601 : INFO : 
+ win_main2 start class window_main lable and button
+matplotlib.axes._base ______  2021-11-05 21:29:41,837 : DEBUG : 
+ update_title_pos
+matplotlib.font_manager ______  2021-11-05 21:29:41,879 : DEBUG : 
+ findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('/usr/share/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+matplotlib.font_manager ______  2021-11-05 21:29:41,982 : DEBUG : 
+ findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('/usr/share/matplotlib/mpl-data/fonts/ttf/DejaVuSans.ttf') with score of 0.050000.
+matplotlib.axes._base ______  2021-11-05 21:29:41,987 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:29:43,268 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:29:43,342 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:29:44,218 : DEBUG : 
+ update_title_pos
+matplotlib.axes._base ______  2021-11-05 21:29:44,296 : DEBUG : 
+ update_title_pos
+win_main ______  2021-11-05 21:29:45,201 : INFO : 
+ win_main2 start class window_main plot update
+win_main ______  2021-11-05 21:29:45,209 : INFO : 
+ win_main2 start class window_main logger
+root ______  2021-11-05 21:29:45,209 : INFO : 
+ Values were correktly imported
+win_main ______  2021-11-05 21:29:45,212 : INFO : 
+ __ END win_main2 start class window_main 
