@@ -1,0 +1,381 @@
+matplotlib ______  2021-11-05 12:03:01,288 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:03:01,446 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:03:01,470 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:03:01,470 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:03:01,471 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:03:01,471 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:03:01,704 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:03:01,817 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:03:02,399 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,399 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:03:02,400 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:03:04,058 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:03:04,061 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:03:04,291 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:03:04,302 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:03:04,302 : INFO : 
+ logging from start up
+win_main ______  2021-11-05 12:03:04,792 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 12:03:05,204 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 12:03:06,149 : INFO : 
+ logging from win_main2 start up
+matplotlib ______  2021-11-05 12:06:07,979 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:06:08,048 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:06:08,056 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:06:08,056 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:06:08,056 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:06:08,056 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:06:08,173 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:06:08,195 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,382 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:06:08,383 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:06:08,797 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:06:08,800 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:06:08,825 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:06:08,828 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:06:08,828 : INFO : 
+ logging from start up
+win_main ______  2021-11-05 12:06:08,847 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 12:06:08,853 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 12:06:08,919 : INFO : 
+ logging from win_main2 start up
+matplotlib ______  2021-11-05 12:44:23,125 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:44:23,149 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:44:23,154 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:44:23,154 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:44:23,154 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:44:23,154 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:44:23,194 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:44:23,203 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:44:23,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:44:23,387 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:44:23,387 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:44:23,403 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:44:23,407 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:44:23,407 : INFO : 
+ logging from start up
+win_main ______  2021-11-05 12:44:23,412 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 12:44:23,415 : INFO : 
+ Values loaded from load_setting
+matplotlib ______  2021-11-05 12:49:34,177 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:49:34,194 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:49:34,196 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:49:34,197 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:49:34,197 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:49:34,197 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:49:34,235 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:49:34,242 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:49:34,318 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,318 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:49:34,319 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:49:34,433 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:49:34,434 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:49:34,446 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:49:34,448 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:49:34,448 : INFO : 
+ logging from start up
+win_main ______  2021-11-05 12:49:34,452 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 12:49:34,455 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 12:49:34,668 : INFO : 
+ logging from win_main2 start up
+win_main ______  2021-11-05 12:49:34,845 : INFO : 
+ start__ win_main2 start class window_main init
+matplotlib ______  2021-11-05 12:51:40,365 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:51:40,384 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:51:40,388 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:51:40,388 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:51:40,388 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:51:40,388 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:51:40,420 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:51:40,428 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:51:40,496 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:51:40,655 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:51:40,655 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:51:40,686 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:51:40,688 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:51:40,689 : INFO : 
+ logging from start up
+matplotlib ______  2021-11-05 12:54:01,117 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:54:01,138 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:54:01,138 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:54:01,138 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:54:01,138 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:54:01,138 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:54:01,182 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:54:01,190 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:54:01,270 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,270 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,270 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:54:01,270 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:54:01,271 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:54:01,394 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:54:01,394 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:54:01,406 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:54:01,410 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:54:01,410 : INFO : 
+ logging from start up
+matplotlib ______  2021-11-05 12:57:30,407 : DEBUG : 
+ matplotlib data path: C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data
+matplotlib ______  2021-11-05 12:57:30,429 : DEBUG : 
+ CONFIGDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib ______  2021-11-05 12:57:30,432 : DEBUG : 
+ matplotlib version 3.4.0
+matplotlib ______  2021-11-05 12:57:30,432 : DEBUG : 
+ interactive is False
+matplotlib ______  2021-11-05 12:57:30,432 : DEBUG : 
+ platform is win32
+matplotlib ______  2021-11-05 12:57:30,432 : DEBUG : 
+ loaded modules: ['sys', 'builtins', '_frozen_importlib', '_imp', '_thread', '_warnings', '_weakref', 'zipimport', '_frozen_importlib_external', '_io', 'marshal', 'nt', 'winreg', 'encodings', 'codecs', '_codecs', 'encodings.aliases', 'encodings.utf_8', '_signal', '__main__', 'encodings.latin_1', 'io', 'abc', '_abc', 'site', 'os', 'stat', '_stat', 'ntpath', 'genericpath', 'os.path', '_collections_abc', '_sitebuiltins', '_bootlocale', '_locale', 'encodings.cp1252', 'types', 'importlib', 'importlib._bootstrap', 'importlib._bootstrap_external', 'warnings', 'importlib.util', 'importlib.abc', 'importlib.machinery', 'contextlib', 'collections', 'operator', '_operator', 'keyword', 'heapq', '_heapq', 'itertools', 'reprlib', '_collections', 'functools', '_functools', 'mpl_toolkits', 'pywin32_bootstrap', 'sphinxcontrib', 'pip', 'pip._internal', 'pip._internal.utils', 'pip._internal.utils.inject_securetransport', 'pip._internal.utils.typing', 'threading', 'time', 'traceback', 'linecache', 'tokenize', 're', 'enum', 'sre_compile', '_sre', 'sre_parse', 'sre_constants', 'copyreg', 'token', '_weakrefset', 'logging', 'weakref', 'collections.abc', 'string', '_string', 'atexit', 'logging.handlers', 'socket', '_socket', 'selectors', 'math', 'select', 'errno', 'pickle', 'struct', '_struct', '_compat_pickle', '_pickle', 'queue', '_queue', 'copy', 'numpy', 'numpy._globals', 'numpy.__config__', 'numpy.version', 'numpy._distributor_init', 'glob', 'fnmatch', 'posixpath', 'ctypes', '_ctypes', 'ctypes._endian', 'numpy.core', 'numpy.core.multiarray', 'numpy.core.overrides', 'textwrap', 'datetime', '_datetime', 'numpy.core._multiarray_umath', 'numpy.compat', 'numpy.compat._inspect', 'numpy.compat.py3k', 'pathlib', 'urllib', 'urllib.parse', 'numpy.core.umath', 'numpy.core.numerictypes', 'numbers', 'numpy.core._string_helpers', 'numpy.core._type_aliases', 'numpy.core._dtype', 'numpy.core.numeric', 'numpy.core.shape_base', 'numpy.core._asarray', 'numpy.core.fromnumeric', 'numpy.core._methods', 'numpy.core._exceptions', 'numpy.core._ufunc_config', 'numpy.core.arrayprint', 'numpy.core.defchararray', 'numpy.core.records', 'numpy.core.memmap', 'numpy.core.function_base', 'numpy.core.machar', 'numpy.core.getlimits', 'numpy.core.einsumfunc', 'numpy.core._add_newdocs', 'numpy.core._multiarray_tests', 'numpy.core._add_newdocs_scalars', 'numpy.core._dtype_ctypes', 'numpy.core._internal', 'ast', '_ast', 'platform', 'subprocess', 'signal', 'msvcrt', '_winapi', 'numpy._pytesttester', 'numpy.lib', 'numpy.lib.mixins', 'numpy.lib.scimath', 'numpy.lib.type_check', 'numpy.lib.ufunclike', 'numpy.lib.index_tricks', 'numpy.matrixlib', 'numpy.matrixlib.defmatrix', 'numpy.linalg', 'numpy.linalg.linalg', 'numpy.lib.twodim_base', 'numpy.linalg.lapack_lite', 'numpy.linalg._umath_linalg', 'numpy.lib.function_base', 'numpy.lib.histograms', 'numpy.lib.stride_tricks', 'numpy.lib.nanfunctions', 'numpy.lib.shape_base', 'numpy.lib.polynomial', 'numpy.lib.utils', 'numpy.lib.arraysetops', 'numpy.lib.npyio', 'numpy.lib.format', 'numpy.lib._datasource', 'shutil', 'zlib', 'bz2', '_compression', '_bz2', 'lzma', '_lzma', 'numpy.lib._iotools', 'numpy.lib.arrayterator', 'numpy.lib.arraypad', 'numpy.lib._version', 'numpy.fft', 'numpy.fft._pocketfft', 'numpy.fft._pocketfft_internal', 'numpy.fft.helper', 'numpy.polynomial', 'numpy.polynomial.polynomial', 'numpy.polynomial.polyutils', 'numpy.polynomial._polybase', 'numpy.polynomial.chebyshev', 'numpy.polynomial.legendre', 'numpy.polynomial.hermite', 'numpy.polynomial.hermite_e', 'numpy.polynomial.laguerre', 'numpy.random', 'numpy.random._pickle', 'numpy.random.mtrand', 'cython_runtime', 'numpy.random.bit_generator', '_cython_0_29_21', 'numpy.random._common', 'secrets', 'base64', 'binascii', 'hmac', '_hashlib', 'hashlib', '_blake2', '_sha3', 'random', 'bisect', '_bisect', '_random', 'numpy.random._bounded_integers', 'numpy.random._mt19937', 'numpy.random._philox', 'numpy.random._pcg64', 'numpy.random._sfc64', 'numpy.random._generator', 'numpy.ctypeslib', 'numpy.ma', 'numpy.ma.core', 'inspect', 'dis', 'opcode', '_opcode', 'numpy.ma.extras', 'tkinter', '_tkinter', 'tkinter.constants', 'GUI', 'matplotlib', 'distutils', 'distutils.version', 'locale', 'pprint', 'tempfile', 'matplotlib._api', 'matplotlib._api.deprecation', 'matplotlib.cbook', 'gzip', 'shlex', 'matplotlib._c_internal_utils', 'matplotlib.docstring', 'matplotlib.rcsetup', 'matplotlib.animation', 'uuid', 'PIL', 'PIL._version', 'PIL.Image', 'PIL.ImageMode', 'PIL.TiffTags', 'PIL._binary', 'PIL._util', 'PIL._imaging', 'cffi', 'cffi.api', 'cffi.lock', 'cffi.error', 'cffi.model', 'matplotlib._animation_data', 'matplotlib.colors', 'PIL.PngImagePlugin', 'PIL.ImageFile', 'PIL.ImagePalette', 'array', 'PIL.GimpGradientFile', 'PIL.GimpPaletteFile', 'PIL.ImageColor', 'PIL.PaletteFile', 'matplotlib.scale', 'matplotlib.ticker', 'matplotlib.transforms', 'matplotlib._path', 'matplotlib.path', 'matplotlib.bezier', 'matplotlib._color_data', 'matplotlib.fontconfig_pattern', 'pyparsing', 'matplotlib._enums', 'cycler', '__future__', 'six', 'six.moves', 'matplotlib._version', 'json', 'json.decoder', 'json.scanner', '_json', 'json.encoder', 'matplotlib.ft2font', 'dateutil', 'dateutil._version', 'kiwisolver', 'matplotlib.dates', 'dateutil.rrule', 'calendar', 'dateutil._common', 'dateutil.relativedelta', 'dateutil.parser', 'dateutil.parser._parser', 'decimal', '_decimal', 'dateutil.tz', 'dateutil.tz.tz', 'dateutil.tz._common', 'dateutil.tz._factories', 'dateutil.tz.win', 'ctypes.wintypes', 'dateutil.parser.isoparser', 'matplotlib.units']
+matplotlib ______  2021-11-05 12:57:30,474 : DEBUG : 
+ CACHEDIR=C:\Users\MALIN Philipp\.matplotlib
+matplotlib.font_manager ______  2021-11-05 12:57:30,474 : DEBUG : 
+ Using fontManager instance from C:\Users\MALIN Philipp\.matplotlib\fontlist-v330.json
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The text.latex.preview rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The mathtext.fallback_to_cm rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: Support for setting the 'mathtext.fallback_to_cm' rcParam is deprecated since 3.3 and will be removed two minor releases later; use 'mathtext.fallback : 'cm' instead.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The validate_bool_maybe_none function was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The savefig.jpeg_quality rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The keymap.all_axes rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_path rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.style.core ______  2021-11-05 12:57:30,566 : WARNING : 
+ In C:\ProgramData\Anaconda3\lib\site-packages\matplotlib\mpl-data\stylelib\_classic_test.mplstyle: 
+The animation.avconv_args rcparam was deprecated in Matplotlib 3.3 and will be removed two minor releases later.
+matplotlib.pyplot ______  2021-11-05 12:57:30,686 : DEBUG : 
+ Loaded backend qt5agg version unknown.
+matplotlib.pyplot ______  2021-11-05 12:57:30,686 : DEBUG : 
+ Loaded backend Qt5Agg version unknown.
+GUI ______  2021-11-05 12:57:30,696 : INFO : 
+ set upp logger in puls_win.py
+root ______  2021-11-05 12:57:30,704 : INFO : 
+ logger import function
+win_main ______  2021-11-05 12:57:30,704 : INFO : 
+ logging from start up
+win_main ______  2021-11-05 12:57:30,817 : INFO : 
+ logging from win_main2 start up
+win_main ______  2021-11-05 12:57:30,822 : INFO : 
+ logging from win_main2 start up
+root ______  2021-11-05 12:57:30,825 : INFO : 
+ Values loaded from load_setting
+win_main ______  2021-11-05 12:57:30,921 : INFO : 
+ start__ win_main2 start class window_main init
+win_main ______  2021-11-05 12:57:31,030 : INFO : 
+ win_main2 start class window_main init
+win_main ______  2021-11-05 12:57:31,170 : INFO : 
+ win_main2 start class window_main menuleiste
+win_main ______  2021-11-05 12:57:31,317 : INFO : 
+ win_main2 start class window_main lable and button
