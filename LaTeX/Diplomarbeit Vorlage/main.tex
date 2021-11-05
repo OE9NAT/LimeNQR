@@ -1,0 +1,191 @@
+% !TeX spellcheck = en_US
+
+\documentclass[a4paper,11pt]{book}
+
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+%\usepackage[utf8]{inputenc} %fuers ue
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{siunitx}
+%\usepackage[ngerman]{babel} %rechtschreibung?, silbentrennung
+\usepackage{float}
+\usepackage{caption}
+\usepackage[font=small, format=plain, labelfont=bf, textfont=it]{caption} %format figure captions
+\usepackage{textcomp} %extra symbole
+\usepackage{fancyhdr} %Kopfzeile fancy package bestimmt seitenlayout
+\usepackage{subfigure}
+%\usepackage{setspace} %fuer Absatzabstaende
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[raggedright]{titlesec}
+\usepackage{lmodern}
+\usepackage{array,multirow,graphicx}
+\usepackage{url}
+\usepackage{hyperref} %erzeugt im pdf links
+\usepackage{scrextend}
+
+\setlength{\belowcaptionskip}{-10pt}
+
+%\singlespacing
+
+\setlength{\headheight}{15.2pt} %Seitenraender und Format
+\textwidth=15cm
+\textheight=21cm %vorher 21cm (war mal 22cm)
+\topmargin=10pt
+\oddsidemargin=1cm
+\evensidemargin=0cm
+
+\setcounter{secnumdepth}{4} %Tiefe der Nummerierung
+\setcounter{tocdepth}{4}
+\setlength{\parskip}{0.5cm} %Abstand beim Absatz (einruecken)
+
+
+
+
+
+%\singlespacing
+
+\fontencoding{T1}
+
+%standard graphics path
+\graphicspath{{./figures/}}
+
+\begin{document}
+
+\hyphenation{photo-lu-mi-nes-cence}
+\hyphenation{electro-lu-mi-nes-cence}
+\hyphenation{nano-wire}
+\hyphenation{nano-wires}
+\hyphenation{hetero-struc-ture}
+\hyphenation{hetero-struc-tures}
+\hyphenation{crystal-lite}
+\hyphenation{down-scaling}
+\hyphenation{Kos-ten}
+\hyphenation{Leistungs-stei-ger-ung}
+\hyphenation{phy-si-ka-lisch}
+\hyphenation{Bauteil-konzepte}
+\hyphenation{Bau-teile}
+\hyphenation{Struk-tu-ren}
+\hyphenation{Nano-dr\"ah-ten}
+\hyphenation{Nano-dr\"ahte}
+\hyphenation{opto-elektronische}
+\hyphenation{Ladungs-tr\"ager-mobilit\"at}
+\hyphenation{zahl-reiche}
+\hyphenation{Hetero-strukturen}
+\hyphenation{ge-wach-sen}
+\hyphenation{Diffusions-koeffizienten}
+\hyphenation{Seg-men-te}
+\hyphenation{Rat-schl\"age}
+\hyphenation{litho-graph-isches}
+\hyphenation{Feldeffekt-transistoren}
+\hyphenation{Fertigungs-prozesses}
+\hyphenation{Emmerich}
+\hyphenation{Bertagnolli}
+\hyphenation{Nijholt}
+
+\bibliographystyle{unsrtnat}%Style des Literaturverzeichnisses
+
+\pagestyle{empty}
+\include{titelseite}
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+\pagenumbering{roman}\setcounter{page}{1}%beginne mit roemischen seitenzahlen
+\pagestyle{plain}
+%\onehalfspacing% 1.5 Zeilenabstand
+%\doublespacing %2 Zeilenabstand
+
+
+\phantomsection
+\include{declaration}
+
+\deffootnote[2em]{2em}{1em}{\textsuperscript{\thefootnotemark}\,}
+
+\phantomsection
+\include{abstract}
+
+\phantomsection
+\include{acknowledgment}
+
+%\singlespacing
+
+%\tableofcontents%  Inhaltsverzeichnis
+%\doublespacing
+
+\renewcommand{\baselinestretch}{1.08}\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{1.0}\normalsize
+\clearpage{\pagestyle{empty}\cleardoublepage}
+
+%\singlespacing
+
+\newpage
+%\thispagestyle{empty} erzeugt Leerseite ohne Seitenzahl etc.
+%\section*{}
+
+\fancypagestyle{plain}{
+ \fancyhf{}				%leert die h=head und f=foot bereiche
+ \renewcommand{\headrulewidth}{0pt}
+ \fancyfoot[C]{\thepage}
+ %\fancyhead[R]{\thepage} Seitenzahlen rechts oben
+}						%redefine plain in fancyhdr package weil: chapter beginnseiten werden immer in plain angezeigt
+\pagestyle{fancy} 		%ist der Seitenstil der normalen Seiten
+\lhead[\leftmark]{}
+\rhead[]{}%\thepage} 		Erstellt seitenzahlen rechts oben
+%\cfoot{} 				Loescht die Seitenzahlen unten in der Mitte
+%chapters
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+%\onehalfspacing
+%\doublespacing
+
+\include{introduction} 
+
+\include{theory}
+
+\include{experimental}
+
+\include{results}
+
+\include{conclusion}
+
+
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\lhead[LIST OF ABBREVIATIONS]{}
+\include{listofabbreviations}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{List of Symbols}
+\lhead[LIST OF SYMBOLS]{}
+\include{listofsymbols}
+
+\clearpage
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Process Parameters}
+\lhead[PROCESS PARAMETERS]{}
+\include{processparameters}
+
+\clearpage 
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\lhead[\leftmark]{}
+\bibliography{library}
+\clearpage{\pagestyle{empty}\cleardoublepage}
+\end{document}
+
+
+\makeindex
+
+
