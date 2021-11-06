@@ -1,13 +1,16 @@
-import os
-import pip
-import sys
-import threading
+try:
+    import os
+    import pip
+    import sys
+    import threading
+except ImportError:
+    print(" import error in start.py")
 
-import logging # DEBUG INFO WARNING ERROR 
+import logging  # DEBUG INFO WARNING ERROR
 from logging.handlers import QueueHandler
-logging.basicConfig(filename="log/win_main_log.log", 
-    level=logging.DEBUG, # <- set logging level
-    format="%(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s") # set level
+logging.basicConfig(filename="log/win_main_log.log",
+                    level=logging.DEBUG,  # <- set logging level
+                    format="%(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s")  # set level
 
 
 def test_version():
@@ -96,11 +99,9 @@ if __name__ == "__main__":
     else:
         print("\n\nimports alles ok\n\n")
 
-    ## start Program
+    # start Program
     sys.path.append("program")
 
-    import GUI # start GUI
-
-
+    import GUI  # start GUI
 
     print("-_____END check start of GUI ____-")
