@@ -448,7 +448,7 @@ class window_main(tk.Tk):
             frame_logger, width=30, height=8, font=("Times New Roman", 10))
         #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
         #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
-        logtext_area.grid(row=2)#, sticky="nsew")
+        logtext_area.pack(fill="x", padx=2, pady=2)#.grid(row=2)#, sticky="nsew")
 
         #text_handler = TextHandler(logtext_area)
         # Add the handler to logger
