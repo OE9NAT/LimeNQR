@@ -402,59 +402,37 @@ class window_main(tk.Tk):
 
         plot_text = tk.Label(frame_plot, text="Results of last run",
                              foreground="green", background="white", font=("Arial Bold", 10))
-        plot_text.grid(row=0, sticky="ew")
+        plot_text.grid(row=0,column=0, columnspan=2,sticky="ew")
 
         print("start ploting")
-        # t = np.arange(0.0, 2.0, 0.01)
-        # s1 = np.sin(2*np.pi*t)
-        # s2 = np.sin(4*np.pi*t)
-        #
-        # #fig = plt.figure(figsize=(1, 2))
-        # fig = plt.figure()
-        # fig.set_size_inches(6, 4.0, forward=True)
-        # #fig.savefig('test2png.png', dpi=100)
-        # # set the spacing between subplots
-        # plt.subplots_adjust(left=0.07,bottom=0.06,right=0.99,top=0.9,wspace=0.4,hspace=0.4)
-        #
-        #
-        # time_plot=plt.subplot(211)
-        # plt.plot(t, s1)
-        # time_plot.title.set_text("Time")
-        # plt.grid()
-        #
-        #
-        # feq_plot=plt.subplot(212)
-        # plt.plot(t, 2*s1)
-        # feq_plot.title.set_text("Frequency")
-        # plt.grid()
 
         # specify the window as master
-        canvas = FigureCanvasTkAgg(self.plot_live(), master=frame_plot)
-        canvas.get_tk_widget().grid(row=1, padx=2, pady=2)  # ,columnspan=3,rowspan=20)
-        canvas.draw()
+        self.canvas = FigureCanvasTkAgg(self.plot_live(), master=frame_plot)
+        self.canvas.get_tk_widget().grid(row=1, column=0,padx=2, pady=2,sticky="ew",columnspan=2)  # ,columnspan=3,rowspan=20)
+        self.canvas.draw()
         #canvas.get_tk_widget().place(x = 10, y = 360, width=500, height=400)
-        # canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
+        #canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
 
+        
         # navigation toolbar for the Plot
         toolbarFrame = tk.Frame(master=frame_plot)
-        toolbarFrame.grid(row=2, padx=2, pady=2)
-        toolbar = NavigationToolbar2Tk(canvas, toolbarFrame)
+        toolbarFrame.grid(row=2,column=0, padx=2, pady=2)#,sticky="ew")
+        toolbar = NavigationToolbar2Tk(self.canvas, toolbarFrame)
 
-        #toolbarFrame = tk.Frame(master=frame_plot)
-        #toolbarFrame.place(x = 50, y = 760, width=450, height=35)
 
-        #toolbar = NavigationToolbar2Tk(canvas, master=frame_plot)
-        #toolbarFrame.grid(row=2, column=0,sticky="ew")
+        button_reload = tk.Button(frame_plot, text="Reload plot",
+                               command=self.plor_update, background="chartreuse4")
+        button_reload.grid(row=2, column=1, padx=2, pady=2, sticky="ew")
 
         logger_win_main.info("win_main2 start class window_main plot update")
 
         # return
         ######----- Logger  ------######
         frame_logger = tk.Frame(self, bg='grey')
-        frame_logger.grid(row=1, column=0, sticky="nsew", padx=2, pady=2)
+        frame_logger.grid(row=2, column=0, sticky="nsew", padx=2, pady=2)
         file_path_lable = tk.Label(
             frame_logger, text="debug logger: ", foreground="green", background="black")
-        file_path_lable.grid(row=0, column=0)
+        file_path_lable.pack(fill="x", padx=2, pady=2)#.grid(row=0, column=0)
 
         # Create a combobbox to select the logging level
         loglevel_console = tk.StringVar()
@@ -464,13 +442,13 @@ class window_main(tk.Tk):
                                 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
         #textvariable=level ,state='readonly'
         combobox.current(0)
-        combobox.grid(row=1, column=0, sticky="ew")
+        combobox.pack(fill="x", padx=2, pady=2)#.grid(row=1 sticky="ew")
 
         logtext_area = tk.scrolledtext.ScrolledText(
             frame_logger, width=30, height=8, font=("Times New Roman", 10))
         #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
         #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
-        logtext_area.grid(row=2, column=0, sticky="nsew")
+        logtext_area.grid(row=2)#, sticky="nsew")
 
         #text_handler = TextHandler(logtext_area)
         # Add the handler to logger
@@ -481,25 +459,25 @@ class window_main(tk.Tk):
 
         ######----- Buttens  ------######
         frame_Buttens = tk.Frame(self, bg='grey')
-        frame_Buttens.grid(row=2, column=0, padx=2, pady=2, sticky="nsew")
-        butons_y = 700  # hight of buttens
+        frame_Buttens.grid(row=1, padx=2, pady=2, sticky="nsew")
 
         button_run = tk.Button(frame_Buttens, text="RUN",
                                command=load_values(), background="chartreuse4")
-        button_run.grid(row=0, column=0, padx=2, pady=2, sticky="ew")
+        button_run.pack(fill="x", padx=2, pady=2)#.grid(row=0, padx=2, pady=2, sticky="ew")
 
         close_button = tk.Button(
             frame_Buttens, text="Test", background="SkyBlue4", command=lambda: print("hi"))
-        close_button.grid(row=1, column=0, padx=2, pady=2, sticky="ew")
+        #close_button.grid(row=1,  padx=2, pady=2, sticky="ew")
+        close_button .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
             frame_Buttens, text="ploter", command=win_plot.win_plot)  # windows_file)
-        plot_button.grid(row=2, column=0, padx=2, pady=2, sticky="ew")
+        plot_button.pack(fill="x", padx=2, pady=2)#.grid(row=2,  padx=2, pady=2, sticky="ew")
 
         exit_button = tk.Button(
             frame_Buttens, text="Close", background="tomato4", command=self.destroy)
         # exit_button = tk.Button(self, text="Beenden", command=self.quit)#.destroy) #self.quit
-        exit_button.grid(row=3, column=0, padx=2, pady=2, sticky="ew")
+        exit_button.pack(fill="x", padx=2, pady=2)#.grid(row=3,  padx=2, pady=2, sticky="ew")
 
         ### ----- final settings --####
         # self.average_input.focus() #where curser should be set for the uer
@@ -545,30 +523,67 @@ class window_main(tk.Tk):
         #print("data_amplitude",data_amplitude)
 
         #fig = plt.figure(figsize=(1, 2))
-        fig = plt.figure()
-        fig.set_size_inches(6, 4.0, forward=True)
+        self.fig = plt.figure()
+        self.fig.set_size_inches(6, 4.0, forward=True)
         #fig.savefig('test2png.png', dpi=100)
-        fig.set_canvas(self)
+        self.fig.set_canvas(self)
 
         # set the spacing between subplots
         plt.subplots_adjust(left=0.1, bottom=0.12, right=0.99,
                             top=0.9, wspace=0.4, hspace=0.6)
 
-        time_plot = plt.subplot(211)
-        plt.plot(t, s1)
-        time_plot.title.set_text("Time")
-        time_plot.set_xlabel('time [s]')
-        time_plot.set_ylabel('Amplituden [V]')
-        plt.grid()
+        self.time_plot = plt.subplot(211)
+        self.time_line = self.time_plot.plot(t, s1)
+        self.time_plot.title.set_text("Time")
+        self.time_plot.set_xlabel('time [s]')
+        self.time_plot.set_ylabel('Amplituden [V]')
+        self.time_plot.grid()
 
-        feq_plot = plt.subplot(212)
-        plt.plot(data_fequency,data_amplitude)
-        feq_plot.title.set_text("Frequency")
-        feq_plot.set_xlabel('Frequency [kHz]')
-        feq_plot.set_ylabel('Amplituden [V]')
-        plt.grid()
+        self.feq_plot = plt.subplot(212)
+        self.feq_plot.plot(data_fequency,data_amplitude)
+        self.feq_plot.title.set_text("Frequency")
+        self.feq_plot.set_xlabel('Frequency [kHz]')
+        self.feq_plot.set_ylabel('Amplituden [V]')
+        self.feq_plot.grid()
 
-        return fig
+        return self.fig
+
+    
+    def plor_update(self, file = "signals_TEST/live_scan_data.csv"):
+        print("update plot")
+        logger_win_main.info("update plot from main")
+
+        #for testing
+        iterate_plot = np.random.uniform(low=1, high=10)
+        print("iterate_plot ",iterate_plot)
+        t = np.arange(0.0, 2.0, 0.01)
+        s1 = np.sin(iterate_plot*10*np.pi*t)
+        freq = np.arange(0, 100, 10)
+        s2 = np.zeros(10)
+        s2[int(iterate_plot)]= 20
+
+        #call the clear method on your axes
+        self.time_plot.clear()
+        self.feq_plot.clear()
+
+
+        #plot the new data
+        self.time_plot.plot(t, s1)
+        self.time_plot.title.set_text("Time of new data ferq:"+ str(iterate_plot))
+        self.time_plot.set_xlabel('time [s]')
+        self.time_plot.set_ylabel('Amplituden [V]')
+        self.time_plot.grid()
+
+        self.feq_plot.plot(freq, s2)
+        self.feq_plot.title.set_text("Frequency")
+        self.feq_plot.set_xlabel('Frequency [kHz]')
+        self.feq_plot.set_ylabel('Amplituden [V]')
+        self.feq_plot.grid()
+
+        #call the draw method on your canvas
+        self.canvas.draw()
+        
+
 
     def close():
         print("save and close all windows")
