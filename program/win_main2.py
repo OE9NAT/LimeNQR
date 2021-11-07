@@ -143,12 +143,7 @@ def load_values(path="config.cfg", section="pre_set_values"):
 #
 #    windows_file(file_path,experiment_path,cycle_path)
 
-def test():
-    loglevel_console.set("INFO")
-    print(loglevel_console.get())
-    log_text = "text to be instertet in scolbar"+"\n"+loglevel_console.get() + \
-        " \n"
-    logtext_area.insert(tk.INSERT, log_text)
+
 
 
 # def window_main():
@@ -159,8 +154,7 @@ class window_main(tk.Tk):
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
         #self = tk.Tk()
-        self.title(
-            "Magnetic Resonance Imaging - Contrast Agent Analyser Controller - Main")
+        self.title("Magnetic Resonance Imaging - Contrast Agent Analyser Controller - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
        
     
@@ -208,7 +202,7 @@ class window_main(tk.Tk):
         help_menu.add_command(label="Error message !", command=error_window)
         help_menu.add_command(label="Error value !",
                               command=lambda:  error_window(" max feq"))
-        help_menu.add_command(label="test loglevel", command=test)
+        help_menu.add_command(label="test loglevel", command=lambda: self.test_logtext())
         # Drop-down generieren
         menuleiste.add_cascade(label="Help", menu=help_menu)
 
@@ -289,8 +283,15 @@ class window_main(tk.Tk):
         # Butten RUN measurement
         self.button_run = tk.Button(
             frame_measure, text="RUN measurment", command=self.set_measur, foreground="green")
-        self.button_run.grid(row=5, column=0, rowspan=3,
-                             padx=5, pady=5, columnspan=2)
+        self.button_run.grid(row=5, column=0, rowspan=1,
+                             padx=5, pady=5)
+
+        # Butten last RUN measurement from settings.cfg
+        self.button_last_run = tk.Button(
+            frame_measure, text="load settings", command=lambda: self.set_measur("11","22","33","44"))
+        self.button_last_run.grid(row=7, column=0,
+                             padx=5, pady=5)
+        
 
         ######----- Tune&Match Settings ------######
         frame_tm = tk.LabelFrame(self, text="Tune&Match Settings", bg='grey')
@@ -340,11 +341,11 @@ class window_main(tk.Tk):
 
         # Buttens
         self.send_TMfile = tk.Button(
-            frame_tm, text="Read TM-file", command=RUN, foreground="red4")
+            frame_tm, text="Read TM-file", command=lambda: self.logtext_area.insert(tk.INSERT, "read tm-file\n"), foreground="red4")
         self.send_TMfile.grid(row=4, column=0, padx=5, pady=5)
 
         self.send_TMfile = tk.Button(
-            frame_tm, text="Send to Arduino", command=RUN, foreground="green")
+            frame_tm, text="Send to Arduino", command=lambda: self.logtext_area.insert(tk.INSERT, "send tm-file\n"), foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
         ######----- load sequence  ------######
@@ -435,20 +436,20 @@ class window_main(tk.Tk):
         file_path_lable.pack(fill="x", padx=2, pady=2)#.grid(row=0, column=0)
 
         # Create a combobbox to select the logging level
-        loglevel_console = tk.StringVar()
-        loglevel_console.set("DEBUG")
+        self.loglevel_console = tk.StringVar()
+        self.loglevel_console.set("DEBUG")
         #loglevel = tk.StringVar(self,'DEBUG')
-        combobox = TTK.Combobox(frame_logger, width=35, textvariable=loglevel_console, values=[
+        combobox = TTK.Combobox(frame_logger, width=35, textvariable=self.loglevel_console, values=[
                                 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
         #textvariable=level ,state='readonly'
         combobox.current(0)
         combobox.pack(fill="x", padx=2, pady=2)#.grid(row=1 sticky="ew")
 
-        logtext_area = tk.scrolledtext.ScrolledText(
+        self.logtext_area = tk.scrolledtext.ScrolledText(
             frame_logger, width=30, height=8, font=("Times New Roman", 10))
         #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
         #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
-        logtext_area.pack(fill="x", padx=2, pady=2)#.grid(row=2)#, sticky="nsew")
+        self.logtext_area.pack(fill="x", padx=2, pady=2)#.grid(row=2)#, sticky="nsew")
 
         #text_handler = TextHandler(logtext_area)
         # Add the handler to logger
@@ -496,6 +497,9 @@ class window_main(tk.Tk):
         self.freq_step_input.insert(0, str(step))
         self.average_input.delete("0", "end")
         self.average_input.insert(0, str(average))
+
+        log_text = "Measurment settig loadet from settings.cfg"+"\n"
+        self.logtext_area.insert(tk.INSERT, log_text)
 
     def plot_live(self, s1="", t1="", s2="", t2=""):
         t = np.arange(0.0, 2.0, 0.01)
@@ -582,8 +586,16 @@ class window_main(tk.Tk):
 
         #call the draw method on your canvas
         self.canvas.draw()
-        
 
+        log_text = "Updatet live Plot"+" \n"
+        self.logtext_area.insert(tk.INSERT, log_text)
+        
+    def test_logtext(self):
+        self.loglevel_console.set("INFO from test_logtext")
+        print(self.loglevel_console.get())
+        log_text = "text to be instertet in scolbar"+"\n"+self.loglevel_console.get() + \
+            " \n"
+        self.logtext_area.insert(tk.INSERT, log_text)
 
     def close():
         print("save and close all windows")
