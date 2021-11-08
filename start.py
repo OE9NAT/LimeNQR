@@ -45,8 +45,17 @@ def test_import():
     # list of all necessery imports
     try:
         import numpy
-        #import eggs
+        import matplotlib
         import tkinter
+        import tkinter.ttk as TTK
+        #from tkinter import scrolledtext
+
+        import matplotlib.pyplot as
+        #from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+        import configparser
+        import queue
+        import PIL
+        import logging
 
     except ModuleNotFoundError as err:
         # Error handling
