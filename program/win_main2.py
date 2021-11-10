@@ -4,6 +4,7 @@ import win_seq_spin
 import win_seq_puls
 from function import *
 from tkinter import scrolledtext   # use for logger
+from tkinter import filedialog
 import tkinter as tk
 import PIL.Image as image
 
@@ -18,10 +19,36 @@ import logging  # DEBUG INFO WARNING ERROR
 #    level=logging.DEBUG, # <- set logging level
 #    format="%(asctime)s - %(name)s : %(levelname)s : \n %(message)s") # set level
 
+handler = logging.FileHandler("log/Value_log.log")     
+# handler = logging.handlers.RotatingFileHandler("log/Value_log.log")
+formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")   
+handler.setFormatter(formatter)
+
 
 logger_win_main = logging.getLogger('win_main')
 logger_win_main.addHandler(logging.StreamHandler())
 logger_win_main.info("logging from win_main2 start up")
+
+logger_value = logging.getLogger("value")
+logger_value.setLevel(logging.DEBUG)
+logger_value.addHandler(handler)
+#logger_value.addHandler(logging.StreamHandler())
+
+logger_value.debug('This is an error message')
+logger_value.info("start value logger")
+logger_value.warning("start value logger")
+logger_value.error('This is an error message')
+logger_value.critical('This is an error message')
+
+
+logger_setting = logging.getLogger("settings")
+logger_setting.setLevel(logging.DEBUG)
+logger_setting.addHandler(handler)
+#logger_setting.addHandler(logging.StreamHandler())
+
+logger_setting.info("start settings logger")
+
+
 
 
 if 'setting_dict' not in locals():
@@ -32,7 +59,7 @@ if 'setting_dict' not in locals():
     #setting_dict=load_setting (path_setting)
 
     print("\nsetting_dict:", *setting_dict.items(), sep="\n\n")
-    freq_start = (setting_dict["setting"]["freq_start"])
+    freq_start = setting_dict["setting"]["freq_start"]
     freq_end = (setting_dict["setting"]["freq_end"])
     #freq_step = tk.StringVar(setting_dict["setting"] ["freq_step"])
     #freq_average = tk.StringVar(setting_dict["setting"] ["freq_repetitions"])
@@ -202,7 +229,7 @@ class window_main(tk.Tk):
         help_menu.add_command(label="Error message !", command=error_window)
         help_menu.add_command(label="Error value !",
                               command=lambda:  error_window(" max feq"))
-        help_menu.add_command(label="test loglevel", command=lambda: self.test_logtext())
+        help_menu.add_command(label="test loglevel", command=lambda: self.debug_logtext())
         # Drop-down generieren
         menuleiste.add_cascade(label="Help", menu=help_menu)
 
@@ -282,15 +309,15 @@ class window_main(tk.Tk):
 
         # Butten RUN measurement
         self.button_run = tk.Button(
-            frame_measure, text="RUN measurment", command=self.set_measur, foreground="green")
+            frame_measure, text="RUN measurment", command=self.run_measurment, foreground="green")
         self.button_run.grid(row=5, column=0, rowspan=1,
-                             padx=5, pady=5)
+                             padx=5, pady=5,sticky ="ew")
 
         # Butten last RUN measurement from settings.cfg
         self.button_last_run = tk.Button(
-            frame_measure, text="load settings", command=lambda: self.set_measur("11","22","33","44"))
+            frame_measure, text="load settings", command=self.load_meas_set)
         self.button_last_run.grid(row=7, column=0,
-                             padx=5, pady=5)
+                             padx=5, pady=5,sticky ="ew")
         
 
         ######----- Tune&Match Settings ------######
@@ -304,7 +331,7 @@ class window_main(tk.Tk):
         self.Tune_U_max_lable = tk.Label(frame_tm, text="Tune U_max: ")
         self.Tune_U_max_lable.grid(row=0, column=0, padx=5, pady=5)
         # simple_label("V",620,100)
-        tk.Label(frame_tm, text="V").grid(row=0, column=0, padx=3)
+        tk.Label(frame_tm, text="V").grid(row=0, column=2, padx=3)
 
         self.Tune_U_max_input = tk.Entry(
             frame_tm, fg="black", bg="white", width=10)
@@ -341,11 +368,11 @@ class window_main(tk.Tk):
 
         # Buttens
         self.send_TMfile = tk.Button(
-            frame_tm, text="Read TM-file", command=lambda: self.logtext_area.insert(tk.INSERT, "read tm-file\n"), foreground="red4")
+            frame_tm, text="Read TM-file", command=lambda: self.read_tm(), foreground="red4")
         self.send_TMfile.grid(row=4, column=0, padx=5, pady=5)
 
         self.send_TMfile = tk.Button(
-            frame_tm, text="Send to Arduino", command=lambda: self.logtext_area.insert(tk.INSERT, "send tm-file\n"), foreground="green")
+            frame_tm, text="Send to Arduino", command= self.send_arduino , foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
         ######----- load sequence  ------######
@@ -409,7 +436,7 @@ class window_main(tk.Tk):
 
         # specify the window as master
         self.canvas = FigureCanvasTkAgg(self.plot_live(), master=frame_plot)
-        self.canvas.get_tk_widget().grid(row=1, column=0,padx=2, pady=2,sticky="ew",columnspan=2)  # ,columnspan=3,rowspan=20)
+        self.canvas.get_tk_widget().grid(row=1, column=0,padx=2, pady=2,sticky="nsew",columnspan=2)  # ,columnspan=3,rowspan=20)
         self.canvas.draw()
         #canvas.get_tk_widget().place(x = 10, y = 360, width=500, height=400)
         #canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
@@ -422,7 +449,7 @@ class window_main(tk.Tk):
 
 
         button_reload = tk.Button(frame_plot, text="Reload plot",
-                               command=self.plor_update, background="chartreuse4")
+                               command=self.plot_update, background="chartreuse4")
         button_reload.grid(row=2, column=1, padx=2, pady=2, sticky="ew")
 
         logger_win_main.info("win_main2 start class window_main plot update")
@@ -446,7 +473,7 @@ class window_main(tk.Tk):
         combobox.pack(fill="x", padx=2, pady=2)#.grid(row=1 sticky="ew")
 
         self.logtext_area = tk.scrolledtext.ScrolledText(
-            frame_logger, width=30, height=8, font=("Times New Roman", 10))
+            frame_logger, width=30, height=12, font=("Times New Roman", 10))
         #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
         #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
         self.logtext_area.pack(fill="x", padx=2, pady=2)#.grid(row=2)#, sticky="nsew")
@@ -488,7 +515,34 @@ class window_main(tk.Tk):
         self.update_idletasks()
         # return self
 
-    def set_measur(self, start="10000", stop="20000", step="1000", average="100"):
+    def run_measurment(self):
+            print("run_measurment")
+
+
+    def load_meas_set(self):
+        print("my setting_dict dose not exist")
+    
+        path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
+        setting_dict = load_setting(path_setting, file="/program/setting.cfg")
+       
+        freq_start = setting_dict["setting"]["freq_start"]
+        freq_end = setting_dict["setting"]["freq_end"]
+        freq_step = setting_dict["setting"] ["freq_step"]
+        freq_average = setting_dict["setting"] ["freq_repetitions"]
+
+        logger_value.info("freq_start" +str(freq_start))
+        logger_value.info("freq_end" +str(freq_end))
+        logger_value.info("freq_step" +str(freq_step))
+        logger_value.info("freq_average" +str(freq_average))
+
+        self.set_measur (freq_start,freq_end,freq_step,freq_average)
+
+        self.set_tm() # set with pre set values
+
+
+
+
+    def set_measur(self, start="11", stop="22", step="33", average="44"):
         self.freq_start_input.delete("0", "end")
         self.freq_start_input.insert(0, start)
         self.freq_end_input.delete("0", "end")
@@ -553,7 +607,7 @@ class window_main(tk.Tk):
         return self.fig
 
     
-    def plor_update(self, file = "signals_TEST/live_scan_data.csv"):
+    def plot_update(self, file = "signals_TEST/live_scan_data.csv"):
         print("update plot")
         logger_win_main.info("update plot from main")
 
@@ -589,13 +643,78 @@ class window_main(tk.Tk):
 
         log_text = "Updatet live Plot"+" \n"
         self.logtext_area.insert(tk.INSERT, log_text)
+    
+    def read_tm(self):
+        print("def read_tm")
+        self.logtext_area.insert(tk.INSERT, "read tm-file\n") 
+        file = filedialog.askopenfilename(title='select Tune and Match file') #initialdir='/home/',
+
+        print("file path for tune and match\n ",file)
+        self.debug_logtext("read_tm file : "+file)
+        logger_setting.info("read_tm file : "+file)
+
+        tune_value = 3.3
+        match_value= 3.3
+        tm_step_value = 50
+        tm_lut_value = 20
+
+        self.set_tm(tune_value,match_value, tm_step_value,tm_lut_value)
+
+        text= "tune_value" +str(tune_value)
+        text= text+"\nmatch_value" + str(match_value)
+        text= text+"\ntm_step_value"+str(tm_step_value)
+        text= text+"\ntm_lut_value"+str(tm_lut_value)
+        text = text +"\nfiel path: "+file
+
+        logger_value.info("tune_value" +str(tune_value))
+        logger_value.info("match_value" +str(match_value))
+        logger_value.info("tm_step_value" +str(tm_step_value))
+        logger_value.info("tm_lut_value" +str(tm_lut_value))
         
-    def test_logtext(self):
-        self.loglevel_console.set("INFO from test_logtext")
+        logger_win_main.info("def read_tm "+text)
+
+    def set_tm(self,tune=5, match=100,tm_step=100,lut=10):
+        self.Tune_U_max_input.delete("0", "end")
+        self.Tune_U_max_input.insert(0, tune)
+        self.Match_U_max_input.delete("0", "end")
+        self.Match_U_max_input.insert(0, match)
+        self.V_step_input.delete("0", "end")
+        self.V_step_input.insert(0, tm_step)
+        self.LUT_input.delete("0", "end")
+        self.LUT_input.insert(0, lut)
+
+
+    def send_arduino(self):
+        print("def send arduino")
+        tune_value = self.Tune_U_max_input.get()
+        match_value = self.Match_U_max_input.get()
+        tm_step_value = self.V_step_input.get()
+        tm_lut_value = self.LUT_input.get()
+        #print("Tune_value ",Tune_value)
+        self.debug_logtext("Tune voltage: "+tune_value)
+        self.debug_logtext("Match: "+match_value)
+        self.debug_logtext("freq step: "+tm_step_value)
+        self.debug_logtext("lut size: "+tm_lut_value)
+
+        logger_value.info("tune_value" +str(tune_value))
+        logger_value.info("match_value" +str(match_value))
+        logger_value.info("tm_step_value" +str(tm_step_value))
+        logger_value.info("tm_lut_value" +str(tm_lut_value))
+
+        logger_win_main.info("def send_arduino ")
+
+
+
+        
+    def debug_logtext(self,text="test"):
+        #self.loglevel_console.set("INFO from debug_logtext")
         print(self.loglevel_console.get())
-        log_text = "text to be instertet in scolbar"+"\n"+self.loglevel_console.get() + \
-            " \n"
+        if text == "test":
+            log_text = "test loglevel_console: "+self.loglevel_console.get() +" \n"
+        else: 
+            log_text = text + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
+        self.logtext_area.see(tk.END)
 
     def close():
         print("save and close all windows")

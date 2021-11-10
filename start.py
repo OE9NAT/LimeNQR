@@ -8,10 +8,25 @@ except ImportError:
 
 import logging  # DEBUG INFO WARNING ERROR
 from logging.handlers import QueueHandler
-logging.basicConfig(filename="log/win_main_log.log",
-                    level=logging.DEBUG,  # <- set logging level
-                    format="%(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s")  # set level
 
+
+
+# handler = logging.FileHandler("log/Value_log.log")     
+# handler = logging.handlers.RotatingFileHandler("log/Value_log.log")
+# formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")   
+# handler.setFormatter(formatter)
+
+logging.basicConfig(filename="log/DEFAULT_log.log",
+                    level=logging.DEBUG,  # <- set logging level
+                    format="______ %(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s")  # set level
+
+
+
+
+
+logger_start = logging.getLogger('start')
+logger_start.addHandler(logging.StreamHandler())
+logger_start.info("logging from start up")
 
 def test_version():
 
@@ -28,6 +43,7 @@ def test_version():
         print("\n minimum requirements is python 3.7 \n ERROR end")
         return False
 
+    logger_start.warning("start test python version "+sys.version)
     return True
 
 
@@ -47,10 +63,10 @@ def test_import():
         import numpy
         import matplotlib
         import tkinter
-        import tkinter.ttk as TTK
+        import tkinter.ttk
         #from tkinter import scrolledtext
 
-        import matplotlib.pyplot as
+        import matplotlib.pyplot
         #from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
         import configparser
         import queue

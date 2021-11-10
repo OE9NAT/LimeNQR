@@ -34,12 +34,16 @@ from logging.handlers import QueueHandler
 loggerGUI = logging.getLogger(__name__)
 loggerGUI.setLevel(logging.DEBUG) # <- set logging level
     
-loggerGUI_handler = logging.FileHandler("log_GUI_file.log")
+logging_handler = logging.FileHandler("log_GUI_file.log")
 formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(message)s")
-loggerGUI_handler.setFormatter(formatter)
-loggerGUI.addHandler(loggerGUI_handler)
-    
+logging_handler.setFormatter(formatter)
+
+loggerGUI.addHandler(logging_handler)
 loggerGUI.info("set upp logger in puls_win.py")
+
+logger_gui = logging.getLogger('GUI')
+logger_gui.addHandler(logging.StreamHandler())
+logger_gui.info("logging from GUI start up")
 
 
 
