@@ -1,6 +1,7 @@
 from data2plot import *
 import configparser
 import os
+import sys
 from tkinter import filedialog
 from tkinter import scrolledtext   # use for logger
 import tkinter as tk
@@ -38,8 +39,16 @@ def win_plot():
     print("win_plot")
     ######----- Setup of gui ------######
     window_plot = tk.Tk()
-    window_plot.title("GUI for bach")
-    # window_main.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+    window_plot.title("Magnetic Resonance Imaging - Contrast Agent Analyse Controller - win_plot")
+    try:
+        # for linux
+        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_plot.wm_iconbitmap(bitmap=log_path)
+    except:
+        # for windows
+        log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_plot.wm_iconbitmap(bitmap=log_path)
+    
     # window_main.wm_iconbitmap(bitmap="@/home/pi/Desktop/Bach_arbeit/stethoskop.xbm")
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_plot.geometry("1200x1000+200+100")
