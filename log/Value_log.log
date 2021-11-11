@@ -1,0 +1,832 @@
+____ value ____  2021-11-10 23:01:04,642 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:01:04,642 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:01:04,643 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:01:04,644 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:01:04,644 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:01:04,645 : INFO : 
+ start settings logger
+____ settings ____  2021-11-10 23:01:12,127 : INFO : 
+ read_tm file : /home/pi/bacharbeit/README.md
+____ value ____  2021-11-10 23:01:12,128 : INFO : 
+ tune_value123
+____ value ____  2021-11-10 23:01:12,129 : INFO : 
+ match_value234
+____ value ____  2021-11-10 23:01:12,130 : INFO : 
+ tm_step_value345
+____ value ____  2021-11-10 23:01:12,131 : INFO : 
+ tm_lut_value456
+____ settings ____  2021-11-10 23:01:14,741 : INFO : 
+ read_tm file : /home/pi/bacharbeit/start.py
+____ value ____  2021-11-10 23:01:14,742 : INFO : 
+ tune_value123
+____ value ____  2021-11-10 23:01:14,743 : INFO : 
+ match_value234
+____ value ____  2021-11-10 23:01:14,744 : INFO : 
+ tm_step_value345
+____ value ____  2021-11-10 23:01:14,745 : INFO : 
+ tm_lut_value456
+____ value ____  2021-11-10 23:01:16,065 : INFO : 
+ tune_value123
+____ value ____  2021-11-10 23:01:16,067 : INFO : 
+ match_value234
+____ value ____  2021-11-10 23:01:16,069 : INFO : 
+ tm_step_value345
+____ value ____  2021-11-10 23:01:16,072 : INFO : 
+ tm_lut_value456
+____ value ____  2021-11-10 23:01:16,682 : INFO : 
+ tune_value123
+____ value ____  2021-11-10 23:01:16,683 : INFO : 
+ match_value234
+____ value ____  2021-11-10 23:01:16,683 : INFO : 
+ tm_step_value345
+____ value ____  2021-11-10 23:01:16,684 : INFO : 
+ tm_lut_value456
+____ value ____  2021-11-10 23:02:56,015 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:02:56,015 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:02:56,016 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:02:56,017 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:02:56,018 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:02:56,019 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:29:19,344 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:29:19,344 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:29:19,345 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:29:19,345 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:29:19,345 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:29:19,346 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:30:43,829 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:30:43,830 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:30:43,830 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:30:43,830 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:30:43,830 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:30:43,831 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:30:52,063 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:30:52,066 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:30:52,067 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:30:52,067 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:31:39,895 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:31:39,896 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:31:39,896 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:31:39,896 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:31:39,897 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:31:39,898 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:31:47,806 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:31:47,806 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:31:47,807 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:31:47,808 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:32:01,398 : INFO : 
+ freq_start100001
+____ value ____  2021-11-10 23:32:01,398 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:32:01,399 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:32:01,399 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:33:28,807 : INFO : 
+ freq_start100001
+____ value ____  2021-11-10 23:33:28,811 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:33:28,812 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:33:28,813 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:33:29,579 : INFO : 
+ freq_start100001
+____ value ____  2021-11-10 23:33:29,580 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:33:29,580 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:33:29,580 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:33:30,822 : INFO : 
+ freq_start100001
+____ value ____  2021-11-10 23:33:30,823 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:33:30,823 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:33:30,823 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:33:48,906 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:33:48,906 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:33:48,907 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:33:48,907 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:33:50,159 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:33:50,159 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:33:50,160 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:33:50,160 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:42:49,784 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:42:49,784 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:42:49,785 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:42:49,785 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:42:49,785 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:42:49,786 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:42:56,076 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:42:56,076 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:42:56,077 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:42:56,077 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:43:05,396 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:43:05,397 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:43:05,397 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:43:05,398 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:43:08,226 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:43:08,226 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:43:08,227 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:43:08,228 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:44:33,287 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:44:33,288 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:44:33,288 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:44:33,288 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:44:33,288 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:44:33,289 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:44:38,820 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:44:38,821 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:44:38,822 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:44:38,822 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:44:40,289 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:44:40,289 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:44:40,290 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:44:40,290 : INFO : 
+ freq_average100
+____ settings ____  2021-11-10 23:44:45,138 : INFO : 
+ read_tm file : /home/pi/bacharbeit/README.md
+____ value ____  2021-11-10 23:44:45,139 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-10 23:44:45,140 : INFO : 
+ match_value3.3
+____ value ____  2021-11-10 23:44:45,140 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-10 23:44:45,141 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-10 23:44:50,707 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:44:50,708 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:44:50,709 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:44:50,709 : INFO : 
+ freq_average100
+____ value ____  2021-11-10 23:45:00,802 : INFO : 
+ freq_start10000
+____ value ____  2021-11-10 23:45:00,802 : INFO : 
+ freq_end20000
+____ value ____  2021-11-10 23:45:00,803 : INFO : 
+ freq_step1000
+____ value ____  2021-11-10 23:45:00,803 : INFO : 
+ freq_average100
+____ settings ____  2021-11-10 23:45:13,619 : INFO : 
+ read_tm file : /home/pi/bacharbeit/start.py
+____ value ____  2021-11-10 23:45:13,621 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-10 23:45:13,622 : INFO : 
+ match_value3.3
+____ value ____  2021-11-10 23:45:13,622 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-10 23:45:13,623 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-10 23:45:15,650 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-10 23:45:15,650 : INFO : 
+ match_value3.3
+____ value ____  2021-11-10 23:45:15,651 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-10 23:45:15,651 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-10 23:47:13,728 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:47:13,728 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:47:13,728 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:47:13,729 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:47:13,729 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:47:13,729 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:48:18,321 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:48:18,322 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:48:18,322 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:48:18,322 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:48:18,322 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:48:18,323 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:48:48,691 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:48:48,691 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:48:48,691 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:48:48,691 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:48:48,692 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:48:48,692 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:50:08,560 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:50:08,560 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:50:08,561 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:50:08,561 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:50:08,561 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:50:08,561 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:50:57,717 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:50:57,718 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:50:57,718 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:50:57,718 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:50:57,718 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:50:57,719 : INFO : 
+ start settings logger
+____ value ____  2021-11-10 23:52:07,606 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-10 23:52:07,606 : INFO : 
+ start value logger
+____ value ____  2021-11-10 23:52:07,607 : WARNING : 
+ start value logger
+____ value ____  2021-11-10 23:52:07,607 : ERROR : 
+ This is an error message
+____ value ____  2021-11-10 23:52:07,607 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-10 23:52:07,607 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:08:33,934 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:08:33,934 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:08:33,934 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:08:33,934 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:08:33,935 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:08:33,935 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:17:14,813 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:17:14,813 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:17:14,814 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:17:14,814 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:17:14,814 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:17:14,815 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:19:52,602 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:19:52,603 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:19:52,603 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:19:52,603 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:19:52,603 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:19:52,604 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:20:38,536 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:20:38,536 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:20:38,536 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:20:38,537 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:20:38,537 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:20:38,537 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:21:41,381 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:21:41,381 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:21:41,381 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:21:41,382 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:21:41,382 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:21:41,382 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:24:01,508 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:24:01,508 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:24:01,509 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:24:01,509 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:24:01,509 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:24:01,509 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:26:42,885 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:26:42,886 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:26:42,886 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:26:42,886 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:26:42,887 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:26:42,887 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 00:27:23,349 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 00:27:23,349 : INFO : 
+ start value logger
+____ value ____  2021-11-11 00:27:23,350 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 00:27:23,350 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 00:27:23,350 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 00:27:23,350 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:27:25,788 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:27:25,788 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:27:25,788 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:27:25,789 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:27:25,789 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:27:25,789 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:36:07,025 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:36:07,026 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:36:07,026 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:36:07,026 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:36:07,027 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:36:07,027 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:39:58,165 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:39:58,165 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:39:58,165 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:39:58,166 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:39:58,166 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:39:58,166 : INFO : 
+ start settings logger
+____ settings ____  2021-11-11 14:41:06,194 : INFO : 
+ read_tm file : /home/pi/.bash_logout
+____ value ____  2021-11-11 14:41:06,195 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 14:41:06,196 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 14:41:06,197 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 14:41:06,197 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 14:41:17,014 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 14:41:17,014 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 14:41:17,015 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 14:41:17,016 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 14:44:28,586 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 14:44:28,588 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 14:44:28,589 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 14:44:28,590 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 14:44:30,174 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 14:44:30,175 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 14:44:30,175 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 14:44:30,176 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 14:44:35,153 : INFO : 
+ tune_value4
+____ value ____  2021-11-11 14:44:35,154 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 14:44:35,155 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 14:44:35,155 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 14:48:06,013 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:48:06,013 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:48:06,013 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:48:06,014 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:48:06,014 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:48:06,014 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:50:39,114 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:50:39,114 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:50:39,114 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:50:39,115 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:50:39,115 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:50:39,115 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:53:18,680 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:53:18,681 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:53:18,681 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:53:18,681 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:53:18,681 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:53:18,682 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:53:57,026 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:53:57,026 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:53:57,026 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:53:57,027 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:53:57,027 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:53:57,027 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:54:59,132 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:54:59,133 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:54:59,133 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:54:59,133 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:54:59,134 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:54:59,134 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 14:57:55,492 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 14:57:55,492 : INFO : 
+ start value logger
+____ value ____  2021-11-11 14:57:55,492 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 14:57:55,493 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 14:57:55,493 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 14:57:55,493 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:03:12,715 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:03:12,716 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:03:12,716 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:03:12,716 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:03:12,716 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:03:12,717 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:04:41,281 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:04:41,281 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:04:41,281 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:04:41,282 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:04:41,282 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:04:41,282 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:06:54,577 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:06:54,578 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:06:54,578 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:06:54,578 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:06:54,579 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:06:54,579 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:08:27,995 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:08:27,995 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:08:27,996 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:08:27,996 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:08:27,996 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:08:27,996 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:09:02,596 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:09:02,596 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:09:02,597 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:09:02,597 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:09:02,597 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:09:02,597 : INFO : 
+ start settings logger
+____ settings ____  2021-11-11 15:09:13,285 : INFO : 
+ read_tm file : /home/pi/bacharbeit/start.py
+____ value ____  2021-11-11 15:09:13,286 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 15:09:13,286 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 15:09:13,287 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 15:09:13,287 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 15:09:16,849 : INFO : 
+ tune_value3.3
+____ value ____  2021-11-11 15:09:16,852 : INFO : 
+ match_value3.3
+____ value ____  2021-11-11 15:09:16,852 : INFO : 
+ tm_step_value50
+____ value ____  2021-11-11 15:09:16,853 : INFO : 
+ tm_lut_value20
+____ value ____  2021-11-11 15:10:49,644 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:10:49,644 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:10:49,645 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:10:49,645 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:10:49,645 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:10:49,645 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:31:48,979 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:31:48,979 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:31:48,980 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:31:48,980 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:31:48,980 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:31:48,981 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:34:26,136 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:34:26,136 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:34:26,137 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:34:26,137 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:34:26,137 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:34:26,137 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:36:35,050 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:36:35,051 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:36:35,051 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:36:35,051 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:36:35,051 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:36:35,052 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:38:47,054 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:38:47,055 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:38:47,055 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:38:47,055 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:38:47,055 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:38:47,056 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:42:09,863 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:42:09,864 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:42:09,864 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:42:09,864 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:42:09,864 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:42:09,865 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:46:22,029 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:46:22,030 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:46:22,030 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:46:22,030 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:46:22,030 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:46:22,031 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:54:08,833 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 15:54:08,834 : INFO : 
+ start value logger
+____ value ____  2021-11-11 15:54:08,834 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 15:54:08,834 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 15:54:08,835 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 15:54:08,835 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 15:55:00,027 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 15:55:00,028 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 15:55:00,029 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 15:55:00,030 : INFO : 
+ freq_average100
+____ value ____  2021-11-11 15:55:01,055 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 15:55:01,056 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 15:55:01,057 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 15:55:01,057 : INFO : 
+ freq_average100
+____ value ____  2021-11-11 15:55:04,904 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 15:55:04,905 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 15:55:04,906 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 15:55:04,906 : INFO : 
+ freq_average100
+____ value ____  2021-11-11 15:55:10,172 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 15:55:10,173 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 15:55:10,174 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 15:55:10,174 : INFO : 
+ freq_average100
+____ value ____  2021-11-11 16:03:35,237 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 16:03:35,237 : INFO : 
+ start value logger
+____ value ____  2021-11-11 16:03:35,238 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 16:03:35,238 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 16:03:35,238 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 16:03:35,238 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 16:04:00,408 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 16:04:00,409 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 16:04:00,410 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 16:04:00,410 : INFO : 
+ freq_average100
+____ value ____  2021-11-11 16:07:19,976 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-11 16:07:19,976 : INFO : 
+ start value logger
+____ value ____  2021-11-11 16:07:19,977 : WARNING : 
+ start value logger
+____ value ____  2021-11-11 16:07:19,977 : ERROR : 
+ This is an error message
+____ value ____  2021-11-11 16:07:19,977 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-11 16:07:19,978 : INFO : 
+ start settings logger
+____ value ____  2021-11-11 16:07:26,547 : INFO : 
+ freq_start10000
+____ value ____  2021-11-11 16:07:26,547 : INFO : 
+ freq_end20000
+____ value ____  2021-11-11 16:07:26,548 : INFO : 
+ freq_step1000
+____ value ____  2021-11-11 16:07:26,548 : INFO : 
+ freq_average100
