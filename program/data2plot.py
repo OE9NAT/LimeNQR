@@ -11,6 +11,7 @@ def plot(filename):
     #filename = "/home/pi/lukas_bararbeit/signals/11111111111_093701_setup.h5"
 
     folder_signal = "signals_TEST/"
+    print("filename for lotting", filename)
 
     font_plot = {'family': 'serif', 'color':  'darkred',
                  'weight': 'normal', 'size': 16}

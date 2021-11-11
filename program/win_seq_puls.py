@@ -6,6 +6,10 @@ import PIL.Image as image
 import logging # DEBUG INFO WARNING ERROR 
 from logging.handlers import QueueHandler
 
+logger_win_seqpuls = logging.getLogger('win_seq_puls')
+logger_win_seqpuls.addHandler(logging.StreamHandler())
+logger_win_seqpuls.info("logging from win_seq_puls start up")
+
 class Puls:
     def __init__(self,P1="10",TP1="20",TE1="30",TA="40"):  #**kwargs
         self.puls_1=P1
@@ -34,7 +38,7 @@ def save_file(path,experiment="test_experiment_1",cycle="test_cycle_11"):
         os.makedirs(cycle)
     except OSError as error:
         print ("error file1 Experiment olready exists")
-        logging.error('error message')
+        logger_win_seqpuls.error('error message')
         
     
     return "testing save"
@@ -48,17 +52,14 @@ def save_values(path="test_data",experiment="test_experiment",cycle="test_cycle"
     input_values["P_1"] = globals()["P_1_input"].get()
     input_values["TP_1"] = globals()["TP_1_input"].get()
     input_values["TA"] = globals()["TA_input"].get()
-    input_values["P_2"] = globals()["P_2_input"].get()
-    input_values["TP_2"] = globals()["TP_2_input"].get()
-    input_values["P_3"] = globals()["P_3_input"].get()
-    input_values["TP_3"] = globals()["TP_3_input"].get()
+ 
     
     path_lable.config(text = "Seq. for data: "+path)
     experiment_lable.config(text= "Seq. for experiment: "+experiment)
     cycle_lable.config(text = "Seq. for cycle: "+cycle) 
 
     
-    logger.info('load inputs from save_valsues ')
+    logger_win_seqpuls.info('load inputs from save_valsues ')
     print("loadet all in save_values",input_values)
 
     ###read and write to config.cfg
@@ -85,22 +86,22 @@ def save_values(path="test_data",experiment="test_experiment",cycle="test_cycle"
         if config.has_section(cfg_section): #config.has_option(section, option)
             print(".cfg section exist ",cycle)     
             config[cfg_section]=input_values
-            logging.info('Values were saved and overwritten')
+            logger_win_seqpuls.info('Values were saved and overwritten')
         else:
             print(".cfg section dose not exist")
             config.add_section(cfg_section)
             config[cfg_section]=input_values
-            logging.info('Values were saved and new written')
+            logger_win_seqpuls.info('Values were saved and new written')
         
     except IOError:
         print("generated new .cfg file ",cycle)
         config[cfg_section]=input_values
-        logging.info('Values were saved and written to a new file')
+        logger_win_seqpuls.info('Values were saved and written to a new file')
         
     with open(cycle, "w") as configfile:
         print("## save .cfg to __",cycle) 
         config.write(configfile)
-    logging.info('save_values end ')
+    logger_win_seqpuls.info('save_values end ')
     
 
     
@@ -120,7 +121,15 @@ def load_file(path="data", experiment="test_experiment",cycle="test_cycle"):
     ######----- Setup of gui ------###### 
     window_experiment = tk.Tk()
     window_experiment.title("load experiment")
-    window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+    #window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+    try:
+        # for linux
+        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_experiment.wm_iconbitmap(bitmap=log_path)
+    except:
+        # for windows
+        log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_experiment.wm_iconbitmap(bitmap=log_path)
     window_experiment.geometry("600x520") # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_experiment.option_add("Helvetica", '10') # Frischart und groesse
     window_experiment.resizable(width=False, height=False) #  False = no resize
@@ -248,7 +257,15 @@ def windows_file(path="test_data", experiment="test_experiment",cycle="test_cycl
     window_puls = tk.Tk()
     window_puls.title("Set Puls")
     log_path = "@/"+os.path.abspath(os.path.dirname(sys.argv[0])) + "/stethoskop.xbm"
-    window_puls.wm_iconbitmap(bitmap=log_path) 
+    #window_puls.wm_iconbitmap(bitmap=log_path) 
+    try:
+        # for linux
+        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_puls.wm_iconbitmap(bitmap=log_path)
+    except:
+        # for windows
+        log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_puls.wm_iconbitmap(bitmap=log_path)
     window_puls.geometry("1000x800+1000+100") # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_puls.option_add("Helvetica", '10') # Frischart und groesse
     window_puls.resizable(width=False, height=False) #  False = no resize
@@ -289,7 +306,7 @@ def windows_file(path="test_data", experiment="test_experiment",cycle="test_cycl
     
     ### picture
    
-    image_path = os.path.abspath(os.path.dirname(sys.argv[0]))+"/sequenz/puls_seq.JPG"
+    image_path = os.path.abspath(os.path.dirname(sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
     #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
     image = Image.open(image_path) 
     image_puls = image.resize((750, 300))
@@ -371,14 +388,14 @@ if __name__ == "__main__":
     #          format="%(asctime)s:%(levelname)s:%(message)s"  ) # set level
     
     
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG) # <- set logging level
+    logger_win_seqpuls = logging.getLogger(__name__)
+    logger_win_seqpuls.setLevel(logging.DEBUG) # <- set logging level
     log_handler = logging.FileHandler("log_file.log")
     formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(message)s")
     log_handler.setFormatter(formatter)
-    logger.addHandler(log_handler)
+    logger_win_seqpuls.addHandler(log_handler)
     
-    logger.info("set upp logger in puls_win.py")
+    logger_win_seqpuls.info("set upp logger in puls_win.py")
     
     import function
     

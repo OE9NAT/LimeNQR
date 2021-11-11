@@ -181,10 +181,8 @@ class window_main(tk.Tk):
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
         #self = tk.Tk()
-        self.title("Magnetic Resonance Imaging - Contrast Agent Analyser Controller - Main")
+        self.title("Magnetic Resonance Imaging - Contrast Agent Analyse Controller - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-       
-    
 
         try:
             # for linux
@@ -383,27 +381,27 @@ class window_main(tk.Tk):
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
         # Filepath for Storage for loading data
-        file_path_lable = tk.Label(frame_seq, text="path: ")
-        file_path_lable.grid(row=0, column=0, padx=5, pady=5)
+        self.file_path_lable = tk.Label(frame_seq, text="path: ")
+        self.file_path_lable.grid(row=0, column=0, padx=5, pady=5)
 
-        file_path_input = tk.Entry(frame_seq, fg="black", bg="white", width=10)
-        file_path_input.grid(row=0, column=1, padx=5, pady=5)
+        self.file_path_input = tk.Entry(frame_seq, fg="black", bg="white", width=10)
+        self.file_path_input.grid(row=0, column=1, padx=5, pady=5)
 
         # Filepath for Storage for loading data
         experiment_path_lable = tk.Label(frame_seq, text="experiment: ")
         experiment_path_lable.grid(row=1, column=0, padx=5, pady=5)
 
-        experiment_path_input = tk.Entry(
+        self.experiment_path_input = tk.Entry(
             frame_seq, fg="black", bg="white", width=10)
-        experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
+        self.experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
 
         # Filepath for Storage for loading data
         cycle_path_lable = tk.Label(frame_seq, text="cycle: ")
         cycle_path_lable.grid(row=2, column=0, padx=5, pady=5)
 
-        cycle_path_input = tk.Entry(
+        self.cycle_path_input = tk.Entry(
             frame_seq, fg="black", bg="white", width=10)
-        cycle_path_input.grid(row=2, column=1, padx=5, pady=5)
+        self.cycle_path_input.grid(row=2, column=1, padx=5, pady=5)
 
         puls_button = tk.Button(frame_seq, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
@@ -503,7 +501,7 @@ class window_main(tk.Tk):
         plot_button.pack(fill="x", padx=2, pady=2)#.grid(row=2,  padx=2, pady=2, sticky="ew")
 
         exit_button = tk.Button(
-            frame_Buttens, text="Close", background="tomato4", command=self.destroy)
+            frame_Buttens, text="Save & Close", background="tomato4", command=save_quit_all)# self.destroy)
         # exit_button = tk.Button(self, text="Beenden", command=self.quit)#.destroy) #self.quit
         exit_button.pack(fill="x", padx=2, pady=2)#.grid(row=3,  padx=2, pady=2, sticky="ew")
 
@@ -538,6 +536,8 @@ class window_main(tk.Tk):
         self.set_measur (freq_start,freq_end,freq_step,freq_average)
 
         self.set_tm() # set with pre set values
+
+        self.set_storage() # load sequence storage paths
 
 
 
@@ -691,6 +691,7 @@ class window_main(tk.Tk):
         tm_step_value = self.V_step_input.get()
         tm_lut_value = self.LUT_input.get()
         #print("Tune_value ",Tune_value)
+        self.debug_logtext("send to Arduino")
         self.debug_logtext("Tune voltage: "+tune_value)
         self.debug_logtext("Match: "+match_value)
         self.debug_logtext("freq step: "+tm_step_value)
@@ -702,6 +703,15 @@ class window_main(tk.Tk):
         logger_value.info("tm_lut_value" +str(tm_lut_value))
 
         logger_win_main.info("def send_arduino ")
+
+    def set_storage(self,path="test_path", experiment="test_exper",cycle="test_cycle"):
+        self.file_path_input.delete("0", "end")
+        self.file_path_input.insert(0, path)
+        self.experiment_path_input.delete("0", "end")
+        self.experiment_path_input.insert(0, experiment)
+        self.cycle_path_input.delete("0", "end")
+        self.cycle_path_input.insert(0, cycle)
+
 
 
 

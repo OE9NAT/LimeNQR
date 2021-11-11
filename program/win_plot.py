@@ -8,6 +8,8 @@ import tkinter as tk
 import PIL.Image as image
 
 import tkinter.ttk as TTK  # use for Combobox
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg, NavigationToolbar2Tk)
 from PIL import ImageTk, Image  # .jpg
 
 
@@ -124,18 +126,25 @@ def win_plot():
     files = []
     #folder_signal = "D:/UNI/Bacharbeit/lukas_bararbeit/signals"
     folder_signal = "/home/pi/lukas_bararbeit/signals/"
+    
+    #plot al data to file
+    plot_all=False
+    if plot_all:
+        for file in os.listdir(folder_signal):
+            if file.endswith(".h5"):
+                file_name = os.path.join(folder_signal, file)
+                # print(file_name,"\n")
+                files.append(file_name)
 
-    for file in os.listdir(folder_signal):
-        if file.endswith(".h5"):
-            file_name = os.path.join(folder_signal, file)
-            # print(file_name,"\n")
-            files.append(file_name)
-
-    for file in files:
-        print("\n \n lopp test  \n \n ")
-        print(file)
-        fig = plot(file)
-        break
+        for file in files:
+            print("\n \n lopp test  \n \n ")
+            print(file)
+            fig = plot(file)
+            
+    
+    ##plotr on screen
+    file = filedialog.askopenfilename( title='select signal .h5 file') #initialdir='/home/'
+    fig = plot(file) #funktion in in data2plot.py
 
     # specify the window as master
     canvas = FigureCanvasTkAgg(fig, master=window_plot)
