@@ -376,7 +376,7 @@ def window_main():
     # source_pw_input.place(x = 1000, y = 250, width=input_width, height=text_input_height)
     # simple_label("%",1100,250)
     
-    print('test_1_a logger')
+
     ######----- load sequence  ------######
     #path="test_data", experiment="test_experiment_3",cycle="test_cycle_3"
     
@@ -415,7 +415,7 @@ def window_main():
     own_button = tk.Button(window_main, text="set own sequenz", command=win_seq_own.windows_file)#windows_file) 
     own_button.place(x = 800, y = 350, width=150, height=50)
     
-    plot_button = tk.Button(window_main, text="ploter", command=win_plot.win_plot)#windows_file) 
+    plot_button = tk.Button(window_main, text="Plotter", command=win_plot.win_plot)#windows_file) 
     plot_button.place(x = 800, y = 400, width=150, height=50)
     
    

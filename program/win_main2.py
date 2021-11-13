@@ -492,12 +492,12 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)#.grid(row=0, padx=2, pady=2, sticky="ew")
 
         close_button = tk.Button(
-            frame_Buttens, text="Test", background="SkyBlue4", command=lambda: print("hi"))
+            frame_Buttens, text="Filestrukture", background="SkyBlue4", command=lambda: print("hi"))
         #close_button.grid(row=1,  padx=2, pady=2, sticky="ew")
         close_button .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
-            frame_Buttens, text="ploter", command=win_plot.win_plot)  # windows_file)
+            frame_Buttens, text="PLOT", command=win_plot.win_plot)  # windows_file)
         plot_button.pack(fill="x", padx=2, pady=2)#.grid(row=2,  padx=2, pady=2, sticky="ew")
 
         exit_button = tk.Button(
