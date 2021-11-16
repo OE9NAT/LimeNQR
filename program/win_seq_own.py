@@ -119,7 +119,13 @@ def load_file(path="data", experiment="test_experiment",cycle="test_cycle"):
     ######----- Setup of gui ------###### 
     window_experiment = tk.Tk()
     window_experiment.title("load experiment")
-    window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+    #window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+    try:
+        # for linux
+        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_experiment.wm_iconbitmap(bitmap=log_path)
+    except:
+        pass
     window_experiment.geometry("600x520") # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_experiment.option_add("Helvetica", '10') # Frischart und groesse
     window_experiment.resizable(width=False, height=False) #  False = no resize
@@ -246,8 +252,14 @@ def windows_file(path="test_data", experiment="test_experiment",cycle="test_cycl
     ######----- Setup of gui ------###### 
     window_puls = tk.Tk()
     window_puls.title("Set Puls")
-    log_path = "@/"+os.path.abspath(os.path.dirname(sys.argv[0])) + "/stethoskop.xbm"
-    window_puls.wm_iconbitmap(bitmap=log_path) 
+    #log_path = "@/"+os.path.abspath(os.path.dirname(sys.argv[0])) + "/stethoskop.xbm"
+    #window_puls.wm_iconbitmap(bitmap=log_path) 
+    try:
+        # for linux
+        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
+        window_experiment.wm_iconbitmap(bitmap=log_path)
+    except:
+        pass
     window_puls.geometry("1000x800+1000+100") # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_puls.option_add("Helvetica", '10') # Frischart und groesse
     window_puls.resizable(width=False, height=False) #  False = no resize

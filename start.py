@@ -10,10 +10,9 @@ import logging  # DEBUG INFO WARNING ERROR
 from logging.handlers import QueueHandler
 
 
-
-# handler = logging.FileHandler("log/Value_log.log")     
+# handler = logging.FileHandler("log/Value_log.log")
 # handler = logging.handlers.RotatingFileHandler("log/Value_log.log")
-# formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")   
+# formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")
 # handler.setFormatter(formatter)
 
 logging.basicConfig(filename="log/DEFAULT_log.log",
@@ -21,12 +20,10 @@ logging.basicConfig(filename="log/DEFAULT_log.log",
                     format="______ %(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s")  # set level
 
 
-
-
-
 logger_start = logging.getLogger('start')
 logger_start.addHandler(logging.StreamHandler())
 logger_start.info("logging from start up")
+
 
 def test_version():
 
@@ -72,11 +69,15 @@ def test_import():
         import queue
         import PIL
         import logging
+        import h5py
+        #import RPi
 
     except ModuleNotFoundError as err:
         # Error handling
-        print("\nERROR loading import \n")
+        print("\n #### ERROR loading import ####\n")
         print(err)
+        print("\n#### ERROR loading import #### \n")
+        #os.system('python -m pip install '+str(err))
 
         return False
     else:
@@ -118,8 +119,10 @@ if __name__ == "__main__":
     print("Check list:", *test_dict.items(), sep="\n")
 
     if False in test_dict.values():
-        print("ERROR \n problem with imports \n")
-        raise ImportError("not all imports are satisfied")
+        test_import()
+        #print("ERROR \n problem with imports \n")
+
+        raise ImportError("imports are not satisfied")
 
     else:
         print("\n\nimports alles ok\n\n")

@@ -12,6 +12,7 @@ import tkinter.ttk as TTK  # use for Combobox
 from PIL import ImageTk, Image  # .jpg
 
 import csv
+import GUI
 
 import logging  # DEBUG INFO WARNING ERROR
 #from logging.handlers import QueueHandler
@@ -19,9 +20,10 @@ import logging  # DEBUG INFO WARNING ERROR
 #    level=logging.DEBUG, # <- set logging level
 #    format="%(asctime)s - %(name)s : %(levelname)s : \n %(message)s") # set level
 
-handler = logging.FileHandler("log/Value_log.log")     
+handler = logging.FileHandler("log/Value_log.log")
 # handler = logging.handlers.RotatingFileHandler("log/Value_log.log")
-formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")   
+formatter = logging.Formatter(
+    "____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")
 handler.setFormatter(formatter)
 
 
@@ -32,7 +34,7 @@ logger_win_main.info("logging from win_main2 start up")
 logger_value = logging.getLogger("value")
 logger_value.setLevel(logging.DEBUG)
 logger_value.addHandler(handler)
-#logger_value.addHandler(logging.StreamHandler())
+# logger_value.addHandler(logging.StreamHandler())
 
 logger_value.debug('This is an error message')
 logger_value.info("start value logger")
@@ -44,11 +46,9 @@ logger_value.critical('This is an error message')
 logger_setting = logging.getLogger("settings")
 logger_setting.setLevel(logging.DEBUG)
 logger_setting.addHandler(handler)
-#logger_setting.addHandler(logging.StreamHandler())
+# logger_setting.addHandler(logging.StreamHandler())
 
 logger_setting.info("start settings logger")
-
-
 
 
 if 'setting_dict' not in locals():
@@ -171,8 +171,6 @@ def load_values(path="config.cfg", section="pre_set_values"):
 #    windows_file(file_path,experiment_path,cycle_path)
 
 
-
-
 # def window_main():
 class window_main(tk.Tk):
 
@@ -181,19 +179,13 @@ class window_main(tk.Tk):
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
         #self = tk.Tk()
-        self.title("Magnetic Resonance Imaging - Contrast Agent Analyser Controller - Main")
+        self.title(
+            "Magnetic Resonance Imaging - Contrast Agent Analyse Controller - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-       
-    
 
-        try:
-            # for linux
-            log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
-            self.wm_iconbitmap(bitmap=log_path)
-        except:
-            # for windows
-            log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
-            self.wm_iconbitmap(bitmap=log_path)
+        print(log_path)
+
+        self.wm_iconbitmap(bitmap=log_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.geometry("1000x750+100+10")
         self.option_add("Helvetica", '10')  # Frischart und groesse
@@ -229,7 +221,8 @@ class window_main(tk.Tk):
         help_menu.add_command(label="Error message !", command=error_window)
         help_menu.add_command(label="Error value !",
                               command=lambda:  error_window(" max feq"))
-        help_menu.add_command(label="test loglevel", command=lambda: self.debug_logtext())
+        help_menu.add_command(label="test loglevel",
+                              command=lambda: self.debug_logtext())
         # Drop-down generieren
         menuleiste.add_cascade(label="Help", menu=help_menu)
 
@@ -311,14 +304,13 @@ class window_main(tk.Tk):
         self.button_run = tk.Button(
             frame_measure, text="RUN measurment", command=self.run_measurment, foreground="green")
         self.button_run.grid(row=5, column=0, rowspan=1,
-                             padx=5, pady=5,sticky ="ew")
+                             padx=5, pady=5, sticky="ew")
 
         # Butten last RUN measurement from settings.cfg
         self.button_last_run = tk.Button(
             frame_measure, text="load settings", command=self.load_meas_set)
         self.button_last_run.grid(row=7, column=0,
-                             padx=5, pady=5,sticky ="ew")
-        
+                                  padx=5, pady=5, sticky="ew")
 
         ######----- Tune&Match Settings ------######
         frame_tm = tk.LabelFrame(self, text="Tune&Match Settings", bg='grey')
@@ -372,7 +364,7 @@ class window_main(tk.Tk):
         self.send_TMfile.grid(row=4, column=0, padx=5, pady=5)
 
         self.send_TMfile = tk.Button(
-            frame_tm, text="Send to Arduino", command= self.send_arduino , foreground="green")
+            frame_tm, text="Send to Arduino", command=self.send_arduino, foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
         ######----- load sequence  ------######
@@ -383,27 +375,28 @@ class window_main(tk.Tk):
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
         # Filepath for Storage for loading data
-        file_path_lable = tk.Label(frame_seq, text="path: ")
-        file_path_lable.grid(row=0, column=0, padx=5, pady=5)
+        self.file_path_lable = tk.Label(frame_seq, text="path: ")
+        self.file_path_lable.grid(row=0, column=0, padx=5, pady=5)
 
-        file_path_input = tk.Entry(frame_seq, fg="black", bg="white", width=10)
-        file_path_input.grid(row=0, column=1, padx=5, pady=5)
+        self.file_path_input = tk.Entry(
+            frame_seq, fg="black", bg="white", width=10)
+        self.file_path_input.grid(row=0, column=1, padx=5, pady=5)
 
         # Filepath for Storage for loading data
         experiment_path_lable = tk.Label(frame_seq, text="experiment: ")
         experiment_path_lable.grid(row=1, column=0, padx=5, pady=5)
 
-        experiment_path_input = tk.Entry(
+        self.experiment_path_input = tk.Entry(
             frame_seq, fg="black", bg="white", width=10)
-        experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
+        self.experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
 
         # Filepath for Storage for loading data
         cycle_path_lable = tk.Label(frame_seq, text="cycle: ")
         cycle_path_lable.grid(row=2, column=0, padx=5, pady=5)
 
-        cycle_path_input = tk.Entry(
+        self.cycle_path_input = tk.Entry(
             frame_seq, fg="black", bg="white", width=10)
-        cycle_path_input.grid(row=2, column=1, padx=5, pady=5)
+        self.cycle_path_input.grid(row=2, column=1, padx=5, pady=5)
 
         puls_button = tk.Button(frame_seq, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
@@ -430,26 +423,25 @@ class window_main(tk.Tk):
 
         plot_text = tk.Label(frame_plot, text="Results of last run",
                              foreground="green", background="white", font=("Arial Bold", 10))
-        plot_text.grid(row=0,column=0, columnspan=2,sticky="ew")
+        plot_text.grid(row=0, column=0, columnspan=2, sticky="ew")
 
         print("start ploting")
 
         # specify the window as master
         self.canvas = FigureCanvasTkAgg(self.plot_live(), master=frame_plot)
-        self.canvas.get_tk_widget().grid(row=1, column=0,padx=2, pady=2,sticky="nsew",columnspan=2)  # ,columnspan=3,rowspan=20)
+        self.canvas.get_tk_widget().grid(row=1, column=0, padx=2, pady=2, sticky="nsew",
+                                         columnspan=2)  # ,columnspan=3,rowspan=20)
         self.canvas.draw()
         #canvas.get_tk_widget().place(x = 10, y = 360, width=500, height=400)
-        #canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
+        # canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
 
-        
         # navigation toolbar for the Plot
         toolbarFrame = tk.Frame(master=frame_plot)
-        toolbarFrame.grid(row=2,column=0, padx=2, pady=2)#,sticky="ew")
+        toolbarFrame.grid(row=2, column=0, padx=2, pady=2)  # ,sticky="ew")
         toolbar = NavigationToolbar2Tk(self.canvas, toolbarFrame)
 
-
         button_reload = tk.Button(frame_plot, text="Reload plot",
-                               command=self.plot_update, background="chartreuse4")
+                                  command=self.plot_update, background="chartreuse4")
         button_reload.grid(row=2, column=1, padx=2, pady=2, sticky="ew")
 
         logger_win_main.info("win_main2 start class window_main plot update")
@@ -460,7 +452,8 @@ class window_main(tk.Tk):
         frame_logger.grid(row=2, column=0, sticky="nsew", padx=2, pady=2)
         file_path_lable = tk.Label(
             frame_logger, text="debug logger: ", foreground="green", background="black")
-        file_path_lable.pack(fill="x", padx=2, pady=2)#.grid(row=0, column=0)
+        # .grid(row=0, column=0)
+        file_path_lable.pack(fill="x", padx=2, pady=2)
 
         # Create a combobbox to select the logging level
         self.loglevel_console = tk.StringVar()
@@ -470,13 +463,14 @@ class window_main(tk.Tk):
                                 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
         #textvariable=level ,state='readonly'
         combobox.current(0)
-        combobox.pack(fill="x", padx=2, pady=2)#.grid(row=1 sticky="ew")
+        combobox.pack(fill="x", padx=2, pady=2)  # .grid(row=1 sticky="ew")
 
         self.logtext_area = tk.scrolledtext.ScrolledText(
             frame_logger, width=30, height=12, font=("Times New Roman", 10))
         #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
         #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
-        self.logtext_area.pack(fill="x", padx=2, pady=2)#.grid(row=2)#, sticky="nsew")
+        # .grid(row=2)#, sticky="nsew")
+        self.logtext_area.pack(fill="x", padx=2, pady=2)
 
         #text_handler = TextHandler(logtext_area)
         # Add the handler to logger
@@ -491,21 +485,24 @@ class window_main(tk.Tk):
 
         button_run = tk.Button(frame_Buttens, text="RUN",
                                command=load_values(), background="chartreuse4")
-        button_run.pack(fill="x", padx=2, pady=2)#.grid(row=0, padx=2, pady=2, sticky="ew")
+        # .grid(row=0, padx=2, pady=2, sticky="ew")
+        button_run.pack(fill="x", padx=2, pady=2)
 
         close_button = tk.Button(
-            frame_Buttens, text="Test", background="SkyBlue4", command=lambda: print("hi"))
+            frame_Buttens, text="Filestrukture", background="SkyBlue4", command=lambda: print("hi"))
         #close_button.grid(row=1,  padx=2, pady=2, sticky="ew")
         close_button .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
-            frame_Buttens, text="ploter", command=win_plot.win_plot)  # windows_file)
-        plot_button.pack(fill="x", padx=2, pady=2)#.grid(row=2,  padx=2, pady=2, sticky="ew")
+            frame_Buttens, text="PLOT", command=win_plot.win_plot)  # windows_file)
+        # .grid(row=2,  padx=2, pady=2, sticky="ew")
+        plot_button.pack(fill="x", padx=2, pady=2)
 
         exit_button = tk.Button(
-            frame_Buttens, text="Close", background="tomato4", command=self.destroy)
+            frame_Buttens, text="Save & Close", background="tomato4", command=save_quit_all)  # self.destroy)
         # exit_button = tk.Button(self, text="Beenden", command=self.quit)#.destroy) #self.quit
-        exit_button.pack(fill="x", padx=2, pady=2)#.grid(row=3,  padx=2, pady=2, sticky="ew")
+        # .grid(row=3,  padx=2, pady=2, sticky="ew")
+        exit_button.pack(fill="x", padx=2, pady=2)
 
         ### ----- final settings --####
         # self.average_input.focus() #where curser should be set for the uer
@@ -516,31 +513,29 @@ class window_main(tk.Tk):
         # return self
 
     def run_measurment(self):
-            print("run_measurment")
-
+        print("run_measurment")
 
     def load_meas_set(self):
         print("my setting_dict dose not exist")
-    
+
         path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
         setting_dict = load_setting(path_setting, file="/program/setting.cfg")
-       
+
         freq_start = setting_dict["setting"]["freq_start"]
         freq_end = setting_dict["setting"]["freq_end"]
-        freq_step = setting_dict["setting"] ["freq_step"]
-        freq_average = setting_dict["setting"] ["freq_repetitions"]
+        freq_step = setting_dict["setting"]["freq_step"]
+        freq_average = setting_dict["setting"]["freq_repetitions"]
 
-        logger_value.info("freq_start" +str(freq_start))
-        logger_value.info("freq_end" +str(freq_end))
-        logger_value.info("freq_step" +str(freq_step))
-        logger_value.info("freq_average" +str(freq_average))
+        logger_value.info("freq_start" + str(freq_start))
+        logger_value.info("freq_end" + str(freq_end))
+        logger_value.info("freq_step" + str(freq_step))
+        logger_value.info("freq_average" + str(freq_average))
 
-        self.set_measur (freq_start,freq_end,freq_step,freq_average)
+        self.set_measur(freq_start, freq_end, freq_step, freq_average)
 
-        self.set_tm() # set with pre set values
+        self.set_tm()  # set with pre set values
 
-
-
+        self.set_storage()  # load sequence storage paths
 
     def set_measur(self, start="11", stop="22", step="33", average="44"):
         self.freq_start_input.delete("0", "end")
@@ -577,8 +572,8 @@ class window_main(tk.Tk):
         data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
         data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
         #print("data_feq", *data_fequency, sep="\n")
-        #print("data_fequency",type(data_fequen[0])
-        #print("data_amplitude",data_amplitude)
+        # print("data_fequency",type(data_fequen[0])
+        # print("data_amplitude",data_amplitude)
 
         #fig = plt.figure(figsize=(1, 2))
         self.fig = plt.figure()
@@ -598,7 +593,7 @@ class window_main(tk.Tk):
         self.time_plot.grid()
 
         self.feq_plot = plt.subplot(212)
-        self.feq_plot.plot(data_fequency,data_amplitude)
+        self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
         self.feq_plot.set_xlabel('Frequency [kHz]')
         self.feq_plot.set_ylabel('Amplituden [V]')
@@ -606,28 +601,27 @@ class window_main(tk.Tk):
 
         return self.fig
 
-    
-    def plot_update(self, file = "signals_TEST/live_scan_data.csv"):
+    def plot_update(self, file="signals_TEST/live_scan_data.csv"):
         print("update plot")
         logger_win_main.info("update plot from main")
 
-        #for testing
+        # for testing
         iterate_plot = np.random.uniform(low=1, high=10)
-        print("iterate_plot ",iterate_plot)
+        print("iterate_plot ", iterate_plot)
         t = np.arange(0.0, 2.0, 0.01)
         s1 = np.sin(iterate_plot*10*np.pi*t)
         freq = np.arange(0, 100, 10)
         s2 = np.zeros(10)
-        s2[int(iterate_plot)]= 20
+        s2[int(iterate_plot)] = 20
 
-        #call the clear method on your axes
+        # call the clear method on your axes
         self.time_plot.clear()
         self.feq_plot.clear()
 
-
-        #plot the new data
+        # plot the new data
         self.time_plot.plot(t, s1)
-        self.time_plot.title.set_text("Time of new data ferq:"+ str(iterate_plot))
+        self.time_plot.title.set_text(
+            "Time of new data ferq:" + str(iterate_plot))
         self.time_plot.set_xlabel('time [s]')
         self.time_plot.set_ylabel('Amplituden [V]')
         self.time_plot.grid()
@@ -638,42 +632,43 @@ class window_main(tk.Tk):
         self.feq_plot.set_ylabel('Amplituden [V]')
         self.feq_plot.grid()
 
-        #call the draw method on your canvas
+        # call the draw method on your canvas
         self.canvas.draw()
 
         log_text = "Updatet live Plot"+" \n"
         self.logtext_area.insert(tk.INSERT, log_text)
-    
+
     def read_tm(self):
         print("def read_tm")
-        self.logtext_area.insert(tk.INSERT, "read tm-file\n") 
-        file = filedialog.askopenfilename(title='select Tune and Match file') #initialdir='/home/',
+        self.logtext_area.insert(tk.INSERT, "read tm-file\n")
+        file = filedialog.askopenfilename(
+            title='select Tune and Match file')  # initialdir='/home/',
 
-        print("file path for tune and match\n ",file)
+        print("file path for tune and match\n ", file)
         self.debug_logtext("read_tm file : "+file)
         logger_setting.info("read_tm file : "+file)
 
         tune_value = 3.3
-        match_value= 3.3
+        match_value = 3.3
         tm_step_value = 50
         tm_lut_value = 20
 
-        self.set_tm(tune_value,match_value, tm_step_value,tm_lut_value)
+        self.set_tm(tune_value, match_value, tm_step_value, tm_lut_value)
 
-        text= "tune_value" +str(tune_value)
-        text= text+"\nmatch_value" + str(match_value)
-        text= text+"\ntm_step_value"+str(tm_step_value)
-        text= text+"\ntm_lut_value"+str(tm_lut_value)
-        text = text +"\nfiel path: "+file
+        text = "tune_value" + str(tune_value)
+        text = text+"\nmatch_value" + str(match_value)
+        text = text+"\ntm_step_value"+str(tm_step_value)
+        text = text+"\ntm_lut_value"+str(tm_lut_value)
+        text = text + "\nfiel path: "+file
 
-        logger_value.info("tune_value" +str(tune_value))
-        logger_value.info("match_value" +str(match_value))
-        logger_value.info("tm_step_value" +str(tm_step_value))
-        logger_value.info("tm_lut_value" +str(tm_lut_value))
-        
+        logger_value.info("tune_value" + str(tune_value))
+        logger_value.info("match_value" + str(match_value))
+        logger_value.info("tm_step_value" + str(tm_step_value))
+        logger_value.info("tm_lut_value" + str(tm_lut_value))
+
         logger_win_main.info("def read_tm "+text)
 
-    def set_tm(self,tune=5, match=100,tm_step=100,lut=10):
+    def set_tm(self, tune=5, match=100, tm_step=100, lut=10):
         self.Tune_U_max_input.delete("0", "end")
         self.Tune_U_max_input.insert(0, tune)
         self.Match_U_max_input.delete("0", "end")
@@ -683,7 +678,6 @@ class window_main(tk.Tk):
         self.LUT_input.delete("0", "end")
         self.LUT_input.insert(0, lut)
 
-
     def send_arduino(self):
         print("def send arduino")
         tune_value = self.Tune_U_max_input.get()
@@ -691,27 +685,33 @@ class window_main(tk.Tk):
         tm_step_value = self.V_step_input.get()
         tm_lut_value = self.LUT_input.get()
         #print("Tune_value ",Tune_value)
+        self.debug_logtext("send to Arduino")
         self.debug_logtext("Tune voltage: "+tune_value)
         self.debug_logtext("Match: "+match_value)
         self.debug_logtext("freq step: "+tm_step_value)
         self.debug_logtext("lut size: "+tm_lut_value)
 
-        logger_value.info("tune_value" +str(tune_value))
-        logger_value.info("match_value" +str(match_value))
-        logger_value.info("tm_step_value" +str(tm_step_value))
-        logger_value.info("tm_lut_value" +str(tm_lut_value))
+        logger_value.info("tune_value" + str(tune_value))
+        logger_value.info("match_value" + str(match_value))
+        logger_value.info("tm_step_value" + str(tm_step_value))
+        logger_value.info("tm_lut_value" + str(tm_lut_value))
 
         logger_win_main.info("def send_arduino ")
 
+    def set_storage(self, path="test_path", experiment="test_exper", cycle="test_cycle"):
+        self.file_path_input.delete("0", "end")
+        self.file_path_input.insert(0, path)
+        self.experiment_path_input.delete("0", "end")
+        self.experiment_path_input.insert(0, experiment)
+        self.cycle_path_input.delete("0", "end")
+        self.cycle_path_input.insert(0, cycle)
 
-
-        
-    def debug_logtext(self,text="test"):
+    def debug_logtext(self, text="test"):
         #self.loglevel_console.set("INFO from debug_logtext")
         print(self.loglevel_console.get())
         if text == "test":
-            log_text = "test loglevel_console: "+self.loglevel_console.get() +" \n"
-        else: 
+            log_text = "test loglevel_console: "+self.loglevel_console.get() + " \n"
+        else:
             log_text = text + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         self.logtext_area.see(tk.END)

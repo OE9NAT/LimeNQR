@@ -10,6 +10,9 @@ def plot(filename):
     #filename = "./signals/20210916_174823_setup.h5"
     #filename = "/home/pi/lukas_bararbeit/signals/11111111111_093701_setup.h5"
 
+    folder_signal = "signals_TEST/"
+    print("filename for lotting", filename)
+
     font_plot = {'family': 'serif', 'color':  'darkred',
                  'weight': 'normal', 'size': 16}
 
@@ -83,15 +86,10 @@ def plot(filename):
     plt.text(150, 150, text, fontdict={
              'family': 'serif', 'weight': 'normal', 'size': 10})
 
-    save_filename = folder_signal+"/plots/" + \
-        "sample_time_" + filename[42:-4] + ".jpg"
-    print("save_filename", save_filename)
-    plt.savefig(save_filename)
-
-    save_filename = folder_signal+"/plots/" + \
-        "sample_time_" + filename[42:-4] + ".svg"
-    print("save_filename", save_filename)
-    plt.savefig(save_filename)
+    save_filename = folder_signal+"/plots/" +"sample_" + filename[42:-4] 
+    print("save_filename", save_filename+ ".jpg")
+    plt.savefig(save_filename+ ".jpg")
+    plt.savefig(save_filename+ ".svg")
 
     # plt.show()
 
@@ -123,11 +121,9 @@ def plot(filename):
     ax4.set_xlabel('frequency in Hz', fontsize=8)
     ax4.set_ylabel('amplitude in mV', fontsize=8)
 
-    save_filename = folder_signal+"/plots/" + \
-        "sample_" + filename[42:-4] + ".jpg"
-    print("save_filename", save_filename)
-    plt.savefig(save_filename)
-    plt.show()
+
+    plt.savefig(save_filename+".jpg")
+    #plt.show()
 
     return figure
 
