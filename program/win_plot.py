@@ -14,10 +14,10 @@ from PIL import ImageTk, Image  # .jpg
 
 
 import logging  # DEBUG INFO WARNING ERROR
-#from logging.handlers import QueueHandler
-# logging.basicConfig(filename="../log/win_main_log.log",
-#    level=logging.DEBUG, # <- set logging level
-#    format="%(asctime)s - %(name)s : %(levelname)s : \n %(message)s") # set level
+
+import variables
+value_set = variables.Value_Settings()
+logo_path = value_set.logo_path
 
 
 logger_win_main = logging.getLogger('win_main')
@@ -41,16 +41,11 @@ def win_plot():
     print("win_plot")
     ######----- Setup of gui ------######
     window_plot = tk.Tk()
-    window_plot.title("Magnetic Resonance Imaging - Contrast Agent Analyse Controller - win_plot")
-    try:
-        # for linux
-        log_path = "@/" + os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
-        window_plot.wm_iconbitmap(bitmap=log_path)
-    except:
-        # for windows
-        log_path = os.path.abspath(os.path.dirname(sys.argv[0])) + "/program/stethoskop.xbm"
-        window_plot.wm_iconbitmap(bitmap=log_path)
-    
+    window_plot.title(
+        "Magnetic Resonance Imaging - Contrast Agent Analyse Controller - win_plot")
+
+    window_plot.wm_iconbitmap(bitmap=logo_path)
+
     # window_main.wm_iconbitmap(bitmap="@/home/pi/Desktop/Bach_arbeit/stethoskop.xbm")
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_plot.geometry("1200x1000+200+100")
@@ -126,9 +121,9 @@ def win_plot():
     files = []
     #folder_signal = "D:/UNI/Bacharbeit/lukas_bararbeit/signals"
     folder_signal = "/home/pi/lukas_bararbeit/signals/"
-    
-    #plot al data to file
-    plot_all=False
+
+    # plot al data to file
+    plot_all = False
     if plot_all:
         for file in os.listdir(folder_signal):
             if file.endswith(".h5"):
@@ -140,11 +135,11 @@ def win_plot():
             print("\n \n lopp test  \n \n ")
             print(file)
             fig = plot(file)
-            
-    
-    ##plotr on screen
-    file = filedialog.askopenfilename( title='select signal .h5 file') #initialdir='/home/'
-    fig = plot(file) #funktion in in data2plot.py
+
+    # plotr on screen
+    file = filedialog.askopenfilename(
+        title='select signal .h5 file')  # initialdir='/home/'
+    fig = plot(file)  # funktion in in data2plot.py
 
     # specify the window as master
     canvas = FigureCanvasTkAgg(fig, master=window_plot)

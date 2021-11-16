@@ -10,7 +10,6 @@ from matplotlib.backends.backend_tkagg import (
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import scrolledtext   # use to display logger
-import tkinter as tk
 import matplotlib
 import numpy as np
 import os
@@ -61,43 +60,9 @@ print("-_____GUI own imports_end____-")
 
 print("___start GUI analys")
 
-# get size of screen
-window = tk.Tk()
-screen_width = window.winfo_screenwidth()
-screen_height = window.winfo_screenheight()
-window.title("get Window size")
-# window.geometry("400x400")
-
-# window.destroy()
-print(type(screen_width))
-text = "breite: "+str(screen_width) + " hoehe: "+str(screen_height)
-print(text)
-
 
 # constant Variabels
 
-class window_main():
-
-    def __init__(self):
-
-
-global log_path
-# https://www.shareicon.net/stethoscope-medical-kit-clinic-hospital-medical-tool-medical-777051
-try:
-    # for linux
-    log_path = "@/" + \
-        os.path.abspath(os.path.dirname(
-            sys.argv[0])) + "/program/icon_logo.xbm"
-    window.wm_iconbitmap(bitmap=log_path)
-except:
-    # for windows
-    log_path = os.path.abspath(os.path.dirname(
-        sys.argv[0])) + "/program/icon_logo.xbm"
-    window.wm_iconbitmap(bitmap=log_path)
-print("path of logo: ", log_path)
-
-
-# window.destroy()
 
 # show window, wait for user imput
 win_main = window_main()

@@ -1,8 +1,14 @@
+
+import variables
 import os
 import sys
 import configparser
 import PIL.Image as image
 
+import tkinter as tk
+import tkinter.ttk as TTK  # use for Combobox
+from tkinter import scrolledtext   # use for logger
+from PIL import ImageTk, Image  # .jpg
 
 import logging  # DEBUG INFO WARNING ERROR
 from logging.handlers import QueueHandler
@@ -10,6 +16,9 @@ from logging.handlers import QueueHandler
 logger_win_seqpuls = logging.getLogger('win_seq_puls')
 logger_win_seqpuls.addHandler(logging.StreamHandler())
 logger_win_seqpuls.info("logging from win_seq_puls start up")
+
+value_set = variables.Value_Settings()
+logo_path = value_set.logo_path
 
 
 class Puls:
@@ -122,17 +131,7 @@ def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
     window_experiment = tk.Tk()
     window_experiment.title("load experiment")
     # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-    try:
-        # for linux
-        log_path = "@/" + \
-            os.path.abspath(os.path.dirname(
-                sys.argv[0])) + "/program/stethoskop.xbm"
-        window_experiment.wm_iconbitmap(bitmap=log_path)
-    except:
-        # for windows
-        log_path = os.path.abspath(os.path.dirname(
-            sys.argv[0])) + "/program/stethoskop.xbm"
-        window_experiment.wm_iconbitmap(bitmap=log_path)
+    window_experiment.wm_iconbitmap(bitmap=logo_path)
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_experiment.geometry("600x520")
     window_experiment.option_add("Helvetica", '10')  # Frischart und groesse
@@ -219,10 +218,6 @@ def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
 
 
 def windows_file(path="test_data", experiment="test_experiment", cycle="test_cycle"):
-    import tkinter as tk
-    import tkinter.ttk as TTK  # use for Combobox
-    from tkinter import scrolledtext   # use for logger
-    from PIL import ImageTk, Image  # .jpg
 
     # helper function
     def simple_label(text_unit, column, row):
@@ -267,7 +262,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
     ######----- Setup of gui ------######
     window_puls = tk.Tk()
     window_puls.title("Set Puls")
-    window_puls.wm_iconbitmap(bitmap=log_path)
+    window_puls.wm_iconbitmap(bitmap=logo_path)
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_puls.geometry("1000x800+1000+100")
     window_puls.option_add("Helvetica", '10')  # Frischart und groesse

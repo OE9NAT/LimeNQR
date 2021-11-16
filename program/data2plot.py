@@ -86,10 +86,10 @@ def plot(filename):
     plt.text(150, 150, text, fontdict={
              'family': 'serif', 'weight': 'normal', 'size': 10})
 
-    save_filename = folder_signal+"/plots/" +"sample_" + filename[42:-4] 
-    print("save_filename", save_filename+ ".jpg")
-    plt.savefig(save_filename+ ".jpg")
-    plt.savefig(save_filename+ ".svg")
+    save_filename = folder_signal+"/plots/" + "sample_" + filename[42:-4]
+    print("save_filename", save_filename + ".jpg")
+    plt.savefig("save_filename" + ".jpg")
+    #plt.savefig("save_filename" + ".svg")
 
     # plt.show()
 
@@ -121,9 +121,8 @@ def plot(filename):
     ax4.set_xlabel('frequency in Hz', fontsize=8)
     ax4.set_ylabel('amplitude in mV', fontsize=8)
 
-
-    plt.savefig(save_filename+".jpg")
-    #plt.show()
+    plt.savefig("save_filename"+".jpg")
+    # plt.show()
 
     return figure
 
@@ -144,8 +143,7 @@ if __name__ == "__main__":
 
     file = "signals_TEST/live_scan_data.csv"
 
-    fig =plot(file)
-
+    fig = plot(file)
 
     # exit()
 
