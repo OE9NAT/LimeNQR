@@ -38,6 +38,41 @@ class Value_Settings:
     def hallo_word():
         print("hallo")
 
+    @staticmethod
+    def import_setting(path=os.path.dirname(
+            sys.argv[0]), file="program/setting.cfg"):
+        # read settings form cfg file
+        path_settings = path+"/"+file
+        print("setting file: ", path_settings)
+        if not os.path.exists(path_settings):
+            print("file Setting not found")
+            logger_function.warning(
+                "function.py, def load_setting, path_settings not found")
+            #raise TypeError ("file dose not exist \n"+path_settings)
+
+            # look fore settings.cfg
+            path_settings = filedialog.askopenfilename(
+                initialdir='/home/', title='select settings.cfg path')
+            print("setting file: ", path_settings)
+
+        configParser = configparser.ConfigParser()
+        configParser.read(path_settings)
+        setting_dict = {section: dict(configParser.items(section))
+                        for section in configParser.sections()}
+
+        self._freq_start = 11
+        self._freq_end = 11
+        self._freq_step = 11
+        self._freq_repetitions = 11
+
+        self._tm_tune = 11
+        self.tm_match = 11
+        self.tm_freq = 11
+        self._tm_lut = 11
+
+        logging.info("Values loaded from load_setting")
+        return setting_dict
+
     @property  # getter for path of logo for window
     def logo_path(self):
         print(self._log_path, "\n")

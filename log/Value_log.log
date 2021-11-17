@@ -553,3 +553,27 @@ ____ value ____  2021-11-17 00:05:03,282 : CRITICAL :
  This is an error message
 ____ settings ____  2021-11-17 00:05:03,282 : INFO : 
  start settings logger
+____ value ____  2021-11-17 07:37:14,934 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-17 07:37:14,934 : INFO : 
+ start value logger
+____ value ____  2021-11-17 07:37:14,934 : WARNING : 
+ start value logger
+____ value ____  2021-11-17 07:37:14,934 : ERROR : 
+ This is an error message
+____ value ____  2021-11-17 07:37:14,934 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-17 07:37:14,934 : INFO : 
+ start settings logger
+____ value ____  2021-11-17 07:37:32,213 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-17 07:37:32,215 : INFO : 
+ start value logger
+____ value ____  2021-11-17 07:37:32,215 : WARNING : 
+ start value logger
+____ value ____  2021-11-17 07:37:32,215 : ERROR : 
+ This is an error message
+____ value ____  2021-11-17 07:37:32,215 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-17 07:37:32,216 : INFO : 
+ start settings logger
