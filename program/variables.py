@@ -2,6 +2,11 @@ import tkinter as tk
 import os
 import sys
 import configparser
+import logging
+
+logger_win_variables = logging.getLogger('win_variables')
+logger_win_variables.addHandler(logging.StreamHandler())
+logger_win_variables.info("logging from win_variables start up")
 
 
 class Value_Settings:
@@ -76,19 +81,19 @@ class Value_Settings:
         setting_dict = {section: dict(configParser.items(section))
                         for section in configParser.sections()}
 
-        self._freq_start = 11
-        self._freq_end = 11
-        self._freq_step = 11
-        self._freq_repetitions = 11
-
-        self._tunematch_tune = 11
-        self._tunematch_match = 11
-        self._tunematch_freq = 11
-        self._tunematch_lut = 11
-
-        self._load_sample = "sam"
-        self._load_experiment = "exp"
-        self._load_data = "Ech"
+        #self._freq_start = 11
+        #self._freq_end = 11
+        #self._freq_step = 11
+        #self._freq_repetitions = 11
+#
+        #self._tunematch_tune = 11
+        #self._tunematch_match = 11
+        #self._tunematch_freq = 11
+        #self._tunematch_lut = 11
+#
+        #self._load_sample = "sam"
+        #self._load_experiment = "exp"
+        #self._load_data = "Ech"
 
         # logging.info("Values loaded from load_setting")
         self.import_values = {}
@@ -139,16 +144,20 @@ class Value_Settings:
         print("getter variables.py get_freq")
         return [self._load_sample, self._load_experiment, self._load_data]
 
+    # logo path
     @import_setting.getter
     def logo_path(self):
         print(self._log_path, "\n")
         return self._log_path
 
+    # read and save to settings.cfg
     @import_setting.setter
-    def set_settins(self, path_settings):
+    def set_settings(self, path_settings):
         # def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting.cfg"):
         # read settings form setting.cfg file and set it ot ROM
         # path_settings = path+"/"+file
+        logger_win_variables.debug(
+            "logging from variable.py set settings start up")
         print("@property import_settings")
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
@@ -162,15 +171,16 @@ class Value_Settings:
                 initialdir='/home/', title='select settings.cfg path')
             print("setting file: ", path_settings)
 
+        self.path_settings = path_settings
         configParser = configparser.ConfigParser()
         configParser.read(path_settings)
         setting_dict = {section: dict(configParser.items(section))
                         for section in configParser.sections()}
 
         print((setting_dict.keys()))
-        print((setting_dict["setting"]))
+        print((setting_dict["storage_defalt"]))
 
-        self._freq_start = setting_dict[0]  # ["settings"]["freq_start"]
+        self._freq_start = setting_dict["setting"]["freq_start"]
         self._freq_end = setting_dict["setting"]["freq_end"]
         self._freq_step = setting_dict["setting"]["freq_step"]
         self._freq_repetitions = setting_dict["setting"]["freq_repetitions"]
@@ -180,9 +190,9 @@ class Value_Settings:
         self._tunematch_freq = setting_dict["TandM_settings"]["tm_step_value"]
         self._tunematch_lut = setting_dict["TandM_settings"]["tm_lut_value"]
 
-        self._load_sample = "1sam"
-        self._load_experiment = "1exp"
-        self._load_data = "1Ech"
+        self._load_sample = setting_dict["storage_defalt"]["seq_data"]
+        self._load_experiment = setting_dict["storage_defalt"]["seq_experiment"]
+        self._load_data = setting_dict["storage_defalt"]["seq_cycle"]
 
         # logging.info("Values loaded from load_setting")
         self.import_values = {}
@@ -191,9 +201,94 @@ class Value_Settings:
         self.import_values["tunematch"] = {}
         self.import_values["load"] = {}
 
-        print("import_values", type(self.import_values))
+        print("import_values", self.import_values)
+        logger_win_variables.info("logging from win_variables start up")
 
         return self.import_values
+
+    @import_setting.setter
+    def save_settings(self, value):
+        # save settings form ROM and save it to setting.cfg file
+        print("save_settings variables.py\n\n", type(value), value)
+
+        logger_win_variables.debug(
+            "logging from variable.py save ro settings.cfg")
+        print("@property import_settings")
+        print("setting file: ", self.path_settings)
+
+        path_settings = self.path_settings
+
+        if not os.path.exists(path_settings):
+            print("file Setting not found")
+            logger_function.warning(
+                "function.py, def load_setting, path_settings not found")
+            # raise TypeError ("file dose not exist \n"+path_settings)
+
+            # look fore settings.cfg
+            path_settings = filedialog.askopenfilename(
+                initialdir='/home/', title='select settings.cfg path')
+            print("setting file: ", path_settings)
+
+        configParser = configparser.ConfigParser()
+        configParser.read(path_settings)
+
+        config_section = configParser.sections()
+
+        configParser["setting"]["freq_start"] = value["freq"]["freq_start"]
+        configParser["setting"]["freq_end"] = value["freq"]["freq_end"]
+        configParser["setting"]["freq_step"] = value["freq"]["freq_step"]
+        configParser["setting"]["freq_repetitions"] = value["freq"]["freq_repetitions"]
+
+        configParser["TandM_settings"]["tune_value"] = value["tunematch"]["tune"]
+        configParser["TandM_settings"]["match_value"] = value["tunematch"]["match"]
+        configParser["TandM_settings"]["tm_step_value"] = value["tunematch"]["step"]
+        configParser["TandM_settings"]["tm_lut_value"] = value["tunematch"]["lut"]
+
+        configParser["storage_defalt"]["seq_data"] = value["load"]["sample"]
+        configParser["storage_defalt"]["seq_experiment"] = value["load"]["experiment"]
+        configParser["storage_defalt"]["seq_cycle"] = value["load"]["data"]
+
+        # setting_dict = {section: dict(configParser.items(section))
+        #                for section in configParser.sections()}
+
+        #import_values = {}
+        # import_values["freq"] = {"freq_start": self._freq_start, "freq_end": self._freq_end,
+        #                         "freq_step": self._freq_step, "freq_repetitions": self._freq_repetitions}
+        #import_values["tunematch"] = {}
+        #import_values["load"] = {}
+        #
+        #print("import_values", import_values)
+        #logger_win_variables.info("logging from win_variables start up")
+
+        # write to config.cfg
+        # try:
+        #    with open("config.cfg", "r") as configfile:
+        #
+        #    print("_____________________ TEST pre ______________________")
+        #    print("types of sections avalibel ____ \n", config.sections())
+        #    print("types of options avalibel of option ___ ",
+        #          config.has_option(cfg_section, "file_path"))
+        #    print("_____________________ TEST after ______________________")
+        #
+        #    # config.has_option(section, option)
+        #    if configParser.has_section(cfg_section):
+        #        print(".cfg section exist")
+        #        configParser[cfg_section] = input_values
+        #        #logging.info('Values were saved and overwritten')
+        #    else:
+        #        configParser.add_section(cfg_section)
+        #        configParser[cfg_section] = input_values
+        #        #logging.info('Values were saved and new written')
+        # except IOError:
+        #    print("generated new .cfg file")
+        #    configParser[cfg_section] = input_values
+        #    #logging.info('Values were saved and written to a new file')
+
+        with open(path_settings, "w") as configfile:
+            configParser.write(configfile)
+        #logging.info('save_values end ')
+
+        return value
 
     # ## @property
     # #def freq(self):

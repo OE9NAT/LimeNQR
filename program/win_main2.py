@@ -82,61 +82,6 @@ if 'setting_dict' not in locals():
 freq_start_num = "123xxxx"
 
 
-# read and save input vales from GUI and save it to config.cfg file
-def save_values(cfg_section="pre_set_values"):
-    global input_values
-    input_values = {}
-    print("save input_values to config.cfg file to: " + cfg_section)
-
-    input_values["freq_start"] = freq_start_input.get()
-    input_values["freq_end"] = freq_end_input.get()
-    input_values["freq_step"] = freq_step_input.get()
-    input_values["average"] = average_input.get()
-    input_values["Tune_U_max"] = Tune_U_max_input.get()
-    input_values["Match_U_max"] = Match_U_max_input.get()
-    input_values["V_step"] = V_step_input.get()
-    input_values["puls"] = puls_input.get()
-    input_values["Dwell_t"] = Dwell_t_input.get()
-    input_values["seq_steps"] = seq_steps_input.get()
-    input_values["source_pw"] = source_pw_input.get()
-    input_values["file_path"] = file_path_input.get()
-
-    print("loadet all", input_values)
-
-    # read and write to config.cfg
-    config = configparser.ConfigParser()
-    try:
-        with open("config.cfg", "r") as configfile:
-            print("####### ___ config.read")
-            # config.read("config.cfg")
-
-        print("_____________________ TEST pre ______________________")
-        print("types of sections avalibel ____ \n", config.sections())
-        print("types of options avalibel of option ___ ",
-              config.has_option(cfg_section, "file_path"))
-        print("_____________________ TEST after ______________________")
-
-        if config.has_section(cfg_section):  # config.has_option(section, option)
-            print(".cfg section exist")
-            config[cfg_section] = input_values
-            logging.info('Values were saved and overwritten')
-        else:
-            print(".cfg section dose not exist")
-            config.add_section(cfg_section)
-            config[cfg_section] = input_values
-            logging.info('Values were saved and new written')
-
-    except IOError:
-        print("generated new .cfg file")
-        config[cfg_section] = input_values
-        logging.info('Values were saved and written to a new file')
-
-    with open("config.cfg", "w") as configfile:
-        config.write(configfile)
-    logging.info('save_values end ')
-    # return input_values
-
-
 def load_values(path="config.cfg", section="pre_set_values"):
     # configParser = configparser.ConfigParser()
     # configParser.read(path)
@@ -220,7 +165,7 @@ class window_main(tk.Tk):
         menuleiste = tk.Menu(self)
 
         datei_menu = tk.Menu(menuleiste, tearoff=0)
-        datei_menu.add_command(label="Save", command=save_values)
+        datei_menu.add_command(label="Save", command=self.get_values)
         datei_menu.add_command(label="Save all", command=print(
             "test save all"))  # save_all)
         datei_menu.add_command(label="Close all", command=save_quit_all)
@@ -541,6 +486,9 @@ class window_main(tk.Tk):
 
     def save_measurment(self):
         print("save_measurment to settings.cfg")
+
+        value_set.save_settings = self.get_values()
+
         self.saved_poup = tk.Label(
             self.frame_measure, text='settings saved', font=(7), background="chartreuse4")
         self.saved_poup.grid(row=5, column=1, padx=5,
@@ -551,7 +499,7 @@ class window_main(tk.Tk):
 
         path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
         # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
-        value_set.set_settins = os.path.join(
+        value_set.set_settings = os.path.join(
             path_setting, "program", "setting.cfg")
 
         freq_start = value_set.get_freq[0]
@@ -566,8 +514,8 @@ class window_main(tk.Tk):
 
         self.set_measur(freq_start, freq_end, freq_step, freq_average)
         # set with pre set values for tuen and match
-        self.set_tm(value_set.get_freq[0], value_set.get_freq[1],
-                    value_set.get_freq[2], value_set.get_freq[3])
+        self.set_tm(value_set.get_tunematch[0], value_set.get_tunematch[1],
+                    value_set.get_tunematch[2], value_set.get_tunematch[3])
         # load sequence storage paths
         self.set_storage(
             value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
@@ -758,6 +706,27 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
         logger_win_main.info("def send_arduino ")
+
+    # read and save input vales from GUI and save it to config.cfg file
+    def get_values(self):
+        print("TEST get_values")
+
+        print("get input_values from win_main ")
+
+        self.import_values = {}
+        self.import_values["freq"] = {"freq_start": self.freq_start_input.get(), "freq_end": self.freq_end_input.get(),
+                                      "freq_step": self.freq_step_input.get(), "freq_repetitions": self.average_input.get()}
+        self.import_values["tunematch"] = {"tune": self.Tune_U_max_input.get(
+        ), "match": self. Match_U_max_input.get(), "step": self.V_step_input.get(), "lut": self.V_step_input.get()}
+        self.import_values["load"] = {"sample": self.file_path_input.get(
+        ), "experiment": self.experiment_path_input.get(), "data": self.experiment_path_input.get()}
+
+        self.experiment_path_input
+
+        print("loadet all", self.import_values.keys())
+        print("loadet all", self.import_values)
+
+        return self.import_values
 
     def set_storage(self, path="test_path", experiment="test_exper", cycle="test_cycle"):
         self.file_path_input.delete("0", "end")
