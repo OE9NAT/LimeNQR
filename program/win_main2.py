@@ -15,8 +15,19 @@ from PIL import ImageTk, Image  # .jpg
 
 import variables
 value_set = variables.Value_Settings()
+print(value_set._freq_start)
 logo_path = value_set.logo_path
+# logo_path = "program/icon_logo.xbm"
 
+# read from settings.cfg
+var_setting = value_set.import_setting
+# # setter
+# value_set.set_freq = (22, 22, 22, 22)
+# print("get start", value_set._freq_start)
+# # getter
+# print("getter", value_set.get_freq)
+
+##############
 
 handler = logging.FileHandler("log/Value_log.log")
 # handler = logging.handlers.RotatingFileHandler("log/Value_log.log")
@@ -54,20 +65,20 @@ if 'setting_dict' not in locals():
 
     path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
     setting_dict = load_setting(path_setting, file="/program/setting.cfg")
-    #setting_dict=load_setting (path_setting)
+    # setting_dict=load_setting (path_setting)
 
     print("\nsetting_dict:", *setting_dict.items(), sep="\n\n")
     freq_start = setting_dict["setting"]["freq_start"]
     freq_end = (setting_dict["setting"]["freq_end"])
-    #freq_step = tk.StringVar(setting_dict["setting"] ["freq_step"])
-    #freq_average = tk.StringVar(setting_dict["setting"] ["freq_repetitions"])
+    # freq_step = tk.StringVar(setting_dict["setting"] ["freq_step"])
+    # freq_average = tk.StringVar(setting_dict["setting"] ["freq_repetitions"])
 
     freq_start = "123"
     freq_end = "123"
     freq_step = "123"
     freq_average = "123"
 
-    #freq_start = StringVar(window, value=freq_start)
+    # freq_start = StringVar(window, value=freq_start)
 freq_start_num = "123xxxx"
 
 
@@ -127,7 +138,7 @@ def save_values(cfg_section="pre_set_values"):
 
 
 def load_values(path="config.cfg", section="pre_set_values"):
-    #configParser = configparser.ConfigParser()
+    # configParser = configparser.ConfigParser()
     # configParser.read(path)
     # print(configParser.get(section,"freq_start"))
     # print(configParser.items(section))
@@ -176,7 +187,7 @@ class window_main(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
-        #self = tk.Tk()
+        # self = tk.Tk()
         self.title(
             "Magnetic Resonance Imaging - Contrast Agent Analyse Controller - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
@@ -259,10 +270,10 @@ class window_main(tk.Tk):
         self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite
 
         # start frequency
-        #freq_start = tk.StringVar(self, value=freq_start_num)
+        # freq_start = tk.StringVar(self, value=freq_start_num)
 
         self.freq_start_lable = tk.Label(
-            self.frame_measure, text="START frequency: ", background="green4")
+            self.frame_measure, text="START frequency: ")
         self.freq_start_lable.grid(row=1, column=0, padx=5, pady=5)
         # simple_label("MHz",270,100)
 
@@ -276,7 +287,7 @@ class window_main(tk.Tk):
 
         # end frequency
         self.freq_end_lable = tk.Label(
-            self.frame_measure, text="END frequency: ", background="red4")
+            self.frame_measure, text="END frequency: ")
         self.freq_end_lable.grid(row=2, column=0, padx=5, pady=5)
         # simple_label("MHz",270,150)
 
@@ -288,7 +299,7 @@ class window_main(tk.Tk):
 
         # freq Steps
         self.freq_step_lable = tk.Label(
-            self.frame_measure, text="frequency steps: ", background="dark goldenrod")
+            self.frame_measure, text="frequency steps: ")
         self.freq_step_lable.grid(row=3, column=0, padx=5, pady=5)
         # simple_label("steps",270,200)
         tk.Label(self.frame_measure, text="step").grid(row=3, column=2, padx=3)
@@ -299,7 +310,7 @@ class window_main(tk.Tk):
 
         # average
         self.average_lable = tk.Label(
-            self.frame_measure, text="average: ", background="dark goldenrod")
+            self.frame_measure, text="average: ")
         self.average_lable.grid(row=4, column=0, padx=5, pady=5)
         tk.Label(self.frame_measure, text="step").grid(row=4, column=2, padx=3)
 
@@ -422,8 +433,8 @@ class window_main(tk.Tk):
             "win_main2 start class window_main lable and button")
 
         ######----- Plotter  ------######
-        #btn = tk.Label(self, text='A simple plot', foreground="green",background="white", font=("Arial Bold", 15))
-        #btn.place(x = 10, y = 350, width=200, height=30)
+        # btn = tk.Label(self, text='A simple plot', foreground="green",background="white", font=("Arial Bold", 15))
+        # btn.place(x = 10, y = 350, width=200, height=30)
         frame_plot = tk.Frame(self, bg='grey')  # , width=100, height=300, )
         frame_plot.grid(row=1, column=1, sticky="nsew",
                         columnspan=2, rowspan=2, padx=2, pady=2)
@@ -439,7 +450,7 @@ class window_main(tk.Tk):
         self.canvas.get_tk_widget().grid(row=1, column=0, padx=2, pady=2, sticky="nsew",
                                          columnspan=2)  # ,columnspan=3,rowspan=20)
         self.canvas.draw()
-        #canvas.get_tk_widget().place(x = 10, y = 360, width=500, height=400)
+        # canvas.get_tk_widget().place(x = 10, y = 360, width=500, height=400)
         # canvas.get_tk_widget().grid(row=1, column=0)#,columnspan=2)
 
         # navigation toolbar for the Plot
@@ -465,23 +476,23 @@ class window_main(tk.Tk):
         # Create a combobbox to select the logging level
         self.loglevel_console = tk.StringVar()
         self.loglevel_console.set("DEBUG")
-        #loglevel = tk.StringVar(self,'DEBUG')
+        # loglevel = tk.StringVar(self,'DEBUG')
         combobox = TTK.Combobox(frame_logger, width=35, textvariable=self.loglevel_console, values=[
                                 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'])
-        #textvariable=level ,state='readonly'
+        # textvariable=level ,state='readonly'
         combobox.current(0)
         combobox.pack(fill="x", padx=2, pady=2)  # .grid(row=1 sticky="ew")
 
         self.logtext_area = tk.scrolledtext.ScrolledText(
             frame_logger, width=30, height=12, font=("Times New Roman", 10))
-        #scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
-        #logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
+        # scrollbar = Scrollbar(self,width = 30, height = 8,font = ("Times New Roman",15))
+        # logtext_area = Listbox(self, yscrollcommand = scrollbar.set )
         # .grid(row=2)#, sticky="nsew")
         self.logtext_area.pack(fill="x", padx=2, pady=2)
 
-        #text_handler = TextHandler(logtext_area)
+        # text_handler = TextHandler(logtext_area)
         # Add the handler to logger
-        #logger = logging.getLogger()
+        # logger = logging.getLogger()
         # logger.addHandler(text_handler)
 
         logger_win_main.info("win_main2 start class window_main logger")
@@ -522,24 +533,31 @@ class window_main(tk.Tk):
         print('end of window_main init')
         logger_win_main.info("__ END win_main2 start class window_main ")
         self.update_idletasks()
+
+        # write all files form settings.cfg to entery
+        self.load_settings()
+        self.update()
         # return self
 
     def save_measurment(self):
         print("save_measurment to settings.cfg")
         self.saved_poup = tk.Label(
-            self.frame_measure, text='settings saved', font=(8), background="chartreuse4")
-        self.saved_poup.grid(row=5, column=1, padx=5, pady=5, sticky="ew")
-        self.saved_poup.after(5000, lambda: self.saved_poup.grid_forget())
+            self.frame_measure, text='settings saved', font=(7), background="chartreuse4")
+        self.saved_poup.grid(row=5, column=1, padx=5,
+                             pady=5, sticky="ew", rowspan=2)
+        self.saved_poup.after(3000, lambda: self.saved_poup.grid_forget())
 
     def load_settings(self):
 
         path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
-        setting_dict = load_setting(path_setting, file="/program/setting.cfg")
+        # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
+        value_set.set_settins = os.path.join(
+            path_setting, "program", "setting.cfg")
 
-        freq_start = setting_dict["setting"]["freq_start"]
-        freq_end = setting_dict["setting"]["freq_end"]
-        freq_step = setting_dict["setting"]["freq_step"]
-        freq_average = setting_dict["setting"]["freq_repetitions"]
+        freq_start = value_set.get_freq[0]
+        freq_end = value_set.get_freq[1]
+        freq_step = value_set.get_freq[2]
+        freq_average = value_set.get_freq[3]
 
         logger_value.info("freq_start" + str(freq_start))
         logger_value.info("freq_end" + str(freq_end))
@@ -547,26 +565,26 @@ class window_main(tk.Tk):
         logger_value.info("freq_average" + str(freq_average))
 
         self.set_measur(freq_start, freq_end, freq_step, freq_average)
+        # set with pre set values for tuen and match
+        self.set_tm(value_set.get_freq[0], value_set.get_freq[1],
+                    value_set.get_freq[2], value_set.get_freq[3])
+        # load sequence storage paths
+        self.set_storage(
+            value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
 
-        self.set_tm()  # set with pre set values
-
-        self.set_storage()  # load sequence storage paths
-
+        # popup for settings loaded
         self.load_poup = tk.Label(
-            self.frame_measure, text='settings loaded', font=(8), background="chartreuse4")
-        self.load_poup.grid(row=6, column=1, padx=5, pady=5, sticky="ew")
-        self.load_poup.after(5000, lambda: self.load_poup.grid_forget())
+            self.frame_measure, text='settings loaded', font=(7), background="chartreuse4")
+        self.load_poup.grid(row=7, column=1, padx=5,
+                            pady=5, sticky="ew", rowspan=2)
+        self.load_poup.after(3000, lambda: self.load_poup.grid_forget())
 
         # logger
         log_text = "Measurment settig loadet from settings.cfg"+"\n"
-        log_text = log_text + " freq_start " + start + "\n"
-        log_text = log_text + " freq_end " + stop + "\n"
-        log_text = log_text + " freq_step " + step + "\n"
-        log_text = log_text + " freq_average " + average + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
-    def set_measur(self, start="11", stop="22", step="33", average="44"):
+    def set_measur(self, start=11, stop=22, step=33, average=44):
         self.freq_start_input.delete("0", "end")
         self.freq_start_input.insert(0, start)
         self.freq_end_input.delete("0", "end")
@@ -578,10 +596,10 @@ class window_main(tk.Tk):
 
         # logger
         log_text = "Measurment settig loadet "+"\n"
-        log_text = log_text + " freq_start " + start + "\n"
-        log_text = log_text + " freq_end " + stop + "\n"
-        log_text = log_text + " freq_step " + step + "\n"
-        log_text = log_text + " freq_average " + average + "\n"
+        log_text = log_text + " freq_start " + str(start) + "\n"
+        log_text = log_text + " freq_end " + str(stop) + "\n"
+        log_text = log_text + " freq_step " + str(step) + "\n"
+        log_text = log_text + " freq_average " + str(average) + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -590,30 +608,30 @@ class window_main(tk.Tk):
         s1 = np.sin(20*np.pi*t)
         s2 = np.sin(40*np.pi*t)
 
-        #file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
-        #file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
+        # file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
+        # file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
 
         file = "signals_TEST/live_scan_data.csv"
-        #file_name = os.path.join(folder_signal, file)
+        # file_name = os.path.join(folder_signal, file)
 
         with open(file, newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
             data = [data for data in spamreader]
-        #print("data .csv\n", *data)
+        # print("data .csv\n", *data)
 
-        #print("data firt list ", data[0])
+        # print("data firt list ", data[0])
         del data[0]  # ['frequency', 'amplitude'] remove description from colems
 
         data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
         data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
-        #print("data_feq", *data_fequency, sep="\n")
+        # print("data_feq", *data_fequency, sep="\n")
         # print("data_fequency",type(data_fequen[0])
         # print("data_amplitude",data_amplitude)
 
-        #fig = plt.figure(figsize=(1, 2))
+        # fig = plt.figure(figsize=(1, 2))
         self.fig = plt.figure()
         self.fig.set_size_inches(6, 4.0, forward=True)
-        #fig.savefig('test2png.png', dpi=100)
+        # fig.savefig('test2png.png', dpi=100)
         self.fig.set_canvas(self)
 
         # set the spacing between subplots
@@ -715,10 +733,10 @@ class window_main(tk.Tk):
 
         # logger
         log_text = "Tune and Match settings set "+"\n"
-        log_text = log_text + " tune " + tune + "\n"
-        log_text = log_text + " match " + match + "\n"
-        log_text = log_text + " tm_step " + tm_step + "\n"
-        log_text = log_text + " lut " + lut + "\n"
+        log_text = log_text + " tune " + str(tune) + "\n"
+        log_text = log_text + " match " + str(match) + "\n"
+        log_text = log_text + " tm_step " + str(tm_step) + "\n"
+        log_text = log_text + " lut " + str(lut) + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -728,7 +746,7 @@ class window_main(tk.Tk):
         match_value = self.Match_U_max_input.get()
         tm_step_value = self.V_step_input.get()
         tm_lut_value = self.LUT_input.get()
-        #print("Tune_value ",Tune_value)
+        # print("Tune_value ",Tune_value)
 
         # logger
         log_text = "send to Arduino "+"\n"
@@ -758,7 +776,7 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def debug_logtext(self, text="test"):
-        #self.loglevel_console.set("INFO from debug_logtext")
+        # self.loglevel_console.set("INFO from debug_logtext")
         print(self.loglevel_console.get())
         if text == "test":
             log_text = "test loglevel_console: "+self.loglevel_console.get() + " \n"
@@ -823,7 +841,7 @@ if __name__ == "__main__":
     if 'myVar' not in globals():
         print("my global Variable dose not exist")
 
-    #script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+    # script_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
     win_main = window_main()
     win_main.mainloop()
