@@ -27,6 +27,10 @@ var_setting = value_set.import_setting
 # # getter
 # print("getter", value_set.get_freq)
 
+# Dokumentation of experiment
+file_set = variables.File_Settings()
+file_setting = file_set.save_experiment
+
 ##############
 
 handler = logging.FileHandler("log/Value_log.log")
@@ -455,7 +459,7 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            frame_Buttens, text="Filestrukture", command=lambda: print("Filestrukture"))
+            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment("Filestrukture"))
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(

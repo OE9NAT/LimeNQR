@@ -1,8 +1,11 @@
-import tkinter as tk
 import os
 import sys
+import tkinter as tk
+import numpy as np
+import scipy
 import configparser
 import logging
+
 
 logger_win_variables = logging.getLogger('win_variables')
 logger_win_variables.addHandler(logging.StreamHandler())
@@ -55,7 +58,7 @@ class Value_Settings:
 
     @staticmethod
     def hallo_word():
-        print("hallo")
+        print("hallo from variables.py class Value_settings")
 
     @property
     def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting.cfg"):
@@ -85,12 +88,12 @@ class Value_Settings:
         #self._freq_end = 11
         #self._freq_step = 11
         #self._freq_repetitions = 11
-#
+        #
         #self._tunematch_tune = 11
         #self._tunematch_match = 11
         #self._tunematch_freq = 11
         #self._tunematch_lut = 11
-#
+        #
         #self._load_sample = "sam"
         #self._load_experiment = "exp"
         #self._load_data = "Ech"
@@ -290,24 +293,175 @@ class Value_Settings:
 
         return value
 
-    # ## @property
-    # #def freq(self):
-    # #    # implement to read from settings.cfg
-    # #    self._freq_start = 10000
-    # #    self._freq_end = 20000
-    # #    self._freq_step = 1000
-    # #    self._freq_repetitions = 100
-    # #    freq = []
-    # #    freq.append(self._freq_start)
-    # #    freq.append(self._freq_end)
-    # #    freq.append(self._freq_step)
-    # #    freq.append(self._freq_repetitions)
-    # #    return freq
 
-    # @import_setting.setter
-    # def define_frequency(self, start, stop, step, reps):
-    #     print("setter value define_frequency", start)
-    #     self._freq_start = start
-    #     self._freq_end = stop
-    #     self._freq_step = step
-    #     self._freq_repetitions = reps
+class Pulse_Settings:
+
+    def __init__(self):
+        print("Pulse_Settings")
+        self._puls_start = 00
+        self._puls_length = 00
+        self._puls_hight = 00
+
+        self.signal_shape = ["squaer", "pulse", "triang", "trapets"]
+
+    @staticmethod
+    def parameter2Vektor(start, stop, shape="squaer", number=100):
+        t = np.linspcae(start, stop, number)
+        if shape == "squaer":
+            signale = scipy.signal.square(t, duty=1)
+
+        elif shape == "pulse":
+            signalse = scipy.signal.square(t, duty=1)
+
+        elif shape == "triang":
+            signalse = scipy.signal.square(t, duty=1)
+
+        elif shape == "trapets":
+            signalse = scipy.signal.square(t, duty=1)
+
+        else:
+            print("shape not implemented")
+            signalse = np.linspcae(start, stop, number)
+
+        print(shape, " signale \n", signale)
+        return[t, signale]
+
+
+class File_Settings:
+
+    def __init__(self):
+        print("File_Settings")
+        self._absolute_path = os.path.dirname(sys.argv[0])
+        self._path = "Test_Sample"
+        self._experiment = "Test_experiment"
+        self._data = "Test_Data"
+
+    @staticmethod
+    def generate_folder(sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+        # create file struckter if not exist as given
+
+        # main folder for all Data
+        file_doc = os.path.join(self._absolute_path, self._data)
+        if not os.path.exists(file_doc):
+            os.makedirs(file_doc)
+
+        # folder for samples
+        file_doc = os.path.join(file_doc, sample)
+        if not os.path.exists(file_doc):
+            os.makedirs(file_doc)
+
+        # folder for experiment
+        file_doc = os.path.join(file_doc, experiment)
+        if not os.path.exists(file_doc):
+            os.makedirs(file_doc)
+
+        # folder for data
+        file_doc = os.path.join(file_doc, data)
+        if not os.path.exists(file_doc):
+            os.makedirs(file_doc)
+
+        return file_doc
+
+    @property
+    def save_experiment(path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+        print("save_experiment from variables.py")
+        print("path: "+str(path)+"\nexperiment: " +
+              str(experiment) + "\nData: " + str(data))
+
+        ######----- Setup of gui ------######
+        window_experiment = tk.Tk()
+        window_experiment.title("Experiment Filehandler")
+        # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+        # window_experiment.wm_iconbitmap(bitmap=logo_path)
+        # Fensterbreite,hoehe, on secreen offset x, on screen offset y
+        window_experiment.geometry("800x750")
+        window_experiment.option_add(
+            "Helvetica", '10')  # Frischart und groesse
+        window_experiment.resizable(
+            width=False, height=False)  # False = no resize
+        text_input_height = 30
+
+        def save_experiment():
+            print("save all parameters to .cfg file")
+            status_lable = tk.Label(
+                window_experiment, text="updated sequenz !!")
+            status_lable.place(x=10, y=250, width=500,
+                               height=text_input_height)
+            return
+
+            # global experiment = {}
+
+            experiment_dict["data"] = data.get()
+            experiment_dict["experiment"] = experiment.get()
+            experiment_dict["cycle"] = cycle.get()
+
+            print(experiment_dict)
+
+            path_lable.config(text="Seq. for data: "+experiment_dict["data"])
+            experiment_lable.config(
+                text="Seq. for experiment: "+experiment_dict["experiment"])
+            cycle_lable.config(text="Seq. for cycle: " +
+                               experiment_dict["cycle"])
+
+            save_values(
+                experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"])
+            print("end of save_experiment")
+
+        # Title
+        lable_text = tk.Label(window_experiment, text="Set Experiment strukture ",
+                              foreground="green", background="OliveDrab4", font=("Helvetica", 30))
+        lable_text.place(x=50, y=10, width=500, height=50)
+
+        # Set parameters
+        text_input_height = 40
+        path_text = "Seq. for data: "+str(path)
+        path_lable = tk.Label(
+            window_experiment, text=path_text, background="gray50")
+        path_lable.place(x=50, y=100, width=500, height=text_input_height)
+
+        experiment_text = "Seq. for experiment: "+experiment
+        experiment_lable = tk.Label(
+            window_experiment, text=experiment_text, background="gray50")
+        experiment_lable.place(x=50, y=150, width=500,
+                               height=text_input_height)
+
+        cycle_text = "Seq. for data: "+data
+        cycle_lable = tk.Label(
+            window_experiment, text=cycle_text, background="gray50")
+        cycle_lable.place(x=50, y=200, width=500, height=text_input_height)
+
+        # Experiment
+        gray_light = "gray70"
+        path_lable_input = tk.Label(
+            window_experiment, text="Set Seq. data: ", background=gray_light)
+        path_lable_input.place(x=50, y=300, width=300, height=40)
+        data = tk.Entry(window_experiment, fg="black", bg="white", width=40)
+        data.place(x=350, y=300, width=200, height=40)
+
+        experiment_lable_input = tk.Label(
+            window_experiment, text="Set Seq. experiment: ", background=gray_light)
+        experiment_lable_input.place(x=50, y=350, width=300, height=40)
+        experiment = tk.Entry(
+            window_experiment, fg="black", bg="white", width=40)
+        experiment.place(x=350, y=350, width=200, height=40)
+
+        cycle_lable_input = tk.Label(
+            window_experiment, text="Set Seq. cycle: ", background=gray_light)
+        cycle_lable_input.place(x=50, y=400, width=300, height=40)
+        cycle = tk.Entry(window_experiment, fg="black", bg="white", width=40)
+        cycle.place(x=350, y=400, width=200, height=40)
+
+        # Buttons
+        save_button = tk.Button(window_experiment, text="Save",
+                                background="SkyBlue4", command=lambda:  save_experiment())
+        save_button.place(x=50, y=450, width=140, height=50)
+
+        save_button = tk.Button(window_experiment, text="load",
+                                command=lambda: print("butten load"))
+        save_button.place(x=230, y=450, width=140, height=50)
+
+        close_button = tk.Button(window_experiment, text="Close",
+                                 background="tomato4", command=window_experiment.destroy)
+        close_button.place(x=410, y=450, width=140, height=50)
+
+        return print("closing load file")
