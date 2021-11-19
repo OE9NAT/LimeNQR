@@ -1,4 +1,4 @@
-# bacharbeit
+# GUI for a SDR controlled magnetic resonance imaging - contrast agent analyse controller
 
 To start gui run start.py file.
 
