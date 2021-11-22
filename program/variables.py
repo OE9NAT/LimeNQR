@@ -2,6 +2,7 @@ import os
 import sys
 import tkinter as tk
 from tkinter import filedialog
+
 import numpy as np
 import scipy
 import configparser
@@ -85,19 +86,19 @@ class Value_Settings:
         setting_dict = {section: dict(configParser.items(section))
                         for section in configParser.sections()}
 
-        #self._freq_start = 11
-        #self._freq_end = 11
-        #self._freq_step = 11
-        #self._freq_repetitions = 11
+        # self._freq_start = 11
+        # self._freq_end = 11
+        # self._freq_step = 11
+        # self._freq_repetitions = 11
         #
-        #self._tunematch_tune = 11
-        #self._tunematch_match = 11
-        #self._tunematch_freq = 11
-        #self._tunematch_lut = 11
+        # self._tunematch_tune = 11
+        # self._tunematch_match = 11
+        # self._tunematch_freq = 11
+        # self._tunematch_lut = 11
         #
-        #self._load_sample = "sam"
-        #self._load_experiment = "exp"
-        #self._load_data = "Ech"
+        # self._load_sample = "sam"
+        # self._load_experiment = "exp"
+        # self._load_data = "Ech"
 
         # logging.info("Values loaded from load_setting")
         self.import_values = {}
@@ -255,14 +256,14 @@ class Value_Settings:
         # setting_dict = {section: dict(configParser.items(section))
         #                for section in configParser.sections()}
 
-        #import_values = {}
+        # import_values = {}
         # import_values["freq"] = {"freq_start": self._freq_start, "freq_end": self._freq_end,
         #                         "freq_step": self._freq_step, "freq_repetitions": self._freq_repetitions}
-        #import_values["tunematch"] = {}
-        #import_values["load"] = {}
+        # import_values["tunematch"] = {}
+        # import_values["load"] = {}
         #
-        #print("import_values", import_values)
-        #logger_win_variables.info("logging from win_variables start up")
+        # print("import_values", import_values)
+        # logger_win_variables.info("logging from win_variables start up")
 
         # write to config.cfg
         # try:
@@ -290,7 +291,7 @@ class Value_Settings:
 
         with open(path_settings, "w") as configfile:
             configParser.write(configfile)
-        #logging.info('save_values end ')
+        # logging.info('save_values end ')
 
         return value
 
@@ -390,6 +391,7 @@ class File_Settings:
         # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
         # window_experiment.wm_iconbitmap(bitmap=logo_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
+
         window_experiment.geometry("800x750")
         window_experiment.option_add(
             "Helvetica", '10')  # Frischart und groesse
@@ -423,76 +425,115 @@ class File_Settings:
                 experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"])
             print("end of save_experiment")
 
+        # self.main_frame = tk.Frame(self, bg='grey')
+        # , padx=frame_boarder,pady=frame_boarder)
+        # self.frame.grid(row=0, column=0, sticky="nsew")
+        # self.grid_rowconfigure(0, weight=1, minsize=240)  # splaten hoehe
+        # self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite
+
+        frame_boarder = 3
+
         # Title
         lable_text = tk.Label(window_experiment, text="Set Experiment strukture ",
                               foreground="green", background="OliveDrab4", font=("Helvetica", 30))
-        lable_text.place(x=50, y=10, width=500, height=50)
+        lable_text.grid(row=0, column=0, sticky="nsew")  # , columnspan=1)
 
-        # Set parameters
+        # Parameters
+
+        self.frame_parameter = tk.LabelFrame(
+            window_experiment, text="set Parameters", bg='grey')
+        self.frame_parameter.grid(
+            row=1, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
+
+        # self.frame_parameter = tk.Frame(
+        #    self, bg='grey', padx=frame_boarder, pady=frame_boarder)
+        # self.frame_parameter.grid(row=0, column=0, sticky="nsew")
+
         text_input_height = 40
-        path_text = "Seq. for data: "+str(path)
+        path_text = "Sample: \n"+str(path)
         path_lable = tk.Label(
-            window_experiment, text=path_text, background="gray50")
-        path_lable.place(x=50, y=100, width=500, height=text_input_height)
+            self.frame_parameter, text=path_text, background="gray50")
+        path_lable.grid(row=0, column=0)
 
-        experiment_text = "Seq. for experiment: "+experiment
+        experiment_text = "Experiment: \n"+experiment
         experiment_lable = tk.Label(
-            window_experiment, text=experiment_text, background="gray50")
-        experiment_lable.place(x=50, y=150, width=500,
-                               height=text_input_height)
+            self.frame_parameter, text=experiment_text, background="gray50")
+        experiment_lable.grid(row=1, column=0)
 
-        cycle_text = "Seq. for data: "+data
-        cycle_lable = tk.Label(
-            window_experiment, text=cycle_text, background="gray50")
-        cycle_lable.place(x=50, y=200, width=500, height=text_input_height)
+        cycle_text = "Data: \n"+data
+        cycle_lable = tk.Label(self.frame_parameter,
+                               text=cycle_text, background="gray50")
+        cycle_lable.grid(row=2, column=0)
 
-        # Experiment
+        # New Experiment parameter
+        self.frame_experiment = tk.LabelFrame(
+            window_experiment, text="new Expeiment-Parameters", bg='grey')
+        self.frame_experiment.grid(
+            row=4, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
+
         gray_light = "gray70"
         path_lable_input = tk.Label(
-            window_experiment, text="Set Sample: \n Ex: TuGraz", background=gray_light)
-        path_lable_input.place(x=50, y=300, width=300, height=40)
-        self.sample = tk.Entry(window_experiment, fg="black",
-                               bg="white", width=40)
-        self.sample.place(x=350, y=300, width=200, height=40)
+            self.frame_experiment, text="Set Sample: \n Ex: TuGraz", background=gray_light)
+        path_lable_input.grid(row=0, column=0)
+        self.sample = tk.Entry(self.frame_experiment,
+                               fg="black", bg="white", width=40)
+        self.sample.grid(row=0, column=1, padx=frame_boarder,
+                         pady=frame_boarder, sticky="nsew")
 
         experiment_lable_input = tk.Label(
-            window_experiment, text="Set Seq. experiment: \n Ex: Bismut", background=gray_light)
-        experiment_lable_input.place(x=50, y=350, width=300, height=40)
+            self.frame_experiment, text="Set Seq. experiment: \n Ex: Bismut", background=gray_light)
+        experiment_lable_input.grid(row=1, column=0)
         self.experiment = tk.Entry(
-            window_experiment, fg="black", bg="white", width=40)
-        self.experiment.place(x=350, y=350, width=200, height=40)
+            self.frame_experiment, fg="black", bg="white", width=40)
+        self.experiment.grid(row=1, column=1, padx=frame_boarder,
+                             pady=frame_boarder, sticky="nsew")
 
         cycle_lable_input = tk.Label(
-            window_experiment, text="Set Seq. cycle: \n Ex: FID, Spin-Echo,", background=gray_light)
-        cycle_lable_input.place(x=50, y=400, width=300, height=40)
-        self.data = tk.Entry(
-            window_experiment, fg="black", bg="white", width=40)
-        self.data.place(x=350, y=400, width=200, height=40)
+            self.frame_experiment, text="Set Seq. cycle: \n Ex: FID, Spin-Echo,", background=gray_light)
+        cycle_lable_input.grid(row=2, column=0)
+        self.data = tk.Entry(self.frame_experiment,
+                             fg="black", bg="white", width=40)
+        self.data.grid(row=2, column=1, padx=frame_boarder,
+                       pady=frame_boarder, sticky="nsew")
+
+        save_button = tk.Button(self.frame_experiment, text="Save",
+                                background="SkyBlue4", command=lambda: File_Settings.generate_folder(self, sample=self.sample.get(), experiment=self.experiment.get(), data=self.data.get()))
+        save_button.grid(row=3, column=0, columnspan=2, sticky="nsew")
 
         # Buttons
-        save_button = tk.Button(window_experiment, text="Save",
-                                background="SkyBlue4", command=lambda: File_Settings.generate_folder(self, sample=self.sample.get(), experiment=self.experiment.get(), data=self.data.get()))
-        save_button.place(x=50, y=450, width=140, height=50)
+        self.frame_buttens = tk.LabelFrame(
+            window_experiment, text="load Expeiment-Parameters", bg='grey')
+        self.frame_buttens.grid(
+            row=3, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
 
-        save_button = tk.Button(window_experiment, text="load",
+        save_button = tk.Button(self.frame_buttens, text="load preexisting settings",
                                 command=lambda:  File_Settings.load_folder(self))
-        save_button.place(x=230, y=450, width=140, height=50)
+        save_button.grid(row=0, column=0, padx=frame_boarder,
+                         pady=frame_boarder, sticky="nsew")
 
-        close_button = tk.Button(window_experiment, text="Close",
+        close_button = tk.Button(self.frame_buttens, text="close window",
                                  background="tomato4", command=window_experiment.destroy)
-        close_button.place(x=410, y=450, width=140, height=50)
+        close_button.grid(row=0, column=1, padx=frame_boarder,
+                          pady=frame_boarder, sticky="nsew")
 
         # kommentare
-        kommentar = tk.Label(
-            window_experiment, text="kommentar ", background=gray_light)
-        kommentar.place(x=550, y=50, width=300, height=40)
+        frame_comment = tk.LabelFrame(
+            window_experiment, text="Comment for Experiment: ", background=gray_light)
+        frame_comment.grid(row=2, column=0, sticky="nsew")
 
-        txt_experiment = tk.Entry(
-            window_experiment, fg="black", bg="white", width=40)
-        txt_experiment.place(x=550, y=150, width=200, height=40)
+        tk.Label(frame_comment, text="Area to comment on the experiment",
+                 background=gray_light).pack()
 
-        txt_cycle = tk.Entry(window_experiment, fg="black",
-                             bg="white", width=40)
-        txt_cycle.place(x=550, y=200, width=200, height=40)
+        txt_experiment = tk.Text(
+            frame_comment,  height=6, fg="black", bg="white", width=50)
+        # fill="Fill in comments for the eperiment ",
+        txt_experiment.pack(padx=2, pady=2, expand=True)
+        txt_experiment.insert(tk.END, "Comments for the Experiment collected:")
+
+        txt_data = tk.Text(frame_comment, fg="black",
+                           bg="white", width=50, height=6)
+
+        txt_data.pack(padx=2, pady=2, expand=True)
+        txt_data.insert(tk.END, "Comments for the data collected:")
 
         return print("closing load file")

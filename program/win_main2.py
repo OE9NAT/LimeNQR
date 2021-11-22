@@ -160,7 +160,7 @@ class window_main(tk.Tk):
         self.minsize(380, 380)  # (width_minsize=1200, height_minsize=800)
         self.maxsize(1200, 850)
 
-        self.update()
+        # self.update()
         # self.update_idletasks()
         logger_win_main.info("win_main2 start class window_main init")
 
