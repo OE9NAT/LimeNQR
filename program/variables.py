@@ -1,6 +1,7 @@
 import os
 import sys
 import tkinter as tk
+from tkinter import filedialog
 import numpy as np
 import scipy
 import configparser
@@ -334,14 +335,17 @@ class File_Settings:
         self._absolute_path = os.path.dirname(sys.argv[0])
         self._path = "Test_Sample"
         self._experiment = "Test_experiment"
-        self._data = "Test_Data"
+        self._data = "Sorage_vault"
 
     @staticmethod
-    def generate_folder(sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+    def generate_folder(self, sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+        """ test """
+
         # create file struckter if not exist as given
+        absolute = os.path.dirname(__file__)
 
         # main folder for all Data
-        file_doc = os.path.join(self._absolute_path, self._data)
+        file_doc = os.path.join(absolute, '..', self._data)
         if not os.path.exists(file_doc):
             os.makedirs(file_doc)
 
@@ -360,15 +364,27 @@ class File_Settings:
         if not os.path.exists(file_doc):
             os.makedirs(file_doc)
 
+        print("storage path: ", file_doc)
+        logger_win_variables.info("storage path: " + file_doc)
+
         return file_doc
 
+    @staticmethod
+    def load_folder(self):
+        file_doc = os.path.join(os.path.dirname(__file__), '..', self._data)
+
+        file = filedialog.askopenfilename(
+            title='select settings.cfg file from Experimnet', initialdir=file_doc)
+
+        print(file)
+
     @property
-    def save_experiment(path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+    def save_experiment(self, path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
         print("save_experiment from variables.py")
         print("path: "+str(path)+"\nexperiment: " +
               str(experiment) + "\nData: " + str(data))
 
-        ######----- Setup of gui ------######
+        # ----- Setup of gui ------######l
         window_experiment = tk.Tk()
         window_experiment.title("Experiment Filehandler")
         # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
@@ -433,35 +449,50 @@ class File_Settings:
         # Experiment
         gray_light = "gray70"
         path_lable_input = tk.Label(
-            window_experiment, text="Set Seq. data: ", background=gray_light)
+            window_experiment, text="Set Sample: \n Ex: TuGraz", background=gray_light)
         path_lable_input.place(x=50, y=300, width=300, height=40)
-        data = tk.Entry(window_experiment, fg="black", bg="white", width=40)
-        data.place(x=350, y=300, width=200, height=40)
+        self.sample = tk.Entry(window_experiment, fg="black",
+                               bg="white", width=40)
+        self.sample.place(x=350, y=300, width=200, height=40)
 
         experiment_lable_input = tk.Label(
-            window_experiment, text="Set Seq. experiment: ", background=gray_light)
+            window_experiment, text="Set Seq. experiment: \n Ex: Bismut", background=gray_light)
         experiment_lable_input.place(x=50, y=350, width=300, height=40)
-        experiment = tk.Entry(
+        self.experiment = tk.Entry(
             window_experiment, fg="black", bg="white", width=40)
-        experiment.place(x=350, y=350, width=200, height=40)
+        self.experiment.place(x=350, y=350, width=200, height=40)
 
         cycle_lable_input = tk.Label(
-            window_experiment, text="Set Seq. cycle: ", background=gray_light)
+            window_experiment, text="Set Seq. cycle: \n Ex: FID, Spin-Echo,", background=gray_light)
         cycle_lable_input.place(x=50, y=400, width=300, height=40)
-        cycle = tk.Entry(window_experiment, fg="black", bg="white", width=40)
-        cycle.place(x=350, y=400, width=200, height=40)
+        self.data = tk.Entry(
+            window_experiment, fg="black", bg="white", width=40)
+        self.data.place(x=350, y=400, width=200, height=40)
 
         # Buttons
         save_button = tk.Button(window_experiment, text="Save",
-                                background="SkyBlue4", command=lambda:  save_experiment())
+                                background="SkyBlue4", command=lambda: File_Settings.generate_folder(self, sample=self.sample.get(), experiment=self.experiment.get(), data=self.data.get()))
         save_button.place(x=50, y=450, width=140, height=50)
 
         save_button = tk.Button(window_experiment, text="load",
-                                command=lambda: print("butten load"))
+                                command=lambda:  File_Settings.load_folder(self))
         save_button.place(x=230, y=450, width=140, height=50)
 
         close_button = tk.Button(window_experiment, text="Close",
                                  background="tomato4", command=window_experiment.destroy)
         close_button.place(x=410, y=450, width=140, height=50)
+
+        # kommentare
+        kommentar = tk.Label(
+            window_experiment, text="kommentar ", background=gray_light)
+        kommentar.place(x=550, y=50, width=300, height=40)
+
+        txt_experiment = tk.Entry(
+            window_experiment, fg="black", bg="white", width=40)
+        txt_experiment.place(x=550, y=150, width=200, height=40)
+
+        txt_cycle = tk.Entry(window_experiment, fg="black",
+                             bg="white", width=40)
+        txt_cycle.place(x=550, y=200, width=200, height=40)
 
         return print("closing load file")
