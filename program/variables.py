@@ -126,7 +126,7 @@ class Value_Settings:
 
     @import_setting.setter
     def set_tunematch(self, value):
-        print("setter value define_frequency", value)
+        print("setter value set_tunematch", value)
         self._tunematch_tune = value[0]
         self._tunematch_match = value[1]
         self._tunematch_freq = value[2]
@@ -134,12 +134,12 @@ class Value_Settings:
 
     @import_setting.getter
     def get_tunematch(self):
-        print("getter variables.py get_freq")
+        print("getter variables.py get_tunematch")
         return [self._tunematch_tune, self._tunematch_match, self._tunematch_freq, self._tunematch_lut]
 
     @import_setting.setter
     def set_load(self, value):
-        print("setter value define_frequency", value)
+        print("setter value define_filestrukture", value)
         self._load_sample = value[0]
         self._load_experiment = value[1]
         self._load_data = value[2]
@@ -331,12 +331,13 @@ class Pulse_Settings:
 
 class File_Settings:
 
-    def __init__(self):
+    def __init__(self, value_set):
         print("File_Settings")
         self._absolute_path = os.path.dirname(sys.argv[0])
         self._path = "Test_Sample"
         self._experiment = "Test_experiment"
         self._data = "Sorage_vault"
+        self.imp_value_set = value_set
 
     @staticmethod
     def generate_folder(self, sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
@@ -368,6 +369,12 @@ class File_Settings:
         print("storage path: ", file_doc)
         logger_win_variables.info("storage path: " + file_doc)
 
+        # save parameters to Filehandler
+        self.imp_value_set.set_load = [sample, experiment, data]
+
+        # update window
+        File_Settings.update_set_Parameters(self)
+
         return file_doc
 
     @staticmethod
@@ -378,6 +385,25 @@ class File_Settings:
             title='select settings.cfg file from Experimnet', initialdir=file_doc)
 
         print(file)
+
+        File_Settings.update_set_Parameters(self)
+
+    @staticmethod
+    def update_set_Parameters(self):
+        # ,sample,exp,data
+
+        # update labels
+        # Value_Settings.get_load())
+        self.path_lable.config(text=self.imp_value_set.get_load[0])
+        self.experiment_lable.config(text=self.imp_value_set.get_load[1])
+        self.cycle_lable.config(text=self.imp_value_set.get_load[2])
+
+        # popup to show saved
+        self.saved_poup = tk.Label(
+            self.frame_parameter, text='Updated Parameters!!', font=(7), background="chartreuse4")
+        self.saved_poup.grid(row=5, column=0, padx=5,
+                             pady=5, sticky="ew", columnspan=2)
+        self.saved_poup.after(3000, lambda: self.saved_poup.grid_forget())
 
     @property
     def save_experiment(self, path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
@@ -392,51 +418,25 @@ class File_Settings:
         # window_experiment.wm_iconbitmap(bitmap=logo_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
 
-        window_experiment.geometry("800x750")
+        # window_experiment.geometry("800x750")
         window_experiment.option_add(
             "Helvetica", '10')  # Frischart und groesse
         window_experiment.resizable(
             width=False, height=False)  # False = no resize
         text_input_height = 30
 
-        def save_experiment():
-            print("save all parameters to .cfg file")
-            status_lable = tk.Label(
-                window_experiment, text="updated sequenz !!")
-            status_lable.place(x=10, y=250, width=500,
-                               height=text_input_height)
-            return
-
-            # global experiment = {}
-
-            experiment_dict["data"] = data.get()
-            experiment_dict["experiment"] = experiment.get()
-            experiment_dict["cycle"] = cycle.get()
-
-            print(experiment_dict)
-
-            path_lable.config(text="Seq. for data: "+experiment_dict["data"])
-            experiment_lable.config(
-                text="Seq. for experiment: "+experiment_dict["experiment"])
-            cycle_lable.config(text="Seq. for cycle: " +
-                               experiment_dict["cycle"])
-
-            save_values(
-                experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"])
-            print("end of save_experiment")
-
-        # self.main_frame = tk.Frame(self, bg='grey')
-        # , padx=frame_boarder,pady=frame_boarder)
-        # self.frame.grid(row=0, column=0, sticky="nsew")
+        self.main_frame = tk.Frame(
+            window_experiment, bg='grey', padx=2, pady=2)
+        self.main_frame.grid(row=0, column=0, sticky="nsew")
         # self.grid_rowconfigure(0, weight=1, minsize=240)  # splaten hoehe
         # self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite
 
         frame_boarder = 3
 
         # Title
-        lable_text = tk.Label(window_experiment, text="Set Experiment strukture ",
-                              foreground="green", background="OliveDrab4", font=("Helvetica", 30))
-        lable_text.grid(row=0, column=0, sticky="nsew")  # , columnspan=1)
+        lable_text = tk.Label(self.main_frame, text="Set Experiment strukture ",
+                              foreground="green", background="OliveDrab4", font=("Helvetica", 30),)
+        lable_text.pack()  # , columnspan=1)
 
         # Parameters
 
@@ -445,31 +445,45 @@ class File_Settings:
         self.frame_parameter.grid(
             row=1, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
 
+        self.frame_parameter.grid_columnconfigure(0, weight=1)
+        self.frame_parameter.grid_columnconfigure(1, weight=1)
+        # , minsize=480)  # spalten breite
+
         # self.frame_parameter = tk.Frame(
         #    self, bg='grey', padx=frame_boarder, pady=frame_boarder)
         # self.frame_parameter.grid(row=0, column=0, sticky="nsew")
 
-        text_input_height = 40
-        path_text = "Sample: \n"+str(path)
-        path_lable = tk.Label(
-            self.frame_parameter, text=path_text, background="gray50")
-        path_lable.grid(row=0, column=0)
+        path_lable_text = tk.Label(
+            self.frame_parameter, text="Sample:", background="gray50")
+        path_lable_text .grid(row=0, column=0, sticky="e")
+        self.path_lable = tk.Label(
+            self.frame_parameter, text="Sample test \n", background="gray50")
+        self.path_lable.grid(row=0, column=1, sticky="w")
 
-        experiment_text = "Experiment: \n"+experiment
-        experiment_lable = tk.Label(
-            self.frame_parameter, text=experiment_text, background="gray50")
-        experiment_lable.grid(row=1, column=0)
+        experiment_lable_text = tk.Label(
+            self.frame_parameter, text="Experiment:", background="gray50")
+        experiment_lable_text .grid(row=1, column=0, sticky="e")
+        self.experiment_lable = tk.Label(
+            self.frame_parameter, text="Experiment test", background="gray50")
+        self.experiment_lable.grid(row=1, column=1, sticky="w")
 
-        cycle_text = "Data: \n"+data
-        cycle_lable = tk.Label(self.frame_parameter,
-                               text=cycle_text, background="gray50")
-        cycle_lable.grid(row=2, column=0)
+        cycle_lable_text = tk.Label(self.frame_parameter,
+                                    text="Data:", background="gray50")
+        cycle_lable_text .grid(row=2, column=0, sticky="e")
+        self.cycle_lable = tk.Label(self.frame_parameter,
+                                    text="Data test", background="gray50")
+        self.cycle_lable .grid(row=2, column=1, sticky="w")
+
+        # fill entery
+        File_Settings.update_set_Parameters(self)
 
         # New Experiment parameter
         self.frame_experiment = tk.LabelFrame(
             window_experiment, text="new Expeiment-Parameters", bg='grey')
         self.frame_experiment.grid(
             row=4, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
+        self.frame_experiment.grid_columnconfigure(0, weight=2)
+        self.frame_experiment.grid_columnconfigure(1, weight=1)
 
         gray_light = "gray70"
         path_lable_input = tk.Label(
@@ -505,13 +519,15 @@ class File_Settings:
             window_experiment, text="load Expeiment-Parameters", bg='grey')
         self.frame_buttens.grid(
             row=3, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
+        self.frame_buttens.grid_columnconfigure(0, weight=1)
+        self.frame_buttens.grid_columnconfigure(1, weight=1)
 
-        save_button = tk.Button(self.frame_buttens, text="load preexisting settings",
+        save_button = tk.Button(self.frame_buttens, text="load pre-existing settings",
                                 command=lambda:  File_Settings.load_folder(self))
         save_button.grid(row=0, column=0, padx=frame_boarder,
                          pady=frame_boarder, sticky="nsew")
 
-        close_button = tk.Button(self.frame_buttens, text="close window",
+        close_button = tk.Button(self.frame_buttens, text="save & close window",
                                  background="tomato4", command=window_experiment.destroy)
         close_button.grid(row=0, column=1, padx=frame_boarder,
                           pady=frame_boarder, sticky="nsew")

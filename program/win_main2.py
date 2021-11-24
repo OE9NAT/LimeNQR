@@ -25,10 +25,10 @@ var_setting = value_set.import_setting
 # value_set.set_freq = (22, 22, 22, 22)
 # print("get start", value_set._freq_start)
 # # getter
-# print("getter", value_set.get_freq)
+print("getter", value_set.get_freq)
 
 # Dokumentation of experiment
-file_set = variables.File_Settings()
+file_set = variables.File_Settings(value_set)
 file_setting = file_set.save_experiment
 
 ##############
@@ -153,12 +153,11 @@ class window_main(tk.Tk):
         #         sys.argv[0])) + "/program/stethoskop.xbm"
         #     self.wm_iconbitmap(bitmap=log_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
+        self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
+        self.maxsize(1200, 850)
         self.geometry("1000x750+100+10")
         self.option_add("Helvetica", '10')  # Frischart und groesse
         # self.resizable(width=False, height=False) #  False = no resize
-
-        self.minsize(380, 380)  # (width_minsize=1200, height_minsize=800)
-        self.maxsize(1200, 850)
 
         # self.update()
         # self.update_idletasks()
@@ -342,7 +341,7 @@ class window_main(tk.Tk):
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
         # Filepath for Storage for loading data
-        self.file_path_lable = tk.Label(frame_seq, text="path: ")
+        self.file_path_lable = tk.Label(frame_seq, text="Sample: ")
         self.file_path_lable.grid(row=0, column=0, padx=5, pady=5)
 
         self.file_path_input = tk.Entry(
@@ -358,7 +357,7 @@ class window_main(tk.Tk):
         self.experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
 
         # Filepath for Storage for loading data
-        cycle_path_lable = tk.Label(frame_seq, text="cycle: ")
+        cycle_path_lable = tk.Label(frame_seq, text="Data: ")
         cycle_path_lable.grid(row=2, column=0, padx=5, pady=5)
 
         self.cycle_path_input = tk.Entry(
