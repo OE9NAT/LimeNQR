@@ -337,7 +337,7 @@ class File_Settings:
         self._path = "Test_Sample"
         self._experiment = "Test_experiment"
         self._data = "Sorage_vault"
-        self.imp_value_set = value_set
+        self.imp_value_set = value_set  # import class Values_settings for paramter
 
     @staticmethod
     def generate_folder(self, sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
@@ -405,6 +405,29 @@ class File_Settings:
                              pady=5, sticky="ew", columnspan=2)
         self.saved_poup.after(3000, lambda: self.saved_poup.grid_forget())
 
+    @staticmethod
+    def save_close(self):
+
+        # save files
+        self._absolute_path = os.path.dirname(sys.argv[0])
+        self._path = "Test_Sample"
+        self._experiment = "Test_experiment"
+        self._data = "Sorage_vault"
+        file_save = os.path.join(
+            self._absolute_path, self._path, self._experiment, self._data)
+        print('stored in :', file_save)
+
+        with open('comment_experiment.txt', 'a', encoding='utf-8') as file:
+            file.write('\ Date:'+"\n")
+            # file.write(self.txt_data.get())
+            file.write(self.txt_experiment.get('1.0', 'end'))  # "1.0",'end-1c'
+
+        # with open('comment_experiment.txt', 'a', encoding='utf-8') as file:
+        #    file.write('\ Date:'+"\n")
+        #    file.write(self.txt_data.get())
+
+        self.window_experiment.destroy()
+
     @property
     def save_experiment(self, path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
         print("save_experiment from variables.py")
@@ -412,21 +435,21 @@ class File_Settings:
               str(experiment) + "\nData: " + str(data))
 
         # ----- Setup of gui ------######l
-        window_experiment = tk.Tk()
-        window_experiment.title("Experiment Filehandler")
-        # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-        # window_experiment.wm_iconbitmap(bitmap=logo_path)
+        self.window_experiment = tk.Tk()
+        self.window_experiment.title("Experiment Filehandler")
+        # self.window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
+        # self.window_experiment.wm_iconbitmap(bitmap=logo_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
 
-        # window_experiment.geometry("800x750")
-        window_experiment.option_add(
+        # self.window_experiment.geometry("800x750")
+        self.window_experiment.option_add(
             "Helvetica", '10')  # Frischart und groesse
-        window_experiment.resizable(
+        self.window_experiment.resizable(
             width=False, height=False)  # False = no resize
         text_input_height = 30
 
         self.main_frame = tk.Frame(
-            window_experiment, bg='grey', padx=2, pady=2)
+            self.window_experiment, bg='grey', padx=2, pady=2)
         self.main_frame.grid(row=0, column=0, sticky="nsew")
         # self.grid_rowconfigure(0, weight=1, minsize=240)  # splaten hoehe
         # self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite
@@ -441,7 +464,7 @@ class File_Settings:
         # Parameters
 
         self.frame_parameter = tk.LabelFrame(
-            window_experiment, text="set Parameters", bg='grey')
+            self.window_experiment, text="set Parameters", bg='grey')
         self.frame_parameter.grid(
             row=1, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
 
@@ -479,7 +502,7 @@ class File_Settings:
 
         # New Experiment parameter
         self.frame_experiment = tk.LabelFrame(
-            window_experiment, text="new Expeiment-Parameters", bg='grey')
+            self.window_experiment, text="new Expeiment-Parameters", bg='grey')
         self.frame_experiment.grid(
             row=4, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
         self.frame_experiment.grid_columnconfigure(0, weight=2)
@@ -516,40 +539,47 @@ class File_Settings:
 
         # Buttons
         self.frame_buttens = tk.LabelFrame(
-            window_experiment, text="load Expeiment-Parameters", bg='grey')
+            self.window_experiment, text="load Expeiment-Parameters", bg='grey')
         self.frame_buttens.grid(
             row=3, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
-        self.frame_buttens.grid_columnconfigure(0, weight=1)
-        self.frame_buttens.grid_columnconfigure(1, weight=1)
+        self.frame_buttens.grid_columnconfigure(0, weight=2)
+        self.frame_buttens.grid_columnconfigure(1, weight=2)
+        self.frame_buttens.grid_columnconfigure(2, weight=1)
 
         save_button = tk.Button(self.frame_buttens, text="load pre-existing settings",
                                 command=lambda:  File_Settings.load_folder(self))
         save_button.grid(row=0, column=0, padx=frame_boarder,
                          pady=frame_boarder, sticky="nsew")
 
-        close_button = tk.Button(self.frame_buttens, text="save & close window",
-                                 background="tomato4", command=window_experiment.destroy)
-        close_button.grid(row=0, column=1, padx=frame_boarder,
+        save_close_button = tk.Button(self.frame_buttens, text="save & close window",
+                                      background="chartreuse4", command=lambda: File_Settings.save_close(self))
+        save_close_button.grid(row=0, column=1, padx=frame_boarder,
+                               pady=frame_boarder, sticky="nsew")
+
+        close_button = tk.Button(self.frame_buttens, text="close window",
+                                 background="red3", command=self.window_experiment.destroy)
+        close_button.grid(row=0, column=2, padx=frame_boarder,
                           pady=frame_boarder, sticky="nsew")
 
         # kommentare
-        frame_comment = tk.LabelFrame(
-            window_experiment, text="Comment for Experiment: ", background=gray_light)
-        frame_comment.grid(row=2, column=0, sticky="nsew")
+        self.frame_comment = tk.LabelFrame(
+            self.window_experiment, text="Comment for Experiment: ", background=gray_light)
+        self.frame_comment.grid(row=2, column=0, sticky="nsew")
 
-        tk.Label(frame_comment, text="Area to comment on the experiment",
+        tk.Label(self.frame_comment, text="Area to comment on the experiment",
                  background=gray_light).pack()
 
-        txt_experiment = tk.Text(
-            frame_comment,  height=6, fg="black", bg="white", width=50)
+        self.txt_experiment = tk.Text(
+            self.frame_comment,  height=6, fg="black", bg="white", width=50)
         # fill="Fill in comments for the eperiment ",
-        txt_experiment.pack(padx=2, pady=2, expand=True)
-        txt_experiment.insert(tk.END, "Comments for the Experiment collected:")
+        self.txt_experiment.pack(padx=2, pady=2, expand=True)
+        self.txt_experiment.insert(
+            tk.END, "Comments for the Experiment collected:")
 
-        txt_data = tk.Text(frame_comment, fg="black",
-                           bg="white", width=50, height=6)
+        self.txt_data = tk.Text(self.frame_comment, fg="black",
+                                bg="white", width=50, height=6)
 
-        txt_data.pack(padx=2, pady=2, expand=True)
-        txt_data.insert(tk.END, "Comments for the data collected:")
+        self.txt_data.pack(padx=2, pady=2, expand=True)
+        self.txt_data.insert(tk.END, "Comments for the data collected:")
 
         return print("closing load file")

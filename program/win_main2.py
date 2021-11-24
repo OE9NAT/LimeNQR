@@ -458,7 +458,7 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment())
+            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment(self))
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
