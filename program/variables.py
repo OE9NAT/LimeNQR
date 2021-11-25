@@ -456,10 +456,11 @@ class File_Settings:
             self.window_experiment.destroy()
 
     @property
-    def save_experiment(self, path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+    # , path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+    def save_experiment(self):
         print("save_experiment from variables.py")
-        print("path: "+str(path)+"\nexperiment: " +
-              str(experiment) + "\nData: " + str(data))
+        # print("path: "+str(path)+"\nexperiment: " +
+        #      str(experiment) + "\nData: " + str(data))
 
         # ----- Setup of gui ------######l
         self.window_experiment = tk.Tk()

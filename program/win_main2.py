@@ -29,7 +29,7 @@ print("getter", value_set.get_freq)
 
 # Dokumentation of experiment
 file_set = variables.File_Settings(value_set)
-file_setting = file_set.save_experiment
+# file_setting = file_set.save_experiment   #open experiment strukture
 
 ##############
 
@@ -130,6 +130,8 @@ def load_values(path="config.cfg", section="pre_set_values"):
 
 
 # def window_main():
+
+
 class window_main(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -458,7 +460,7 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment(self))
+            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment)
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
@@ -484,6 +486,10 @@ class window_main(tk.Tk):
 
         # write all files form settings.cfg to entery
         self.load_settings()
+
+        # open file handler for starting expeiment
+        file_setting = file_set.save_experiment
+
         self.update()
         # return self
 
@@ -519,6 +525,7 @@ class window_main(tk.Tk):
         # set with pre set values for tuen and match
         self.set_tm(value_set.get_tunematch[0], value_set.get_tunematch[1],
                     value_set.get_tunematch[2], value_set.get_tunematch[3])
+
         # load sequence storage paths
         self.set_storage(
             value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
