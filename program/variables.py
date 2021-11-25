@@ -64,12 +64,12 @@ class Value_Settings:
         print("hallo from variables.py class Value_settings")
 
     @property
-    def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting.cfg"):
+    def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting_last_run.cfg"):
         # read settings form setting.cfg file
         # path_settings = path+"/"+file
         print("@property import_settings")
         path_settings = str(os.path.dirname(
-            sys.argv[0]))+"/"+"program/setting.cfg"
+            sys.argv[0]))+"/"+"program/setting_last_run.cfg"
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
             print("file Setting not found")
@@ -86,6 +86,12 @@ class Value_Settings:
         configParser.read(path_settings)
         setting_dict = {section: dict(configParser.items(section))
                         for section in configParser.sections()}
+
+        print(*setting_dict, *setting_dict.values(), sep="\n")
+        print("test\n \n")
+
+        self.set_freq = ["xy", "xy", "xy", "xy"]  # [tune, match, freq , lut]
+        self.set_load = ["xy", "xy", "xy"]  # [sample, experiment, data]
 
         # self._freq_start = 11
         # self._freq_end = 11
@@ -423,6 +429,8 @@ class File_Settings:
         #    # file dose not exist jet
         #    os.mkdir(file_save)
 
+        # update on win_main
+
         # minimum length of comment
         comment_exp = self.txt_experiment.get('1.0', 'end')
         if len(comment_exp) < 100:
@@ -492,7 +500,7 @@ class File_Settings:
         # Parameters
 
         self.frame_parameter = tk.LabelFrame(
-            self.window_experiment, text="set Parameters", bg='grey')
+            self.window_experiment, text="selected Parameters", bg='grey')
         self.frame_parameter.grid(
             row=1, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
 
@@ -561,7 +569,7 @@ class File_Settings:
         self.data.grid(row=2, column=1, padx=frame_boarder,
                        pady=frame_boarder, sticky="nsew")
 
-        save_button = tk.Button(self.frame_experiment, text="Save",
+        save_button = tk.Button(self.frame_experiment, text="set Parameters",
                                 background="SkyBlue4", command=lambda: File_Settings.generate_folder(self, sample=self.sample.get(), experiment=self.experiment.get(), data=self.data.get()))
         save_button.grid(row=3, column=0, columnspan=2, sticky="nsew")
 

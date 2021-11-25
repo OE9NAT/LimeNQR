@@ -9,6 +9,7 @@ from tkinter import scrolledtext   # use for logger
 from tkinter import filedialog
 import tkinter as tk
 import PIL.Image as image
+import datetime
 
 import tkinter.ttk as TTK  # use for Combobox
 from PIL import ImageTk, Image  # .jpg
@@ -133,9 +134,11 @@ def load_values(path="config.cfg", section="pre_set_values"):
 
 
 class window_main(tk.Tk):
+    time_autosave = 5000  # in ms
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
         # self = tk.Tk()
@@ -171,8 +174,8 @@ class window_main(tk.Tk):
 
         datei_menu = tk.Menu(menuleiste, tearoff=0)
         datei_menu.add_command(label="Save", command=self.get_values)
-        datei_menu.add_command(label="Save all", command=print(
-            "test save all"))  # save_all)
+        datei_menu.add_command(
+            label="auto-save", command=self.autosave)  # save_all)
         datei_menu.add_command(label="Close all", command=save_quit_all)
         datei_menu.add_separator()  # Trennlinie
         datei_menu.add_command(label="load values", command=load_values)
@@ -335,36 +338,25 @@ class window_main(tk.Tk):
             frame_tm, text="Send to Arduino", command=self.send_arduino, foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
-        ######----- load sequence  ------######
-        frame_seq = tk.LabelFrame(self, text="load sequence", bg='grey')
+        ######----- info box  ------######
+        frame_seq = tk.LabelFrame(self, text="info box", bg='grey')
         frame_seq.grid(row=0, column=2, padx=frame_boarder,
                        pady=frame_boarder, sticky="nsew")
         self.grid_rowconfigure(2, weight=1, minsize=240)
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
-        # Filepath for Storage for loading data
-        self.file_path_lable = tk.Label(frame_seq, text="Sample: ")
-        self.file_path_lable.grid(row=0, column=0, padx=5, pady=5)
+        # set Data
+        self.lable_info_data = tk.Label(frame_seq, text="Data: preset")
+        self.lable_info_data.grid(row=2, column=0, padx=5, pady=5)
 
-        self.file_path_input = tk.Entry(
-            frame_seq, fg="black", bg="white", width=10)
-        self.file_path_input.grid(row=0, column=1, padx=5, pady=5)
+        # Set Experiment
+        self.experiment_path_lable = tk.Label(
+            frame_seq, text="Experiment: preset")
+        self.experiment_path_lable.grid(row=1, column=0, padx=3, pady=3)
 
-        # Filepath for Storage for loading data
-        experiment_path_lable = tk.Label(frame_seq, text="experiment: ")
-        experiment_path_lable.grid(row=1, column=0, padx=5, pady=5)
-
-        self.experiment_path_input = tk.Entry(
-            frame_seq, fg="black", bg="white", width=10)
-        self.experiment_path_input.grid(row=1, column=1, padx=5, pady=5)
-
-        # Filepath for Storage for loading data
-        cycle_path_lable = tk.Label(frame_seq, text="Data: ")
-        cycle_path_lable.grid(row=2, column=0, padx=5, pady=5)
-
-        self.cycle_path_input = tk.Entry(
-            frame_seq, fg="black", bg="white", width=10)
-        self.cycle_path_input.grid(row=2, column=1, padx=5, pady=5)
+        # set Sample
+        self.lable_info_sample = tk.Label(frame_seq, text="Sample: preset")
+        self.lable_info_sample.grid(row=0, column=0, padx=3, pady=3)
 
         puls_button = tk.Button(frame_seq, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
@@ -408,7 +400,7 @@ class window_main(tk.Tk):
         toolbarFrame.grid(row=2, column=0, padx=2, pady=2)  # ,sticky="ew")
         toolbar = NavigationToolbar2Tk(self.canvas, toolbarFrame)
 
-        button_reload = tk.Button(frame_plot, text="Reload plot",
+        button_reload = tk.Button(frame_plot, text="auto-update plot",
                                   command=self.plot_update, background="chartreuse4")
         button_reload.grid(row=2, column=1, padx=2, pady=2, sticky="ew")
 
@@ -456,7 +448,7 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         button_run = tk.Button(frame_Buttens, text="RUN ",
-                               command=load_values())
+                               command=lambda: print("RUN Pulssequenz von Lukas"))
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
@@ -486,8 +478,10 @@ class window_main(tk.Tk):
 
         # write all files form settings.cfg to entery
         self.load_settings()
+        self.autosave()
 
         # open file handler for starting expeiment
+
         file_setting = file_set.save_experiment
 
         self.update()
@@ -527,15 +521,15 @@ class window_main(tk.Tk):
                     value_set.get_tunematch[2], value_set.get_tunematch[3])
 
         # load sequence storage paths
-        self.set_storage(
-            value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
+        # self.set_storage(
+        #    value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
 
         # popup for settings loaded
         self.load_poup = tk.Label(
             self.frame_measure, text='settings loaded', font=(7), background="chartreuse4")
         self.load_poup.grid(row=7, column=1, padx=5,
                             pady=5, sticky="ew", rowspan=2)
-        self.load_poup.after(3000, lambda: self.load_poup.grid_forget())
+        self.load_poup.after(2000, lambda: self.load_poup.grid_forget())
 
         # logger
         log_text = "Measurment settig loadet from settings.cfg"+"\n"
@@ -648,6 +642,7 @@ class window_main(tk.Tk):
 
         log_text = "Updatet live Plot"+" \n"
         self.logtext_area.insert(tk.INSERT, log_text)
+        self.after(2000, self.plot_update)  # update again after 2000 ms
 
     def read_tm(self):
         print("def read_tm")
@@ -728,10 +723,10 @@ class window_main(tk.Tk):
                                       "freq_step": self.freq_step_input.get(), "freq_repetitions": self.average_input.get()}
         self.import_values["tunematch"] = {"tune": self.Tune_U_max_input.get(
         ), "match": self. Match_U_max_input.get(), "step": self.V_step_input.get(), "lut": self.V_step_input.get()}
-        self.import_values["load"] = {"sample": self.file_path_input.get(
-        ), "experiment": self.experiment_path_input.get(), "data": self.experiment_path_input.get()}
+        # self.import_values["load"] = {"sample": self.file_path_input.get(
+        # ), "experiment": self.experiment_path_input.get(), "data": self.experiment_path_input.get()}
 
-        self.experiment_path_input
+        # self.experiment_path_input
 
         print("loadet all", self.import_values.keys())
         print("loadet all", self.import_values)
@@ -739,12 +734,13 @@ class window_main(tk.Tk):
         return self.import_values
 
     def set_storage(self, path="test_path", experiment="test_exper", cycle="test_cycle"):
-        self.file_path_input.delete("0", "end")
-        self.file_path_input.insert(0, path)
-        self.experiment_path_input.delete("0", "end")
-        self.experiment_path_input.insert(0, experiment)
-        self.cycle_path_input.delete("0", "end")
-        self.cycle_path_input.insert(0, cycle)
+        # handling exported to variables.py in class File_Settings
+        #self.file_path_input.delete("0", "end")
+        #self.file_path_input.insert(0, path)
+        #self.experiment_path_input.delete("0", "end")
+        #self.experiment_path_input.insert(0, experiment)
+        #self.cycle_path_input.delete("0", "end")
+        #self.cycle_path_input.insert(0, cycle)
 
         # file_set.generate_folder(
         #    self, sample=path, experiment=experiment, data=cycle)
@@ -767,6 +763,21 @@ class window_main(tk.Tk):
         self.logtext_area.insert(tk.INSERT, log_text)
         self.logtext_area.see(tk.END)
 
+    def autosave(self):
+        print("autosave from win_main2")
+        # self.set_storage(
+        #    value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
+
+        # self.lable_info_sample.config(text=self.imp_value_set.get_load[0])
+
+        self.lable_info_data.config(text="Sample: "+value_set._load_sample)
+        self.lable_info_sample.config(
+            text="Experiment: "+value_set._load_experiment)
+        self.experiment_path_lable.config(text="Daten: "+value_set._load_data)
+
+        # update again after 5s "autosave automatikaly"
+        self.after(window_main.time_autosave, self.autosave)
+
     def close():
         print("save and close all windows")
         self.destroy()
@@ -782,43 +793,41 @@ if __name__ == "__main__":
     import configparser
     import PIL.Image as image
 
-
-#   from logging.handlers import QueueHandler
+    #   from logging.handlers import QueueHandler
     # logging.config.fileConfig(filename="../log/win_main_log.log", level=logging.DEBUG, # <- set logging level
     #    format="%(name)s - %(asctime)s:%(levelname)s:%(message)s" , # set level
     #    disable_existing_loggers=False )
 
-
-#    logging.basicConfig(filename="../log/win_main_log.log",
-#        level=logging.DEBUG, # <- set logging level
-#        format="%(asctime)s - %(name)s : %(levelname)s : \n %(message)s") # set level
-#
-#
-#    logger = logging.getLogger('win_main')
-#    logger.addHandler(logging.StreamHandler())
-#    logger.info("logging from start up")
-#
-#    from function import *
-#
-#    if 'setting_dict' not in locals():
-#        print("my setting_dict dose not exist")
-#
-#        path_setting=os.path.abspath(os.path.dirname(sys.argv[0]))
-#        #setting_dict=load_setting (path_setting ,file="setting.cfg")
-#        setting_dict=load_setting (path_setting)
-#        #print("\nsetting_dict:", *setting_dict.items(), sep="\n\n")
-#
-#        freq_start = setting_dict["setting"] ["freq_start"]
-#        freq_end = setting_dict["setting"] ["freq_end"]
-#        freq_step = setting_dict["setting"] ["freq_step"]
-#        freq_repetitions = setting_dict["setting"] ["freq_repetitions"]
-#
-#
-#    import win_seq_puls
-#    import win_seq_spin
-#    import win_seq_own
-#    import win_plot
-#
+    #    logging.basicConfig(filename="../log/win_main_log.log",
+    #        level=logging.DEBUG, # <- set logging level
+    #        format="%(asctime)s - %(name)s : %(levelname)s : \n %(message)s") # set level
+    #
+    #
+    #    logger = logging.getLogger('win_main')
+    #    logger.addHandler(logging.StreamHandler())
+    #    logger.info("logging from start up")
+    #
+    #    from function import *
+    #
+    #    if 'setting_dict' not in locals():
+    #        print("my setting_dict dose not exist")
+    #
+    #        path_setting=os.path.abspath(os.path.dirname(sys.argv[0]))
+    #        #setting_dict=load_setting (path_setting ,file="setting.cfg")
+    #        setting_dict=load_setting (path_setting)
+    #        #print("\nsetting_dict:", *setting_dict.items(), sep="\n\n")
+    #
+    #        freq_start = setting_dict["setting"] ["freq_start"]
+    #        freq_end = setting_dict["setting"] ["freq_end"]
+    #        freq_step = setting_dict["setting"] ["freq_step"]
+    #        freq_repetitions = setting_dict["setting"] ["freq_repetitions"]
+    #
+    #
+    #    import win_seq_puls
+    #    import win_seq_spin
+    #    import win_seq_own
+    #    import win_plot
+    #
 
     if 'myVar' not in globals():
         print("my global Variable dose not exist")
