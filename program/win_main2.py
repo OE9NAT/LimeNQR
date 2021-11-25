@@ -739,6 +739,9 @@ class window_main(tk.Tk):
         self.cycle_path_input.delete("0", "end")
         self.cycle_path_input.insert(0, cycle)
 
+        # file_set.generate_folder(
+        #    self, sample=path, experiment=experiment, data=cycle)
+
         # logger
         log_text = "set storage "+"\n"
         log_text = log_text + " path " + path + "\n"

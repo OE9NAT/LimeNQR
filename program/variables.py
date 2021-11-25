@@ -7,6 +7,7 @@ import numpy as np
 import scipy
 import configparser
 import logging
+from datetime import datetime
 
 
 logger_win_variables = logging.getLogger('win_variables')
@@ -330,13 +331,14 @@ class Pulse_Settings:
 
 
 class File_Settings:
+    main_data_path = "storage_vault"
 
     def __init__(self, value_set):
         print("File_Settings")
         self._absolute_path = os.path.dirname(sys.argv[0])
         self._path = "Test_Sample"
         self._experiment = "Test_experiment"
-        self._data = "Sorage_vault"
+        self._data = File_Settings.main_data_path
         self.imp_value_set = value_set  # import class Values_settings for paramter
 
     @staticmethod
@@ -347,7 +349,7 @@ class File_Settings:
         absolute = os.path.dirname(__file__)
 
         # main folder for all Data
-        file_doc = os.path.join(absolute, '..', self._data)
+        file_doc = os.path.join(absolute, '..', File_Settings.main_data_path)
         if not os.path.exists(file_doc):
             os.makedirs(file_doc)
 
@@ -409,24 +411,49 @@ class File_Settings:
     def save_close(self):
 
         # save files
-        self._absolute_path = os.path.dirname(sys.argv[0])
-        self._path = "Test_Sample"
-        self._experiment = "Test_experiment"
-        self._data = "Sorage_vault"
-        file_save = os.path.join(
-            self._absolute_path, self._path, self._experiment, self._data)
+        absolute_path = os.path.join(
+            os.path.dirname(__file__), '..', self._data)
+        sample = self.imp_value_set.get_load[0]
+        experiment = self.imp_value_set.get_load[1]
+        data = self.imp_value_set.get_load[2]
+        file_save = os.path.join(absolute_path, sample, experiment, data)
         print('stored in :', file_save)
 
-        with open('comment_experiment.txt', 'a', encoding='utf-8') as file:
-            file.write('\ Date:'+"\n")
-            # file.write(self.txt_data.get())
-            file.write(self.txt_experiment.get('1.0', 'end'))  # "1.0",'end-1c'
+        # if not os.path.isdir(file_save):
+        #    # file dose not exist jet
+        #    os.mkdir(file_save)
 
-        # with open('comment_experiment.txt', 'a', encoding='utf-8') as file:
-        #    file.write('\ Date:'+"\n")
-        #    file.write(self.txt_data.get())
+        # minimum length of comment
+        comment_exp = self.txt_experiment.get('1.0', 'end')
+        if len(comment_exp) < 100:
+            print("comment to short 20>", len(comment_exp))
+            comment_error = "\n Comment of the Experiment must be longer!! \n"
+            comment_error = comment_error + \
+                "add information about what was done,\n length of the comment is: "
+            comment_error = comment_error + str(len(comment_exp)) + " < 100"
+            tk.messagebox.showerror(
+                message=comment_error, title="Error sort comment")
+        else:
 
-        self.window_experiment.destroy()
+            with open(os.path.join(file_save, 'comment_experiment.txt'), 'a', encoding='utf-8') as file:
+                file.write('*** comment from: '+str(datetime.now())+"  ***\n")
+                file.write(comment_exp+"\n")  # "1.0",'end-1c'
+
+        comment_data = self.txt_data.get('1.0', 'end')
+        if len(comment_data) < 100:
+            print("comment to short 20>", len(comment_data))
+            comment_error = "\n Comment of the Data must be longer!! \n"
+            comment_error = comment_error + \
+                "add information about what was done,\n length of the comment is: "
+            comment_error = comment_error + str(len(comment_data)) + " < 100"
+            tk.messagebox.showerror(
+                message=comment_error, title="Error sort comment")
+        else:
+            with open(os.path.join(file_save, 'comment_data.txt'), 'a', encoding='utf-8') as file:
+                file.write('*** comment from: '+str(datetime.now())+"  ***\n")
+                file.write(comment_data)
+
+            self.window_experiment.destroy()
 
     @property
     def save_experiment(self, path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
