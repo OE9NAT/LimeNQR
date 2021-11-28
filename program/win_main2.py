@@ -160,7 +160,20 @@ class window_main(tk.Tk):
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
         self.maxsize(1200, 850)
-        self.geometry("1000x750+100+10")
+        self.geometry("1000x750+400+100")
+
+        window_width = 1000
+        window_height = 750
+
+        # get the screen dimension to center window on screen
+        screen_width = self.winfo_screenwidth()
+        screen_height = self.winfo_screenheight()
+        center_x = int(screen_width/2 - window_width / 2)
+        center_y = int(screen_height/2 - window_height / 2)
+        print("______window _" +
+              f'{window_width}x{window_height}+{center_x}+{center_y}')
+        self.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+
         self.option_add("Helvetica", '10')  # Frischart und groesse
         # self.resizable(width=False, height=False) #  False = no resize
 
@@ -339,34 +352,48 @@ class window_main(tk.Tk):
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
         ######----- info box  ------######
-        frame_seq = tk.LabelFrame(self, text="info box", bg='grey')
-        frame_seq.grid(row=0, column=2, padx=frame_boarder,
-                       pady=frame_boarder, sticky="nsew")
+        info_box = tk.LabelFrame(self, text="info box", bg='grey')
+        info_box.grid(row=0, column=2, padx=frame_boarder,
+                      pady=frame_boarder, sticky="nsew")
         self.grid_rowconfigure(2, weight=1, minsize=240)
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
-        # set Data
-        self.lable_info_data = tk.Label(frame_seq, text="Data: preset")
-        self.lable_info_data.grid(row=2, column=0, padx=5, pady=5)
+        frame_seq = tk.LabelFrame(self, text="info box", bg='grey')
+        frame_seq.grid(row=0, column=2, padx=frame_boarder,
+                       pady=frame_boarder, sticky="nsew")
 
-        # Set Experiment
-        self.experiment_path_lable = tk.Label(
-            frame_seq, text="Experiment: preset")
-        self.experiment_path_lable.grid(row=1, column=0, padx=3, pady=3)
-
+        # info path
         # set Sample
-        self.lable_info_sample = tk.Label(frame_seq, text="Sample: preset")
+        self.lable_info_sample = tk.Label(
+            info_box, text="Sample: preset", bg='grey')
         self.lable_info_sample.grid(row=0, column=0, padx=3, pady=3)
 
-        puls_button = tk.Button(frame_seq, text="set Puls sequenz",
+        # Set Experiment
+        self.lable_info_experiment = tk.Label(
+            info_box, text="Experiment: preset", bg='grey')
+        self.lable_info_experiment.grid(row=1, column=0, padx=3, pady=3)
+
+        # set Data
+        self.lable_info_data = tk.Label(
+            info_box, text="Data: preset", bg='grey')
+        self.lable_info_data.grid(row=2, column=0, padx=5, pady=5)
+
+        # info frequenz
+        # puls
+        self.lable_info_puls = tk.Label(
+            info_box, text="Puls info: \nP: \nTP: \nA:", bg='grey')
+        self.lable_info_data.grid(
+            row=2, column=0, padx=5, pady=5, columnspan=3)
+
+        puls_button = tk.Button(info_box, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2, padx=2, pady=2)
 
-        spin_button = tk.Button(frame_seq, text="set Spin sequenz",
+        spin_button = tk.Button(info_box, text="set Spin sequenz",
                                 command=win_seq_spin.windows_file)  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2, padx=2, pady=2)
 
-        own_button = tk.Button(frame_seq, text="set own sequenz",
+        own_button = tk.Button(info_box, text="set own sequenz",
                                command=win_seq_own.windows_file)  # windows_file)
         own_button.grid(row=5, column=0, columnspan=2, padx=2, pady=2)
 
@@ -773,7 +800,7 @@ class window_main(tk.Tk):
         self.lable_info_data.config(text="Sample: "+value_set._load_sample)
         self.lable_info_sample.config(
             text="Experiment: "+value_set._load_experiment)
-        self.experiment_path_lable.config(text="Daten: "+value_set._load_data)
+        self.lable_info_experiment.config(text="Daten: "+value_set._load_data)
 
         # update again after 5s "autosave automatikaly"
         self.after(window_main.time_autosave, self.autosave)

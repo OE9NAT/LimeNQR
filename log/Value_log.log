@@ -14012,3 +14012,1298 @@ ____ value ____  2021-11-25 23:45:29,676 : INFO :
  tm_step_value 50
  tm_lut_value 20
 
+____ value ____  2021-11-26 08:28:35,176 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-26 08:28:35,177 : INFO : 
+ start value logger
+____ value ____  2021-11-26 08:28:35,178 : WARNING : 
+ start value logger
+____ value ____  2021-11-26 08:28:35,180 : ERROR : 
+ This is an error message
+____ value ____  2021-11-26 08:28:35,181 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-26 08:28:35,182 : INFO : 
+ start settings logger
+____ value ____  2021-11-26 08:28:36,958 : INFO : 
+ freq_start123
+____ value ____  2021-11-26 08:28:36,958 : INFO : 
+ freq_end22333
+____ value ____  2021-11-26 08:28:36,958 : INFO : 
+ freq_step33333
+____ value ____  2021-11-26 08:28:36,959 : INFO : 
+ freq_average4433
+____ value ____  2021-11-26 08:28:36,959 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-26 08:28:36,961 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-26 08:28:36,963 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-26 08:31:04,022 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-26 08:31:04,024 : INFO : 
+ start value logger
+____ value ____  2021-11-26 08:31:04,024 : WARNING : 
+ start value logger
+____ value ____  2021-11-26 08:31:04,024 : ERROR : 
+ This is an error message
+____ value ____  2021-11-26 08:31:04,024 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-26 08:31:04,025 : INFO : 
+ start settings logger
+____ value ____  2021-11-26 08:31:05,732 : INFO : 
+ freq_start123
+____ value ____  2021-11-26 08:31:05,733 : INFO : 
+ freq_end22333
+____ value ____  2021-11-26 08:31:05,733 : INFO : 
+ freq_step33333
+____ value ____  2021-11-26 08:31:05,733 : INFO : 
+ freq_average4433
+____ value ____  2021-11-26 08:31:05,734 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-26 08:31:05,740 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-26 08:31:05,745 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-26 16:35:47,412 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-26 16:35:47,413 : INFO : 
+ start value logger
+____ value ____  2021-11-26 16:35:47,413 : WARNING : 
+ start value logger
+____ value ____  2021-11-26 16:35:47,414 : ERROR : 
+ This is an error message
+____ value ____  2021-11-26 16:35:47,415 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-26 16:35:47,415 : INFO : 
+ start settings logger
+____ value ____  2021-11-26 16:35:49,267 : INFO : 
+ freq_start123
+____ value ____  2021-11-26 16:35:49,267 : INFO : 
+ freq_end22333
+____ value ____  2021-11-26 16:35:49,267 : INFO : 
+ freq_step33333
+____ value ____  2021-11-26 16:35:49,267 : INFO : 
+ freq_average4433
+____ value ____  2021-11-26 16:35:49,268 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-26 16:35:49,271 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-26 16:35:49,274 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:28:15,150 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:28:15,151 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:28:15,151 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:28:15,151 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:28:15,151 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:28:15,151 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:28:16,714 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:28:16,714 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:28:16,714 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:28:16,715 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:28:16,715 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:28:16,718 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:28:16,724 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:30:45,183 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:30:45,184 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:30:45,185 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:30:45,185 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:30:45,185 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:30:45,186 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:30:47,087 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:30:47,088 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:30:47,088 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:30:47,088 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:30:47,088 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:30:47,090 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:30:47,092 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:32:25,461 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:32:25,463 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:32:25,463 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:32:25,464 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:32:25,464 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:32:25,465 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:32:26,952 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:32:26,952 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:32:26,952 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:32:26,953 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:32:26,954 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:32:26,962 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:32:26,967 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:36:22,367 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:36:22,368 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:36:22,369 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:36:22,370 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:36:22,370 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:36:22,372 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:36:24,463 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:36:24,463 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:36:24,463 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:36:24,463 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:36:24,464 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:36:24,466 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:36:24,469 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:54:23,981 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:54:23,983 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:54:23,984 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:54:23,984 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:54:23,984 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:54:23,985 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:54:25,542 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:54:25,542 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:54:25,542 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:54:25,543 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:54:25,543 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:54:25,545 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:54:25,549 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 18:56:10,306 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 18:56:10,306 : INFO : 
+ start value logger
+____ value ____  2021-11-27 18:56:10,307 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 18:56:10,307 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 18:56:10,307 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 18:56:10,308 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 18:56:11,917 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 18:56:11,917 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 18:56:11,917 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 18:56:11,917 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 18:56:11,919 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 18:56:11,922 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 18:56:11,926 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 19:06:23,003 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 19:06:23,004 : INFO : 
+ start value logger
+____ value ____  2021-11-27 19:06:23,005 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 19:06:23,005 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 19:06:23,006 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 19:06:23,006 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 19:06:25,508 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 19:06:25,509 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 19:06:25,509 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 19:06:25,510 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 19:06:25,511 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 19:06:25,515 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 19:06:25,519 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 19:07:55,402 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 19:07:55,403 : INFO : 
+ start value logger
+____ value ____  2021-11-27 19:07:55,404 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 19:07:55,405 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 19:07:55,405 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 19:07:55,406 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 19:07:57,300 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 19:07:57,300 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 19:07:57,300 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 19:07:57,300 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 19:07:57,301 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 19:07:57,303 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 19:07:57,307 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 19:08:59,134 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 19:08:59,135 : INFO : 
+ start value logger
+____ value ____  2021-11-27 19:08:59,136 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 19:08:59,137 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 19:08:59,139 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 19:08:59,140 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 19:09:00,652 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 19:09:00,652 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 19:09:00,652 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 19:09:00,653 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 19:09:00,653 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 19:09:00,658 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 19:09:00,660 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-27 19:11:17,483 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-27 19:11:17,484 : INFO : 
+ start value logger
+____ value ____  2021-11-27 19:11:17,484 : WARNING : 
+ start value logger
+____ value ____  2021-11-27 19:11:17,484 : ERROR : 
+ This is an error message
+____ value ____  2021-11-27 19:11:17,484 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-27 19:11:17,484 : INFO : 
+ start settings logger
+____ value ____  2021-11-27 19:11:18,826 : INFO : 
+ freq_start123
+____ value ____  2021-11-27 19:11:18,827 : INFO : 
+ freq_end22333
+____ value ____  2021-11-27 19:11:18,827 : INFO : 
+ freq_step33333
+____ value ____  2021-11-27 19:11:18,827 : INFO : 
+ freq_average4433
+____ value ____  2021-11-27 19:11:18,828 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-27 19:11:18,830 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-27 19:11:18,832 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 11:48:22,502 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 11:48:22,503 : INFO : 
+ start value logger
+____ value ____  2021-11-28 11:48:22,503 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 11:48:22,503 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 11:48:22,504 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 11:48:22,504 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 11:48:23,998 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 11:48:23,999 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 11:48:23,999 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 11:48:23,999 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 11:48:24,000 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 11:48:24,002 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 11:48:24,004 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 12:09:34,226 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 12:09:34,226 : INFO : 
+ start value logger
+____ value ____  2021-11-28 12:09:34,226 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 12:09:34,227 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 12:09:34,227 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 12:09:34,227 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 12:09:35,805 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 12:09:35,805 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 12:09:35,805 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 12:09:35,805 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 12:09:35,806 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 12:09:35,808 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 12:09:35,811 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 12:15:57,212 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 12:15:57,212 : INFO : 
+ start value logger
+____ value ____  2021-11-28 12:15:57,212 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 12:15:57,213 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 12:15:57,213 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 12:15:57,213 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 12:15:59,361 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 12:15:59,361 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 12:15:59,361 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 12:15:59,361 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 12:15:59,363 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 12:15:59,367 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 12:15:59,370 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 12:17:50,615 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 12:17:50,616 : INFO : 
+ start value logger
+____ value ____  2021-11-28 12:17:50,616 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 12:17:50,616 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 12:17:50,616 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 12:17:50,617 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 12:17:52,054 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 12:17:52,054 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 12:17:52,054 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 12:17:52,054 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 12:17:52,055 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 12:17:52,057 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 12:17:52,059 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 15:44:45,342 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 15:44:45,343 : INFO : 
+ start value logger
+____ value ____  2021-11-28 15:44:45,343 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 15:44:45,344 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 15:44:45,344 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 15:44:45,344 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 15:44:46,902 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 15:44:46,902 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 15:44:46,902 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 15:44:46,903 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 15:44:46,903 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 15:44:46,905 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 15:44:46,907 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 15:45:16,321 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 15:45:16,322 : INFO : 
+ start value logger
+____ value ____  2021-11-28 15:45:16,322 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 15:45:16,322 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 15:45:16,322 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 15:45:16,322 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 15:45:17,744 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 15:45:17,744 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 15:45:17,745 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 15:45:17,745 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 15:45:17,746 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 15:45:17,748 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 15:45:17,750 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 15:52:37,034 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 15:52:37,034 : INFO : 
+ start value logger
+____ value ____  2021-11-28 15:52:37,034 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 15:52:37,035 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 15:52:37,035 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 15:52:37,037 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 15:52:38,388 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 15:52:38,388 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 15:52:38,388 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 15:52:38,388 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 15:52:38,389 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 15:52:38,391 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 15:52:38,393 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 19:25:01,861 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 19:25:01,861 : INFO : 
+ start value logger
+____ value ____  2021-11-28 19:25:01,862 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 19:25:01,862 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 19:25:01,862 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 19:25:01,862 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 19:25:03,263 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 19:25:03,263 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 19:25:03,264 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 19:25:03,264 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 19:25:03,264 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 19:25:03,266 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 19:25:03,270 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 19:38:13,588 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 19:38:13,588 : INFO : 
+ start value logger
+____ value ____  2021-11-28 19:38:13,589 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 19:38:13,589 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 19:38:13,589 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 19:38:13,589 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 19:38:15,056 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 19:38:15,056 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 19:38:15,056 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 19:38:15,056 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 19:38:15,057 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 19:38:15,058 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 19:38:15,060 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 19:54:13,942 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 19:54:13,943 : INFO : 
+ start value logger
+____ value ____  2021-11-28 19:54:13,943 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 19:54:13,943 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 19:54:13,943 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 19:54:13,944 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 19:54:15,562 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 19:54:15,562 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 19:54:15,563 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 19:54:15,564 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 19:54:15,564 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 19:54:15,566 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 19:54:15,569 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 20:25:55,796 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 20:25:55,796 : INFO : 
+ start value logger
+____ value ____  2021-11-28 20:25:55,796 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 20:25:55,796 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 20:25:55,797 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 20:25:55,797 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 20:25:57,100 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 20:25:57,101 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 20:25:57,101 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 20:25:57,101 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 20:25:57,102 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 20:25:57,104 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 20:25:57,107 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 20:36:08,027 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 20:36:08,027 : INFO : 
+ start value logger
+____ value ____  2021-11-28 20:36:08,028 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 20:36:08,028 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 20:36:08,029 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 20:36:08,030 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 20:36:09,289 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 20:36:09,290 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 20:36:09,290 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 20:36:09,290 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 20:36:09,291 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 20:36:09,293 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 20:36:09,296 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 20:55:26,120 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 20:55:26,120 : INFO : 
+ start value logger
+____ value ____  2021-11-28 20:55:26,120 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 20:55:26,121 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 20:55:26,121 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 20:55:26,121 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 20:55:27,542 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 20:55:27,542 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 20:55:27,542 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 20:55:27,543 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 20:55:27,543 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 20:55:27,545 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 20:55:27,548 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 20:59:36,845 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 20:59:36,846 : INFO : 
+ start value logger
+____ value ____  2021-11-28 20:59:36,846 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 20:59:36,846 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 20:59:36,846 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 20:59:36,847 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 20:59:38,195 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 20:59:38,195 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 20:59:38,195 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 20:59:38,195 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 20:59:38,196 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 20:59:38,198 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 20:59:38,201 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:07:27,593 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:07:27,594 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:07:27,596 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:07:27,596 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:07:27,596 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:07:27,596 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:07:28,982 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:07:28,982 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:07:28,983 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:07:28,983 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:07:28,983 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:07:28,986 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:07:28,989 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:18:29,444 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:18:29,445 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:18:29,445 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:18:29,445 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:18:29,445 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:18:29,446 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:18:30,830 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:18:30,831 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:18:30,831 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:18:30,831 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:18:30,832 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:18:30,834 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:18:30,835 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:26:50,641 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:26:50,642 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:26:50,643 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:26:50,643 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:26:50,643 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:26:50,643 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:26:52,013 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:26:52,014 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:26:52,014 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:26:52,014 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:26:52,014 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:26:52,017 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:26:52,020 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:33:52,356 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:33:52,357 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:33:52,357 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:33:52,357 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:33:52,357 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:33:52,357 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:33:53,861 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:33:53,862 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:33:53,862 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:33:53,862 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:33:53,862 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:33:53,864 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:33:53,867 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:34:49,755 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:34:49,756 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:34:49,756 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:34:49,756 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:34:49,757 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:34:49,757 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:34:51,132 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:34:51,133 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:34:51,133 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:34:51,133 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:34:51,134 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:34:51,136 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:34:51,140 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 21:35:23,802 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 21:35:23,802 : INFO : 
+ start value logger
+____ value ____  2021-11-28 21:35:23,802 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 21:35:23,803 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 21:35:23,803 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 21:35:23,803 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 21:35:25,238 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 21:35:25,239 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 21:35:25,239 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 21:35:25,239 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 21:35:25,240 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 21:35:25,241 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 21:35:25,244 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 22:35:46,685 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 22:35:46,686 : INFO : 
+ start value logger
+____ value ____  2021-11-28 22:35:46,686 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 22:35:46,686 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 22:35:46,686 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 22:35:46,687 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 22:35:48,067 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 22:35:48,068 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 22:35:48,068 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 22:35:48,068 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 22:35:48,069 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 22:35:48,071 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 22:35:48,074 : INFO : 
+ Measurment settig loadet from settings.cfg
+
+____ value ____  2021-11-28 22:49:43,072 : DEBUG : 
+ This is an error message
+____ value ____  2021-11-28 22:49:43,073 : INFO : 
+ start value logger
+____ value ____  2021-11-28 22:49:43,073 : WARNING : 
+ start value logger
+____ value ____  2021-11-28 22:49:43,073 : ERROR : 
+ This is an error message
+____ value ____  2021-11-28 22:49:43,074 : CRITICAL : 
+ This is an error message
+____ settings ____  2021-11-28 22:49:43,074 : INFO : 
+ start settings logger
+____ value ____  2021-11-28 22:49:44,520 : INFO : 
+ freq_start123
+____ value ____  2021-11-28 22:49:44,520 : INFO : 
+ freq_end22333
+____ value ____  2021-11-28 22:49:44,521 : INFO : 
+ freq_step33333
+____ value ____  2021-11-28 22:49:44,521 : INFO : 
+ freq_average4433
+____ value ____  2021-11-28 22:49:44,522 : INFO : 
+ Measurment settig loadet 
+ freq_start 123
+ freq_end 22333
+ freq_step 33333
+ freq_average 4433
+
+____ value ____  2021-11-28 22:49:44,523 : INFO : 
+ Tune and Match settings set 
+ tune 3.3
+ match 3.3
+ tm_step 50
+ lut 50
+
+____ value ____  2021-11-28 22:49:44,525 : INFO : 
+ Measurment settig loadet from settings.cfg
+

@@ -1,11 +1,9 @@
-*** comment from: 2021-11-24 23:24:10.172010  ***
-Comments for the data collected:
-self._data
-self._data
-self._data
-self._data
-self._data
-self._data
-self._data
-*** comment from: 2021-11-25 18:00:33.432927  ***
-Comments for the data collected:Comments for the Experiment collected:Comments for the Experiment collected:Comments for the Experiment collected:
+*** comment from: 2021-11-27 18:57:44.950223  ***
+Comments for the data collected:Comments for the Experiment collected:
+Comments for the Experiment collected:
+Comments for the Experiment collected:
+Comments for the Experiment collected:
+Comments for the Experiment collected:
+Comments for the Experiment collected:
+Comments for the Experiment collected:
+

@@ -337,7 +337,7 @@ class Pulse_Settings:
 
 
 class File_Settings:
-    main_data_path = "storage_vault"
+    main_data_path = "Storage_vault"
 
     def __init__(self, value_set):
         print("File_Settings")
@@ -348,8 +348,14 @@ class File_Settings:
         self.imp_value_set = value_set  # import class Values_settings for paramter
 
     @staticmethod
-    def generate_folder(self, sample="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
+    def generate_folder(self, sample="pre_sample", experiment="pre_experiment", data="pre_data"):
         """ test """
+
+        if False:
+            file_experiment = self.imp_value_set.get_load
+            sample = self.file_experiment[0]
+            experiment = self.file_experiment[1]
+            data = self.file_experiment[2]
 
         # create file struckter if not exist as given
         absolute = os.path.dirname(__file__)
@@ -389,10 +395,32 @@ class File_Settings:
     def load_folder(self):
         file_doc = os.path.join(os.path.dirname(__file__), '..', self._data)
 
-        file = filedialog.askopenfilename(
+        path_file = filedialog.askopenfilename(
             title='select settings.cfg file from Experimnet', initialdir=file_doc)
 
-        print(file)
+        path, file = os.path.split(path_file)
+
+        print("File", file)
+        print("path", path)
+
+        sample = "sample test"
+        experiment = "experiment test"
+        data = "data test"
+
+        #path_list = path.split(os.sep)
+        path_list = path.split("/")
+        print(os.sep, " path ", path_list)
+
+        if not(path_list[-4] == File_Settings.main_data_path):
+            print(path_list[-4])
+            print("ERROR file path not Filestrukture")
+            print(path_list)
+
+        sample = path_list[-3]
+        experiment = path_list[-2]
+        data = path_list[-1]
+
+        self.imp_value_set.set_load = [sample, experiment, data]
 
         File_Settings.update_set_Parameters(self)
 
@@ -419,15 +447,20 @@ class File_Settings:
         # save files
         absolute_path = os.path.join(
             os.path.dirname(__file__), '..', self._data)
-        sample = self.imp_value_set.get_load[0]
-        experiment = self.imp_value_set.get_load[1]
-        data = self.imp_value_set.get_load[2]
+        file_experiment = self.imp_value_set.get_load
+        sample = file_experiment[0]
+        experiment = file_experiment[1]
+        data = file_experiment[2]
+        #sample = self.imp_value_set.get_load[0]
+        #experiment = self.imp_value_set.get_load[1]
+        #data = self.imp_value_set.get_load[2]
         file_save = os.path.join(absolute_path, sample, experiment, data)
         print('stored in :', file_save)
 
-        # if not os.path.isdir(file_save):
-        #    # file dose not exist jet
-        #    os.mkdir(file_save)
+        if not os.path.isdir(file_save):
+            print("file dose not exist jet")
+            # os.mkdir(file_save)
+            File_Settings.generate_folder(self, sample, experiment, data)
 
         # update on win_main
 
@@ -462,6 +495,8 @@ class File_Settings:
                 file.write(comment_data)
 
             self.window_experiment.destroy()
+
+        self.attributes('-topmost', True)
 
     @property
     # , path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
@@ -612,6 +647,8 @@ class File_Settings:
         self.txt_experiment.insert(
             tk.END, "Comments for the Experiment collected:")
 
+        tk.Label(self.frame_comment, text="Area to comment on the Data",
+                 background=gray_light).pack()
         self.txt_data = tk.Text(self.frame_comment, fg="black",
                                 bg="white", width=50, height=6)
 
