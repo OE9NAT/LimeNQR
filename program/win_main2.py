@@ -358,11 +358,6 @@ class window_main(tk.Tk):
         self.grid_rowconfigure(2, weight=1, minsize=240)
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
-        frame_seq = tk.LabelFrame(self, text="info box", bg='grey')
-        frame_seq.grid(row=0, column=2, padx=frame_boarder,
-                       pady=frame_boarder, sticky="nsew")
-
-        # info path
         # set Sample
         self.lable_info_sample = tk.Label(
             info_box, text="Sample: preset", bg='grey')
@@ -381,9 +376,9 @@ class window_main(tk.Tk):
         # info frequenz
         # puls
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info: \nP: \nTP: \nA:", bg='grey')
+            info_box, text="Puls info: \nP:", bg='grey')
         self.lable_info_data.grid(
-            row=2, column=0, padx=5, pady=5, columnspan=3)
+            row=0, column=1, padx=5, pady=5)  # columnspan=3   rowspan=3
 
         puls_button = tk.Button(info_box, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
