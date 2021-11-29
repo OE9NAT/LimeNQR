@@ -1,3 +1,5 @@
+
+import run_external
 import logging  # DEBUG INFO WARNING ERROR
 import csv
 import win_plot
@@ -31,6 +33,10 @@ print("getter", value_set.get_freq)
 # Dokumentation of experiment
 file_set = variables.File_Settings(value_set)
 # file_setting = file_set.save_experiment   #open experiment strukture
+
+# Start SDR and send Tune and Match to arduino
+# run_external.send_sdr()
+# run_external.send_tune_match()
 
 ##############
 
@@ -358,27 +364,28 @@ class window_main(tk.Tk):
         self.grid_rowconfigure(2, weight=1, minsize=240)
         self.grid_columnconfigure(2, weight=1, minsize=280)
 
+        # info experiment strukture
         # set Sample
         self.lable_info_sample = tk.Label(
             info_box, text="Sample: preset", bg='grey')
-        self.lable_info_sample.grid(row=0, column=0, padx=3, pady=3)
+        self.lable_info_sample.grid(row=0, column=0)  # , padx=3, pady=3)
 
         # Set Experiment
         self.lable_info_experiment = tk.Label(
             info_box, text="Experiment: preset", bg='grey')
-        self.lable_info_experiment.grid(row=1, column=0, padx=3, pady=3)
+        self.lable_info_experiment.grid(row=1, column=0)
 
         # set Data
         self.lable_info_data = tk.Label(
             info_box, text="Data: preset", bg='grey')
-        self.lable_info_data.grid(row=2, column=0, padx=5, pady=5)
+        self.lable_info_data.grid(row=2, column=0)
 
         # info frequenz
         # puls
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info: \nP:", bg='grey')
-        self.lable_info_data.grid(
-            row=0, column=1, padx=5, pady=5)  # columnspan=3   rowspan=3
+            info_box, text="Puls info: \nP:\nTP:\nA:", bg='grey')
+        self.lable_info_puls.grid(
+            row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
         puls_button = tk.Button(info_box, text="set Puls sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
@@ -512,6 +519,7 @@ class window_main(tk.Tk):
     def save_measurment(self):
         print("save_measurment to settings.cfg")
 
+        # gread GUI and save to class Value_Settings
         value_set.save_settings = self.get_values()
 
         self.saved_poup = tk.Label(
@@ -732,9 +740,13 @@ class window_main(tk.Tk):
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
+        run_external.send_tune_match(
+            tune_value, match_value, tm_step_value, tm_lut_value)
+
         logger_win_main.info("def send_arduino ")
 
     # read and save input vales from GUI and save it to config.cfg file
+
     def get_values(self):
         print("TEST get_values")
 
@@ -745,8 +757,8 @@ class window_main(tk.Tk):
                                       "freq_step": self.freq_step_input.get(), "freq_repetitions": self.average_input.get()}
         self.import_values["tunematch"] = {"tune": self.Tune_U_max_input.get(
         ), "match": self. Match_U_max_input.get(), "step": self.V_step_input.get(), "lut": self.V_step_input.get()}
-        # self.import_values["load"] = {"sample": self.file_path_input.get(
-        # ), "experiment": self.experiment_path_input.get(), "data": self.experiment_path_input.get()}
+        self.import_values["load"] = {"sample": value_set._load_sample,
+                                      "experiment": value_set._load_experiment, "data": value_set._load_data}
 
         # self.experiment_path_input
 
@@ -792,12 +804,13 @@ class window_main(tk.Tk):
 
         # self.lable_info_sample.config(text=self.imp_value_set.get_load[0])
 
-        self.lable_info_data.config(text="Sample: "+value_set._load_sample)
         self.lable_info_sample.config(
+            text="Sample: "+value_set._load_sample)
+        self.lable_info_experiment.config(
             text="Experiment: "+value_set._load_experiment)
-        self.lable_info_experiment.config(text="Daten: "+value_set._load_data)
+        self.lable_info_data.config(text="Daten: "+value_set._load_data)
 
-        # update again after 5s "autosave automatikaly"
+        # update again after fixed time "autosave automatikaly"
         self.after(window_main.time_autosave, self.autosave)
 
     def close():

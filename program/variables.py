@@ -296,6 +296,11 @@ class Value_Settings:
         #    configParser[cfg_section] = input_values
         #    #logging.info('Values were saved and written to a new file')
 
+        path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
+        path_setting = os.path.join(
+            path_setting, "program", "setting_lastrun.cfg")
+
+        # save to settings.cfg
         with open(path_settings, "w") as configfile:
             configParser.write(configfile)
         # logging.info('save_values end ')
@@ -350,12 +355,19 @@ class File_Settings:
     @staticmethod
     def generate_folder(self, sample="pre_sample", experiment="pre_experiment", data="pre_data"):
         """ test """
+        print("sample", sample)
+        print("experiment", experiment)
+        print("data", data)
 
-        if False:
-            file_experiment = self.imp_value_set.get_load
-            sample = self.file_experiment[0]
-            experiment = self.file_experiment[1]
-            data = self.file_experiment[2]
+        # if empy parameter ist handed over use last saved ones
+        file_experiment = self.imp_value_set.get_load
+
+        if sample == "":
+            sample = file_experiment[0]
+        if experiment == "":
+            experiment = file_experiment[1]
+        if data == "":
+            data = file_experiment[2]
 
         # create file struckter if not exist as given
         absolute = os.path.dirname(__file__)
@@ -581,7 +593,7 @@ class File_Settings:
 
         gray_light = "gray70"
         path_lable_input = tk.Label(
-            self.frame_experiment, text="Set Sample: \n Ex: TuGraz", background=gray_light)
+            self.frame_experiment, text="Set Sample foldername: \n Ex: TuGraz", background=gray_light)
         path_lable_input.grid(row=0, column=0)
         self.sample = tk.Entry(self.frame_experiment,
                                fg="black", bg="white", width=40)
@@ -589,7 +601,7 @@ class File_Settings:
                          pady=frame_boarder, sticky="nsew")
 
         experiment_lable_input = tk.Label(
-            self.frame_experiment, text="Set Seq. experiment: \n Ex: Bismut", background=gray_light)
+            self.frame_experiment, text="Set Experiment foldername: \n Ex: Bismut", background=gray_light)
         experiment_lable_input.grid(row=1, column=0)
         self.experiment = tk.Entry(
             self.frame_experiment, fg="black", bg="white", width=40)
@@ -597,7 +609,7 @@ class File_Settings:
                              pady=frame_boarder, sticky="nsew")
 
         cycle_lable_input = tk.Label(
-            self.frame_experiment, text="Set Seq. cycle: \n Ex: FID, Spin-Echo,", background=gray_light)
+            self.frame_experiment, text="Set Data foldername: \n Ex: FID, Spin-Echo,", background=gray_light)
         cycle_lable_input.grid(row=2, column=0)
         self.data = tk.Entry(self.frame_experiment,
                              fg="black", bg="white", width=40)
