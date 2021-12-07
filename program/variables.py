@@ -73,7 +73,7 @@ class Value_Settings:
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            logger_function.warning(
+            logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
 
@@ -173,9 +173,9 @@ class Value_Settings:
         print("@property import_settings")
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
-            print("file Setting not found")
-            logger_function.warning(
-                "function.py, def load_setting, path_settings not found")
+            print("file Setting not found", path_settings)
+            logger_win_variables.warning(
+                "function.py, def load_setting, path_settings not found \n" + path_settings)
             # raise TypeError ("file dose not exist \n"+path_settings)
 
             # look fore settings.cfg
@@ -221,27 +221,57 @@ class Value_Settings:
     @import_setting.setter
     def save_settings(self, value):
         # save settings form ROM and save it to setting.cfg file
-        print("save_settings variables.py\n\n", type(value), value)
+        print("save_settings variables.py \n ", type(value), "\n", value)
+        # <class 'dict'>
+        # {'freq': {'freq_start': '1', 'freq_end': '2', 'freq_step': '3', 'freq_repetitions': '4'},
+        # 'tunematch': {'tune': '3.3', 'match': '3.3', 'step': '50', 'lut': '50'},
+        # 'load': {'sample': 'test_Sample', 'experiment': 'test_Experiment', 'data': 'test_Experiment'}}
 
         logger_win_variables.debug(
             "logging from variable.py save ro settings.cfg")
         print("@property import_settings")
-        print("setting file: ", self.path_settings)
 
-        path_settings = self.path_settings
+        # saving settings.cfg to
+        # # old c:\Users\Malin\GIT\bacharbeit\program\setting.cfg
+        # path_settings = self.path_settings
+
+        # new 'load': {'sample': 'test_Sample', 'experiment': 'test_Experiment', 'data': 'test_Experiment'}
+        path_settings = os.path.abspath(os.path.dirname(sys.argv[0]))
+        storage = File_Settings.main_data_path  # Storage_vault
+        sample_path = value["load"]["sample"]
+        exp_path = value["load"]["experiment"]
+        data_path = value["load"]["data"]
+        setting_name = File_Settings.settings_file
+        path_settings = os.path.join(
+            path_settings, storage, sample_path, exp_path, data_path, setting_name)
+        print("setting file: ", path_settings)
+
+        configParser = configparser.ConfigParser()
 
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            logger_function.warning(
+            logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
 
+            configParser["start"] = {}
+            configParser["start"]["datum created:"] = str(datetime.now())
+            configParser["setting"] = {}
+            configParser["TandM_settings"] = {}
+            configParser["storage_defalt"] = {}
+            with open(path_settings, "w") as configfile:
+                configParser.write(configfile)
+
+            print("new settings.cfg generated")
+
             # look fore settings.cfg
+            path = os.path.join(
+                path_settings, storage, sample_path, exp_path, data_path)
             path_settings = filedialog.askopenfilename(
-                initialdir='/home/', title='select settings.cfg path')
+                initialdir=path, title='select settings.cfg path')
             print("setting file: ", path_settings)
 
-        configParser = configparser.ConfigParser()
+        #configParser = configparser.ConfigParser()
         configParser.read(path_settings)
 
         config_section = configParser.sections()
@@ -343,6 +373,7 @@ class Pulse_Settings:
 
 class File_Settings:
     main_data_path = "Storage_vault"
+    settings_file = "setting.cfg"
 
     def __init__(self, value_set):
         print("File_Settings")

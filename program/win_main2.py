@@ -92,42 +92,6 @@ if 'setting_dict' not in locals():
     # freq_start = StringVar(window, value=freq_start)
 freq_start_num = "123xxxx"
 
-
-def load_values(path="config.cfg", section="pre_set_values"):
-    # configParser = configparser.ConfigParser()
-    # configParser.read(path)
-    # print(configParser.get(section,"freq_start"))
-    # print(configParser.items(section))
-    print("_____________loaded all data in "+path+section)
-    #
-    # freq_start_input.delete(0,tk.END)
-    # freq_start_input.insert(1,configParser.get(section,"freq_start"))
-    # freq_end_input.delete(0,tk.END)
-    # freq_end_input.insert(1,configParser.get(section,"freq_end"))
-    # freq_step_input.delete(0,tk.END)
-    # freq_step_input.insert(1,configParser.get(section,"freq_step"))
-    # average_input.delete(0,tk.END)
-    # average_input.insert(1,configParser.get(section,"average"))
-    # Tune_U_max_input.delete(0,tk.END)
-    # Tune_U_max_input.insert(1,configParser.get(section,"Tune_U_max"))
-    # Match_U_max_input.delete(0,tk.END)
-    # Match_U_max_input.insert(1,configParser.get(section,"Match_U_max"))
-    # V_step_input.delete(0,tk.END)
-    # V_step_input.insert(1,configParser.get(section,"V_step"))
-    # puls_input.delete(0,tk.END)
-    # puls_input.insert(1,configParser.get(section,"puls"))
-    # Dwell_t_input.delete(0,tk.END)
-    # Dwell_t_input.insert(1,configParser.get(section,"Dwell_t"))
-    # seq_steps_input.delete(0,tk.END)
-    # seq_steps_input.insert(1,configParser.get(section,"seq_steps"))
-    # source_pw_input.delete(0,tk.END)
-    # source_pw_input.insert(1,configParser.get(section,"source_pw"))
-    # file_path_input.delete(0,tk.END)
-    # file_path_input.insert(1,configParser.get(section,"file_path"))
-
-    logging.info('Values were correktly imported')
-
-
 # def puls_sequenz():
 #    file_path=file_path_input.get()
 #    experiment_path=experiment_path_input.get()
@@ -137,8 +101,6 @@ def load_values(path="config.cfg", section="pre_set_values"):
 
 
 # def window_main():
-
-
 class window_main(tk.Tk):
     time_autosave = 5000  # in ms
 
@@ -197,7 +159,8 @@ class window_main(tk.Tk):
             label="auto-save", command=self.autosave)  # save_all)
         datei_menu.add_command(label="Close all", command=save_quit_all)
         datei_menu.add_separator()  # Trennlinie
-        datei_menu.add_command(label="load values", command=load_values)
+        datei_menu.add_command(label="load last values",
+                               command=self.load_settings2)
         datei_menu.add_command(
             label="spacer_1", command=print("test space_1"))  # save_all)
         datei_menu.add_command(
@@ -296,9 +259,9 @@ class window_main(tk.Tk):
         self.button_run.grid(row=5, column=0, rowspan=1,
                              padx=5, pady=5, sticky="ew")
 
-        # Butten load settings from settings.cfg
+        # Butten load last settings from settings.cfg
         self.button_last_run = tk.Button(
-            self.frame_measure, text="load settings", command=self.load_settings)
+            self.frame_measure, text="load saved settings", command=self.load_settings)
         self.button_last_run.grid(row=7, column=0,
                                   padx=5, pady=5, sticky="ew")
 
@@ -469,32 +432,32 @@ class window_main(tk.Tk):
         logger_win_main.info("win_main2 start class window_main logger")
 
         ######----- Buttens  ------######
-        frame_Buttens = tk.Frame(self, bg='grey')
-        frame_Buttens.grid(row=1, padx=2, pady=2, sticky="nsew")
+        self.frame_Buttens = tk.Frame(self, bg='grey')
+        self.frame_Buttens.grid(row=1, padx=2, pady=2, sticky="nsew")
 
-        button_run = tk.Button(frame_Buttens, text="Load last run",
-                               command=load_values())
-        button_run.pack(fill="x", padx=2, pady=2)
+        self.button_run = tk.Button(self.frame_Buttens, text="Load last run",
+                                    command=self.load_settings2)  # load_last_values)
+        self.button_run.pack(fill="x", padx=2, pady=2)
 
-        button_run = tk.Button(frame_Buttens, text="RUN ",
+        button_run = tk.Button(self.frame_Buttens, text="RUN ",
                                command=lambda: print("RUN Pulssequenz von Lukas"))
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment)
+            self.frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment)
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
-            frame_Buttens, text="PLOT", command=win_plot.win_plot)
+            self.frame_Buttens, text="PLOT", command=win_plot.win_plot)
         plot_button.pack(fill="x", padx=2, pady=2)
 
         exit_button = tk.Button(
-            frame_Buttens, text="Save & Close", command=save_quit_all)  # self.destroy)
+            self.frame_Buttens, text="Save & Close", command=save_quit_all)  # self.destroy)
         # exit_button = tk.Button(self, text="Beenden", command=self.quit)#.destroy) #self.quit
         # .grid(row=3,  padx=2, pady=2, sticky="ew")
         exit_button.pack(fill="x", padx=2, pady=2)
 
-        Filestrukture = tk.Button(frame_Buttens, text="Test",
+        Filestrukture = tk.Button(self.frame_Buttens, text="Test",
                                   background="SkyBlue4", activebackground="red", command=lambda: print("Filestrukture"))
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
@@ -566,7 +529,81 @@ class window_main(tk.Tk):
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
+    def load_settings2(self):
+        # loas setting_last_run.cfg from last saved
+
+        path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
+        # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
+        value_set.set_settings = os.path.join(
+            path_setting, "program", "setting_last_run.cfg")
+
+        freq_start = value_set.get_freq[0]
+        freq_end = value_set.get_freq[1]
+        freq_step = value_set.get_freq[2]
+        freq_average = value_set.get_freq[3]
+
+        log_text = "freq_start" + str(freq_start) + "\n"
+        log_text += "freq_end" + str(freq_end) + "\n"
+        log_text += "freq_step" + str(freq_step) + "\n"
+        log_text += "freq_average" + str(freq_average)
+        logger_value.info(log_text)
+
+        self.set_measur(freq_start, freq_end, freq_step, freq_average)
+
+    def load_last_values2(self):
+        """ load setting_last_run.cfg from folder program
+        """
+
+        # read file setting_last_run.cfg into class variables
+        path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
+        value_set.set_settings = os.path.join(
+            path_setting, "program", "setting_last_run.cfg")
+
+        # read freq values form class and show in GUI
+        freq_values = value_set.get_freq
+        freq_start = freq_values[0]
+        freq_end = freq_values[1]
+        freq_step = freq_values[2]
+        freq_average = freq_values[3]
+        # self.set_measur(freq_start, freq_end, freq_step, freq_average)
+        # self.set_measur("11xx", "22xx", "33xx", "44xx")
+
+        return
+        # read tune and match values form class and show in GUI
+        tm_values = value_set.get_tunematch
+        tune = tm_values[0]
+        match = tm_values[1]
+        step = tm_values[2]
+        lut = tm_values[3]
+        self.set_tm(tune, match, step, lut)
+
+        # load sequence storage paths
+        storage_values = value_set.get_load
+        sample = storage_values[0]
+        experiment = storage_values[1]
+        data = storage_values[2]
+        self.set_storage(sample, experiment, data)
+
+        # popup for settings loaded
+        self.load_poup = tk.Label(
+            self.frame_measure, text='last settings loaded', font=(7), background="chartreuse4")
+        self.load_poup.grid(row=7, column=1, padx=5,
+                            pady=5, sticky="ew", rowspan=2)
+        self.load_poup.after(2000, lambda: self.load_poup.grid_forget())
+
+        # logging
+        logger_value.info("freq_start" + str(freq_start))
+        logger_value.info("freq_end" + str(freq_end))
+        logger_value.info("freq_step" + str(freq_step))
+        logger_value.info("freq_average" + str(freq_average))
+
+        logging.info('Values were imported from last setting_last_run.cfg')
+        return
+
     def set_measur(self, start=11, stop=22, step=33, average=44):
+        # self.freq_start_input.config(text=start)
+        print("\n self_______\n", self)
+
         self.freq_start_input.delete("0", "end")
         self.freq_start_input.insert(0, start)
         self.freq_end_input.delete("0", "end")
@@ -769,12 +806,12 @@ class window_main(tk.Tk):
 
     def set_storage(self, path="test_path", experiment="test_exper", cycle="test_cycle"):
         # handling exported to variables.py in class File_Settings
-        #self.file_path_input.delete("0", "end")
-        #self.file_path_input.insert(0, path)
-        #self.experiment_path_input.delete("0", "end")
-        #self.experiment_path_input.insert(0, experiment)
-        #self.cycle_path_input.delete("0", "end")
-        #self.cycle_path_input.insert(0, cycle)
+        # self.file_path_input.delete("0", "end")
+        # self.file_path_input.insert(0, path)
+        # self.experiment_path_input.delete("0", "end")
+        # self.experiment_path_input.insert(0, experiment)
+        # self.cycle_path_input.delete("0", "end")
+        # self.cycle_path_input.insert(0, cycle)
 
         # file_set.generate_folder(
         #    self, sample=path, experiment=experiment, data=cycle)
@@ -814,7 +851,7 @@ class window_main(tk.Tk):
         self.after(window_main.time_autosave, self.autosave)
 
     def close():
-        print("save and close all windows")
+        print("close all windows")
         self.destroy()
 
 
