@@ -167,7 +167,7 @@ class Value_Settings:
     @import_setting.setter
     def set_settings(self, path_settings):
         # def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting.cfg"):
-        # read settings form setting.cfg file and set it ot ROM
+        # read settings form setting_last_run.cfg file and set it ot ROM
         # path_settings = path+"/"+file
         logger_win_variables.debug(
             "logging from variable.py set settings start up")
@@ -179,10 +179,22 @@ class Value_Settings:
                 "function.py, def load_setting, path_settings not found \n" + path_settings)
             # raise TypeError ("file dose not exist \n"+path_settings)
 
+            storage_path = os.path.dirname(path_settings)
+            print("storage_path  ", storage_path)
+
             # look fore settings.cfg
             path_settings = filedialog.askopenfilename(
-                initialdir='/home/', title='select settings.cfg path')
+                initialdir=storage_path, title='select settings.cfg path to save')
             print("setting file: ", path_settings)
+
+            configParser_new = configparser.ConfigParser()
+            configParser_new["start"] = {}
+            configParser_new["start"]["datum created:"] = str(datetime.now())
+            configParser_new["setting"] = {}
+            configParser_new["TandM_settings"] = {}
+            configParser_new["storage_defalt"] = {}
+            with open(path_settings, "w") as configfile:
+                configParser_new.write(configfile)
 
         self.path_settings = path_settings
         configParser = configparser.ConfigParser()
@@ -249,6 +261,9 @@ class Value_Settings:
 
         if not os.path.exists(path_settings):
             print("file Setting not found")
+            storage_path = os.path.dirname(path_settings)
+            os.makedirs(storage_path)
+
             logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
@@ -258,6 +273,7 @@ class Value_Settings:
             configParser_new["setting"] = {}
             configParser_new["TandM_settings"] = {}
             configParser_new["storage_defalt"] = {}
+
             with open(path_settings, "w") as configfile:
                 configParser_new.write(configfile)
 
@@ -335,6 +351,7 @@ class Value_Settings:
         # save to settings.cfg
         with open(path_settings, "w") as configfile:
             config_file.write(configfile)
+
         # logging.info('save_values end ')
 
         return value
@@ -541,6 +558,7 @@ class File_Settings:
 
             self.window_experiment.destroy()
 
+        # bring main window to the top
         self.attributes('-topmost', True)
 
     @property

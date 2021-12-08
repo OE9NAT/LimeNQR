@@ -28,8 +28,9 @@ var_setting = value_set.import_setting
 # value_set.set_freq = (22, 22, 22, 22)
 # print("get start", value_set._freq_start)
 # # getter
-print("getter", value_set.get_freq)
+# print("getter", value_set.get_freq)
 
+# class File_Settings load values
 # Dokumentation of experiment
 file_set = variables.File_Settings(value_set)
 # file_setting = file_set.save_experiment   #open experiment strukture
@@ -469,8 +470,8 @@ class window_main(tk.Tk):
         logger_win_main.info("__ END win_main2 start class window_main ")
         self.update_idletasks()
 
-        # write all files form settings.cfg to entery
-        self.load_settings()
+        # write all files form settings_last_run.cfg to entery
+        self.load_settings2()
         self.autosave()
 
         # open file handler for starting expeiment
@@ -483,8 +484,15 @@ class window_main(tk.Tk):
     def save_measurment(self):
         print("save_measurment to settings.cfg")
 
-        value_set.set_settings = os.path.join(
-            path_setting, "program", "setting.cfg")
+        storage_values = value_set.get_load
+        sample = storage_values[0]
+        experiment = storage_values[1]
+        data = storage_values[2]
+        self.set_storage(sample, experiment, data)
+
+        # value_set.set_settings = os.path.join(
+        #    path_setting, sample, experiment, data, "setting.cfg")
+        #print("save settings to ", sample, experiment, data, "setting.cfg")
 
         # gread GUI and save to class Value_Settings
         value_set.save_settings = self.get_values()
@@ -496,11 +504,23 @@ class window_main(tk.Tk):
         self.saved_poup.after(3000, lambda: self.saved_poup.grid_forget())
 
     def load_settings(self):
+        # select settings.cfg
 
-        path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
-        # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
-        value_set.set_settings = os.path.join(
-            path_setting, "program", "setting.cfg")
+        path_settings = os.path.abspath(os.path.dirname(sys.argv[0]))
+        storage = file_set.main_data_path
+
+        path = os.path.join(path_settings, storage)
+        path_settings = filedialog.askopenfilename(
+            initialdir=path, title='select settings.cfg path')
+        print(path_settings)
+        # rais error if path_settings is not settings.cfg
+        value_set.set_settings = path_settings
+        #value_set.save_settings = self.get_values()
+
+        # path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
+        # # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
+        # value_set.set_settings = os.path.join(
+        #     path_setting, "program", "setting.cfg")
 
         freq_start = value_set.get_freq[0]
         freq_end = value_set.get_freq[1]
@@ -534,7 +554,7 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def load_settings2(self):
-        # loas setting_last_run.cfg from last saved
+        # load setting_last_run.cfg from last saved to GUI
 
         path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
         # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
@@ -553,6 +573,13 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
         self.set_measur(freq_start, freq_end, freq_step, freq_average)
+
+        tm_values = value_set.get_tunematch
+        tune = tm_values[0]
+        match = tm_values[1]
+        step = tm_values[2]
+        lut = tm_values[3]
+        self.set_tm(tune, match, step, lut)
 
     def load_last_values2(self):
         """ load setting_last_run.cfg from folder program
