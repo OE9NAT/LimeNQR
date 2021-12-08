@@ -75,7 +75,8 @@ if 'setting_dict' not in locals():
     print("my setting_dict dose not exist")
 
     path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
-    setting_dict = load_setting(path_setting, file="/program/setting.cfg")
+    setting_dict = load_setting(
+        path_setting, file="/program/setting_last_run.cfg")
     # setting_dict=load_setting (path_setting)
 
     print("\nsetting_dict:", *setting_dict.items(), sep="\n\n")
@@ -481,6 +482,9 @@ class window_main(tk.Tk):
 
     def save_measurment(self):
         print("save_measurment to settings.cfg")
+
+        value_set.set_settings = os.path.join(
+            path_setting, "program", "setting.cfg")
 
         # gread GUI and save to class Value_Settings
         value_set.save_settings = self.get_values()

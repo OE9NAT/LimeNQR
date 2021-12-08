@@ -8,6 +8,7 @@ import scipy
 import configparser
 import logging
 from datetime import datetime
+import time
 
 
 logger_win_variables = logging.getLogger('win_variables')
@@ -246,49 +247,50 @@ class Value_Settings:
             path_settings, storage, sample_path, exp_path, data_path, setting_name)
         print("setting file: ", path_settings)
 
-        configParser = configparser.ConfigParser()
-
         if not os.path.exists(path_settings):
             print("file Setting not found")
             logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
-
-            configParser["start"] = {}
-            configParser["start"]["datum created:"] = str(datetime.now())
-            configParser["setting"] = {}
-            configParser["TandM_settings"] = {}
-            configParser["storage_defalt"] = {}
+            configParser_new = configparser.ConfigParser()
+            configParser_new["start"] = {}
+            configParser_new["start"]["datum created:"] = str(datetime.now())
+            configParser_new["setting"] = {}
+            configParser_new["TandM_settings"] = {}
+            configParser_new["storage_defalt"] = {}
             with open(path_settings, "w") as configfile:
-                configParser.write(configfile)
+                configParser_new.write(configfile)
 
             print("new settings.cfg generated")
 
             # look fore settings.cfg
-            path = os.path.join(
-                path_settings, storage, sample_path, exp_path, data_path)
-            path_settings = filedialog.askopenfilename(
-                initialdir=path, title='select settings.cfg path')
+            # option to select different storage location
+            # path = os.path.join(
+            #    path_settings, storage, sample_path, exp_path, data_path)
+            # path_settings = filedialog.askopenfilename(
+            #    initialdir=path, title='select settings.cfg path')
             print("setting file: ", path_settings)
 
-        #configParser = configparser.ConfigParser()
-        configParser.read(path_settings)
+        config_file = configparser.ConfigParser()
+        print("path_settings", path_settings)
+        config_file.read(path_settings)
+        config_section = config_file.sections()
 
-        config_section = configParser.sections()
+        print("config_section", config_section)
 
-        configParser["setting"]["freq_start"] = value["freq"]["freq_start"]
-        configParser["setting"]["freq_end"] = value["freq"]["freq_end"]
-        configParser["setting"]["freq_step"] = value["freq"]["freq_step"]
-        configParser["setting"]["freq_repetitions"] = value["freq"]["freq_repetitions"]
+        config_file["setting"]["freq_start"] = value["freq"]["freq_start"]
+        config_file["setting"]["freq_end"] = value["freq"]["freq_end"]
+        config_file["setting"]["freq_step"] = value["freq"]["freq_step"]
+        config_file["setting"]["freq_repetitions"] = value["freq"]["freq_repetitions"]
 
-        configParser["TandM_settings"]["tune_value"] = value["tunematch"]["tune"]
-        configParser["TandM_settings"]["match_value"] = value["tunematch"]["match"]
-        configParser["TandM_settings"]["tm_step_value"] = value["tunematch"]["step"]
-        configParser["TandM_settings"]["tm_lut_value"] = value["tunematch"]["lut"]
+        config_file["TandM_settings"]["tune_value"] = value["tunematch"]["tune"]
+        config_file["TandM_settings"]["match_value"] = value["tunematch"]["match"]
+        config_file["TandM_settings"]["tm_step_value"] = value["tunematch"]["step"]
+        config_file["TandM_settings"]["tm_lut_value"] = value["tunematch"]["lut"]
 
-        configParser["storage_defalt"]["seq_data"] = value["load"]["sample"]
-        configParser["storage_defalt"]["seq_experiment"] = value["load"]["experiment"]
-        configParser["storage_defalt"]["seq_cycle"] = value["load"]["data"]
+        config_file["storage_defalt"]["seq_data"] = value["load"]["sample"]
+        config_file["storage_defalt"]["seq_experiment"] = value["load"]["experiment"]
+        config_file["storage_defalt"]["seq_cycle"] = value["load"]["data"]
 
         # setting_dict = {section: dict(configParser.items(section))
         #                for section in configParser.sections()}
@@ -332,7 +334,7 @@ class Value_Settings:
 
         # save to settings.cfg
         with open(path_settings, "w") as configfile:
-            configParser.write(configfile)
+            config_file.write(configfile)
         # logging.info('save_values end ')
 
         return value
