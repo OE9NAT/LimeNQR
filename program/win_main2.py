@@ -441,8 +441,8 @@ class window_main(tk.Tk):
                                     command=self.load_settings2)  # load_last_values)
         self.button_run.pack(fill="x", padx=2, pady=2)
 
-        button_run = tk.Button(self.frame_Buttens, text="RUN ",
-                               command=lambda: print("RUN Pulssequenz von Lukas"))
+        button_run = tk.Button(self.frame_Buttens, text="RUN ", activebackground="red",
+                               command=lambda: run_external.send_sdr(self.get_values()))
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
@@ -654,6 +654,7 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def plot_live(self, s1="", t1="", s2="", t2=""):
+        # plot data when first startet GUI
         t = np.arange(0.0, 2.0, 0.01)
         s1 = np.sin(20*np.pi*t)
         s2 = np.sin(40*np.pi*t)
@@ -827,6 +828,8 @@ class window_main(tk.Tk):
         ), "match": self. Match_U_max_input.get(), "step": self.V_step_input.get(), "lut": self.V_step_input.get()}
         self.import_values["load"] = {"sample": value_set._load_sample,
                                       "experiment": value_set._load_experiment, "data": value_set._load_data}
+        self.import_values["sequenz"] = {
+            "sequenz": "fid"}  # fid, spin, comp, spin_phase
 
         # self.experiment_path_input
 

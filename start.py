@@ -15,6 +15,11 @@ from logging.handlers import QueueHandler
 # formatter = logging.Formatter("____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s")
 # handler.setFormatter(formatter)
 
+# Check if log file exist
+if not os.path.exists("log"):
+    os.makedirs("log")
+
+
 logging.basicConfig(filename="log/DEFAULT_log.log",
                     level=logging.DEBUG,  # <- set logging level
                     format="______ %(name)s ______  %(asctime)s : %(levelname)s : \n %(message)s")  # set level
