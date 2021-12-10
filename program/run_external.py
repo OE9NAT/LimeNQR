@@ -65,8 +65,8 @@ def send_sdr(value):
     print("type x_freq", type(x_freq))  # type y_freq <class 'list'>
     print("type y_freq", type(y_freq))  # type y_freq <class 'list'>
 
-    file_freq = os.path.join("program", "scan_data_time.csv")
-    file_time = os.path.join("program", 'scan_data_freq.csv')
+    file_time = os.path.join("program", "scan_data_time.csv")
+    file_freq = os.path.join("program", 'scan_data_freq.csv')
 
     with open(file_time, 'w', ) as seq_file:
         wr = csv.writer(seq_file, quoting=csv.QUOTE_ALL)
