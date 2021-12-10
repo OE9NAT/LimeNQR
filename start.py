@@ -132,7 +132,7 @@ if __name__ == "__main__":
     else:
         print("\n\nimports alles ok\n\n")
 
-    # start Program
+    # start Progra
     sys.path.append("program")
 
     import GUI  # start GUI

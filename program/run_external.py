@@ -50,18 +50,23 @@ def send_sdr(value):
     # x_time = [s.strip('\n') for s in x_time.tolist()]
     x_time = x_time.tolist()
     print(" x_time ", x_time[:10])
+
     # [[0.29129709-1.52607999j] [0.53282316-0.78878987j] [0.88875632-1.65319897j] [1.04129911-1.4370967j ] [0.20866975-0.43285671j]]
-    y_time = [val for sublist in y_time for val in sublist]
-    print(" y_time ", y_time[:5])
+    y_time_abs = [abs(val) for sublist in y_time for val in sublist]
+    y_time_compex = [val for sublist in y_time for val in sublist]
+    print(" y_time_abs ", y_time_abs[:5])
+    # abs([0.88875632-1.65319897j]) !!!!
+
     # [83.02038574 83.07041931 83.12045288 83.17048645 83.22052002]
     x_freq = x_freq.tolist()
     print(" x_freq ", x_freq[:5])
+
     # [[0.20988999] [0.06322438] [0.30136686] [0.06902654] [0.22243679]]
     y_freq = [val for sublist in y_freq for val in sublist]
     print(" y_freq ", y_freq[:5])
 
     print("type x_time", type(x_time))  # type y_freq <class 'list'>
-    print("type y_time", type(y_time))  # type y_freq <class 'list'>
+    print("type y_time_abs", type(y_time_abs))  # type y_freq <class 'list'>
     print("type x_freq", type(x_freq))  # type y_freq <class 'list'>
     print("type y_freq", type(y_freq))  # type y_freq <class 'list'>
 
@@ -70,15 +75,15 @@ def send_sdr(value):
 
     with open(file_time, 'w', ) as seq_file:
         wr = csv.writer(seq_file, quoting=csv.QUOTE_ALL)
-        wr.writerow(["x_time", "y_time"])
+        wr.writerow(["x_time", "y_time_abs", "y_time_complex"])
         for i, value in enumerate(x_time):
-            wr.writerow([x_time[i], y_time[i]])
+            wr.writerow([float(x_time[i]), y_time_abs[i], y_time_compex[i]])
 
     with open(file_freq, 'w', ) as seq_file:
         wr = csv.writer(seq_file, quoting=csv.QUOTE_ALL)
         wr.writerow(["x_freq", "y_freq"])
         for i, value in enumerate(x_freq):
-            wr.writerow([x_freq[i], y_freq[i]])
+            wr.writerow([float(x_freq[i]), float(y_freq[i])])
 
 
 def seq_fid(value):

@@ -441,8 +441,13 @@ class window_main(tk.Tk):
                                     command=self.load_settings2)  # load_last_values)
         self.button_run.pack(fill="x", padx=2, pady=2)
 
+        def run_butten(self):
+            #print("run butten pressed to start measurment")
+            run_external.send_sdr(self.get_values())
+            self.plot_update()
+
         button_run = tk.Button(self.frame_Buttens, text="RUN ", activebackground="red",
-                               command=lambda: run_external.send_sdr(self.get_values()))
+                               command=lambda: run_butten(self))
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
@@ -492,7 +497,7 @@ class window_main(tk.Tk):
 
         # value_set.set_settings = os.path.join(
         #    path_setting, sample, experiment, data, "setting.cfg")
-        #print("save settings to ", sample, experiment, data, "setting.cfg")
+        # print("save settings to ", sample, experiment, data, "setting.cfg")
 
         # gread GUI and save to class Value_Settings
         value_set.save_settings = self.get_values()
@@ -515,7 +520,7 @@ class window_main(tk.Tk):
         print(path_settings)
         # rais error if path_settings is not settings.cfg
         value_set.set_settings = path_settings
-        #value_set.save_settings = self.get_values()
+        # value_set.save_settings = self.get_values()
 
         # path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
         # # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
@@ -705,32 +710,70 @@ class window_main(tk.Tk):
 
         return self.fig
 
-    def plot_update(self, file="signals_TEST/live_scan_data.csv"):
+    def plot_update(self, file_time=os.path.join("program", "scan_data_time.csv"), file_freq=os.path.join("program", "scan_data_freq.csv")):
         print("update plot")
         logger_win_main.info("update plot from main")
 
-        # for testing
-        iterate_plot = np.random.uniform(low=1, high=10)
-        print("iterate_plot ", iterate_plot)
-        t = np.arange(0.0, 2.0, 0.01)
-        s1 = np.sin(iterate_plot*10*np.pi*t)
-        freq = np.arange(0, 100, 10)
-        s2 = np.zeros(10)
-        s2[int(iterate_plot)] = 20
+        # # for testing
+        # iterate_plot = np.random.uniform(low=1, high=10)
+        # print("iterate_plot ", iterate_plot)
+        # t = np.arange(0.0, 2.0, 0.01)
+        # s1 = np.sin(iterate_plot*10*np.pi*t)
+        # freq = np.arange(0, 100, 10)
+        # s2 = np.zeros(10)
+        # s2[int(iterate_plot)] = 20
+
+        # open time file
+        with open(file_time, newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+            data = [data for data in spamreader]
+        # print("data .csv\n", *data)
+
+        # print("data firt list ", data[0])
+        del data[0]  # ['frequency', 'amplitude'] remove description from colems
+
+        # data_time = [print(data[i][0].split(",")[1])
+        #             for i, val in enumerate(data)]
+
+        data_time = [float(data[i][0].split(",")[0].replace('"', ''))
+                     for i, val in enumerate(data)]
+        data_value = [float(data[i][0].split(",")[1].replace('"', ''))
+                      for i, val in enumerate(data)]
+
+        # data_time = [float(data[i][0]) for i, val in enumerate(data)]
+        # data_value = [float(data[i][1]) for i, val in enumerate(data)]
+
+        # open frequency file
+        with open(file_freq, newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
+            data = [data for data in spamreader]
+        # print("data .csv\n", *data)
+
+        # print("data firt list ", data[0])
+        del data[0]  # ['frequency', 'amplitude'] remove description from colems
+
+        data_fequency = [float(data[i][0].split(",")[0].replace('"', ''))
+                         for i, val in enumerate(data)]
+        data_amplitude = [float(data[i][0].split(",")[1].replace('"', ''))
+                          for i, val in enumerate(data)]
+
+        #test = [print(val) for val in data_value]
+
+        # data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
+        # data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
 
         # call the clear method on your axes
         self.time_plot.clear()
         self.feq_plot.clear()
 
         # plot the new data
-        self.time_plot.plot(t, s1)
-        self.time_plot.title.set_text(
-            "Time of new data ferq:" + str(iterate_plot))
+        self.time_plot.plot(data_time, data_value)
+        self.time_plot.title.set_text("Time")
         self.time_plot.set_xlabel('time [s]')
         self.time_plot.set_ylabel('Amplituden [V]')
         self.time_plot.grid()
 
-        self.feq_plot.plot(freq, s2)
+        self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
         self.feq_plot.set_xlabel('Frequency [kHz]')
         self.feq_plot.set_ylabel('Amplituden [V]')
@@ -741,7 +784,9 @@ class window_main(tk.Tk):
 
         log_text = "Updatet live Plot"+" \n"
         self.logtext_area.insert(tk.INSERT, log_text)
-        self.after(2000, self.plot_update)  # update again after 2000 ms
+
+        # auto update again after 2000 ms
+        self.after(2000, self.plot_update)
 
     def read_tm(self):
         print("def read_tm")
