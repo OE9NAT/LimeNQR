@@ -158,7 +158,7 @@ def seq_fid(value):
     l.run()
 
     # read back file and plot time signal + shifted fft
-    if (1 == 1):
+    if (1 == 0):
 
         # reads back the file which was recently saved
         l.readHDF()
@@ -224,6 +224,8 @@ def seq_fid(value):
         print("MAX of Signal: " + str(max(y)))
 
         return tdx, tdy_mean, x, y
+    else:
+        raise Exception(" hardware is missing")
 
 
 def send_tune_match(tune, match, tm_step, tm_lut):

@@ -13,9 +13,13 @@ import tkinter as tk
 import PIL.Image as image
 import datetime
 
+# import module for seqienz
+import win_sequenz
+
 import tkinter.ttk as TTK  # use for Combobox
 from PIL import ImageTk, Image  # .jpg
 
+# variable handeling
 import variables
 value_set = variables.Value_Settings()
 print(value_set._freq_start)
