@@ -377,7 +377,7 @@ class window_main(tk.Tk):
                          padx=2, pady=2, sticky="ew")
 
         own_button = tk.Button(info_box, text="own sequenz",
-                               command=lambda: win_sequenz.window_seq("own", self.get_values()))  # windows_file)
+                               command=lambda: win_sequenz.Window_seq("own", self.get_values()))  # windows_file)
         own_button.grid(row=7, column=0, columnspan=2,
                         padx=2, pady=2, sticky="ew")
 

@@ -25,41 +25,93 @@ class Seq_values:
     print("class Sequenz values setup")
 
 
-class window_seq(tk.Tk):
+class Window_seq:
     print("class Sequenz Window setup")
     frame_boarder = 4
 
-    def __init__(self, seq_type, value_settings, *args, **kwargs):
-        tk.Tk.__init__(self, *args, **kwargs)
+    def __init__(self, seq_type, value_settings):
+        # tk.Tk.__init__(self, *args, **kwargs)
         print("type of sequenz: ", seq_type)
         print("settings variables: \n \n", value_settings)
 
         target_freq = 100  # in MHz
 
-    def window_sequenz():
+        Window_seq.window_sequenz(self)
+
+    @staticmethod
+    def window_sequenz(self):
         # open GUI window and Present settings
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")
-        self.title("Magnetic Resonance Imaging - Sequenz Manager")
-        self.wm_iconbitmap(bitmap=logo_path)
+        win_seq = tk.Tk()
+        win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
+        # win_seq.wm_iconbitmap(bitmap=logo_path)
 
-        self.geometry("800x600")  # "1000x750+400+100"
-        self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
-        self.maxsize(1200, 850)
+        win_seq.geometry("1000x800")  # "1000x750+400+100"
+        win_seq.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
+        win_seq.maxsize(1200, 850)
 
-        self.frame_title = tk.Frame(self, bg="grey")
-        self.frame_title.grid(
-            row=0, column=0, padx=window_seq.frame_boarder, pady=window_seq.frame_boarder, sticky="nsew")
+        # Titile
+        frame_title = tk.Frame(win_seq, bg="grey")
+        frame_title.grid(columnspan=2, row=0, column=0, padx=Window_seq.frame_boarder,
+                         pady=Window_seq.frame_boarder, sticky="nsew")
+        lable_text = tk.Label(frame_title, text="Set Sequenz ",
+                              foreground="green", background="OliveDrab4", font=("Helvetica", 30))
+        lable_text.pack(fill="x")
+        win_seq.grid_rowconfigure(0, weight=1, minsize=50)  # splaten hoehe
 
-    def save2cfg():
-        print("save settings to sfg file")
+        # Info box experiment strukture
+
+        # plot sequenz
+        frame_plot = tk.Frame(win_seq, bg="grey")
+        frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
+                        pady=Window_seq.frame_boarder, sticky="nsew")
+        win_seq.grid_columnconfigure(1, minsize=300)
+        win_seq.grid_rowconfigure(1, weight=10)  # splaten hoehe
+
+        image_path = os.path.abspath(os.path.dirname(
+            sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
+        #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
+        image = Image.open(image_path)
+        image_puls = image.resize((750, 300))
+        image_puls = ImageTk.PhotoImage(image_puls, master=win_seq)
+        #image_puls = ImageTk.PhotoImage(Image.open(image_path))
+        pic_label = tk.Label(frame_plot, image=image_puls)
+        pic_label.pack(fill="both", expand="yes")
+        pic_label.image = image_puls
+        # pic_label.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
+        #               pady=Window_seq.frame_boarder, sticky="nsew")
+        image.close()
+
+        # input
+
+        # Buttens
+        frame_Buttens = tk.Frame(win_seq, bg='grey')
+        frame_Buttens.grid(row=2, padx=2, pady=2, sticky="nsew")
+        win_seq.grid_rowconfigure(2, weight=4, minsize=50)  # splaten hoehe
+
+        button_run = tk.Button(frame_Buttens, text="save",
+                               command=lambda: print("test"))  # load_last_values)
+        button_run.pack(fill="x", padx=2, pady=2)
+
+    def save2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
+        print("save settings to .cfg file")
+        path_settings = os.path.join(file_path, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
+            # path_settings = filedialog.askopenfilename(
+            #    initialdir='/home/', title='select settings.cfg path')
+        print("setting file: ", path_settings)
 
-    def read2cfg():
+    def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         " read .cfg file from file "
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
+
+        configParser = configparser.ConfigParser()
+        configParser.read(path_settings)
+        setting_dict = {section: dict(configParser.items(section))
+                        for section in configParser.sections()}
 
 
 class Seq_FID:
@@ -136,7 +188,7 @@ def save_values(path="test_data", experiment="test_experiment", cycle="test_cycl
         print("available of puls_sequenz ___ ",
               config.has_option(cfg_section, "puls_sequenz"))
         print("types of sections avalibel ____ ", config.sections())
-        #print("types of options avalibel of option ___ ", config.has_option(cfg_section, "file_path"))
+        # print("types of options avalibel of option ___ ", config.has_option(cfg_section, "file_path"))
         print("_____________________ TEST after ______________________")
 
         if config.has_section(cfg_section):  # config.has_option(section, option)
@@ -310,7 +362,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
     window_puls.resizable(width=False, height=False)  # False = no resize
 
     # window_puls.minsize(380, 380) #(width_minsize=1200, height_minsize=800)
-    #window_puls.maxsize(1200, 850)
+    # window_puls.maxsize(1200, 850)
 
     input_width = 100
     text_input_height = 30
@@ -346,11 +398,11 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
 
     image_path = os.path.abspath(os.path.dirname(
         sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
-    #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
+    # image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
     image = Image.open(image_path)
     image_puls = image.resize((750, 300))
     image_puls = ImageTk.PhotoImage(image_puls, master=window_puls)
-    #image_puls = ImageTk.PhotoImage(Image.open(image_path))
+    # image_puls = ImageTk.PhotoImage(Image.open(image_path))
     pic_label = tk.Label(window_puls, image=image_puls)
     pic_label.pack(fill="both", expand="yes")
     pic_label.image = image_puls
@@ -393,7 +445,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
                             command=lambda:  load_file(experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"]))
     load_button.place(x=50, y=butons_y, width=140, height=50)
 
-    #save_button = tk.Button(window_puls, text="Save", background="SkyBlue4", command=lambda:  save_values(path,experiment,cycle))
+    # save_button = tk.Button(window_puls, text="Save", background="SkyBlue4", command=lambda:  save_values(path,experiment,cycle))
     save_button = tk.Button(window_puls, text="Save", background="SkyBlue4",
                             command=lambda:  save_values(experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"]))
 
@@ -455,11 +507,11 @@ if __name__ == "__main__":
     print(testrun_save_2)
 
     print("__testrun_save_2__")
-    #testrun_load_2 = load_file()
+    # testrun_load_2 = load_file()
     # print(testrun_load_2)
 
     print("__testrun_save_2__")
-    #testrun_load_2 = load_file("test_experiment_4","test_cycle_4")
+    # testrun_load_2 = load_file("test_experiment_4","test_cycle_4")
     # print(testrun_load_2)
 
     print("test")
