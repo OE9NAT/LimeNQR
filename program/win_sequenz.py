@@ -29,11 +29,17 @@ class window_seq(tk.Tk):
     print("class Sequenz Window setup")
     frame_boarder = 4
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, seq_type, value_settings, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        print("type of sequenz: ", seq_type)
+        print("settings variables: \n \n", value_settings)
 
+        target_freq = 100  # in MHz
+
+    def window_sequenz():
+        # open GUI window and Present settings
         # sequenz window
-        logger_win_main.info("start__ win_main2 start class window_main init")
+        logger_seq.info("start win_sequenz.py start class logger_seq init")
         self.title("Magnetic Resonance Imaging - Sequenz Manager")
         self.wm_iconbitmap(bitmap=logo_path)
 
@@ -43,7 +49,17 @@ class window_seq(tk.Tk):
 
         self.frame_title = tk.Frame(self, bg="grey")
         self.frame_title.grid(
-            row=0, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
+            row=0, column=0, padx=window_seq.frame_boarder, pady=window_seq.frame_boarder, sticky="nsew")
+
+    def save2cfg():
+        print("save settings to sfg file")
+        if not os.path.exists(path_settings):
+            print("file Setting not found", path_settings)
+
+    def read2cfg():
+        " read .cfg file from file "
+        if not os.path.exists(path_settings):
+            print("file Setting not found", path_settings)
 
 
 class Seq_FID:

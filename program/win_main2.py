@@ -356,17 +356,30 @@ class window_main(tk.Tk):
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
-        puls_button = tk.Button(info_box, text="set Puls sequenz",
+        puls_button = tk.Button(info_box, text="set FID sequenz",
                                 command=win_seq_puls.windows_file)  # windows_file)
-        puls_button.grid(row=3, column=0, columnspan=2, padx=2, pady=2)
+        puls_button.grid(row=3, column=0, columnspan=2,
+                         padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Spin sequenz",
+        spin_button = tk.Button(info_box, text="set Spin-Echo sequenz",
                                 command=win_seq_spin.windows_file)  # windows_file)
-        spin_button.grid(row=4, column=0, columnspan=2, padx=2, pady=2)
+        spin_button.grid(row=4, column=0, columnspan=2,
+                         padx=2, pady=2, sticky="ew")
 
-        own_button = tk.Button(info_box, text="set own sequenz",
-                               command=win_seq_own.windows_file)  # windows_file)
-        own_button.grid(row=5, column=0, columnspan=2, padx=2, pady=2)
+        spin_button = tk.Button(info_box, text="set Comp. Puls sequenz",
+                                command=win_seq_spin.windows_file)  # windows_file)
+        spin_button.grid(row=5, column=0, columnspan=2,
+                         padx=2, pady=2, sticky="ew")
+
+        spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
+                                command=win_seq_spin.windows_file)  # windows_file)
+        spin_button.grid(row=6, column=0, columnspan=2,
+                         padx=2, pady=2, sticky="ew")
+
+        own_button = tk.Button(info_box, text="own sequenz",
+                               command=lambda: win_sequenz.window_seq("own", self.get_values()))  # windows_file)
+        own_button.grid(row=7, column=0, columnspan=2,
+                        padx=2, pady=2, sticky="ew")
 
         self.update()
         logger_win_main.info(
