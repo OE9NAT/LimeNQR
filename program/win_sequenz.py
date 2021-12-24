@@ -52,9 +52,9 @@ class Window_seq:
         win_seq.maxsize(1200, 850)
 
         # zeilen hoehe
-        win_seq.grid_rowconfigure(0, weight=1, minsize=100)  # zeilen hoehe
-        win_seq.grid_rowconfigure(1, weight=2, minsize=50)  # zeilen hoehe
-        win_seq.grid_rowconfigure(2, weight=4, minsize=50)  # zeilen hoehe
+        win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
+        win_seq.grid_rowconfigure(1, weight=4, minsize=80)  # zeilen hoehe
+        win_seq.grid_rowconfigure(2, weight=8, minsize=50)  # zeilen hoehe
         # win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
         # win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
 
@@ -160,7 +160,7 @@ class Window_seq:
 
         button_run = tk.Button(frame_Buttens, text="close",
                                command=lambda: print("test"))  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2, side="left")
+        button_run.pack(fill="x", padx=2, pady=2, side="right")
 
     def save_seq(var):
         print("save all variabels from impout")
