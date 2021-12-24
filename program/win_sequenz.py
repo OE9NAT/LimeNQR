@@ -51,14 +51,25 @@ class Window_seq:
         win_seq.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
         win_seq.maxsize(1200, 850)
 
+        # zeilen hoehe
+        win_seq.grid_rowconfigure(0, weight=1, minsize=100)  # zeilen hoehe
+        win_seq.grid_rowconfigure(1, weight=2, minsize=50)  # zeilen hoehe
+        win_seq.grid_rowconfigure(2, weight=4, minsize=50)  # zeilen hoehe
+        # win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
+        # win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
+
+        # spalten breite
+        win_seq.grid_columnconfigure(0, weight=1, minsize=280)
+        win_seq.grid_columnconfigure(1, weight=4, minsize=300)
+        win_seq.grid_columnconfigure(2, weight=4, minsize=280)
+
         # Titile
         frame_title = tk.Frame(win_seq, bg="grey")
-        frame_title.grid(columnspan=2, row=0, column=0, padx=Window_seq.frame_boarder,
+        frame_title.grid(columnspan=3, row=0, column=0, padx=Window_seq.frame_boarder,
                          pady=Window_seq.frame_boarder, sticky="nsew")
         lable_text = tk.Label(frame_title, text="Set Sequenz ",
                               foreground="green", background="OliveDrab4", font=("Helvetica", 30))
         lable_text.pack(fill="x")
-        win_seq.grid_rowconfigure(0, weight=1, minsize=50)  # splaten hoehe
 
         # Info box experiment strukture
 
@@ -66,8 +77,6 @@ class Window_seq:
         frame_plot = tk.Frame(win_seq, bg="grey")
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
-        win_seq.grid_columnconfigure(1, minsize=300)
-        win_seq.grid_rowconfigure(1, weight=10)  # splaten hoehe
 
         image_path = os.path.abspath(os.path.dirname(
             sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
@@ -83,16 +92,78 @@ class Window_seq:
         #               pady=Window_seq.frame_boarder, sticky="nsew")
         image.close()
 
-        # input
+        # inputbox
+        frame_puls = tk.LabelFrame(win_seq, text="Timing of Puls", bg='grey')
+        frame_puls.grid(row=2, column=0, padx=Window_seq.frame_boarder,
+                        pady=Window_seq.frame_boarder, sticky="nsew")
+
+        lable_info_puls = tk.Label(
+            frame_puls, text="Test info puls settings", bg='grey')
+        lable_info_puls.pack()
+
+        frame_readout = tk.LabelFrame(win_seq, text="Readout", bg='grey')
+        frame_readout.grid(row=2, column=1, padx=Window_seq.frame_boarder,
+                           pady=Window_seq.frame_boarder, sticky="nsew")
+
+        lable_info_sdr = tk.Label(
+            frame_readout, text="Test info readout", bg='grey')
+        lable_info_sdr.pack()
+
+        frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
+        frame_sdr.grid(row=2, column=2, padx=Window_seq.frame_boarder,
+                       pady=Window_seq.frame_boarder, sticky="nsew")
+
+        lable_info_sdr = tk.Label(frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_sdr.pack()
+
+        lable_info_sdr = tk.Label(frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_sdr.pack()
+
+        lable_info_sdr = tk.Label(frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_sdr.pack()
+
+        lable_info_sdr = tk.Label(frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_sdr.pack()
+
+        lable_info_sdr = tk.Label(frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_sdr.pack()
+
+        # infobox
+        info_box = tk.LabelFrame(win_seq, text="info box", bg='grey')
+        info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
+                      pady=Window_seq.frame_boarder, sticky="nsew")
+
+        self.lable_info_experiment = tk.Label(
+            info_box, text="Test info text", bg='grey')
+        self.lable_info_experiment.pack()
 
         # Buttens
         frame_Buttens = tk.Frame(win_seq, bg='grey')
-        frame_Buttens.grid(row=2, padx=2, pady=2, sticky="nsew")
-        win_seq.grid_rowconfigure(2, weight=4, minsize=50)  # splaten hoehe
+        frame_Buttens.grid(row=3, column=1, padx=2, pady=2, sticky="nsew")
+
+        button_run = tk.Button(frame_Buttens, text="load",
+                               command=lambda: load_seq("test"))  # load_last_values)
+        button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="save",
+                               command=lambda: save_seq("test"))  # load_last_values)
+        button_run.pack(fill="x", padx=2, pady=2, side="left")
+
+        button_run = tk.Button(frame_Buttens, text="test",
                                command=lambda: print("test"))  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2)
+        button_run.pack(fill="x", padx=2, pady=2, side="left")
+
+        button_run = tk.Button(frame_Buttens, text="close",
+                               command=lambda: print("test"))  # load_last_values)
+        button_run.pack(fill="x", padx=2, pady=2, side="left")
+
+    def save_seq(var):
+        print("save all variabels from impout")
 
     def save2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         print("save settings to .cfg file")
@@ -102,6 +173,9 @@ class Window_seq:
             # path_settings = filedialog.askopenfilename(
             #    initialdir='/home/', title='select settings.cfg path')
         print("setting file: ", path_settings)
+
+    def load_seq(var):
+        print("load all variabels from .cfg file")
 
     def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         " read .cfg file from file "
