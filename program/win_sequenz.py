@@ -36,10 +36,10 @@ class Window_seq:
 
         target_freq = 100  # in MHz
 
-        Window_seq.window_sequenz(self)
+        Window_seq.window_sequenz(self, seq_type)
 
     @staticmethod
-    def window_sequenz(self):
+    def window_sequenz(self, seq_type):
         # open GUI window and Present settings
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")
@@ -53,9 +53,9 @@ class Window_seq:
 
         # zeilen hoehe
         win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
-        win_seq.grid_rowconfigure(1, weight=4, minsize=80)  # zeilen hoehe
-        win_seq.grid_rowconfigure(2, weight=8, minsize=50)  # zeilen hoehe
-        # win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
+        win_seq.grid_rowconfigure(1, weight=4, minsize=100)  # zeilen hoehe
+        win_seq.grid_rowconfigure(2, weight=8, minsize=100)  # zeilen hoehe
+        win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
         # win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
 
         # spalten breite
@@ -78,8 +78,20 @@ class Window_seq:
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
+        if seq_type == "fid":
+            img_path = "/program/sequenz/puls_seq.JPG"
+        if seq_type == "spin":
+            img_path = "/program/sequenz/spin_seq.JPG"
+        if seq_type == "comp":
+            img_path = "/program/sequenz/puls_seq.JPG"
+        if seq_type == "spin_phase":
+            img_path = "/program/sequenz/puls_seq.JPG"
+        else:
+            # own sequenz
+            img_path = "/program/sequenz/own_seq.JPG"
+
         image_path = os.path.abspath(os.path.dirname(
-            sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
+            sys.argv[0])) + img_path
         #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
         image = Image.open(image_path)
         image_puls = image.resize((750, 300))
@@ -93,22 +105,84 @@ class Window_seq:
         image.close()
 
         # inputbox
+        # Time of Puls
         frame_puls = tk.LabelFrame(win_seq, text="Timing of Puls", bg='grey')
         frame_puls.grid(row=2, column=0, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
-        lable_info_puls = tk.Label(
-            frame_puls, text="Test info puls settings", bg='grey')
-        lable_info_puls.pack()
+        frame_puls.grid_columnconfigure(0, weight=1)
+        frame_puls.grid_columnconfigure(1, weight=1)
+        # frame_puls.grid_rowconfigure(0, weight=1)
+        # frame_puls.grid_rowconfigure(1, weight=1)
+        # frame_puls.grid_rowconfigure(2, weight=1)
+        # frame_puls.grid_rowconfigure(3, weight=1)
+
+        if seq_type == "fid":
+            print("own", seq_type)
+
+            lable_info_puls = tk.Label(
+                frame_puls, text="FID sequenz", bg='grey')
+            lable_info_puls.grid(row=1, column=0)
+
+        if seq_type == "spin":
+            print("spin Echo sequenz =", seq_type)
+
+            lable_info_spin = tk.Label(
+                frame_puls, text="spin sequenz input", bg='grey')
+            lable_info_spin.grid(row=0, column=0, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Puls 1", bg='grey')
+            lable_info_sdr.grid(row=1, column=0)
+            p1 = tk.Entry(frame_puls, fg="black", bg="white")
+            p1.grid(row=1, column=1, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Delay 1", bg='grey')
+            lable_info_sdr.grid(row=2, column=0)
+            tp1 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp1.grid(row=2, column=1, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Puls 2", bg='grey')
+            lable_info_sdr.grid(row=3, column=0)
+            p2 = tk.Entry(frame_puls, fg="black", bg="white")
+            p2.grid(row=3, column=1, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Delay 2", bg='grey')
+            lable_info_sdr.grid(row=4, column=0)
+            tp2 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp2.grid(row=4, column=1, sticky="ew")
+
+        if seq_type == "comp":
+            print("Composite Pulse", seq_type)
+
+            lable_info_puls = tk.Label(
+                frame_puls, text="Composit Puls sequenz", bg='grey')
+            lable_info_puls.grid(row=1, column=0)
+
+        if seq_type == "spin_phase":
+            print("own", seq_type)
+
+            lable_info_puls = tk.Label(
+                frame_puls, text="Spin Echo Phase sequenz", bg='grey')
+            lable_info_puls.grid(row=1, column=0)
+
+        if seq_type == "own":
+            print("own", seq_type)
 
         frame_readout = tk.LabelFrame(win_seq, text="Readout", bg='grey')
         frame_readout.grid(row=2, column=1, padx=Window_seq.frame_boarder,
                            pady=Window_seq.frame_boarder, sticky="nsew")
 
         lable_info_sdr = tk.Label(
-            frame_readout, text="Test info readout", bg='grey')
-        lable_info_sdr.pack()
+            frame_puls, text="Test info readout", bg='grey')
+        # lable_info_sdr.grid(row=2, column=0)
 
+        seq_type
+
+        # Readout
         frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
         frame_sdr.grid(row=2, column=2, padx=Window_seq.frame_boarder,
                        pady=Window_seq.frame_boarder, sticky="nsew")

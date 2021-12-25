@@ -362,12 +362,12 @@ class window_main(tk.Tk):
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin-Echo sequenz",
-                                command=win_seq_spin.windows_file)  # windows_file)
+                                command=lambda: win_sequenz.Window_seq("spin", self.get_values()))  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Comp. Puls sequenz",
-                                command=win_seq_spin.windows_file)  # windows_file)
+                                command=lambda: win_sequenz.Window_seq("comp", self.get_values()))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
