@@ -34,7 +34,50 @@ class Window_seq:
         print("type of sequenz: ", seq_type)
         print("settings variables: \n \n", value_settings)
 
-        target_freq = 100  # in MHz
+        self.target_freq = 83.62  # target frequency of the experiment in MHz
+        self.band_freq = 1.2    # IF or base band frequency in MHz
+
+        self.samplerate = 30.72      # Sampling Rate in M sap per sec
+        self.averaging = 1000        # number of averages
+        self.repetition_num = 1         # number of repetitions
+
+        self.correction_tx_i_dc = -45  # TX I DC correction
+        self.correction_tx_q_dc = 0  # TX Q DC correction
+        self.correction_tx_i_gain = 2047   # TX I Gain correction
+        self.correction_tx_q_gain = 2039  # TX Q Gain correction
+        self.correction_tx_pahse = 3  # TX phase adjustment
+
+        self.correction_rx_i_dc = 0     # RX I DC correction
+        self.correction_rx_q_dc = 0     # RX Q DC correction
+        self.correction_rx_i_gain = 2047  # RX I Gain correction
+        self.correction_rx_q_gain = 2047  # RX Q Gain correction
+        self.correction_rx_phase = 0     # RX phase adjustment
+
+        # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
+        # be adjusted in the ways that it fits to an integer multiply of the buffer size
+        self.repetition_time = 5  # repetition time in mseconds
+        self.acquisition_time = 82  # acquisition time microseconds e-6
+        # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
+        self.gate_signal = [1, 0, 50, 10]
+
+        # pulse durations
+        self.puls_freq = [band_freq]       # pulse frequency
+        self.puls_duration = [3e-6]  # diy  pulse  duration
+        # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
+        self.puls_amplitude = [1]
+        # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
+        self.puls_arangement = [300]
+
+        # base band low pass filter)
+        self.low_pass_rx = 3.0e6  # RX BW
+        self.low_pass_tx = 130.0e6       # RX BW
+
+        self.gain_rx = 55.0       # RX gain
+        self.gain_tx = 40.0       # TX gain
+
+        puls_count = len(puls_freq)     # number of pulses
+        lo_freq = target_freq * 1000000 - band_freq * 1000000
+        rx_gain_factor = 10**((puls_freq-40)/20)
 
         Window_seq.window_sequenz(self, seq_type)
 
@@ -80,11 +123,11 @@ class Window_seq:
 
         if seq_type == "fid":
             img_path = "/program/sequenz/puls_seq.JPG"
-        if seq_type == "spin":
+        elif seq_type == "spin":
             img_path = "/program/sequenz/spin_seq.JPG"
-        if seq_type == "comp":
+        elif seq_type == "comp":
             img_path = "/program/sequenz/puls_seq.JPG"
-        if seq_type == "spin_phase":
+        elif seq_type == "spin_phase":
             img_path = "/program/sequenz/puls_seq.JPG"
         else:
             # own sequenz
@@ -118,11 +161,23 @@ class Window_seq:
         # frame_puls.grid_rowconfigure(3, weight=1)
 
         if seq_type == "fid":
-            print("own", seq_type)
+            print("FID sequnez", seq_type)
 
             lable_info_puls = tk.Label(
-                frame_puls, text="FID sequenz", bg='grey')
-            lable_info_puls.grid(row=1, column=0)
+                frame_puls, text="FID sequenz input", bg='grey')
+            lable_info_puls.grid(row=0, column=0, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Puls 1 in ms", bg='grey')
+            lable_info_sdr.grid(row=1, column=0)
+            p1 = tk.Entry(frame_puls, fg="black", bg="white")
+            p1.grid(row=1, column=1, sticky="ew")
+
+            lable_info_sdr = tk.Label(
+                frame_puls, text="Delay 1 in ms", bg='grey')
+            lable_info_sdr.grid(row=2, column=0)
+            tp1 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp1.grid(row=2, column=1, sticky="ew")
 
         if seq_type == "spin":
             print("spin Echo sequenz =", seq_type)
@@ -132,25 +187,25 @@ class Window_seq:
             lable_info_spin.grid(row=0, column=0, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Puls 1", bg='grey')
+                frame_puls, text="Puls 1 in ms", bg='grey')
             lable_info_sdr.grid(row=1, column=0)
             p1 = tk.Entry(frame_puls, fg="black", bg="white")
             p1.grid(row=1, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Delay 1", bg='grey')
+                frame_puls, text="Delay 1 in ms", bg='grey')
             lable_info_sdr.grid(row=2, column=0)
             tp1 = tk.Entry(frame_puls, fg="black", bg="white")
             tp1.grid(row=2, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Puls 2", bg='grey')
+                frame_puls, text="Puls 2 in ms", bg='grey')
             lable_info_sdr.grid(row=3, column=0)
             p2 = tk.Entry(frame_puls, fg="black", bg="white")
             p2.grid(row=3, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Delay 2", bg='grey')
+                frame_puls, text="Delay 2 in ms", bg='grey')
             lable_info_sdr.grid(row=4, column=0)
             tp2 = tk.Entry(frame_puls, fg="black", bg="white")
             tp2.grid(row=4, column=1, sticky="ew")
@@ -172,17 +227,19 @@ class Window_seq:
         if seq_type == "own":
             print("own", seq_type)
 
+        # Readout
         frame_readout = tk.LabelFrame(win_seq, text="Readout", bg='grey')
         frame_readout.grid(row=2, column=1, padx=Window_seq.frame_boarder,
                            pady=Window_seq.frame_boarder, sticky="nsew")
 
-        lable_info_sdr = tk.Label(
-            frame_puls, text="Test info readout", bg='grey')
-        # lable_info_sdr.grid(row=2, column=0)
+        lable_acquirer = tk.Label(
+            frame_readout, text="Acquirer time in ms", bg='grey')
+        lable_acquirer.grid(row=1, column=0)
 
-        seq_type
+        ta = tk.Entry(frame_readout, fg="black", bg="white")
+        ta.grid(row=1, column=1, sticky="ew")
 
-        # Readout
+        # SDR settings
         frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
         frame_sdr.grid(row=2, column=2, padx=Window_seq.frame_boarder,
                        pady=Window_seq.frame_boarder, sticky="nsew")
@@ -190,6 +247,11 @@ class Window_seq:
         lable_info_sdr = tk.Label(frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
                                   pady=Window_seq.frame_boarder, bg='grey')
         lable_info_sdr.pack()
+        lable_info_sdr = tk.Label(
+            frame_puls, text="Delay 2 in ms", bg='grey')
+        lable_info_sdr.grid(row=4, column=0)
+        tp2 = tk.Entry(frame_puls, fg="black", bg="white")
+        tp2.grid(row=4, column=1, sticky="ew")
 
         lable_info_sdr = tk.Label(frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
                                   pady=Window_seq.frame_boarder, bg='grey')
