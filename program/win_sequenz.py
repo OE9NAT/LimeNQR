@@ -61,7 +61,7 @@ class Window_seq:
         self.gate_signal = [1, 0, 50, 10]
 
         # pulse durations
-        self.puls_freq = [band_freq]       # pulse frequency
+        self.puls_freq = [self.band_freq]       # pulse frequency
         self.puls_duration = [3e-6]  # diy  pulse  duration
         # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
         self.puls_amplitude = [1]
@@ -75,9 +75,9 @@ class Window_seq:
         self.gain_rx = 55.0       # RX gain
         self.gain_tx = 40.0       # TX gain
 
-        puls_count = len(puls_freq)     # number of pulses
-        lo_freq = target_freq * 1000000 - band_freq * 1000000
-        rx_gain_factor = 10**((puls_freq-40)/20)
+        puls_count = len(self.puls_freq)     # number of pulses
+        lo_freq = self.target_freq * 1000000 - self.band_freq * 1000000
+        rx_gain_factor = 10**((self.puls_freq[0]-40)/20)
 
         Window_seq.window_sequenz(self, seq_type)
 
@@ -148,9 +148,46 @@ class Window_seq:
         image.close()
 
         # inputbox
+        # SDR settings
+        frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
+        frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
+                       pady=Window_seq.frame_boarder, sticky="nsew")
+        frame_sdr.grid_columnconfigure(0, weight=1)
+        frame_sdr.grid_columnconfigure(1, weight=1)
+
+        lable_info_rep = tk.Label(frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
+                                  pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_rep.grid(row=1, column=0)
+        self.rep_time_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        self.rep_time_input.grid(row=1, column=1, sticky="ew")
+
+        lable_info_rx_gain = tk.Label(frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
+                                      pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_rx_gain.grid(row=2, column=0)
+        self.rx_gain_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        self.rx_gain_input.grid(row=2, column=1, sticky="ew")
+
+        lable_info_tx_gain = tk.Label(frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
+                                      pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_tx_gain.grid(row=3, column=0)
+        tx_gain_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        tx_gain_input.grid(row=3, column=1, sticky="ew")
+
+        lable_info_rx_pass = tk.Label(frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
+                                      pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_rx_pass.grid(row=4, column=0)
+        rx_low_pass_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        rx_low_pass_input.grid(row=4, column=1, sticky="ew")
+
+        lable_info_tx_pass = tk.Label(frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
+                                      pady=Window_seq.frame_boarder, bg='grey')
+        lable_info_tx_pass.grid(row=5, column=0)
+        tx_low_pass_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        tx_low_pass_input.grid(row=5, column=1, sticky="ew")
+
         # Time of Puls
         frame_puls = tk.LabelFrame(win_seq, text="Timing of Puls", bg='grey')
-        frame_puls.grid(row=2, column=0, padx=Window_seq.frame_boarder,
+        frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
         frame_puls.grid_columnconfigure(0, weight=1)
@@ -229,45 +266,18 @@ class Window_seq:
 
         # Readout
         frame_readout = tk.LabelFrame(win_seq, text="Readout", bg='grey')
-        frame_readout.grid(row=2, column=1, padx=Window_seq.frame_boarder,
+        frame_readout.grid(row=2, column=2, padx=Window_seq.frame_boarder,
                            pady=Window_seq.frame_boarder, sticky="nsew")
+
+        frame_readout.grid_columnconfigure(0, weight=1)
+        frame_readout.grid_columnconfigure(1, weight=1)
 
         lable_acquirer = tk.Label(
             frame_readout, text="Acquirer time in ms", bg='grey')
-        lable_acquirer.grid(row=1, column=0)
+        lable_acquirer.grid(row=1, column=0, sticky="ew")
 
         ta = tk.Entry(frame_readout, fg="black", bg="white")
         ta.grid(row=1, column=1, sticky="ew")
-
-        # SDR settings
-        frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
-        frame_sdr.grid(row=2, column=2, padx=Window_seq.frame_boarder,
-                       pady=Window_seq.frame_boarder, sticky="nsew")
-
-        lable_info_sdr = tk.Label(frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_sdr.pack()
-        lable_info_sdr = tk.Label(
-            frame_puls, text="Delay 2 in ms", bg='grey')
-        lable_info_sdr.grid(row=4, column=0)
-        tp2 = tk.Entry(frame_puls, fg="black", bg="white")
-        tp2.grid(row=4, column=1, sticky="ew")
-
-        lable_info_sdr = tk.Label(frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_sdr.pack()
-
-        lable_info_sdr = tk.Label(frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_sdr.pack()
-
-        lable_info_sdr = tk.Label(frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_sdr.pack()
-
-        lable_info_sdr = tk.Label(frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_sdr.pack()
 
         # infobox
         info_box = tk.LabelFrame(win_seq, text="info box", bg='grey')
@@ -287,7 +297,7 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="save",
-                               command=lambda: save_seq("test"))  # load_last_values)
+                               command=lambda: Window_seq.save_seq(self, "test"))  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="test",
@@ -295,11 +305,16 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="close",
-                               command=lambda: print("test"))  # load_last_values)
+                               background="tomato4", command=win_seq.destroy)  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="right")
 
-    def save_seq(var):
+    @staticmethod
+    def save_seq(self, var):
+        # get input parameter and save to class variables
         print("save all variabels from impout")
+        print("self.target_freq ", self.target_freq)
+        self.repetition_num = self.rep_time_input.get()
+        print("self.repetition_num ", self.repetition_num)
 
     def save2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         print("save settings to .cfg file")
