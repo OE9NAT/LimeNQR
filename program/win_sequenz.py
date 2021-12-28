@@ -186,79 +186,98 @@ class Window_seq:
         tx_low_pass_input.grid(row=5, column=1, sticky="ew")
 
         # Time of Puls
-        frame_puls = tk.LabelFrame(win_seq, text="Timing of Puls", bg='grey')
-        frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
-                        pady=Window_seq.frame_boarder, sticky="nsew")
+        self.frame_puls = tk.LabelFrame(
+            win_seq, text="Timing of Puls", bg='grey')
+        self.frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
+                             pady=Window_seq.frame_boarder, sticky="nsew")
 
-        frame_puls.grid_columnconfigure(0, weight=1)
-        frame_puls.grid_columnconfigure(1, weight=1)
-        # frame_puls.grid_rowconfigure(0, weight=1)
-        # frame_puls.grid_rowconfigure(1, weight=1)
-        # frame_puls.grid_rowconfigure(2, weight=1)
-        # frame_puls.grid_rowconfigure(3, weight=1)
+        self.frame_puls.grid_columnconfigure(0, weight=1)
+        self.frame_puls.grid_columnconfigure(1, weight=1)
+        # self.frame_puls.grid_rowconfigure(0, weight=1)
+        # self.frame_puls.grid_rowconfigure(1, weight=1)
+        # self.frame_puls.grid_rowconfigure(2, weight=1)
+        # self.frame_puls.grid_rowconfigure(3, weight=1)
 
         if seq_type == "fid":
             print("FID sequnez", seq_type)
 
             lable_info_puls = tk.Label(
-                frame_puls, text="FID sequenz input", bg='grey')
+                self.frame_puls, text="FID sequenz input", bg='grey')
             lable_info_puls.grid(row=0, column=0, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Puls 1 in ms", bg='grey')
+                self.frame_puls, text="Puls 1 in ms", bg='grey')
             lable_info_sdr.grid(row=1, column=0)
-            p1 = tk.Entry(frame_puls, fg="black", bg="white")
+            p1 = tk.Entry(self.frame_puls, fg="black", bg="white")
             p1.grid(row=1, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Delay 1 in ms", bg='grey')
+                self.frame_puls, text="Delay 1 in ms", bg='grey')
             lable_info_sdr.grid(row=2, column=0)
-            tp1 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp1 = tk.Entry(self.frame_puls, fg="black", bg="white")
             tp1.grid(row=2, column=1, sticky="ew")
 
         if seq_type == "spin":
             print("spin Echo sequenz =", seq_type)
 
             lable_info_spin = tk.Label(
-                frame_puls, text="spin sequenz input", bg='grey')
+                self.frame_puls, text="spin sequenz input", bg='grey')
             lable_info_spin.grid(row=0, column=0, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Puls 1 in ms", bg='grey')
+                self.frame_puls, text="Puls 1 in ms", bg='grey')
             lable_info_sdr.grid(row=1, column=0)
-            p1 = tk.Entry(frame_puls, fg="black", bg="white")
+            p1 = tk.Entry(self.frame_puls, fg="black", bg="white")
             p1.grid(row=1, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Delay 1 in ms", bg='grey')
+                self.frame_puls, text="Delay 1 in ms", bg='grey')
             lable_info_sdr.grid(row=2, column=0)
-            tp1 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp1 = tk.Entry(self.frame_puls, fg="black", bg="white")
             tp1.grid(row=2, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Puls 2 in ms", bg='grey')
+                self.frame_puls, text="Puls 2 in ms", bg='grey')
             lable_info_sdr.grid(row=3, column=0)
-            p2 = tk.Entry(frame_puls, fg="black", bg="white")
+            p2 = tk.Entry(self.frame_puls, fg="black", bg="white")
             p2.grid(row=3, column=1, sticky="ew")
 
             lable_info_sdr = tk.Label(
-                frame_puls, text="Delay 2 in ms", bg='grey')
+                self.frame_puls, text="Delay 2 in ms", bg='grey')
             lable_info_sdr.grid(row=4, column=0)
-            tp2 = tk.Entry(frame_puls, fg="black", bg="white")
+            tp2 = tk.Entry(self.frame_puls, fg="black", bg="white")
             tp2.grid(row=4, column=1, sticky="ew")
 
         if seq_type == "comp":
             print("Composite Pulse", seq_type)
 
             lable_info_puls = tk.Label(
-                frame_puls, text="Composit Puls sequenz", bg='grey')
+                self.frame_puls, text="Composit Puls sequenz", bg='grey')
             lable_info_puls.grid(row=1, column=0)
+
+            number_pulses = 4
+
+            for number in range(number_pulses):
+                number_puls = number*2
+                number_delay = number*2+1
+
+                lable_puls = tk.Label(
+                    self.frame_puls, text="Puls 1 in ms"+str(number_puls), bg='grey')
+                lable_puls.grid(row=number_puls, column=0)
+                p1 = tk.Entry(self.frame_puls, fg="black", bg="white")
+                p1.grid(row=number_puls, column=1, sticky="ew")
+
+                lable_ = tk.Label(
+                    self.frame_puls, text="Delay 1 in ms"+str(number_delay), bg='grey')
+                lable_info_sdr.grid(row=number_delay, column=0)
+                tp1 = tk.Entry(self.frame_puls, fg="black", bg="white")
+                tp1.grid(row=number_delay, column=1, sticky="ew")
 
         if seq_type == "spin_phase":
             print("own", seq_type)
 
             lable_info_puls = tk.Label(
-                frame_puls, text="Spin Echo Phase sequenz", bg='grey')
+                self.frame_puls, text="Spin Echo Phase sequenz", bg='grey')
             lable_info_puls.grid(row=1, column=0)
 
         if seq_type == "own":
@@ -311,6 +330,18 @@ class Window_seq:
     @staticmethod
     def save_seq(self, var):
         # get input parameter and save to class variables
+
+        read_array = []
+        for entery in self.frame_puls.winfo_children():
+            if entery.winfo_class() == 'Entry':
+                print("entery", entery, "ff: ", entery.get())
+                read_array.append(entery.get())
+
+        pulse_array = read_array[::2].copy()
+        delay_array = read_array[1::2].copy()
+        print("pulse_array", pulse_array)
+        print("delay_array", delay_array)
+
         print("save all variabels from impout")
         print("self.target_freq ", self.target_freq)
         self.repetition_num = self.rep_time_input.get()
