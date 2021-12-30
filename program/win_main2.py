@@ -357,7 +357,7 @@ class window_main(tk.Tk):
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
         puls_button = tk.Button(info_box, text="set FID sequenz",
-                                command=win_seq_puls.windows_file)  # windows_file)
+                                command=win_sequenz.Window_seq("fid", self.get_values()))  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
@@ -372,7 +372,7 @@ class window_main(tk.Tk):
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
-                                command=win_seq_spin.windows_file)  # windows_file)
+                                command=win_sequenz.Window_seq("spin_phase", self.get_values()))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
