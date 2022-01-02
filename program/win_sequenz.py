@@ -29,10 +29,8 @@ class Window_seq:
     print("class Sequenz Window setup")
     frame_boarder = 4
 
-    def __init__(self, seq_type, value_settings):
+    def __init__(self):
         # tk.Tk.__init__(self, *args, **kwargs)
-        print("type of sequenz: ", seq_type)
-        print("settings variables: \n \n", value_settings)
 
         self.target_freq = 83.62  # target frequency of the experiment in MHz
         self.band_freq = 1.2    # IF or base band frequency in MHz
@@ -79,10 +77,15 @@ class Window_seq:
         lo_freq = self.target_freq * 1000000 - self.band_freq * 1000000
         rx_gain_factor = 10**((self.puls_freq[0]-40)/20)
 
-        Window_seq.window_sequenz(self, seq_type)
+        # call Window
+        #Window_seq.window_sequenz(self, seq_type)
 
-    @staticmethod
-    def window_sequenz(self, seq_type):
+    @property
+    def window_sequenz(self, seq_type="0", value_settings="0", puls_cylce="1"):
+        print("type of sequenz: ", seq_type)
+        print("settings variables: \n \n", value_settings)
+        print("number of puls_cylce of sequenz: ", puls_cylce)
+
         # open GUI window and Present settings
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")

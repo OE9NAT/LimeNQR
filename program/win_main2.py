@@ -16,6 +16,7 @@ import datetime
 # import module for seqienz
 import win_sequenz
 
+
 import tkinter.ttk as TTK  # use for Combobox
 from PIL import ImageTk, Image  # .jpg
 
@@ -39,9 +40,15 @@ var_setting = value_set.import_setting
 file_set = variables.File_Settings(value_set)
 # file_setting = file_set.save_experiment   #open experiment strukture
 
+# set defalt Sequenz
+Sequenz = win_sequenz.Window_seq()
+# win_sequenz.Window_seq( self.get_values()))
+# Sequenz.window_sequenz()
+
 # Start SDR and send Tune and Match to arduino
 # run_external.send_sdr()
 # run_external.send_tune_match()
+
 
 ##############
 
@@ -356,29 +363,33 @@ class window_main(tk.Tk):
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
+        # lambda: win_sequenz.Window_seq("spin", self.get_values()
+
         puls_button = tk.Button(info_box, text="set FID sequenz",
-                                command=win_sequenz.Window_seq("fid", self.get_values()))  # windows_file)
+                                command=lambda: win_sequenz.Window_seq())  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin-Echo sequenz",
-                                command=lambda: win_sequenz.Window_seq("spin", self.get_values()))  # windows_file)
+                                command=lambda: win_sequenz.Window_seq())  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Comp. Puls sequenz",
-                                command=lambda: win_sequenz.Window_seq("comp", self.get_values()))  # windows_file)
+                                command=lambda: win_sequenz.Window_seq())  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
-                                command=win_sequenz.Window_seq("spin_phase", self.get_values()))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values()))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        own_button = tk.Button(info_box, text="own sequenz",
-                               command=lambda: win_sequenz.Window_seq("own", self.get_values()))  # windows_file)
-        own_button.grid(row=7, column=0, columnspan=2,
+        own_number_puls = tk.Entry(info_box, fg="black", bg="white")
+        own_number_puls.grid(row=7, column=1, sticky="ew")
+        own_button = tk.Button(info_box, text="own sequenz \n number of Pulses:",
+                               command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get()))  # windows_file)
+        own_button.grid(row=7, column=0,
                         padx=2, pady=2, sticky="ew")
 
         self.update()
