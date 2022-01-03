@@ -13,6 +13,8 @@ from PIL import ImageTk, Image  # .jpg
 import logging  # DEBUG INFO WARNING ERROR
 from logging.handlers import QueueHandler
 
+import function as helper
+
 logger_seq = logging.getLogger('win_sequenz')
 logger_seq.addHandler(logging.StreamHandler())
 logger_seq.info("logging from winsow sequenz at start up")
@@ -80,37 +82,41 @@ class Window_seq:
         # call Window
         #Window_seq.window_sequenz(self, seq_type)
 
-    @property
-    def window_sequenz(self, seq_type="0", value_settings="0", puls_cylce="1"):
+    # @staticmethod  # property
+    def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1"):
         print("type of sequenz: ", seq_type)
         print("settings variables: \n \n", value_settings)
         print("number of puls_cylce of sequenz: ", puls_cylce)
+        puls_cylce = int(puls_cylce)
 
         # open GUI window and Present settings
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")
-        win_seq = tk.Tk()
-        win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
-        # win_seq.wm_iconbitmap(bitmap=logo_path)
+        self.win_seq = tk.Tk()
+        self.win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
+        # self.win_seq.wm_iconbitmap(bitmap=logo_path)
 
-        win_seq.geometry("1000x800")  # "1000x750+400+100"
-        win_seq.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
-        win_seq.maxsize(1200, 850)
+        self.win_seq.geometry("1000x800")  # "1000x750+400+100"
+        # (width_minsize=1200, height_minsize=800)
+        self.win_seq.minsize(380, 400)
+        self.win_seq.maxsize(1200, 850)
 
         # zeilen hoehe
-        win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
-        win_seq.grid_rowconfigure(1, weight=4, minsize=100)  # zeilen hoehe
-        win_seq.grid_rowconfigure(2, weight=8, minsize=100)  # zeilen hoehe
-        win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
-        # win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(
+            1, weight=4, minsize=100)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(
+            2, weight=8, minsize=100)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
+        # self.win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
 
         # spalten breite
-        win_seq.grid_columnconfigure(0, weight=1, minsize=280)
-        win_seq.grid_columnconfigure(1, weight=4, minsize=300)
-        win_seq.grid_columnconfigure(2, weight=4, minsize=280)
+        self.win_seq.grid_columnconfigure(0, weight=1, minsize=280)
+        self.win_seq.grid_columnconfigure(1, weight=4, minsize=300)
+        self.win_seq.grid_columnconfigure(2, weight=4, minsize=280)
 
         # Titile
-        frame_title = tk.Frame(win_seq, bg="grey")
+        frame_title = tk.Frame(self.win_seq, bg="grey")
         frame_title.grid(columnspan=3, row=0, column=0, padx=Window_seq.frame_boarder,
                          pady=Window_seq.frame_boarder, sticky="nsew")
         lable_text = tk.Label(frame_title, text="Set Sequenz ",
@@ -120,7 +126,7 @@ class Window_seq:
         # Info box experiment strukture
 
         # plot sequenz
-        frame_plot = tk.Frame(win_seq, bg="grey")
+        frame_plot = tk.Frame(self.win_seq, bg="grey")
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
@@ -141,7 +147,7 @@ class Window_seq:
         #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
         image = Image.open(image_path)
         image_puls = image.resize((750, 300))
-        image_puls = ImageTk.PhotoImage(image_puls, master=win_seq)
+        image_puls = ImageTk.PhotoImage(image_puls, master=self.win_seq)
         #image_puls = ImageTk.PhotoImage(Image.open(image_path))
         pic_label = tk.Label(frame_plot, image=image_puls)
         pic_label.pack(fill="both", expand="yes")
@@ -152,45 +158,46 @@ class Window_seq:
 
         # inputbox
         # SDR settings
-        frame_sdr = tk.LabelFrame(win_seq, text="SDR Settings", bg='grey')
-        frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
-                       pady=Window_seq.frame_boarder, sticky="nsew")
-        frame_sdr.grid_columnconfigure(0, weight=1)
-        frame_sdr.grid_columnconfigure(1, weight=1)
+        self.frame_sdr = tk.LabelFrame(
+            self.win_seq, text="SDR Settings", bg='grey')
+        self.frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
+                            pady=Window_seq.frame_boarder, sticky="nsew")
+        self.frame_sdr.grid_columnconfigure(0, weight=1)
+        self.frame_sdr.grid_columnconfigure(1, weight=1)
 
-        lable_info_rep = tk.Label(frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
+        lable_info_rep = tk.Label(self.frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
                                   pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rep.grid(row=1, column=0)
-        self.rep_time_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        self.rep_time_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
         self.rep_time_input.grid(row=1, column=1, sticky="ew")
 
-        lable_info_rx_gain = tk.Label(frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
+        lable_info_rx_gain = tk.Label(self.frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rx_gain.grid(row=2, column=0)
-        self.rx_gain_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        self.rx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
         self.rx_gain_input.grid(row=2, column=1, sticky="ew")
 
-        lable_info_tx_gain = tk.Label(frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
+        lable_info_tx_gain = tk.Label(self.frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_gain.grid(row=3, column=0)
-        tx_gain_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        tx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
         tx_gain_input.grid(row=3, column=1, sticky="ew")
 
-        lable_info_rx_pass = tk.Label(frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
+        lable_info_rx_pass = tk.Label(self.frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rx_pass.grid(row=4, column=0)
-        rx_low_pass_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        rx_low_pass_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
         rx_low_pass_input.grid(row=4, column=1, sticky="ew")
 
-        lable_info_tx_pass = tk.Label(frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
+        lable_info_tx_pass = tk.Label(self.frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_pass.grid(row=5, column=0)
-        tx_low_pass_input = tk.Entry(frame_sdr, fg="black", bg="white")
+        tx_low_pass_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
         tx_low_pass_input.grid(row=5, column=1, sticky="ew")
 
         # Time of Puls and Delay
         self.frame_puls = tk.LabelFrame(
-            win_seq, text="Timing of Puls", bg='grey')
+            self.win_seq, text="Timing of Puls", bg='grey')
         self.frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
                              pady=Window_seq.frame_boarder, sticky="nsew")
 
@@ -219,10 +226,10 @@ class Window_seq:
 
         elif seq_type == "own":
             print("own", seq_type)
-            number_pulses = 6
+            number_pulses = puls_cylce
 
         else:
-            number_pulses = 1
+            number_pulses = puls_cylce
 
         for number in range(number_pulses):
             number_puls = number*2
@@ -240,7 +247,7 @@ class Window_seq:
             delay.grid(row=number_delay, column=1, sticky="ew")
 
         # time of Readout
-        frame_readout = tk.LabelFrame(win_seq, text="Readout", bg='grey')
+        frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
         frame_readout.grid(row=2, column=2, padx=Window_seq.frame_boarder,
                            pady=Window_seq.frame_boarder, sticky="nsew")
 
@@ -251,11 +258,11 @@ class Window_seq:
             frame_readout, text="Acquirer time in ms", bg='grey')
         lable_acquirer.grid(row=1, column=0, sticky="ew")
 
-        t_acquirer = tk.Entry(frame_readout, fg="black", bg="white")
-        t_acquirer.grid(row=1, column=1, sticky="ew")
+        self.t_acquirer = tk.Entry(frame_readout, fg="black", bg="white")
+        self.t_acquirer.grid(row=1, column=1, sticky="ew")
 
         # infobox
-        info_box = tk.LabelFrame(win_seq, text="info box", bg='grey')
+        info_box = tk.LabelFrame(self.win_seq, text="info box", bg='grey')
         info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
                       pady=Window_seq.frame_boarder, sticky="nsew")
 
@@ -264,7 +271,7 @@ class Window_seq:
         self.lable_info_experiment.pack()
 
         # Buttens
-        frame_Buttens = tk.Frame(win_seq, bg='grey')
+        frame_Buttens = tk.Frame(self.win_seq, bg='grey')
         frame_Buttens.grid(row=3, column=1, padx=2, pady=2, sticky="nsew")
 
         button_run = tk.Button(frame_Buttens, text="load",
@@ -276,11 +283,11 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="test",
-                               command=lambda: print("test"))  # load_last_values)
+                               command=lambda: helper.error_type_window(int, str, "x_number"))  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="close",
-                               background="tomato4", command=win_seq.destroy)  # load_last_values)
+                               background="tomato4", command=self.win_seq.destroy)  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="right")
 
     @staticmethod
@@ -291,8 +298,16 @@ class Window_seq:
         read_array = []
         for entery in self.frame_puls.winfo_children():
             if entery.winfo_class() == 'Entry':
-                print("entery", entery, "ff: ", entery.get())
-                read_array.append(entery.get())
+                entery_value = entery.get()
+                print("Puls entery", entery, "value: ", entery_value)
+                if len(entery_value) == 0:
+                    helper.error_type_window(
+                        entery_value, int, "Puls entery", "Fill in all Puls parameter")
+                try:
+                    var_input = int(entery_value)
+                except ValueError:
+                    helper.error_type_window(entery_value, int, "Puls entery")
+                read_array.append(var_input)
 
         pulse_array = read_array[::2].copy()
         delay_array = read_array[1::2].copy()
@@ -300,7 +315,7 @@ class Window_seq:
         print("delay_array", delay_array)
 
         # read Readout
-        time_acquirer = t_acquirer.get()
+        time_acquirer = self.t_acquirer.get()
         print("time_acquirer ", time_acquirer)
 
         # read SDR Settings
