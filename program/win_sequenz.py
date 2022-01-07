@@ -80,7 +80,7 @@ class Window_seq:
         rx_gain_factor = 10**((self.puls_freq[0]-40)/20)
 
         # call Window
-        #Window_seq.window_sequenz(self, seq_type)
+        # Window_seq.window_sequenz(self, seq_type)
 
     # @staticmethod  # property
     def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1"):
@@ -88,6 +88,10 @@ class Window_seq:
         print("settings variables: \n \n", value_settings)
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
+
+        if puls_cylce > 7:
+            puls_cylce = 6
+            print("max puls_cylce reached")
 
         # open GUI window and Present settings
         # sequenz window
@@ -144,11 +148,11 @@ class Window_seq:
 
         image_path = os.path.abspath(os.path.dirname(
             sys.argv[0])) + img_path
-        #image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
+        # image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
         image = Image.open(image_path)
         image_puls = image.resize((750, 300))
         image_puls = ImageTk.PhotoImage(image_puls, master=self.win_seq)
-        #image_puls = ImageTk.PhotoImage(Image.open(image_path))
+        # image_puls = ImageTk.PhotoImage(Image.open(image_path))
         pic_label = tk.Label(frame_plot, image=image_puls)
         pic_label.pack(fill="both", expand="yes")
         pic_label.image = image_puls
@@ -200,6 +204,7 @@ class Window_seq:
             self.win_seq, text="Timing of Puls", bg='grey')
         self.frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
                              pady=Window_seq.frame_boarder, sticky="nsew")
+        self.frame_puls.grid_propagate(False)
 
         self.frame_puls.grid_columnconfigure(0, weight=1)
         self.frame_puls.grid_columnconfigure(1, weight=1)
@@ -207,6 +212,11 @@ class Window_seq:
         # self.frame_puls.grid_rowconfigure(1, weight=1)
         # self.frame_puls.grid_rowconfigure(2, weight=1)
         # self.frame_puls.grid_rowconfigure(3, weight=1)
+
+        # ADDING A SCROLLBAR
+        myscrollbar = tk.Scrollbar(self.frame_puls, orient="vertical")
+        # myscrollbar.pack(side="right",fill="y")
+        myscrollbar.grid(row=0, column=2, sticky="nsew", rowspan=10)
 
         if seq_type == "fid":
             print("FID sequnez", seq_type)
@@ -235,16 +245,18 @@ class Window_seq:
             number_puls = number*2
             number_delay = number*2+1
             lable_puls = tk.Label(
-                self.frame_puls, text="Puls "+str(number_puls+1)+" in ms", bg='grey')
+                self.frame_puls, text="Puls "+str(number+1)+" in ms", bg='grey')
             lable_puls.grid(row=number_puls, column=0)
             pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
             pulse.grid(row=number_puls, column=1, sticky="ew")
+            # pulse.config(yscrollcommand=myscrollbar.set)
 
             lable_delay = tk.Label(
-                self.frame_puls, text="Delay "+str(number_puls+1)+" in ms", bg='grey')
+                self.frame_puls, text="Delay "+str(number+1)+" in ms", bg='grey')
             lable_delay.grid(row=number_delay, column=0)
             delay = tk.Entry(self.frame_puls, fg="black", bg="white")
             delay.grid(row=number_delay, column=1, sticky="ew")
+            # delay.config(yscrollcommand=myscrollbar.set)
 
         # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
@@ -290,7 +302,7 @@ class Window_seq:
                                background="tomato4", command=self.win_seq.destroy)  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="right")
 
-    @staticmethod
+    @ staticmethod
     def save_seq(self, var):
         # get input parameter and save to class variables
 
@@ -333,6 +345,18 @@ class Window_seq:
             # path_settings = filedialog.askopenfilename(
             #    initialdir='/home/', title='select settings.cfg path')
         print("setting file: ", path_settings)
+
+        configParser_new = configparser.ConfigParser()
+        configParser_new["start"] = {}
+        configParser_new["start"]["datum created:"] = str(datetime.now())
+        configParser_new["start"]["datum created:"] = "User: " + \
+            str(os.getlogin())
+        configParser_new["setting"] = {}
+        configParser_new["TEST"] = {"key0": "value0", "key1": "value1"}
+
+        # write configfile
+        with open(path_settings, "w") as configfile:
+            configParser_new.write(configfile)
 
     def load_seq(var):
         print("load all variabels from .cfg file")
