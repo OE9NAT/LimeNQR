@@ -141,10 +141,10 @@ class window_main(tk.Tk):
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
         self.maxsize(1200, 850)
-        self.geometry("1000x750+400+100")
+        # self.geometry("1000x750+400+100")
 
         window_width = 1000
-        window_height = 750
+        window_height = 800
 
         # get the screen dimension to center window on screen
         screen_width = self.winfo_screenwidth()

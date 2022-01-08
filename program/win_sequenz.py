@@ -4,6 +4,7 @@ import os
 import sys
 import configparser
 import PIL.Image as image
+from datetime import datetime
 
 import tkinter as tk
 import tkinter.ttk as TTK  # use for Combobox
@@ -103,7 +104,7 @@ class Window_seq:
         self.win_seq.geometry("1000x800")  # "1000x750+400+100"
         # (width_minsize=1200, height_minsize=800)
         self.win_seq.minsize(380, 400)
-        self.win_seq.maxsize(1200, 850)
+        #self.win_seq.maxsize(1200, 850)
 
         # zeilen hoehe
         self.win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
@@ -337,6 +338,9 @@ class Window_seq:
         self.repetition_num = self.rep_time_input.get()
         print("self.repetition_num ", self.repetition_num)
 
+        # save to cfg file
+        Window_seq.save2cfg(self)
+
     def save2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         print("save settings to .cfg file")
         path_settings = os.path.join(file_path, file)
@@ -348,11 +352,13 @@ class Window_seq:
 
         configParser_new = configparser.ConfigParser()
         configParser_new["start"] = {}
-        configParser_new["start"]["datum created:"] = str(datetime.now())
-        configParser_new["start"]["datum created:"] = "User: " + \
+        configParser_new["start"]["Datum created:"] = str(datetime.now())
+        configParser_new["start"]["User created:"] = "User: " + \
             str(os.getlogin())
-        configParser_new["setting"] = {}
-        configParser_new["TEST"] = {"key0": "value0", "key1": "value1"}
+        configParser_new["setting"] = {"key0": "value0", "key1": "value1"}
+        configParser_new["SDR setting"] = {"key0": "value0", "key1": "value1"}
+        configParser_new["Timing of Puls"] = {}
+        configParser_new["Readout"] = {}
 
         # write configfile
         with open(path_settings, "w") as configfile:
