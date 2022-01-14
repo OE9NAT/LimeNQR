@@ -1,4 +1,4 @@
-# bacharbeit
+# GUI for a SDR controlled magnetic resonance imaging - contrast agent analyse controller
 
 To start gui run start.py file.
 
@@ -26,3 +26,5 @@ It will allow a detailed analysis of the last measured data and all
 previus ones.
 
 Have a good measurment.
+
+https://asciiflow.com/#/
