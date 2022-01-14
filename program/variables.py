@@ -70,7 +70,7 @@ class Value_Settings:
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            logger_function.warning(
+            logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
 
@@ -165,7 +165,7 @@ class Value_Settings:
         print("setting file: ", path_settings)
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            logger_function.warning(
+            logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
 
@@ -223,7 +223,7 @@ class Value_Settings:
 
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            logger_function.warning(
+            logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
             # raise TypeError ("file dose not exist \n"+path_settings)
 
