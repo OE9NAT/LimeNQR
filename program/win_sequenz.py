@@ -63,12 +63,12 @@ class Window_seq:
         # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
         self.gate_signal = [1, 0, 50, 10]
 
-        self.phases_number = [4, 1]  # number of phases
+        self.phase_number = [4, 1]  # number of phases
         # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary))
-        self.phases_level = [0, 1]
+        self.phase_level = [0, 1]
         # pulse phase (added to phase shift due to pcn)
         self.phase_puls = [0, np.pi/4]
-        self.number_phases_level = 1
+        self.number_phase_level = 1
 
         # pulse durations
         self.puls_freq = [self.band_freq]       # pulse frequency
@@ -139,6 +139,13 @@ class Window_seq:
         lable_text.pack(fill="x")
 
         # Info box experiment strukture
+        info_box = tk.LabelFrame(self.win_seq, text="info box", bg='grey')
+        info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
+                      pady=Window_seq.frame_boarder, sticky="nsew")
+
+        self.lable_info_experiment = tk.Label(
+            info_box, text="Test info text", bg='grey')
+        self.lable_info_experiment.pack()
 
         # plot sequenz
         frame_plot = tk.Frame(self.win_seq, bg="grey")
@@ -176,41 +183,35 @@ class Window_seq:
         self.frame_sdr = tk.LabelFrame(
             self.win_seq, text="SDR Settings", bg='grey')
         self.frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
-                            pady=Window_seq.frame_boarder, sticky="nsew")
+                            pady=Window_seq.frame_boarder, sticky="nsew", rowspan=2)
         self.frame_sdr.grid_columnconfigure(0, weight=1)
         self.frame_sdr.grid_columnconfigure(1, weight=1)
-
-        lable_info_rep = tk.Label(self.frame_sdr, text="Repetition time", padx=Window_seq.frame_boarder,
-                                  pady=Window_seq.frame_boarder, bg='grey')
-        lable_info_rep.grid(row=1, column=0)
-        self.rep_time_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        self.rep_time_input.grid(row=1, column=1, sticky="ew")
 
         lable_info_rx_gain = tk.Label(self.frame_sdr, text="RX gain", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rx_gain.grid(row=2, column=0)
-        self.rx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        self.rx_gain_input.grid(row=2, column=1, sticky="ew")
+        self.gain_rx_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
+        self.gain_rx_input.grid(row=2, column=1, sticky="ew")
 
         lable_info_tx_gain = tk.Label(self.frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_gain.grid(row=3, column=0)
-        self.tx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        self.tx_gain_input.grid(row=3, column=1, sticky="ew")
+        self.gain_tx_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
+        self.gain_tx_input.grid(row=3, column=1, sticky="ew")
 
         lable_info_rx_pass = tk.Label(self.frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rx_pass.grid(row=4, column=0)
-        self.rx_low_pass_input = tk.Entry(
+        self.low_pass_rx_input = tk.Entry(
             self.frame_sdr, fg="black", bg="white")
-        self.rx_low_pass_input.grid(row=4, column=1, sticky="ew")
+        self.low_pass_rx_input.grid(row=4, column=1, sticky="ew")
 
         lable_info_tx_pass = tk.Label(self.frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_pass.grid(row=5, column=0)
-        self.tx_low_pass_input = tk.Entry(
+        self.low_pass_tx_input = tk.Entry(
             self.frame_sdr, fg="black", bg="white")
-        self.tx_low_pass_input.grid(row=5, column=1, sticky="ew")
+        self.low_pass_tx_input.grid(row=5, column=1, sticky="ew")
 
         lable_correction_tx_i_dc = tk.Label(self.frame_sdr, text="correction_tx_i_dc", padx=Window_seq.frame_boarder,
                                             pady=Window_seq.frame_boarder, bg='grey')
@@ -282,11 +283,10 @@ class Window_seq:
             self.frame_sdr, fg="black", bg="white")
         self.correction_rx_phase_input.grid(row=15, column=1, sticky="ew")
 
-        self.rep_time_input.insert(0, self.repetition_time)
-        self.rx_gain_input.insert(0, self.gain_rx)
-        self.tx_gain_input.insert(0, self.gain_tx)
-        self.rx_low_pass_input.insert(0, self.low_pass_rx)
-        self.tx_low_pass_input.insert(0, self.low_pass_tx)
+        self.gain_rx_input.insert(0, self.gain_rx)
+        self.gain_tx_input.insert(0, self.gain_tx)
+        self.low_pass_rx_input.insert(0, self.low_pass_rx)
+        self.low_pass_tx_input.insert(0, self.low_pass_tx)
         self.correction_tx_i_dc_input.insert(0, self.correction_tx_i_dc)
         self.correction_tx_q_dc_input.insert(0, self.correction_tx_q_dc)
         self.correction_tx_i_gain_input.insert(0, self.correction_tx_i_gain)
@@ -302,7 +302,7 @@ class Window_seq:
         self.frame_puls = tk.LabelFrame(
             self.win_seq, text="Timing of Puls", bg='grey')
         self.frame_puls.grid(row=2, column=1, padx=Window_seq.frame_boarder,
-                             pady=Window_seq.frame_boarder, sticky="nsew")
+                             pady=Window_seq.frame_boarder, sticky="nsew", rowspan=2)
         self.frame_puls.grid_propagate(False)
 
         self.frame_puls.grid_columnconfigure(0, weight=1)
@@ -357,7 +357,7 @@ class Window_seq:
             delay.grid(row=number_delay, column=1, sticky="ew")
             # delay.config(yscrollcommand=myscrollbar.set)
 
-        # time of Readout
+        # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
         frame_readout.grid(row=2, column=2, padx=Window_seq.frame_boarder,
                            pady=Window_seq.frame_boarder, sticky="nsew")
@@ -365,25 +365,100 @@ class Window_seq:
         frame_readout.grid_columnconfigure(0, weight=1)
         frame_readout.grid_columnconfigure(1, weight=1)
 
+        # Repetition
+        lable_repetition_time = tk.Label(
+            frame_readout, text="Repetition time in ms", bg='grey')
+        lable_repetition_time.grid(row=1, column=0, sticky="ew")
+
+        self.repetition_time_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.repetition_time_input.grid(row=1, column=1, sticky="ew")
+        self.repetition_time_input.insert(0, self.repetition_time)
+
+        # Acquirer
         lable_acquirer = tk.Label(
             frame_readout, text="Acquirer time in ms", bg='grey')
-        lable_acquirer.grid(row=1, column=0, sticky="ew")
+        lable_acquirer.grid(row=2, column=0, sticky="ew")
 
-        self.t_acquirer = tk.Entry(frame_readout, fg="black", bg="white")
-        self.t_acquirer.grid(row=1, column=1, sticky="ew")
+        self.acquisition_time_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.acquisition_time_input.grid(row=2, column=1, sticky="ew")
+        self.acquisition_time_input.insert(0, self.acquisition_time)
 
-        # infobox
-        info_box = tk.LabelFrame(self.win_seq, text="info box", bg='grey')
-        info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
-                      pady=Window_seq.frame_boarder, sticky="nsew")
+        # gate_signal
+        lable_gate_signal = tk.Label(
+            frame_readout, text="gate_signal array", bg='grey')
+        lable_gate_signal.grid(row=3, column=0, sticky="ew")
 
-        self.lable_info_experiment = tk.Label(
-            info_box, text="Test info text", bg='grey')
-        self.lable_info_experiment.pack()
+        self.gate_signal_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.gate_signal_input.grid(row=3, column=1, sticky="ew")
+        self.gate_signal_input.insert(0, self.gate_signal)
+
+        # # Phase
+        frame_readout = tk.LabelFrame(
+            self.win_seq, text="Phase & Puls-parameter", bg='grey')
+        frame_readout.grid(row=3, column=2, padx=Window_seq.frame_boarder,
+                           pady=Window_seq.frame_boarder, sticky="nsew")
+
+        frame_readout.grid_columnconfigure(0, weight=1)
+        frame_readout.grid_columnconfigure(1, weight=1)
+
+        # phase_number
+        lable_phase_number = tk.Label(
+            frame_readout, text="phase_number array", bg='grey')
+        lable_phase_number.grid(row=1, column=0, sticky="ew")
+
+        self.phase_number_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.phase_number_input.grid(row=1, column=1, sticky="ew")
+        self.phase_number_input.insert(0, self.phase_number)
+
+        # phase_level
+        lable_phase_level = tk.Label(
+            frame_readout, text="phase_number array", bg='grey')
+        lable_phase_level.grid(row=2, column=0, sticky="ew")
+
+        self.phase_level_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.phase_level_input.grid(row=2, column=1, sticky="ew")
+        self.phase_level_input.insert(0, self.phase_level)
+
+        # phase_puls
+        lable_phase_puls = tk.Label(
+            frame_readout, text="phase_puls array", bg='grey')
+        lable_phase_puls.grid(row=3, column=0, sticky="ew")
+
+        self.phase_puls_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.phase_puls_input.grid(row=3, column=1, sticky="ew")
+        self.phase_puls_input.insert(0, self.phase_puls)
+
+        # number_phase_level
+        lable_number_phase_level = tk.Label(
+            frame_readout, text="number_phase_level array", bg='grey')
+        lable_number_phase_level.grid(row=4, column=0, sticky="ew")
+
+        self.number_phase_level_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.number_phase_level_input.grid(row=4, column=1, sticky="ew")
+        self.number_phase_level_input.insert(0, self.number_phase_level)
+
+        # puls_amplitude
+        lable_puls_amplitude = tk.Label(
+            frame_readout, text="puls_amplitude", bg='grey')
+        lable_puls_amplitude.grid(row=5, column=0, sticky="ew")
+
+        self.puls_amplitude_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.puls_amplitude_input.grid(row=5, column=1, sticky="ew")
+        self.puls_amplitude_input.insert(0, self.puls_amplitude)
+
+        #
 
         # Buttens
         frame_Buttens = tk.Frame(self.win_seq, bg='grey')
-        frame_Buttens.grid(row=3, column=1, padx=2, pady=2, sticky="nsew")
+        frame_Buttens.grid(row=4, column=1, padx=2, pady=2, sticky="nsew")
 
         button_run = tk.Button(frame_Buttens, text="load",
                                command=lambda: load_seq("test"))  # load_last_values)
@@ -414,6 +489,7 @@ class Window_seq:
                 if len(entery_value) == 0:
                     helper.error_type_window(
                         entery_value, int, "Puls entery", "Fill in all Puls parameter")
+                    break
                 try:
                     var_input = int(entery_value)
                 except ValueError:
@@ -425,16 +501,40 @@ class Window_seq:
         print("pulse_array", pulse_array)
         print("delay_array", delay_array)
 
+        self.puls_freq = [12]
+        self.puls_duration = 123
+        self.puls_amplitude = 1234
+        self.puls_arangement = 12345
+
         # read Readout
-        time_acquirer = self.t_acquirer.get()
+        time_acquirer = self.acquisition_time_input.get()
         print("time_acquirer ", time_acquirer)
+        self.repetition_time = self.repetition_time_input.get()
+        self.acquisition_time = self.acquisition_time_input.get()
+        self.gate_signal = self.gate_signal_input.get()
 
         # read SDR Settings
+        self.correction_tx_i_dc = self.correction_tx_i_dc_input.get()
+        self.correction_tx_q_dc = self.correction_tx_q_dc_input.get()
+        self.correction_tx_i_gain = self.correction_tx_i_gain_input.get()
+        self.correction_tx_q_gain = self.correction_tx_q_gain_input.get()
+        self.correction_tx_pahse = self.correction_tx_pahse_input.get()
+        self.correction_rx_i_dc = self.correction_rx_i_dc_input.get()
+        self.correction_rx_q_dc = self.correction_rx_q_dc_input.get()
+        self.correction_rx_i_gain = self.correction_rx_i_gain_input.get()
+        self.correction_rx_q_gain = self.correction_rx_q_gain_input.get()
+        self.correction_rx_phase = self.correction_rx_phase_input.get()
+        self.low_pass_rx = self.low_pass_rx_input.get()
+        self.low_pass_tx = self.low_pass_tx_input.get()
+        self.gain_rx = self.gain_rx_input.get()
+        self.gain_tx = self.gain_tx_input.get()
 
-        print("save all variabels from impout")
-        print("self.target_freq ", self.target_freq)
-        self.repetition_num = self.rep_time_input.get()
-        print("self.repetition_num ", self.repetition_num)
+        # Phase and puls paramterer
+        self.phase_number = self.phase_number_input.get()
+        self.phase_level = self.phase_level_input.get()
+        self.phase_puls = self.phase_puls_input.get()
+        self.number_phase_level0 = self.number_phase_level_input.get()
+        self.puls_amplitude = self.puls_amplitude_input.get()
 
         # save to cfg file
         Window_seq.save2cfg(self)
@@ -505,11 +605,11 @@ class Window_seq:
         configParser_new["Puls"]["puls_count"] = str(len(self.puls_freq))
 
         configParser_new["Phase"] = {}
-        configParser_new["Phase"]["phases_number"] = str(self.phases_number)
-        configParser_new["Phase"]["phases_level"] = str(self.phases_level)
+        configParser_new["Phase"]["phase_number"] = str(self.phase_number)
+        configParser_new["Phase"]["phase_level"] = str(self.phase_level)
         configParser_new["Phase"]["phase_puls"] = str(self.phase_puls)
-        configParser_new["Phase"]["number_phases_level"] = str(
-            self.number_phases_level)
+        configParser_new["Phase"]["number_phase_level"] = str(
+            self.number_phase_level)
 
         configParser_new["Readout"] = {}
         configParser_new["Readout"]["repetition_time"] = str(
