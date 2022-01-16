@@ -5,6 +5,7 @@ import sys
 import configparser
 import PIL.Image as image
 from datetime import datetime
+import numpy as np
 
 import tkinter as tk
 import tkinter.ttk as TTK  # use for Combobox
@@ -31,6 +32,7 @@ class Seq_values:
 class Window_seq:
     print("class Sequenz Window setup")
     frame_boarder = 4
+    max_number_puls = 10
 
     def __init__(self):
         # tk.Tk.__init__(self, *args, **kwargs)
@@ -61,6 +63,13 @@ class Window_seq:
         # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
         self.gate_signal = [1, 0, 50, 10]
 
+        self.phases_number = [4, 1]  # number of phases
+        # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary))
+        self.phases_level = [0, 1]
+        # pulse phase (added to phase shift due to pcn)
+        self.phase_puls = [0, np.pi/4]
+        self.number_phases_level = 1
+
         # pulse durations
         self.puls_freq = [self.band_freq]       # pulse frequency
         self.puls_duration = [3e-6]  # diy  pulse  duration
@@ -90,8 +99,9 @@ class Window_seq:
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
 
-        if puls_cylce > 7:
-            puls_cylce = 6
+        if puls_cylce > Window_seq.max_number_puls:
+            puls_cylce = Window_seq.max_number_puls
+
             print("max puls_cylce reached")
 
         # open GUI window and Present settings
@@ -104,7 +114,7 @@ class Window_seq:
         self.win_seq.geometry("1000x800")  # "1000x750+400+100"
         # (width_minsize=1200, height_minsize=800)
         self.win_seq.minsize(380, 400)
-        #self.win_seq.maxsize(1200, 850)
+        # self.win_seq.maxsize(1200, 850)
 
         # zeilen hoehe
         self.win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
@@ -185,20 +195,108 @@ class Window_seq:
         lable_info_tx_gain = tk.Label(self.frame_sdr, text="TX gain", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_gain.grid(row=3, column=0)
-        tx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        tx_gain_input.grid(row=3, column=1, sticky="ew")
+        self.tx_gain_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
+        self.tx_gain_input.grid(row=3, column=1, sticky="ew")
 
         lable_info_rx_pass = tk.Label(self.frame_sdr, text="RX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_rx_pass.grid(row=4, column=0)
-        rx_low_pass_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        rx_low_pass_input.grid(row=4, column=1, sticky="ew")
+        self.rx_low_pass_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.rx_low_pass_input.grid(row=4, column=1, sticky="ew")
 
         lable_info_tx_pass = tk.Label(self.frame_sdr, text="TX low-pass", padx=Window_seq.frame_boarder,
                                       pady=Window_seq.frame_boarder, bg='grey')
         lable_info_tx_pass.grid(row=5, column=0)
-        tx_low_pass_input = tk.Entry(self.frame_sdr, fg="black", bg="white")
-        tx_low_pass_input.grid(row=5, column=1, sticky="ew")
+        self.tx_low_pass_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.tx_low_pass_input.grid(row=5, column=1, sticky="ew")
+
+        lable_correction_tx_i_dc = tk.Label(self.frame_sdr, text="correction_tx_i_dc", padx=Window_seq.frame_boarder,
+                                            pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_tx_i_dc.grid(row=6, column=0)
+        self.correction_tx_i_dc_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_tx_i_dc_input.grid(row=6, column=1, sticky="ew")
+
+        lable_correction_tx_q_dc = tk.Label(self.frame_sdr, text="correction_tx_q_dc", padx=Window_seq.frame_boarder,
+                                            pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_tx_q_dc.grid(row=7, column=0)
+        self.correction_tx_q_dc_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_tx_q_dc_input.grid(row=7, column=1, sticky="ew")
+
+        lable_correction_tx_i_gain = tk.Label(self.frame_sdr, text="correction_tx_i_gain", padx=Window_seq.frame_boarder,
+                                              pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_tx_i_gain.grid(row=8, column=0)
+        self.correction_tx_i_gain_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_tx_i_gain_input.grid(row=8, column=1, sticky="ew")
+
+        lable_correction_tx_q_gain = tk.Label(self.frame_sdr, text="correction_tx_q_gain", padx=Window_seq.frame_boarder,
+                                              pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_tx_q_gain.grid(row=9, column=0)
+        self.correction_tx_q_gain_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_tx_q_gain_input.grid(row=9, column=1, sticky="ew")
+
+        lable_correction_tx_pahse = tk.Label(self.frame_sdr, text="correction_tx_pahse", padx=Window_seq.frame_boarder,
+                                             pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_tx_pahse.grid(row=10, column=0)
+        self.correction_tx_pahse_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_tx_pahse_input.grid(row=10, column=1, sticky="ew")
+
+        lable_correction_rx_i_dc = tk.Label(self.frame_sdr, text="correction_rx_i_dc", padx=Window_seq.frame_boarder,
+                                            pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_rx_i_dc.grid(row=11, column=0)
+        self.correction_rx_i_dc_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_rx_i_dc_input.grid(row=11, column=1, sticky="ew")
+
+        lable_correction_rx_q_dc = tk.Label(self.frame_sdr, text="correction_rx_q_dc", padx=Window_seq.frame_boarder,
+                                            pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_rx_q_dc.grid(row=12, column=0)
+        self.correction_rx_q_dc_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_rx_q_dc_input.grid(row=12, column=1, sticky="ew")
+
+        lable_correction_rx_i_gain = tk.Label(self.frame_sdr, text="correction_rx_i_gain", padx=Window_seq.frame_boarder,
+                                              pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_rx_i_gain.grid(row=13, column=0)
+        self.correction_rx_i_gain_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_rx_i_gain_input.grid(row=13, column=1, sticky="ew")
+
+        lable_correction_rx_q_gain = tk.Label(self.frame_sdr, text="correction_rx_q_gain", padx=Window_seq.frame_boarder,
+                                              pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_rx_q_gain.grid(row=14, column=0)
+        self.correction_rx_q_gain_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_rx_q_gain_input.grid(row=14, column=1, sticky="ew")
+
+        lable_correction_rx_phase = tk.Label(self.frame_sdr, text="correction_rx_phase", padx=Window_seq.frame_boarder,
+                                             pady=Window_seq.frame_boarder, bg='grey')
+        lable_correction_rx_phase.grid(row=15, column=0)
+        self.correction_rx_phase_input = tk.Entry(
+            self.frame_sdr, fg="black", bg="white")
+        self.correction_rx_phase_input.grid(row=15, column=1, sticky="ew")
+
+        self.rep_time_input.insert(0, self.repetition_time)
+        self.rx_gain_input.insert(0, self.gain_rx)
+        self.tx_gain_input.insert(0, self.gain_tx)
+        self.rx_low_pass_input.insert(0, self.low_pass_rx)
+        self.tx_low_pass_input.insert(0, self.low_pass_tx)
+        self.correction_tx_i_dc_input.insert(0, self.correction_tx_i_dc)
+        self.correction_tx_q_dc_input.insert(0, self.correction_tx_q_dc)
+        self.correction_tx_i_gain_input.insert(0, self.correction_tx_i_gain)
+        self.correction_tx_q_gain_input.insert(0, self.correction_tx_q_gain)
+        self.correction_tx_pahse_input.insert(0, self.correction_tx_pahse)
+        self.correction_rx_i_dc_input.insert(0, self.correction_rx_i_dc)
+        self.correction_rx_q_dc_input.insert(0, self.correction_rx_q_dc)
+        self.correction_rx_i_gain_input.insert(0, self.correction_rx_i_gain)
+        self.correction_rx_q_gain_input.insert(0, self.correction_rx_q_gain)
+        self.correction_rx_phase_input.insert(0, self.correction_rx_phase)
 
         # Time of Puls and Delay
         self.frame_puls = tk.LabelFrame(
@@ -355,10 +453,70 @@ class Window_seq:
         configParser_new["start"]["Datum created:"] = str(datetime.now())
         configParser_new["start"]["User created:"] = "User: " + \
             str(os.getlogin())
-        configParser_new["setting"] = {"key0": "value0", "key1": "value1"}
-        configParser_new["SDR setting"] = {"key0": "value0", "key1": "value1"}
-        configParser_new["Timing of Puls"] = {}
+
+        # puls settings
+        # configParser_new["setting"] = {"key0": "value0", "key1": "value1"}
+        configParser_new["setting"] = {}
+        configParser_new["setting"]["target_freq"] = str(self.target_freq)
+        configParser_new["setting"]["band_freq"] = str(self.band_freq)
+
+        # configParser_new["setting"]["band_freq"] = str(self.samplerate)
+        # configParser_new["setting"]["band_freq"] = str(self.averaging)
+        # configParser_new["setting"]["band_freq"] = str(self.repetition_num)
+
+        configParser_new["setting"]["lo_freq"] = str(self.target_freq *
+                                                     1000000 - self.band_freq * 1000000)
+
+        # SDR Settings
+        # configParser_new["SDR setting"] = {"key0": "value0", "key1": "value1"}
+        configParser_new["SDR setting"] = {}
+        configParser_new["SDR setting"]["correction_tx_i_dc"] = str(
+            self.correction_tx_i_dc)
+        configParser_new["SDR setting"]["correction_tx_q_dc"] = str(
+            self.correction_tx_q_dc)
+        configParser_new["SDR setting"]["correction_tx_i_gain"] = str(
+            self.correction_tx_i_gain)
+        configParser_new["SDR setting"]["correction_tx_q_gain"] = str(
+            self.correction_tx_q_gain)
+        configParser_new["SDR setting"]["correction_tx_pahse"] = str(
+            self.correction_tx_pahse)
+
+        configParser_new["SDR setting"]["correction_rx_i_dc"] = str(
+            self.correction_rx_i_dc)
+        configParser_new["SDR setting"]["correction_rx_q_dc"] = str(
+            self.correction_rx_q_dc)
+        configParser_new["SDR setting"]["correction_rx_i_gain"] = str(
+            self.correction_rx_i_gain)
+        configParser_new["SDR setting"]["correction_rx_q_gain"] = str(
+            self.correction_rx_q_gain)
+        configParser_new["SDR setting"]["correction_rx_phase"] = str(
+            self.correction_rx_phase)
+
+        configParser_new["SDR setting"]["low_pass_rx"] = str(self.low_pass_rx)
+        configParser_new["SDR setting"]["low_pass_tx"] = str(self.low_pass_tx)
+        configParser_new["SDR setting"]["gain_rx"] = str(self.gain_rx)
+        configParser_new["SDR setting"]["gain_tx"] = str(self.gain_tx)
+
+        configParser_new["Puls"] = {}
+        configParser_new["Puls"]["puls_freq"] = str(self.puls_freq)
+        configParser_new["Puls"]["puls_duration"] = str(self.puls_duration)
+        configParser_new["Puls"]["puls_amplitude"] = str(self.puls_amplitude)
+        configParser_new["Puls"]["puls_arangement"] = str(self.puls_arangement)
+        configParser_new["Puls"]["puls_count"] = str(len(self.puls_freq))
+
+        configParser_new["Phase"] = {}
+        configParser_new["Phase"]["phases_number"] = str(self.phases_number)
+        configParser_new["Phase"]["phases_level"] = str(self.phases_level)
+        configParser_new["Phase"]["phase_puls"] = str(self.phase_puls)
+        configParser_new["Phase"]["number_phases_level"] = str(
+            self.number_phases_level)
+
         configParser_new["Readout"] = {}
+        configParser_new["Readout"]["repetition_time"] = str(
+            self.repetition_time)
+        configParser_new["Readout"]["acquisition_time"] = str(
+            self.acquisition_time)
+        configParser_new["Readout"]["gate_signal"] = str(self.gate_signal)
 
         # write configfile
         with open(path_settings, "w") as configfile:

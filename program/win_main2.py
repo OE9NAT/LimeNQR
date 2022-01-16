@@ -140,7 +140,7 @@ class window_main(tk.Tk):
         #     self.wm_iconbitmap(bitmap=log_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
-        self.maxsize(1200, 850)
+        #self.maxsize(1200, 850)
         # self.geometry("1000x750+400+100")
 
         window_width = 1000
@@ -154,11 +154,12 @@ class window_main(tk.Tk):
         print("______window _" +
               f'{window_width}x{window_height}+{center_x}+{center_y}')
         self.geometry(f'{window_width}x{window_height}+{center_x}+{center_y}')
+        self.geometry("1000x800")
 
         self.option_add("Helvetica", '10')  # Frischart und groesse
         # self.resizable(width=False, height=False) #  False = no resize
 
-        # self.update()
+        self.update()
         # self.update_idletasks()
         logger_win_main.info("win_main2 start class window_main init")
 
