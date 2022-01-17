@@ -96,6 +96,10 @@ class Window_seq:
     def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1"):
         print("type of sequenz: ", seq_type)
         print("settings variables: \n \n", value_settings)
+        # settings variables:  {'freq': {'freq_start': '1000', 'freq_end': '2000', 'freq_step': '100', 'freq_repetitions': '10'}, 'tunematch': {'tune': '3.3', 'match': '5', 'step': '10', 'lut': '10'}, 'load': {'sample': '_test_Sample', 'experiment': '_test_Experiment', 'data': '_test_Data'}, 'sequenz': {'sequenz': 'fid'}}
+        print("settings variables: \n \n", value_settings["freq"])
+        self.puls_freq = value_settings["freq"]
+
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
 
@@ -501,10 +505,9 @@ class Window_seq:
         print("pulse_array", pulse_array)
         print("delay_array", delay_array)
 
-        self.puls_freq = [12]
-        self.puls_duration = 123
-        self.puls_amplitude = 1234
-        self.puls_arangement = 12345
+        #self.puls_freq = [12377777777]
+        self.puls_duration = pulse_array
+        self.puls_arangement = delay_array
 
         # read Readout
         time_acquirer = self.acquisition_time_input.get()
