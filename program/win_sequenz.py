@@ -25,8 +25,8 @@ value_set = variables.Value_Settings()
 logo_path = value_set.logo_path
 
 
-class Seq_values:
-    print("class Sequenz values setup")
+# class Seq_values:
+#    print("class Sequenz values setup")
 
 
 class Window_seq:
@@ -99,6 +99,7 @@ class Window_seq:
         # settings variables:  {'freq': {'freq_start': '1000', 'freq_end': '2000', 'freq_step': '100', 'freq_repetitions': '10'}, 'tunematch': {'tune': '3.3', 'match': '5', 'step': '10', 'lut': '10'}, 'load': {'sample': '_test_Sample', 'experiment': '_test_Experiment', 'data': '_test_Data'}, 'sequenz': {'sequenz': 'fid'}}
         print("settings variables: \n \n", value_settings["freq"])
         self.puls_freq = value_settings["freq"]
+        self.storage = value_settings["load"]
 
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
@@ -556,6 +557,9 @@ class Window_seq:
         configParser_new["start"]["Datum created:"] = str(datetime.now())
         configParser_new["start"]["User created:"] = "User: " + \
             str(os.getlogin())
+        configParser_new["start"]["Experiment:"] = str(self.storage)
+        configParser_new["start"]["Experiment parameter:"] = str(
+            self.puls_freq)
 
         # puls settings
         # configParser_new["setting"] = {"key0": "value0", "key1": "value1"}
