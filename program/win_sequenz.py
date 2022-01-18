@@ -152,6 +152,27 @@ class Window_seq:
             info_box, text="Test info text", bg='grey')
         self.lable_info_experiment.pack()
 
+        info_text = "Measurment Settings\n"
+        info_text += "START frequency: " + \
+            str(value_settings["freq"]["freq_start"])+"\n"
+        info_text += "END frequency: " + \
+            str(value_settings["freq"]["freq_end"])+"\n"
+        info_text += "frequency steps: " + \
+            str(value_settings["freq"]["freq_step"])+"\n"
+        info_text += "average: " + \
+            str(value_settings["freq"]["freq_repetitions"])+"\n"
+        self.lable_info_experiment = tk.Label(
+            info_box, text=info_text, bg='grey')
+        self.lable_info_experiment.pack()
+
+        info_text = "\n Experiment strukture:"+"\n"
+        info_text += "Sample: " + value_settings["load"]["sample"] + "\n"
+        info_text += "Experiment: " + value_settings["load"]["experiment"]+"\n"
+        info_text += "Data: " + value_settings["load"]["data"]+"\n"
+        self.lable_info_experiment = tk.Label(
+            info_box, text=info_text, bg='grey')
+        self.lable_info_experiment.pack()
+
         # plot sequenz
         frame_plot = tk.Frame(self.win_seq, bg="grey")
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
