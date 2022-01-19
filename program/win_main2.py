@@ -44,6 +44,7 @@ file_set = variables.File_Settings(value_set)
 Sequenz = win_sequenz.Window_seq()
 # win_sequenz.Window_seq( self.get_values()))
 # Sequenz.window_sequenz()
+#var_sequenz = Sequenz.save2cfg()
 
 # Start SDR and send Tune and Match to arduino
 # run_external.send_sdr()
@@ -119,6 +120,7 @@ class window_main(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
+        self.value_sequenz = Sequenz.save2cfg()
 
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
@@ -140,7 +142,7 @@ class window_main(tk.Tk):
         #     self.wm_iconbitmap(bitmap=log_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
         self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
-        #self.maxsize(1200, 850)
+        # self.maxsize(1200, 850)
         # self.geometry("1000x750+400+100")
 
         window_width = 1000
@@ -171,7 +173,7 @@ class window_main(tk.Tk):
         datei_menu.add_command(label="Save", command=self.get_values)
         datei_menu.add_command(
             label="auto-save", command=self.autosave)  # save_all)
-        datei_menu.add_command(label="Close all", command=save_quit_all)
+        datei_menu.add_command(label="Close all", command=self.save_quit_all)
         datei_menu.add_separator()  # Trennlinie
         datei_menu.add_command(label="load last values",
                                command=self.load_settings2)
@@ -364,6 +366,12 @@ class window_main(tk.Tk):
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
+        type_sequenz = self.get_values()["sequenz"]["sequenz"]
+        self.lable_info_puls = tk.Label(
+            info_box, text="Puls info:"+type_sequenz, bg='grey')
+        self.lable_info_puls.grid(
+            row=1, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
+
         # lambda: win_sequenz.Window_seq("spin", self.get_values()
 
         puls_button = tk.Button(info_box, text="set FID sequenz",
@@ -471,8 +479,8 @@ class window_main(tk.Tk):
         self.button_run.pack(fill="x", padx=2, pady=2)
 
         def run_butten(self):
-            #print("run butten pressed to start measurment")
-            run_external.send_sdr(self.get_values())
+            # print("run butten pressed to start measurment")
+            run_external.send_sdr(self.get_values(), self.value_sequenz)
             self.plot_update()
 
         button_run = tk.Button(self.frame_Buttens, text="RUN ", activebackground="red",
@@ -488,7 +496,7 @@ class window_main(tk.Tk):
         plot_button.pack(fill="x", padx=2, pady=2)
 
         exit_button = tk.Button(
-            self.frame_Buttens, text="Save & Close", command=save_quit_all)  # self.destroy)
+            self.frame_Buttens, text="Save & Close", command=self.save_quit_all)  # self.destroy)
         # exit_button = tk.Button(self, text="Beenden", command=self.quit)#.destroy) #self.quit
         # .grid(row=3,  padx=2, pady=2, sticky="ew")
         exit_button.pack(fill="x", padx=2, pady=2)
@@ -531,6 +539,15 @@ class window_main(tk.Tk):
         # gread GUI and save to class Value_Settings
         value_set.save_settings = self.get_values()
 
+        # save Sequenz data to Experiment strukture
+        storage = file_set.main_data_path  # "Storage_vault"
+        path = os.path.join(os.path.dirname(sys.argv[0]), storage)
+        experiment_path = os.path.join(path, sample, experiment, data)
+        print("experiment_path in save_measurment \n", experiment_path)
+
+        var_sequenz = Sequenz.save2cfg(
+            file="setting_sequenz.cfg", file_path=experiment_path)
+
         self.saved_poup = tk.Label(
             self.frame_measure, text='settings saved', font=(7), background="chartreuse4")
         self.saved_poup.grid(row=5, column=1, padx=5,
@@ -541,7 +558,7 @@ class window_main(tk.Tk):
         # select settings.cfg
 
         path_settings = os.path.abspath(os.path.dirname(sys.argv[0]))
-        storage = file_set.main_data_path
+        storage = file_set.main_data_path  # "Storage_vault"
 
         path = os.path.join(path_settings, storage)
         path_settings = filedialog.askopenfilename(
@@ -786,7 +803,7 @@ class window_main(tk.Tk):
         data_amplitude = [float(data[i][0].split(",")[1].replace('"', ''))
                           for i, val in enumerate(data)]
 
-        #test = [print(val) for val in data_value]
+        # test = [print(val) for val in data_value]
 
         # data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
         # data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
@@ -955,12 +972,30 @@ class window_main(tk.Tk):
             text="Experiment: "+value_set._load_experiment)
         self.lable_info_data.config(text="Daten: "+value_set._load_data)
 
+        # read back sequenz data from entery Window
+        self.value_sequenz = Sequenz.save2cfg()
+
+        type_sequenz = self.value_sequenz["setting"]["sequenz_type"]
+        self.lable_info_puls.config(text="Puls info: "+type_sequenz)
+
         # update again after fixed time "autosave automatikaly"
         self.after(window_main.time_autosave, self.autosave)
 
-    def close():
-        print("close all windows")
-        self.destroy()
+    def save_all(self):
+        # save all parameters to file
+        self.save_measurment()
+        print("save all")
+
+    def save_quit_all(self):
+        print("test")
+
+        # save all parameters to file
+        self.save_measurment()
+        print("save all parameters to file")
+
+        # close all windows
+        print("closing all windows")
+        sys.exit()
 
 
 # show window, wait for user imput

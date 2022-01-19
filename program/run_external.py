@@ -19,31 +19,46 @@ print("RUN sequenz")
 #        print("run SDR sequenz")
 
 
-def send_sdr(value):
+def send_sdr(value_main, value_sequenz):
     print("RUN SDR sequenz ")
-    print("value ", value)
-    # value =
+    print("value_main ", value_main)
+    # value_main =
     # {'freq': {'freq_start': '1000', 'freq_end': '2000', 'freq_step': '100', 'freq_repetitions': '10'},
     # 'tunematch': {'tune': '3.3', 'match': '5', 'step': '10', 'lut': '10'},
     # 'load': {'sample': '_test_Sample', 'experiment': '_test_Experiment', 'data': '_test_Data'}
     # 'sequenz': {'sequenz': 'fid'}} # fid, spin, comp, spin_phase,own
-    sequenz_select = value.get("sequenz").get("sequenz")
+    sequenz_select = value_main.get("sequenz").get("sequenz")
+    print("value_sequenz ", value_sequenz)
+    # {'start': {'datum created:': '2022-01-19 23:26:53.497312', 'user created:': 'User: MALIN Philipp', 'experiment:': "['Experiment initialise']", 'experiment parameter:': '[1.2]'},
+    # 'setting': {'sequenz_type': 'fid', 'target_freq': '83.62', 'band_freq': '1.2', 'lo_freq': '82420000.0'},
+    # 'SDR setting': {'correction_tx_i_dc': '-45', 'correction_tx_q_dc': '0', 'correction_tx_i_gain': '2047', 'correction_tx_q_gain': '2039', 'correction_tx_pahse': '3',    'correction_rx_i_dc': '0', 'correction_rx_q_dc': '0', 'correction_rx_i_gain': '2047', 'correction_rx_q_gain': '2047', 'correction_rx_phase': '0', 'low_pass_rx': '3000000.0', 'low_pass_tx': '130000000.0', 'gain_rx': '55.0', 'gain_tx': '40.0'},
+    # 'Puls': {'puls_freq': '[1.2]', 'puls_duration': '[3e-06]', 'puls_amplitude': '[1]', 'puls_arangement': '[300]', 'puls_count': '1'},
+    # 'Phase': {'phase_number': '[4, 1]', 'phase_level': '[0, 1]', 'phase_puls': '[0, 0.7853981633974483]', 'number_phase_level': '1'},
+    # 'Readout': {'repetition_time': '5', 'acquisition_time': '82', 'gate_signal': '[1, 0, 50, 10]'}}
+    sequenz_select = value_sequenz["setting"]["sequenz_type"]
 
     print("selected sequenz: ", sequenz_select)
     if sequenz_select == "fid":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value)
+        [x_time, y_time, x_freq, y_freq] = seq_fid(value_main, value_sequenz)
 
-    if sequenz_select == "spin":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value)
+    elif sequenz_select == "spin":
+        [x_time, y_time, x_freq, y_freq] = seq_spin(value_main, value_sequenz)
 
-    if sequenz_select == "comp":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value)
+    elif sequenz_select == "comp":
+        [x_time, y_time, x_freq, y_freq] = seq_comp(value_main, value_sequenz)
 
-    if sequenz_select == "spin_phase":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value)
+    elif sequenz_select == "spin_phase":
+        [x_time, y_time, x_freq, y_freq] = seq_fid(value_main, value_sequenz)
 
-    if sequenz_select == "spin_phase":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value)
+    elif sequenz_select == "spin_phase":
+        [x_time, y_time, x_freq, y_freq] = seq_spin_phase(
+            value_main, value_sequenz)
+
+    elif sequenz_select == "own":
+        [x_time, y_time, x_freq, y_freq] = seq_own(value_main, value_sequenz)
+
+    else:
+        print("Waring \n sequenz_select dose not exist!! \n", sequenz_select)
 
     # store aquiried data to filestrukture
     # [22.52604167 22.55859375 22.59114583 22.62369792 22.65625 ]
@@ -76,18 +91,18 @@ def send_sdr(value):
     with open(file_time, 'w', ) as seq_file:
         wr = csv.writer(seq_file, quoting=csv.QUOTE_ALL)
         wr.writerow(["x_time", "y_time_abs", "y_time_complex"])
-        for i, value in enumerate(x_time):
+        for i, value_main in enumerate(x_time):
             wr.writerow([float(x_time[i]), y_time_abs[i], y_time_compex[i]])
 
     with open(file_freq, 'w', ) as seq_file:
         wr = csv.writer(seq_file, quoting=csv.QUOTE_ALL)
         wr.writerow(["x_freq", "y_freq"])
-        for i, value in enumerate(x_freq):
+        for i, value_main in enumerate(x_freq):
             wr.writerow([float(x_freq[i]), float(y_freq[i])])
 
 
-def seq_fid(value):
-    print("fid seq \n", value)
+def seq_fid(value_main, value_sequenz):
+    print("fid seq \n", value_main)
     """ file from lukas FIDseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
@@ -105,20 +120,32 @@ def seq_fid(value):
     # LO frequency (target7 frequency - base band frequency)
     l.lof = tgtfreq-if_frq
     l.sra = 30.72e6                                     # Sampling Rate
-    l.nav = 1000                                        # number of averages
-    l.nrp = 1                                           # number of repetitions
+    # number of averages
+    l.nav = value_main["freq"]["freq_repetitions"]
+    # 1                                           # number of repetitions
+    l.nrp = value_sequenz['SDR setting']['repetition_time']
 
-    l.tdi = -45                                         # TX I DC correction
-    l.tdq = 0                                           # TX Q DC correction
-    l.tgi = 2047                                        # TX I Gain correction
-    l.tgq = 2039                                        # TX Q Gain correction
-    l.tpc = 3                                           # TX phase adjustment
+    # -45                                         # TX I DC correction
+    l.tdi = value_sequenz['SDR setting']['correction_tx_i_dc']
+    # 0                                           # TX Q DC correction
+    l.tdq = value_sequenz['SDR setting']['correction_tx_q_dc']
+    # 2047                                        # TX I Gain correction
+    l.tgi = value_sequenz['SDR setting']['correction_tx_i_gain']
+    # 2039                                        # TX Q Gain correction
+    l.tgq = value_sequenz['SDR setting']['correction_tx_q_gain']
+    # 3                                           # TX phase adjustment
+    l.tpc = value_sequenz['SDR setting']['correction_tx_pahse']
 
-    l.rgi = 2047                                        # RX I Gain correction
-    l.rgq = 2047                                        # RX Q Gain correction
-    l.rdi = 0                                           # RX I DC correction
-    l.rdq = 0                                           # RX Q DC correction
-    l.rpc = 0                                           # RX phase adjustment
+    # 2047                                        # RX I Gain correction
+    l.rgi = value_sequenz['SDR setting']['correction_rx_i_dc']
+    # 2047                                        # RX Q Gain correction
+    l.rgq = value_sequenz['SDR setting']['correction_rx_q_dc']
+    # 0                                           # RX I DC correction
+    l.rdi = value_sequenz['SDR setting']['correction_rx_i_gain']
+    # 0                                           # RX Q DC correction
+    l.rdq = value_sequenz['SDR setting']['correction_rx_q_gain']
+    # 0                                           # RX phase adjustment
+    l.rpc = value_sequenz['SDR setting']['correction_rx_phase']
 
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
@@ -228,8 +255,8 @@ def seq_fid(value):
         raise Exception(" hardware is missing")
 
 
-def seq_spin(value):
-    print("spin seq \n", value)
+def seq_spin(value_main, value_sequenz):
+    print("spin seq \n", value_main)
     """ File from Lukas: SpinEchoseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
@@ -370,9 +397,9 @@ def seq_spin(value):
         raise Exception(" hardware is missing")
 
 
-def seq_comp(value):
+def seq_comp(value_main, value_sequenz):
 
-    print("comp seq \n", value)
+    print("comp seq \n", value_main)
     """ File from Lukas: CompositePulseseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
@@ -532,8 +559,8 @@ def seq_comp(value):
         raise Exception(" hardware is missing")
 
 
-def seq_spin_phase(value):
-    print("spin_phase seq \n", value)
+def seq_spin_phase(value_main, value_sequenz):
+    print("spin_phase seq \n", value_main)
     """ file from Lukas SpinEchoPhaseCyclingseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
@@ -691,8 +718,8 @@ def seq_spin_phase(value):
         raise Exception(" hardware is missing")
 
 
-def seq_own(value):
-    print("fid sspin_phaseeq \n", value)
+def seq_own(value_main, value_sequenz):
+    print("fid sspin_phaseeq \n", value_main)
     """own Sequenz """
 
     # l = limr.limr('./pulseN_test_USB.cpp')

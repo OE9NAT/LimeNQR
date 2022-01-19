@@ -259,10 +259,15 @@ class Value_Settings:
             path_settings, storage, sample_path, exp_path, data_path, setting_name)
         print("setting file: ", path_settings)
 
+        # if path not exist
+        if not os.path.exists(os.path.dirname(path_settings)):
+            storage_path = os.path.dirname(path_settings)
+            print("storage_path", storage_path)
+            os.makedirs(storage_path)
+
+        # if file not exist
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            storage_path = os.path.dirname(path_settings)
-            os.makedirs(storage_path)
 
             logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")

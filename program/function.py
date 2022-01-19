@@ -31,6 +31,7 @@ logger_function.info("logging from start up")
 
 def save_all():
     print("save all was clicked")
+    print("test!! not implemented")
 
 
 def load_setting(path="/home/pi/Bach_arbeit/program", file="setting.cfg"):
@@ -90,12 +91,6 @@ def RUN():
     logger_function.critical('critical message')
 
     window2.mainloop()
-
-
-def save_quit_all():
-    print("quit() funktion closes all windows")
-    print("save all")
-    sys.exit()
 
 
 def variable_input_windows():

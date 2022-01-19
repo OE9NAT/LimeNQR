@@ -37,6 +37,9 @@ class Window_seq:
     def __init__(self):
         # tk.Tk.__init__(self, *args, **kwargs)
 
+        # Sequenz
+        self.sequenz_type = "fid"
+
         self.target_freq = 83.62  # target frequency of the experiment in MHz
         self.band_freq = 1.2    # IF or base band frequency in MHz
 
@@ -89,6 +92,8 @@ class Window_seq:
         lo_freq = self.target_freq * 1000000 - self.band_freq * 1000000
         rx_gain_factor = 10**((self.puls_freq[0]-40)/20)
 
+        self.storage = ["Experiment initialise"]
+
         # call Window
         # Window_seq.window_sequenz(self, seq_type)
 
@@ -100,6 +105,7 @@ class Window_seq:
         print("settings variables: \n \n", value_settings["freq"])
         self.puls_freq = value_settings["freq"]
         self.storage = value_settings["load"]
+        self.sequenz_type = seq_type
 
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
@@ -144,13 +150,18 @@ class Window_seq:
         lable_text.pack(fill="x")
 
         # Info box experiment strukture
-        info_box = tk.LabelFrame(self.win_seq, text="info box", bg='grey')
-        info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
-                      pady=Window_seq.frame_boarder, sticky="nsew")
+        self.info_box = tk.LabelFrame(self.win_seq, text="info box", bg='grey')
+        self.info_box.grid(row=1, column=0, padx=Window_seq.frame_boarder,
+                           pady=Window_seq.frame_boarder, sticky="nsew")
 
-        self.lable_info_experiment = tk.Label(
-            info_box, text="Test info text", bg='grey')
-        self.lable_info_experiment.pack()
+        self.input_info_sequenz = tk.Label(
+            self.info_box, text="Sequenz selected:", bg='grey')
+        self.input_info_sequenz.pack()
+
+        self.sequenz_type_input = tk.Entry(
+            self.info_box, fg="black", bg="white")
+        self.sequenz_type_input.pack()
+        self.sequenz_type_input.insert(0, self.sequenz_type)
 
         info_text = "Measurment Settings\n"
         info_text += "START frequency: " + \
@@ -162,7 +173,7 @@ class Window_seq:
         info_text += "average: " + \
             str(value_settings["freq"]["freq_repetitions"])+"\n"
         self.lable_info_experiment = tk.Label(
-            info_box, text=info_text, bg='grey')
+            self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
         info_text = "\n Experiment strukture:"+"\n"
@@ -170,7 +181,7 @@ class Window_seq:
         info_text += "Experiment: " + value_settings["load"]["experiment"]+"\n"
         info_text += "Data: " + value_settings["load"]["data"]+"\n"
         self.lable_info_experiment = tk.Label(
-            info_box, text=info_text, bg='grey')
+            self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
         # plot sequenz
@@ -491,7 +502,7 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="save",
-                               command=lambda: Window_seq.save_seq(self, "test"))  # load_last_values)
+                               command=lambda: Window_seq.save_seq(self))  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="test",
@@ -503,8 +514,10 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="right")
 
     @ staticmethod
-    def save_seq(self, var):
+    def save_seq(self):
         # get input parameter and save to class variables
+
+        self.sequenz_type = self.sequenz_type_input.get()
 
         # read Timing of Puls
         read_array = []
@@ -562,9 +575,11 @@ class Window_seq:
         self.puls_amplitude = self.puls_amplitude_input.get()
 
         # save to cfg file
-        Window_seq.save2cfg(self)
+        seq_variabels = Window_seq.save2cfg(self)
+        return seq_variabels
 
-    def save2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
+    def save2cfg(self, file="program/setting_sequenz.cfg", file_path=os.path.dirname(sys.argv[0])):
+
         print("save settings to .cfg file")
         path_settings = os.path.join(file_path, file)
         if not os.path.exists(path_settings):
@@ -585,6 +600,7 @@ class Window_seq:
         # puls settings
         # configParser_new["setting"] = {"key0": "value0", "key1": "value1"}
         configParser_new["setting"] = {}
+        configParser_new["setting"]["sequenz_type"] = str(self.sequenz_type)
         configParser_new["setting"]["target_freq"] = str(self.target_freq)
         configParser_new["setting"]["band_freq"] = str(self.band_freq)
 
@@ -649,6 +665,8 @@ class Window_seq:
         # write configfile
         with open(path_settings, "w") as configfile:
             configParser_new.write(configfile)
+
+        return {s: dict(configParser_new.items(s)) for s in configParser_new.sections()}
 
     def load_seq(var):
         print("load all variabels from .cfg file")
