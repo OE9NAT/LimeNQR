@@ -271,7 +271,7 @@ class window_main(tk.Tk):
 
         # Butten save settings to settings.cfg
         self.button_run = tk.Button(
-            self.frame_measure, text="save settings", command=self.save_measurment, foreground="green")
+            self.frame_measure, text="SAVE all", command=self.save_measurment, foreground="green")
         self.button_run.grid(row=5, column=0, rowspan=1,
                              padx=5, pady=5, sticky="ew")
 
@@ -335,6 +335,17 @@ class window_main(tk.Tk):
         self.send_TMfile = tk.Button(
             frame_tm, text="Send to Arduino", command=self.send_arduino, foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
+
+        # Comport Arduino
+        self.Match_U_max_lable = tk.Label(frame_tm, text="Arduino COMport: ")
+        self.Match_U_max_lable.grid(row=5, column=0, padx=5, pady=5)
+
+        self.arduino_com_input = tk.Entry(
+            frame_tm, fg="black", bg="white", width=10)
+        self.arduino_com_input.grid(row=5, column=1, padx=5, pady=5)
+        self.arduino_com_input.insert(0, "COM 4")
+
+     
 
         ######----- info box  ------######
         info_box = tk.LabelFrame(self, text="info box", bg='grey')
@@ -942,10 +953,10 @@ class window_main(tk.Tk):
         #    self, sample=path, experiment=experiment, data=cycle)
 
         # logger
-        log_text = "set storage "+"\n"
-        log_text = log_text + " path " + path + "\n"
-        log_text = log_text + " experiment " + experiment + "\n"
-        log_text = log_text + " cycle " + cycle + "\n"
+        log_text = "__ set storage __"+"\n"
+        log_text = log_text + " path: " + path + "\n"
+        log_text = log_text + " experiment: " + experiment + "\n"
+        log_text = log_text + " cycle: " + cycle + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -980,6 +991,12 @@ class window_main(tk.Tk):
 
         # update again after fixed time "autosave automatikaly"
         self.after(window_main.time_autosave, self.autosave)
+
+        # logger
+        # log_text = "saved all Parameters"+"\n"
+        # log_text += "______________________ \n"
+        # self.logtext_area.insert(tk.INSERT, log_text)
+        # logger_value.info(log_text)
 
     def save_all(self):
         # save all parameters to file

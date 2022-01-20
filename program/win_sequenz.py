@@ -42,6 +42,8 @@ class Window_seq:
 
         self.target_freq = 83.62  # target frequency of the experiment in MHz
         self.band_freq = 1.2    # IF or base band frequency in MHz
+        self.blank_time = 10    # duration after puls, before window
+        self.window_time = 10  # time to read the signal
 
         self.samplerate = 30.72      # Sampling Rate in M sap per sec
         self.averaging = 1000        # number of averages
@@ -122,7 +124,7 @@ class Window_seq:
         self.win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
 
-        self.win_seq.geometry("1000x800")  # "1000x750+400+100"
+        self.win_seq.geometry("1200x1000")  # "1000x750+400+100"
         # (width_minsize=1200, height_minsize=800)
         self.win_seq.minsize(380, 400)
         # self.win_seq.maxsize(1200, 850)
@@ -380,12 +382,6 @@ class Window_seq:
         for number in range(number_pulses):
             number_puls = number*2
             number_delay = number*2+1
-            lable_puls = tk.Label(
-                self.frame_puls, text="Puls "+str(number+1)+" in ms", bg='grey')
-            lable_puls.grid(row=number_puls, column=0)
-            pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
-            pulse.grid(row=number_puls, column=1, sticky="ew")
-            # pulse.config(yscrollcommand=myscrollbar.set)
 
             lable_delay = tk.Label(
                 self.frame_puls, text="Delay "+str(number+1)+" in ms", bg='grey')
@@ -393,6 +389,13 @@ class Window_seq:
             delay = tk.Entry(self.frame_puls, fg="black", bg="white")
             delay.grid(row=number_delay, column=1, sticky="ew")
             # delay.config(yscrollcommand=myscrollbar.set)
+
+            lable_puls = tk.Label(
+                self.frame_puls, text="Puls "+str(number+1)+" in ms", bg='grey')
+            lable_puls.grid(row=number_puls, column=0)
+            pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
+            pulse.grid(row=number_puls, column=1, sticky="ew")
+            # pulse.config(yscrollcommand=myscrollbar.set)
 
         # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
@@ -431,6 +434,26 @@ class Window_seq:
             frame_readout, fg="black", bg="white")
         self.gate_signal_input.grid(row=3, column=1, sticky="ew")
         self.gate_signal_input.insert(0, self.gate_signal)
+
+        # blank_time
+        lable_blank_time = tk.Label(
+            frame_readout, text="Blanking time in ms", bg='grey')
+        lable_blank_time.grid(row=4, column=0, sticky="ew")
+
+        self.blank_time_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.blank_time_input.grid(row=4, column=1, sticky="ew")
+        self.blank_time_input.insert(0, self.blank_time)
+
+        # window_time
+        lable_window_time = tk.Label(
+            frame_readout, text="Window Time in ms", bg='grey')
+        lable_window_time.grid(row=5, column=0, sticky="ew")
+
+        self.window_time_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.window_time_input.grid(row=5, column=1, sticky="ew")
+        self.window_time_input.insert(0, self.window_time)
 
         # # Phase
         frame_readout = tk.LabelFrame(
@@ -498,7 +521,7 @@ class Window_seq:
         frame_Buttens.grid(row=4, column=1, padx=2, pady=2, sticky="nsew")
 
         button_run = tk.Button(frame_Buttens, text="load",
-                               command=lambda: load_seq("test"))  # load_last_values)
+                               command=lambda: Window_seq.load_seq(self))  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="save",
@@ -506,7 +529,7 @@ class Window_seq:
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="test",
-                               command=lambda: helper.error_type_window(int, str, "x_number"))  # load_last_values)
+                               command=lambda: print("space for expantion "))  # load_last_values)
         button_run.pack(fill="x", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="close",
@@ -535,18 +558,16 @@ class Window_seq:
                     helper.error_type_window(entery_value, int, "Puls entery")
                 read_array.append(var_input)
 
-        pulse_array = read_array[::2].copy()
-        delay_array = read_array[1::2].copy()
+        delay_array = read_array[::2].copy()
+        pulse_array = read_array[1::2].copy()
         print("pulse_array", pulse_array)
         print("delay_array", delay_array)
 
         #self.puls_freq = [12377777777]
-        self.puls_duration = pulse_array
-        self.puls_arangement = delay_array
+        self.blank_time = self.blank_time_input.get()
+        self.window_time = self.window_time_input.get()
 
         # read Readout
-        time_acquirer = self.acquisition_time_input.get()
-        print("time_acquirer ", time_acquirer)
         self.repetition_time = self.repetition_time_input.get()
         self.acquisition_time = self.acquisition_time_input.get()
         self.gate_signal = self.gate_signal_input.get()
@@ -603,6 +624,8 @@ class Window_seq:
         configParser_new["setting"]["sequenz_type"] = str(self.sequenz_type)
         configParser_new["setting"]["target_freq"] = str(self.target_freq)
         configParser_new["setting"]["band_freq"] = str(self.band_freq)
+        configParser_new["setting"]["blank_time"] = str(self.blank_time)
+        configParser_new["setting"]["window_time"] = str(self.window_time)
 
         # configParser_new["setting"]["band_freq"] = str(self.samplerate)
         # configParser_new["setting"]["band_freq"] = str(self.averaging)
@@ -668,11 +691,66 @@ class Window_seq:
 
         return {s: dict(configParser_new.items(s)) for s in configParser_new.sections()}
 
-    def load_seq(var):
+    def load_seq(self):
         print("load all variabels from .cfg file")
+
+        seq_variabels = Window_seq.read2cfg(self)
+
+        self.blank_time_input.insert(0, seq_variabels["setting"]["blank_time"])
+        self.window_time_input.insert(
+            0, seq_variabels["setting"]["blank_time"])
+
+        # read Readout
+        self.repetition_time_input.insert(
+            0, seq_variabels["Readout"]["repetition_time"])
+        self.acquisition_time_input.insert(
+            0, seq_variabels["Readout"]["acquisition_time"])
+        self.gate_signal_input.insert(
+            0, seq_variabels["Readout"]["gate_signal"])
+
+        # read SDR Settings
+        self.correction_tx_i_dc_input.insert(
+            0, seq_variabels["SDR setting"]["correction_tx_i_dc"])
+        self.correction_tx_q_dc_input.insert(
+            0, seq_variabels["SDR setting"]["correction_tx_q_dc"])
+        self.correction_tx_i_gain_input.insert(
+            0, seq_variabels["SDR setting"]["correction_tx_i_gain"])
+        self.correction_tx_q_gain_input.insert(
+            0, seq_variabels["SDR setting"]["correction_tx_q_gain"])
+        self.correction_tx_pahse_input.insert(
+            0, seq_variabels["SDR setting"]["correction_tx_pahse"])
+        self.correction_rx_i_dc_input.insert(
+            0, seq_variabels["SDR setting"]["correction_rx_i_dc"])
+        self.correction_rx_q_dc_input.insert(
+            0, seq_variabels["SDR setting"]["correction_rx_q_dc"])
+        self.correction_rx_i_gain_input.insert(
+            0, seq_variabels["SDR setting"]["correction_rx_i_gain"])
+        self.correction_rx_q_gain_input.insert(
+            0, seq_variabels["SDR setting"]["correction_rx_q_gain"])
+        self.correction_rx_phase_input.insert(
+            0, seq_variabels["SDR setting"]["correction_rx_phase"])
+        self.low_pass_rx_input.insert(
+            0, seq_variabels["SDR setting"]["low_pass_rx"])
+        self.low_pass_tx_input.insert(
+            0, seq_variabels["SDR setting"]["low_pass_tx"])
+        self.gain_rx_input.insert(0, seq_variabels["SDR setting"]["gain_rx"])
+        self.gain_tx_input.insert(0, seq_variabels["SDR setting"]["gain_tx"])
+
+        # Phase and puls paramterer
+        self.phase_number_input.insert(
+            0, seq_variabels["Phase"]["phase_number"])
+        self.phase_level_input.insert(0, seq_variabels["Phase"]["phase_level"])
+        self.phase_puls_input.insert(0, seq_variabels["Phase"]["phase_puls"])
+        self.number_phase_level_input.insert(
+            0, seq_variabels["Phase"]["number_phase_level"])
+        self.puls_amplitude_input.insert(
+            0, seq_variabels["Puls"]["puls_amplitude"])
+
+        return seq_variabels
 
     def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
         " read .cfg file from file "
+        path_settings = os.path.join(file_path, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
 
@@ -680,6 +758,9 @@ class Window_seq:
         configParser.read(path_settings)
         setting_dict = {section: dict(configParser.items(section))
                         for section in configParser.sections()}
+
+        print("read from cfg file", setting_dict)
+        return setting_dict
 
 
 class Seq_FID:

@@ -121,30 +121,27 @@ def seq_fid(value_main, value_sequenz):
     l.lof = tgtfreq-if_frq
     l.sra = 30.72e6                                     # Sampling Rate
     # number of averages
-    l.nav = value_main["freq"]["freq_repetitions"]
-    # 1                                           # number of repetitions
+    l.nav = value_main["freq"]["freq_repetitions"]   # number of repetitions
+    # TX I DC correction
     l.nrp = value_sequenz['SDR setting']['repetition_time']
-
-    # -45                                         # TX I DC correction
+    # TX Q DC correction
     l.tdi = value_sequenz['SDR setting']['correction_tx_i_dc']
-    # 0                                           # TX Q DC correction
+    # TX I Gain correction
     l.tdq = value_sequenz['SDR setting']['correction_tx_q_dc']
-    # 2047                                        # TX I Gain correction
+    # TX Q Gain correction
     l.tgi = value_sequenz['SDR setting']['correction_tx_i_gain']
-    # 2039                                        # TX Q Gain correction
+    # TX phase adjustment
     l.tgq = value_sequenz['SDR setting']['correction_tx_q_gain']
-    # 3                                           # TX phase adjustment
+    # RX I Gain correction
     l.tpc = value_sequenz['SDR setting']['correction_tx_pahse']
-
-    # 2047                                        # RX I Gain correction
+    # RX Q Gain correction
     l.rgi = value_sequenz['SDR setting']['correction_rx_i_dc']
-    # 2047                                        # RX Q Gain correction
+    # RX I DC correction
     l.rgq = value_sequenz['SDR setting']['correction_rx_q_dc']
-    # 0                                           # RX I DC correction
+    # RX Q DC correction
     l.rdi = value_sequenz['SDR setting']['correction_rx_i_gain']
-    # 0                                           # RX Q DC correction
+    # RX phase adjustment
     l.rdq = value_sequenz['SDR setting']['correction_rx_q_gain']
-    # 0                                           # RX phase adjustment
     l.rpc = value_sequenz['SDR setting']['correction_rx_phase']
 
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
