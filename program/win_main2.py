@@ -345,8 +345,6 @@ class window_main(tk.Tk):
         self.arduino_com_input.grid(row=5, column=1, padx=5, pady=5)
         self.arduino_com_input.insert(0, "COM 4")
 
-     
-
         ######----- info box  ------######
         info_box = tk.LabelFrame(self, text="info box", bg='grey')
         info_box.grid(row=0, column=2, padx=frame_boarder,
@@ -422,6 +420,12 @@ class window_main(tk.Tk):
         frame_plot = tk.Frame(self, bg='grey')  # , width=100, height=300, )
         frame_plot.grid(row=1, column=1, sticky="nsew",
                         columnspan=2, rowspan=2, padx=2, pady=2)
+        frame_plot.grid_columnconfigure(0, weight=1, minsize=300)
+        frame_plot.grid_columnconfigure(1, weight=1, minsize=300)
+
+        frame_plot.grid_rowconfigure(0, weight=1, minsize=10)
+        frame_plot.grid_rowconfigure(1, weight=100, minsize=300)
+        frame_plot.grid_rowconfigure(2, weight=1, minsize=10)
 
         plot_text = tk.Label(frame_plot, text="Results of last run",
                              foreground="green", background="white", font=("Arial Bold", 10))

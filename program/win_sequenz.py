@@ -9,6 +9,9 @@ import numpy as np
 
 import tkinter as tk
 import tkinter.ttk as TTK  # use for Combobox
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
+                                               NavigationToolbar2Tk)
 from tkinter import scrolledtext   # use for logger
 from PIL import ImageTk, Image  # .jpg
 
@@ -191,31 +194,169 @@ class Window_seq:
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
+        def plot_sequenz(offset, puls, delay=10, window=20, frequency=100, amplitude=1):
+            rest = 10  # end of puls
+
+            duration = []
+            duration_list = []
+
+            for count, value in enumerate(puls):
+                duration.extend([0 for i in range(0, offset[count])])
+                duration.extend([1 for i in range(0, puls[count])])
+                duration_list.append(offset[count])
+                duration_list.append(puls[count])
+
+            delay_start = len(duration)
+            duration.extend([0 for i in range(0, delay)])
+
+            window_start = len(duration)
+            duration.extend([1 for i in range(0, window)])
+            duration.extend([0 for i in range(0, rest)])
+
+            start_time = 0
+            end_time = len(duration)
+            sample_rate = 1000
+
+            time = np.arange(start_time, end_time, 1/sample_rate)
+
+            start_time = time[0]
+            end_time = time[-1]
+            time = np.arange(start_time, end_time, 1/sample_rate)
+            print(start_time, "end_time", end_time)
+
+            sinus = amplitude * np.sin(2 * np.pi * frequency * time)
+            sinus = amplitude * np.sin(2 * np.pi * time)
+            # sinus = sinus * np.repeat(duration, sample_rate)
+
+            x_puls = np.repeat(range(len(duration)), sample_rate)
+            y_puls = np.repeat(duration, sample_rate)
+            x_puls = x_puls[1:]
+            y_puls = y_puls[:-1]
+            x_puls = np.append(x_puls, x_puls[-1] + 1)
+            y_puls = np.append(y_puls, y_puls[-1])
+
+            time = np.append(time, time[-1]).tolist()
+            sinus = np.append(sinus, sinus[-1]).tolist()
+
+            sinus_puls = [sinus[count] if value ==
+                          1 else 0 for count, value in enumerate(y_puls)]
+
+            # with dampend responce
+            print("window_start,", window_start*sample_rate)
+            window_start_upsample = window_start*sample_rate
+
+            sinus_puls = [sinus_puls[count] * (np.exp(-(count-window_start_upsample-200)*0.0001)) if count >
+                          window_start_upsample else sinus_puls[count] for count, value in enumerate(sinus_puls)]
+
+            print(len(x_puls), "x_puls", x_puls[0: 15])
+            print(len(y_puls), "y_puls", y_puls[0: 15])
+            print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
+            print(len(time), "time \n", time[0: 5])
+
+            figure = Figure(figsize=(5, 5), dpi=100)
+            fig_plot = figure.add_subplot()
+
+            # plt.plot(sinus, 'ro')
+            fig_plot.plot(time, sinus_puls)
+            fig_plot.plot(x_puls, y_puls)
+            fig_plot.legend(['Puls frequenzy', 'Enwrap of Puls'])
+
+            off_bool = True
+            point_summ = 0
+            for count, point in enumerate(duration_list):
+                if off_bool:
+                    fig_plot.annotate('Offset '+str(int(count/2+1)), (point_summ, 1),
+                                      textcoords="offset points", xytext=(10, -20), ha='left')
+                    off_bool = False
+                else:
+                    fig_plot.annotate('Puls '+str(int((count+1)/2)), (point_summ, 1),
+                                      textcoords="offset points", xytext=(10, 10), ha='left')
+                    off_bool = True
+                point_summ += point
+
+            fig_plot.annotate('Delay', (point_summ, 1),
+                              textcoords="offset points", xytext=(10, -20), ha='left')
+            fig_plot.annotate('Window', (window_start, 1),
+                              textcoords="offset points", xytext=(10, 10), ha='left')
+
+            if amplitude < 1.5:
+                fig_plot.set_ylim(-1.2, 1.7)
+            fig_plot.set_title("Sequenz of Pulssequenz")
+            fig_plot.set_xlabel("Time in ms")
+            fig_plot.set_ylabel("Amplitude")
+
+            #fig_plot.savefig('plot.jpg', dpi=300)
+            # fig_plot.show()
+
+            return figure
+
+        # fix
         if seq_type == "fid":
-            img_path = "/program/sequenz/puls_seq.JPG"
+
+            puls = [100]  # in ms
+            offset = [50]
+            delay = 200
+            window = 300
+            freq_plot = int(value_settings["freq"]["freq_start"])
+
+            plot_fig = plot_sequenz(
+                offset, puls, frequency=freq_plot, amplitude=2)
+
+            # specify the window as master
+            canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
+            canvas.get_tk_widget().pack(fill="both", expand=True)
+            canvas.draw()
+
         elif seq_type == "spin":
-            img_path = "/program/sequenz/spin_seq.JPG"
+            puls = [5, 2, 10, 8]
+            offset = [20, 10, 5, 8]
+            delay = 11
+            window = 20
+
+            plot_fig = plot_sequenz(offset, puls, delay, window)
+
+            # specify the window as master
+            canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
+            canvas.get_tk_widget().pack(fill="both", expand=True)
+            canvas.draw()
+
         elif seq_type == "comp":
-            img_path = "/program/sequenz/puls_seq.JPG"
+            puls = [5, 2, 10, 8]
+            offset = [20, 10, 5, 8]
+            delay = 11
+            window = 20
+
+            plot_fig = plot_sequenz(offset, puls, delay, window)
+
+            # specify the window as master
+            canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
+            canvas.get_tk_widget().pack(fill="both", expand=True)
+            canvas.draw()
+
         elif seq_type == "spin_phase":
-            img_path = "/program/sequenz/puls_seq.JPG"
+            puls = [5, 2, 10, 8]
+            offset = [20, 10, 5, 8]
+            delay = 11
+            window = 20
+
+            plot_fig = plot_sequenz(offset, puls, delay, window)
+
+            # specify the window as master
+            canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
+            canvas.get_tk_widget().pack(fill="both", expand=True)
+            canvas.draw()
         else:
             # own sequenz
             img_path = "/program/sequenz/own_seq.JPG"
-
-        image_path = os.path.abspath(os.path.dirname(
-            sys.argv[0])) + img_path
-        # image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
-        image = Image.open(image_path)
-        image_puls = image.resize((750, 300))
-        image_puls = ImageTk.PhotoImage(image_puls, master=self.win_seq)
-        # image_puls = ImageTk.PhotoImage(Image.open(image_path))
-        pic_label = tk.Label(frame_plot, image=image_puls)
-        pic_label.pack(fill="both", expand="yes")
-        pic_label.image = image_puls
-        # pic_label.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
-        #               pady=Window_seq.frame_boarder, sticky="nsew")
-        image.close()
+            image_path = os.path.abspath(os.path.dirname(
+                sys.argv[0])) + img_path
+            image = Image.open(image_path)
+            image_puls = image.resize((750, 300))
+            image_puls = ImageTk.PhotoImage(image_puls, master=self.win_seq)
+            pic_label = tk.Label(frame_plot, image=image_puls)
+            pic_label.pack(fill="both", expand="yes")
+            pic_label.image = image_puls
+            image.close()
 
         # inputbox
         # SDR settings

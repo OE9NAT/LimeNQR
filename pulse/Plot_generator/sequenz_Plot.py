@@ -31,8 +31,8 @@ def my_lines(ax, pos, *args, **kwargs):
 # # plt.gca().axis('off')
 # plt.show()
 
-puls = [5, 2, 10]
-offset = [20, 10, 5]
+puls = [5, 2, 10, 8]
+offset = [20, 10, 5, 8]
 delay = 11
 window = 20
 rest = 10  # end of puls
@@ -85,15 +85,19 @@ sinus = np.append(sinus, sinus[-1]).tolist()
 sinus_puls = [sinus[count] if value ==
               1 else 0 for count, value in enumerate(y_puls)]
 
-# sinus_puls = [for value in range(window_start, len(y_puls))]
 
-# y_puls = y_puls+0.1
+# with dampend responce
+print("window_start,", window_start*sample_rate)
+window_start_upsample = window_start*sample_rate
+
+sinus_puls = [sinus_puls[count] * (np.exp(-(count-window_start_upsample-200)*0.0001)) if count >
+              window_start_upsample else sinus_puls[count] for count, value in enumerate(sinus_puls)]
 
 
-print(len(x_puls), "x_puls", x_puls[0:15])
-print(len(y_puls), "y_puls", y_puls[0:15])
-print(len(time), "time \n", time[0:5])
-print(len(sinus), "sinus", sinus[0:5])
+print(len(x_puls), "x_puls", x_puls[0: 15])
+print(len(y_puls), "y_puls", y_puls[0: 15])
+print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
+print(len(time), "time \n", time[0: 5])
 
 
 # plt.plot(sinus, 'ro')
@@ -113,21 +117,26 @@ off_bool = True
 point_summ = 0
 for count, point in enumerate(duration_list):
     if off_bool:
-        plt.annotate('Offset '+str(count), (point_summ, 1),
+        plt.annotate('Offset '+str(int(count/2+1)), (point_summ, 1),
                      textcoords="offset points", xytext=(10, -20), ha='left')
         off_bool = False
     else:
-        plt.annotate('Puls '+str(count), (point_summ, 1),
+        plt.annotate('Puls '+str(int((count+1)/2)), (point_summ, 1),
                      textcoords="offset points", xytext=(10, 10), ha='left')
         off_bool = True
     point_summ += point
 
-plt.annotate('delay', (delay_start, 1),
-             textcoords="offset points", xytext=(10, -20), ha='right')
+plt.annotate('Delay', (point_summ, 1),
+             textcoords="offset points", xytext=(10, -20), ha='left')
 plt.annotate('Window', (window_start, 1),
-             textcoords="offset points", xytext=(10, 10), ha='right')
+             textcoords="offset points", xytext=(10, 10), ha='left')
 
 
-plt.ylim(-1.5, 2.1)
+plt.ylim(-1.2, 1.7)
+plt.title("Sequenz of Pulssequenz")
+plt.xlabel("Time in ms")
+plt.ylabel("Amplitude")
+
+plt.savefig('plot.jpg', dpi=300)
 
 plt.show()
