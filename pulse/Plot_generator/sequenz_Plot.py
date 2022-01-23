@@ -38,41 +38,96 @@ window = 20
 rest = 10  # end of puls
 
 duration = []
+duration_list = []
 
 for count, value in enumerate(puls):
     duration.extend([0 for i in range(0, offset[count])])
     duration.extend([1 for i in range(0, puls[count])])
+    duration_list.append(offset[count])
+    duration_list.append(puls[count])
 
+delay_start = len(duration)
 duration.extend([0 for i in range(0, delay)])
+
+window_start = len(duration)
 duration.extend([1 for i in range(0, window)])
 duration.extend([0 for i in range(0, rest)])
 
 amplitude = 1
-frequency = 100
+frequency = 10000
 start_time = 0
 end_time = len(duration)
-sample_rate = 100
+sample_rate = 1000
 
 time = np.arange(start_time, end_time, 1/sample_rate)
 
+
+start_time = time[0]
+end_time = time[-1]
+time = np.arange(start_time, end_time, 1/sample_rate)
+print(start_time, "end_time", end_time)
+
 sinus = amplitude * np.sin(2 * np.pi * frequency * time)
-#sinus = sinus * np.repeat(duration, sample_rate)
+sinus = amplitude * np.sin(2 * np.pi * time)
+# sinus = sinus * np.repeat(duration, sample_rate)
 
 
-print("duration", duration)
-print("time", time)
-print("sinus", sinus)
-
-
-#data = [0, 0, 0, 1, 1, 0, 1, 0]
-x_puls = np.repeat(range(len(duration)), 2)
-time = np.repeat(duration, 2)
+x_puls = np.repeat(range(len(duration)), sample_rate)
+y_puls = np.repeat(duration, sample_rate)
 x_puls = x_puls[1:]
-time = time[:-1]
+y_puls = y_puls[:-1]
 x_puls = np.append(x_puls, x_puls[-1] + 1)
-time = np.append(time, time[-1])
+y_puls = np.append(y_puls, y_puls[-1])
 
-#plt.plot(x_puls, time)
-plt.plot(x_puls, time)
-#plt.ylim(-0.5, 1.5)
+time = np.append(time, time[-1]).tolist()
+sinus = np.append(sinus, sinus[-1]).tolist()
+
+sinus_puls = [sinus[count] if value ==
+              1 else 0 for count, value in enumerate(y_puls)]
+
+# sinus_puls = [for value in range(window_start, len(y_puls))]
+
+# y_puls = y_puls+0.1
+
+
+print(len(x_puls), "x_puls", x_puls[0:15])
+print(len(y_puls), "y_puls", y_puls[0:15])
+print(len(time), "time \n", time[0:5])
+print(len(sinus), "sinus", sinus[0:5])
+
+
+# plt.plot(sinus, 'ro')
+plt.plot(time, sinus_puls)
+plt.plot(x_puls, y_puls)
+
+# left, right or center,
+# plt.text(window_start, 1, 'Window', horizontalalignment='right')
+
+# plt.annotate(label, # this is the text
+#                  (x,y), # these are the coordinates to position the label
+#                  textcoords="offset points", # how to position the text
+#                  xytext=(0,10), # distance from text to points (x,y)
+#                  ha='center') # horizontal alignment can be left, right or center
+
+off_bool = True
+point_summ = 0
+for count, point in enumerate(duration_list):
+    if off_bool:
+        plt.annotate('Offset '+str(count), (point_summ, 1),
+                     textcoords="offset points", xytext=(10, -20), ha='left')
+        off_bool = False
+    else:
+        plt.annotate('Puls '+str(count), (point_summ, 1),
+                     textcoords="offset points", xytext=(10, 10), ha='left')
+        off_bool = True
+    point_summ += point
+
+plt.annotate('delay', (delay_start, 1),
+             textcoords="offset points", xytext=(10, -20), ha='right')
+plt.annotate('Window', (window_start, 1),
+             textcoords="offset points", xytext=(10, 10), ha='right')
+
+
+plt.ylim(-1.5, 2.1)
+
 plt.show()
