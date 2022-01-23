@@ -126,6 +126,8 @@ class Window_seq:
         self.win_seq = tk.Tk()
         self.win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
+        self.win_seq.wm_iconbitmap(
+            bitmap="C:/Users/MALIN Philipp/git/bacharbeit/program/icon_logo.ico")
 
         self.win_seq.geometry("1200x1000")  # "1000x750+400+100"
         # (width_minsize=1200, height_minsize=800)
@@ -194,7 +196,7 @@ class Window_seq:
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
-        def plot_sequenz(offset, puls, delay=10, window=20, frequency=100, amplitude=1):
+        def plot_sequenz(offset, puls, delay=20, window=40, frequency=100, amplitude=1):
             rest = 10  # end of puls
 
             duration = []
@@ -295,12 +297,12 @@ class Window_seq:
 
             puls = [100]  # in ms
             offset = [50]
-            delay = 200
-            window = 300
+            delay = 30
+            window = 70
             freq_plot = int(value_settings["freq"]["freq_start"])
 
             plot_fig = plot_sequenz(
-                offset, puls, frequency=freq_plot, amplitude=2)
+                offset, puls, frequency=freq_plot, amplitude=1)
 
             # specify the window as master
             canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
