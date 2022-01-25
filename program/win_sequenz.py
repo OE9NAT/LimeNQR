@@ -188,6 +188,17 @@ class Window_seq:
             self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
+        info_text = "last Puls set\n"
+        info_text += "Puls in sec: " + \
+            str(self.puls_duration)+"\n"
+        info_text += "Offset in sec: " + \
+            str(self.puls_arangement)+"\n"
+        info_text += "Puls Amplitude: " + \
+            str(self.puls_amplitude)+"\n"
+        self.lable_info_experiment = tk.Label(
+            self.info_box, text=info_text, bg='grey')
+        self.lable_info_experiment.pack()
+
         info_text = "\n Experiment strukture:"+"\n"
         info_text += "Sample: " + value_settings["load"]["sample"] + "\n"
         info_text += "Experiment: " + value_settings["load"]["experiment"]+"\n"
@@ -281,7 +292,7 @@ class Window_seq:
                     off_bool = True
                 point_summ += point
 
-            fig_plot.annotate('Delay', (point_summ, 1),
+            fig_plot.annotate('Blanking', (point_summ, 1),
                               textcoords="offset points", xytext=(10, -20), ha='left')
             fig_plot.annotate('Window', (window_start, 1),
                               textcoords="offset points", xytext=(10, 10), ha='left')
@@ -289,7 +300,7 @@ class Window_seq:
             if amplitude < 1.5:
                 fig_plot.set_ylim(-1.2, 1.7)
             fig_plot.set_title("Sequenz of Pulssequenz")
-            fig_plot.set_xlabel("Time in ms")
+            fig_plot.set_xlabel("Time in µs")
             fig_plot.set_ylabel("Amplitude")
 
             #fig_plot.savefig('plot.jpg', dpi=300)
@@ -532,7 +543,7 @@ class Window_seq:
             number_delay = number*2+1
 
             lable_delay = tk.Label(
-                self.frame_puls, text="Delay "+str(number+1)+" in µs", bg='grey')
+                self.frame_puls, text="Offset "+str(number+1)+" in µs", bg='grey')
             lable_delay.grid(row=number_delay, column=0)
             delay = tk.Entry(self.frame_puls, fg="black", bg="white")
             delay.grid(row=number_delay, column=1, sticky="ew")
@@ -595,7 +606,7 @@ class Window_seq:
 
         # window_time
         lable_window_time = tk.Label(
-            frame_readout, text="Window Time in ms", bg='grey')
+            frame_readout, text="Window time in ms", bg='grey')
         lable_window_time.grid(row=5, column=0, sticky="ew")
 
         self.window_time_input = tk.Entry(
