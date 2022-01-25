@@ -9,16 +9,18 @@ import csv
 
 print("RUN sequenz")
 
-# class RUN_SDR():
-#
-#    def __init__(self, *args):
-#
-#    @property
-#    def run_sdr(self):
-#
-#        print("run SDR sequenz")
+external_hardware = True  # False
 
 
+# helper fuktion
+def string2array(value):
+    value = value.replace("[", "").replace("]", "")
+    value = value.split(",")
+    print("def string2array", value)
+    return [float(i)for i in value]
+
+
+# sequenz selection
 def send_sdr(value_main, value_sequenz):
     print("RUN SDR sequenz ")
     print("value_main ", value_main)
@@ -119,51 +121,64 @@ def seq_fid(value_main, value_sequenz):
 
     # LO frequency (target7 frequency - base band frequency)
     l.lof = tgtfreq-if_frq
-    l.sra = 30.72e6                                     # Sampling Rate
+    # Sampling Rate
+    l.sra = 30.72e6
     # number of averages
-    l.nav = value_main["setting"]["num_averages"]   # number of repetitions
+    l.nav = float(value_sequenz["setting"]["num_averages"])
+    # number of repetitions
+
+    l.nrp = float(value_sequenz['setting']['repetition_num'])
     # TX I DC correction
-    l.nrp = value_sequenz['SDR setting']['repetition_time']
+    l.tdi = float(value_sequenz['SDR setting']['correction_tx_i_dc'])
     # TX Q DC correction
-    l.tdi = value_sequenz['SDR setting']['correction_tx_i_dc']
+    l.tdq = float(value_sequenz['SDR setting']['correction_tx_q_dc'])
     # TX I Gain correction
-    l.tdq = value_sequenz['SDR setting']['correction_tx_q_dc']
+    l.tgi = float(value_sequenz['SDR setting']['correction_tx_i_gain'])
     # TX Q Gain correction
-    l.tgi = value_sequenz['SDR setting']['correction_tx_i_gain']
+    l.tgq = float(value_sequenz['SDR setting']['correction_tx_q_gain'])
     # TX phase adjustment
-    l.tgq = value_sequenz['SDR setting']['correction_tx_q_gain']
+    l.tpc = float(value_sequenz['SDR setting']['correction_tx_pahse'])
     # RX I Gain correction
-    l.tpc = value_sequenz['SDR setting']['correction_tx_pahse']
+    l.rgi = float(value_sequenz['SDR setting']['correction_rx_i_dc'])
     # RX Q Gain correction
-    l.rgi = value_sequenz['SDR setting']['correction_rx_i_dc']
+    l.rgq = float(value_sequenz['SDR setting']['correction_rx_q_dc'])
     # RX I DC correction
-    l.rgq = value_sequenz['SDR setting']['correction_rx_q_dc']
+    l.rdi = float(value_sequenz['SDR setting']['correction_rx_i_gain'])
     # RX Q DC correction
-    l.rdi = value_sequenz['SDR setting']['correction_rx_i_gain']
+    l.rdq = float(value_sequenz['SDR setting']['correction_rx_q_gain'])
     # RX phase adjustment
-    l.rdq = value_sequenz['SDR setting']['correction_rx_q_gain']
-    l.rpc = value_sequenz['SDR setting']['correction_rx_phase']
+    l.rpc = float(value_sequenz['SDR setting']['correction_rx_phase'])
 
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
-    l.trp = 5e-3                                        # repetition time
-    # acquisition time (gives minimum buffer size)
-    l.tac = 82e-6
+
+    # repetition time = 5e-3
+    l.trp = float(value_sequenz['Readout']['repetition_time']) * 10 ** (-3)
+
+    # acquisition time (gives minimum buffer size) =82e-6
+    l.tac = float(value_sequenz['Readout']['acquisition_time']) * 10 ** (-6)
+
     # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
-    l.t3d = [1, 0, 50, 10]
+    value = value_sequenz['Readout']['gate_signal'].split(" ")
+    l.t3d = [int(i)for i in value]   # [1, 0, 50, 10]
 
     # pulse durations
-    l.pfr = [if_frq]                                    # pulse frequency
-    l.pdr = [3e-6]                                      # pulse  duration
+    # pulse frequency
+    #l.pfr = [if_frq]
+    l.pfr = [if_frq for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    # pulse  duration
+    l.pdr = string2array(value_sequenz['Puls']['puls_duration'])  # [3e-6]
     # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
-    l.pam = [1]
+    l.pam = [value_sequenz['Puls']['puls_amplitude']
+             for i in range(0, int(value_sequenz['Puls']['number_pulses']))]  # [1]
     # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
-    l.pof = [300]
+    l.pof = string2array(value_sequenz['Puls']['puls_arangement'])  # [300]
 
     l.npu = len(l.pfr)                                  # number of pulses
 
-    l.rgn = 55.0                                        # RX gain
-    l.tgn = 40.0                                        # TX gain
+    l.rgn = value_sequenz['SDR setting']['gain_rx']  # 55.0    # RX gain
+    l.tgn = value_sequenz['SDR setting']['gain_tx']  # 40.0  # TX gain
 
     RX_gainfactor = 1
 
@@ -179,10 +194,11 @@ def seq_fid(value_main, value_sequenz):
     l.spt = './pulse/FID'                              # directory to save to
     l.fpa = 'setup'
 
+    print("\n ________\n", "start sequenz", "\n ________\n")
     l.run()
 
     # read back file and plot time signal + shifted fft
-    if (1 == 0):
+    if (1 == external_hardware):
 
         # reads back the file which was recently saved
         l.readHDF()
@@ -245,6 +261,7 @@ def seq_fid(value_main, value_sequenz):
         # print std (for SNR determination -> noise analysis without sample)
         print("std rms frequency domain next to peak X: " + str(np.std(y)))
         # print max of fft (for SNR evaluation - should give peak maximum)
+        print("value y", y)
         print("MAX of Signal: " + str(max(y)))
 
         return tdx, tdy_mean, x, y
@@ -323,7 +340,7 @@ def seq_spin(value_main, value_sequenz):
     l.run()
 
     # read back file and plot time signal + shifted fft
-    if (1 == 1):
+    if (1 == external_hardware):
 
         # reads back the file which was recently saved
         l.readHDF()
@@ -476,7 +493,7 @@ def seq_comp(value_main, value_sequenz):
 
     l.run()
 
-    if (1 == 0):
+    if (1 == external_hardware):
 
         l.readHDF()
 
@@ -646,7 +663,7 @@ def seq_spin_phase(value_main, value_sequenz):
     l.run()
 
     # read back and post-processing
-    if (1 == 1):
+    if (1 == external_hardware):
 
         l.readHDF()
 

@@ -58,10 +58,10 @@ class Window_seq:
         self.correction_tx_q_gain = 2039  # TX Q Gain correction
         self.correction_tx_pahse = 3  # TX phase adjustment
 
-        self.correction_rx_i_dc = 0     # RX I DC correction
-        self.correction_rx_q_dc = 0     # RX Q DC correction
-        self.correction_rx_i_gain = 2047  # RX I Gain correction
-        self.correction_rx_q_gain = 2047  # RX Q Gain correction
+        self.correction_rx_i_dc = 2047     # RX I DC correction
+        self.correction_rx_q_dc = 2047     # RX Q DC correction
+        self.correction_rx_i_gain = 0  # RX I Gain correction
+        self.correction_rx_q_gain = 0  # RX Q Gain correction
         self.correction_rx_phase = 0     # RX phase adjustment
 
         # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
@@ -93,7 +93,7 @@ class Window_seq:
         self.gain_rx = 55.0       # RX gain
         self.gain_tx = 40.0       # TX gain
 
-        puls_count = len(self.puls_freq)     # number of pulses
+        self.number_pulses = len(self.puls_freq)     # number of pulses
         lo_freq = self.target_freq * 1000000 - self.band_freq * 1000000
         rx_gain_factor = 10**((self.puls_freq[0]-40)/20)
 
@@ -114,6 +114,7 @@ class Window_seq:
 
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
+        self.number_pulses = puls_cylce
 
         if puls_cylce > Window_seq.max_number_puls:
             puls_cylce = Window_seq.max_number_puls
@@ -530,14 +531,14 @@ class Window_seq:
             number_delay = number*2+1
 
             lable_delay = tk.Label(
-                self.frame_puls, text="Delay "+str(number+1)+" in ms", bg='grey')
+                self.frame_puls, text="Delay "+str(number+1)+" in µs", bg='grey')
             lable_delay.grid(row=number_delay, column=0)
             delay = tk.Entry(self.frame_puls, fg="black", bg="white")
             delay.grid(row=number_delay, column=1, sticky="ew")
             # delay.config(yscrollcommand=myscrollbar.set)
 
             lable_puls = tk.Label(
-                self.frame_puls, text="Puls "+str(number+1)+" in ms", bg='grey')
+                self.frame_puls, text="Puls "+str(number+1)+" in µs", bg='grey')
             lable_puls.grid(row=number_puls, column=0)
             pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
             pulse.grid(row=number_puls, column=1, sticky="ew")
@@ -722,12 +723,14 @@ class Window_seq:
                     var_input = int(entery_value)
                 except ValueError:
                     helper.error_type_window(entery_value, int, "Puls entery")
-                read_array.append(var_input)
+                read_array.append(var_input * 10 ** (-6))
 
         delay_array = read_array[::2].copy()
         pulse_array = read_array[1::2].copy()
         print("pulse_array", pulse_array)
         print("delay_array", delay_array)
+        self.puls_arangement = delay_array
+        self.puls_duration = pulse_array
 
         #self.puls_freq = [12377777777]
         self.blank_time = self.blank_time_input.get()
@@ -834,11 +837,13 @@ class Window_seq:
         configParser_new["SDR setting"]["gain_tx"] = str(self.gain_tx)
 
         configParser_new["Puls"] = {}
+        configParser_new["Puls"]["number_pulses"] = str(self.number_pulses)
         configParser_new["Puls"]["puls_freq"] = str(self.puls_freq)
         configParser_new["Puls"]["puls_duration"] = str(self.puls_duration)
         configParser_new["Puls"]["puls_amplitude"] = str(self.puls_amplitude)
         configParser_new["Puls"]["puls_arangement"] = str(self.puls_arangement)
-        configParser_new["Puls"]["puls_count"] = str(len(self.puls_freq))
+        configParser_new["Puls"]["number_pulses"] = str(
+            len(self.puls_duration))
 
         configParser_new["Phase"] = {}
         configParser_new["Phase"]["phase_number"] = str(self.phase_number)
