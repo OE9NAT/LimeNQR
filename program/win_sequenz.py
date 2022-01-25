@@ -49,7 +49,7 @@ class Window_seq:
         self.window_time = 10  # time to read the signal
 
         self.samplerate = 30.72      # Sampling Rate in M sap per sec
-        self.averaging = 1000        # number of averages
+        self.num_averages = 1000        # number of averages
         self.repetition_num = 1         # number of repetitions
 
         self.correction_tx_i_dc = -45  # TX I DC correction
@@ -601,6 +601,26 @@ class Window_seq:
         self.window_time_input.grid(row=5, column=1, sticky="ew")
         self.window_time_input.insert(0, self.window_time)
 
+        # number of averages
+        lable_num_averages = tk.Label(
+            frame_readout, text="number of averages", bg='grey')
+        lable_num_averages.grid(row=6, column=0, sticky="ew")
+
+        self.num_averages_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.num_averages_input.grid(row=6, column=1, sticky="ew")
+        self.num_averages_input.insert(0, self.num_averages)
+
+        # repetition_num
+        lable_repetition_num = tk.Label(
+            frame_readout, text="number of Repetition", bg='grey')
+        lable_repetition_num.grid(row=7, column=0, sticky="ew")
+
+        self.repetition_num_input = tk.Entry(
+            frame_readout, fg="black", bg="white")
+        self.repetition_num_input.grid(row=7, column=1, sticky="ew")
+        self.repetition_num_input.insert(0, self.repetition_num)
+
         # # Phase
         frame_readout = tk.LabelFrame(
             self.win_seq, text="Phase & Puls-parameter", bg='grey')
@@ -717,6 +737,8 @@ class Window_seq:
         self.repetition_time = self.repetition_time_input.get()
         self.acquisition_time = self.acquisition_time_input.get()
         self.gate_signal = self.gate_signal_input.get()
+        self.repetition_num = self.repetition_num_input.get()
+        self.num_averages = self.num_averages_input.get()
 
         # read SDR Settings
         self.correction_tx_i_dc = self.correction_tx_i_dc_input.get()
@@ -773,9 +795,10 @@ class Window_seq:
         configParser_new["setting"]["blank_time"] = str(self.blank_time)
         configParser_new["setting"]["window_time"] = str(self.window_time)
 
-        # configParser_new["setting"]["band_freq"] = str(self.samplerate)
-        # configParser_new["setting"]["band_freq"] = str(self.averaging)
-        # configParser_new["setting"]["band_freq"] = str(self.repetition_num)
+        configParser_new["setting"]["samplerate"] = str(self.samplerate)
+        configParser_new["setting"]["num_averages"] = str(self.num_averages)
+        configParser_new["setting"]["repetition_num"] = str(
+            self.repetition_num)
 
         configParser_new["setting"]["lo_freq"] = str(self.target_freq *
                                                      1000000 - self.band_freq * 1000000)

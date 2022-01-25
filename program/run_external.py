@@ -121,7 +121,7 @@ def seq_fid(value_main, value_sequenz):
     l.lof = tgtfreq-if_frq
     l.sra = 30.72e6                                     # Sampling Rate
     # number of averages
-    l.nav = value_main["freq"]["freq_repetitions"]   # number of repetitions
+    l.nav = value_main["setting"]["num_averages"]   # number of repetitions
     # TX I DC correction
     l.nrp = value_sequenz['SDR setting']['repetition_time']
     # TX Q DC correction
