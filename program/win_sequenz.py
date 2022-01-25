@@ -126,8 +126,11 @@ class Window_seq:
         self.win_seq = tk.Tk()
         self.win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
-        self.win_seq.wm_iconbitmap(
-            bitmap="C:/Users/MALIN Philipp/git/bacharbeit/program/icon_logo.ico")
+        try:
+            self.win_seq.wm_iconbitmap(
+                bitmap="C:/Users/MALIN Philipp/git/bacharbeit/program/icon_logo.ico")
+        except Exception:
+            pass
 
         self.win_seq.geometry("1200x1000")  # "1000x750+400+100"
         # (width_minsize=1200, height_minsize=800)
