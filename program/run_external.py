@@ -10,6 +10,7 @@ import csv
 print("RUN sequenz")
 
 external_hardware = True  # False
+save_dh5_file = './pulse/FID'
 
 
 # helper fuktion
@@ -177,8 +178,8 @@ def seq_fid(value_main, value_sequenz):
 
     l.npu = len(l.pfr)                                  # number of pulses
 
-    l.rgn = value_sequenz['SDR setting']['gain_rx']  # 55.0    # RX gain
-    l.tgn = value_sequenz['SDR setting']['gain_tx']  # 40.0  # TX gain
+    l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
+    l.tgn = float(value_sequenz['SDR setting']['gain_tx'])  # 40.0  # TX gain
 
     RX_gainfactor = 1
 
@@ -191,7 +192,7 @@ def seq_fid(value_main, value_sequenz):
     l.rlp = 3.0e6
     l.tlp = 130.0e6                                     # RX BW
 
-    l.spt = './pulse/FID'                              # directory to save to
+    l.spt = save_dh5_file                            # directory to save to
     l.fpa = 'setup'
 
     print("\n ________\n", "start sequenz", "\n ________\n")
@@ -204,7 +205,8 @@ def seq_fid(value_main, value_sequenz):
         l.readHDF()
 
         # evaluation range, defines: blanking time and window length
-        evran = [22.5, 42.5]
+        evran = [float(value_sequenz['setting']['blank_time']),
+                 float(value_sequenz['setting']['window_time'])]  # [22.5, 42.5]
 
         # np.where sometimes does not work out, so it is put in a try except
         # always check the console for errors
@@ -226,8 +228,9 @@ def seq_fid(value_main, value_sequenz):
         fdx1 = fftshift(fdx1)
 
         # scaling factor which converts the y axis (usually a proportional number of points) into uV
-        fac_p_to_uV = 447651/1e6
-
+        fac_p_to_uV = float(
+            value_sequenz['SDR setting']['factor_point2volts'])  # 447651/1e6
+        #fac_p_to_uV = 447651/1e6
         tdy_mean = tdy_mean/l.nav/fac_p_to_uV/RX_gainfactor
 
         plt.figure(1)
@@ -334,7 +337,7 @@ def seq_spin(value_main, value_sequenz):
     l.rlp = 3.0e6
     l.tlp = 130.0e6                                     # RX BW
 
-    l.spt = './pulse/FID'                              # directory to save to
+    l.spt = save_dh5_file                            # directory to save to
     l.fpa = 'setup'
 
     l.run()
@@ -488,7 +491,7 @@ def seq_comp(value_main, value_sequenz):
     l.rlp = 3.0e6                                          # RX Base-Band BW
     l.tlp = 130.0e6                                         # TX Base-Band BW
 
-    l.spt = './pulse/FID'                                  # directory to save to
+    l.spt = save_dh5_file                                # directory to save to
     l.fpa = 'setup'
 
     l.run()

@@ -45,8 +45,8 @@ class Window_seq:
 
         self.target_freq = 83.62  # target frequency of the experiment in MHz
         self.band_freq = 1.2    # IF or base band frequency in MHz
-        self.blank_time = 10    # duration after puls, before window
-        self.window_time = 10  # time to read the signal
+        self.blank_time = 22.5    # duration after puls, before window
+        self.window_time = 42.5  # time to read the signal
 
         self.samplerate = 30.72      # Sampling Rate in M sap per sec
         self.num_averages = 1000        # number of averages
@@ -69,7 +69,7 @@ class Window_seq:
         self.repetition_time = 5  # repetition time in mseconds
         self.acquisition_time = 82  # acquisition time microseconds e-6
         # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
-        self.gate_signal = [1, 0, 50, 10]
+        self.gate_signal = "1 0 50 10"  # [1, 0, 50, 10]
 
         self.phase_number = [4, 1]  # number of phases
         # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary))
@@ -80,7 +80,7 @@ class Window_seq:
 
         # pulse durations
         self.puls_freq = [self.band_freq]       # pulse frequency
-        self.puls_duration = [3e-6]  # diy  pulse  duration
+        self.puls_duration = [3e-06]  # diy  pulse  duration
         # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
         self.puls_amplitude = [1]
         # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
@@ -92,6 +92,7 @@ class Window_seq:
 
         self.gain_rx = 55.0       # RX gain
         self.gain_tx = 40.0       # TX gain
+        self.factor_point2Volts = 447651/1e6
 
         self.number_pulses = len(self.puls_freq)     # number of pulses
         lo_freq = self.target_freq * 1000000 - self.band_freq * 1000000
@@ -727,8 +728,8 @@ class Window_seq:
 
         delay_array = read_array[::2].copy()
         pulse_array = read_array[1::2].copy()
-        print("pulse_array", pulse_array)
-        print("delay_array", delay_array)
+        #print("pulse_array", pulse_array)
+        #print("delay_array", delay_array)
         self.puls_arangement = delay_array
         self.puls_duration = pulse_array
 
@@ -835,6 +836,8 @@ class Window_seq:
         configParser_new["SDR setting"]["low_pass_tx"] = str(self.low_pass_tx)
         configParser_new["SDR setting"]["gain_rx"] = str(self.gain_rx)
         configParser_new["SDR setting"]["gain_tx"] = str(self.gain_tx)
+        configParser_new["SDR setting"]["factor_point2Volts"] = str(
+            self.factor_point2Volts)
 
         configParser_new["Puls"] = {}
         configParser_new["Puls"]["number_pulses"] = str(self.number_pulses)
