@@ -115,12 +115,12 @@ class Window_seq:
 
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
-        self.number_pulses = puls_cylce
 
         if puls_cylce > Window_seq.max_number_puls:
             puls_cylce = Window_seq.max_number_puls
 
             print("max puls_cylce reached")
+        self.number_pulses = puls_cylce
 
         # open GUI window and Present settings
         # sequenz window
@@ -142,16 +142,16 @@ class Window_seq:
         # zeilen hoehe
         self.win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
         self.win_seq.grid_rowconfigure(
-            1, weight=4, minsize=100)  # zeilen hoehe
+            1, weight=2, minsize=40)  # zeilen hoehe
         self.win_seq.grid_rowconfigure(
-            2, weight=8, minsize=100)  # zeilen hoehe
-        self.win_seq.grid_rowconfigure(3, weight=4, minsize=50)  # zeilen hoehe
+            2, weight=3, minsize=100)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(3, weight=4, minsize=60)  # zeilen hoehe
         # self.win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
 
         # spalten breite
-        self.win_seq.grid_columnconfigure(0, weight=1, minsize=280)
-        self.win_seq.grid_columnconfigure(1, weight=4, minsize=300)
-        self.win_seq.grid_columnconfigure(2, weight=4, minsize=280)
+        self.win_seq.grid_columnconfigure(0, weight=1, minsize=200)
+        self.win_seq.grid_columnconfigure(1, weight=4, minsize=200)
+        self.win_seq.grid_columnconfigure(2, weight=6, minsize=300)
 
         # Titile
         frame_title = tk.Frame(self.win_seq, bg="grey")
@@ -212,7 +212,7 @@ class Window_seq:
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
 
-        def plot_sequenz(offset, puls, delay=20, window=40, frequency=100, amplitude=1):
+        def plot_sequenz(selfoffset, puls, delay=20, window=40, frequency=100, amplitude=1):
             rest = 10  # end of puls
 
             duration = []
@@ -260,16 +260,16 @@ class Window_seq:
                           1 else 0 for count, value in enumerate(y_puls)]
 
             # with dampend responce
-            print("window_start,", window_start*sample_rate)
+            #print("window_start,", window_start*sample_rate)
             window_start_upsample = window_start*sample_rate
 
             sinus_puls = [sinus_puls[count] * (np.exp(-(count-window_start_upsample-200)*0.0001)) if count >
                           window_start_upsample else sinus_puls[count] for count, value in enumerate(sinus_puls)]
 
-            print(len(x_puls), "x_puls", x_puls[0: 15])
-            print(len(y_puls), "y_puls", y_puls[0: 15])
-            print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
-            print(len(time), "time \n", time[0: 5])
+            #print(len(x_puls), "x_puls", x_puls[0: 15])
+            #print(len(y_puls), "y_puls", y_puls[0: 15])
+            #print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
+            #print(len(time), "time \n", time[0: 5])
 
             figure = Figure(figsize=(5, 5), dpi=100)
             fig_plot = figure.add_subplot()
@@ -284,18 +284,18 @@ class Window_seq:
             for count, point in enumerate(duration_list):
                 if off_bool:
                     fig_plot.annotate('Offset '+str(int(count/2+1)), (point_summ, 1),
-                                      textcoords="offset points", xytext=(10, -20), ha='left')
+                                      textcoords="offset points", xytext=(2, -20), ha='left')
                     off_bool = False
                 else:
                     fig_plot.annotate('Puls '+str(int((count+1)/2)), (point_summ, 1),
-                                      textcoords="offset points", xytext=(10, 10), ha='left')
+                                      textcoords="offset points", xytext=(2, 10), ha='left')
                     off_bool = True
                 point_summ += point
 
             fig_plot.annotate('Blanking', (point_summ, 1),
-                              textcoords="offset points", xytext=(10, -20), ha='left')
+                              textcoords="offset points", xytext=(2, -20), ha='left')
             fig_plot.annotate('Window', (window_start, 1),
-                              textcoords="offset points", xytext=(10, 10), ha='left')
+                              textcoords="offset points", xytext=(2, 10), ha='left')
 
             if amplitude < 1.5:
                 fig_plot.set_ylim(-1.2, 1.7)
@@ -311,10 +311,10 @@ class Window_seq:
         # fix
         if seq_type == "fid":
 
-            puls = [100]  # in ms
-            offset = [50]
-            delay = 30
-            window = 70
+            puls = [10]  # in ms
+            offset = [5]
+            delay = 4
+            window = 15
             freq_plot = int(value_settings["freq"]["freq_start"])
 
             plot_fig = plot_sequenz(
@@ -326,10 +326,10 @@ class Window_seq:
             canvas.draw()
 
         elif seq_type == "spin":
-            puls = [5, 2, 10, 8]
-            offset = [20, 10, 5, 8]
-            delay = 11
-            window = 20
+            puls = [5, 10]
+            offset = [5, 6]
+            delay = 4
+            window = 25
 
             plot_fig = plot_sequenz(offset, puls, delay, window)
 
@@ -339,10 +339,10 @@ class Window_seq:
             canvas.draw()
 
         elif seq_type == "comp":
-            puls = [5, 2, 10, 8]
-            offset = [20, 10, 5, 8]
-            delay = 11
-            window = 20
+            puls = [10, 15]
+            offset = [6, 7]
+            delay = 5
+            window = 30
 
             plot_fig = plot_sequenz(offset, puls, delay, window)
 
@@ -352,10 +352,10 @@ class Window_seq:
             canvas.draw()
 
         elif seq_type == "spin_phase":
-            puls = [5, 2, 10, 8]
-            offset = [20, 10, 5, 8]
-            delay = 11
-            window = 20
+            puls = [15, 20]
+            offset = [7, 8]
+            delay = 6
+            window = 30
 
             plot_fig = plot_sequenz(offset, puls, delay, window)
 
@@ -364,7 +364,7 @@ class Window_seq:
             canvas.get_tk_widget().pack(fill="both", expand=True)
             canvas.draw()
         else:
-            # own sequenz
+            """  # own sequenz with .JPG
             img_path = "/program/sequenz/own_seq.JPG"
             image_path = os.path.abspath(os.path.dirname(
                 sys.argv[0])) + img_path
@@ -372,9 +372,22 @@ class Window_seq:
             image_puls = image.resize((750, 300))
             image_puls = ImageTk.PhotoImage(image_puls, master=self.win_seq)
             pic_label = tk.Label(frame_plot, image=image_puls)
-            pic_label.pack(fill="both", expand="yes")
+            pic_label.pack(fill="both", expand=True)
             pic_label.image = image_puls
             image.close()
+            """
+            puls_num = self.number_pulses
+            puls = [5 for item in range(0, puls_num)]
+            offset = [10 for item in range(0, puls_num)]
+            delay = 6
+            window = 30
+
+            plot_fig = plot_sequenz(offset, puls, delay, window)
+
+            # specify the window as master
+            canvas = FigureCanvasTkAgg(plot_fig, master=frame_plot)
+            canvas.get_tk_widget().pack(fill="both", expand=True)
+            canvas.draw()
 
         # inputbox
         # SDR settings
@@ -951,25 +964,6 @@ class Window_seq:
         return setting_dict
 
 
-class Seq_FID:
-    def __init__(self, P1="10", TP1="20", TE1="30", TA="40"):  # **kwargs
-        self.puls_1 = P1
-        self.pulspause_1 = TP1
-        self.echo_1 = TE1
-        self.acquire = TA
-        self.nr_puls = 1
-
-        print("\n duration of 1st puls ", P1)
-        print("\n duration of 1st puls pause ", TP1)
-        print("\n duration of 1st Echo ", TE1)
-        print("\n ___ \n time of Acquire ", TA)
-
-    def add_puls(P, TP, TE):
-        print("add puls to sequenz")
-
-### save new experiment ###
-
-
 def save_file(path, experiment="test_experiment_1", cycle="test_cycle_11"):
     print("def save")
     print("experiment" + experiment + "cycle" + cycle)
@@ -1333,23 +1327,6 @@ if __name__ == "__main__":
 
     path = os.getcwd()
     print("The current working directory is %s" % path)
-
-    print("__testrun_save_1__")
-
-    testrun_save_1 = save_file("test__")
-    print(testrun_save_1)
-
-    print("__testrun_save_2__")
-    testrun_save_2 = save_file("path__", "test_experiment_2", "test_cycle_2")
-    print(testrun_save_2)
-
-    print("__testrun_save_2__")
-    # testrun_load_2 = load_file()
-    # print(testrun_load_2)
-
-    print("__testrun_save_2__")
-    # testrun_load_2 = load_file("test_experiment_4","test_cycle_4")
-    # print(testrun_load_2)
 
     print("test")
     win = windows_file(
