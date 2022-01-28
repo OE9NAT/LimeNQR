@@ -552,8 +552,8 @@ class Window_seq:
             number_pulses = puls_cylce
 
         for number in range(number_pulses):
-            number_puls = number*2
-            number_delay = number*2+1
+            number_puls = number*2+1
+            number_delay = number*2
 
             lable_delay = tk.Label(
                 self.frame_puls, text="Offset "+str(number+1)+" in µs", bg='grey')
