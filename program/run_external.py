@@ -376,6 +376,8 @@ def seq_spin(value_main, value_sequenz):
     l.pof = [offset[0], np.ceil(
         (offset[1] + puls[0]) * 10**-6 * l.sra)]
 
+    l.pof = [300, np.ceil(20e-6*l.sra)]
+
     print("l.pof", l.pof)
 
     print("\n \n test \n")
