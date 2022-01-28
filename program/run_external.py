@@ -165,7 +165,7 @@ def seq_fid(value_main, value_sequenz):
 
     # pulse durations
     # pulse frequency
-    #l.pfr = [if_frq]
+    # l.pfr = [if_frq]
     l.pfr = [if_frq for i in range(
         0, int(value_sequenz['Puls']['number_pulses']))]
     # pulse  duration
@@ -230,7 +230,7 @@ def seq_fid(value_main, value_sequenz):
         # scaling factor which converts the y axis (usually a proportional number of points) into uV
         fac_p_to_uV = float(
             value_sequenz['SDR setting']['factor_point2volts'])  # 447651/1e6
-        #fac_p_to_uV = 447651/1e6
+        # fac_p_to_uV = 447651/1e6
         tdy_mean = tdy_mean/l.nav/fac_p_to_uV/RX_gainfactor
 
         plt.figure(1)
@@ -273,7 +273,7 @@ def seq_fid(value_main, value_sequenz):
 
 
 def seq_spin(value_main, value_sequenz):
-    print("spin seq \n", value_main)
+    print("\n \n spin seq \n", value_main)
     """ File from Lukas: SpinEchoseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
@@ -290,41 +290,110 @@ def seq_spin(value_main, value_sequenz):
 
     # LO frequency (target frequency - base band frequency)
     l.lof = tgtfreq-if_frq
-    l.sra = 30.72e6                                     # Sampling Rate
+    sample_rate_sdr = 30.72e6
+    l.sra = sample_rate_sdr                                   # Sampling Rate
     l.nav = 1000                                        # number of averages
-    l.nrp = 1                                           # number of repetitions
 
-    l.tdi = -45                                         # TX I DC correction
-    l.tdq = 0                                           # TX Q DC correction
-    l.tgi = 2047                                        # TX I Gain correction
-    l.tgq = 2039                                        # TX Q Gain correction
-    l.tpc = 3                                           # TX phase adjustment
+    l.nrp = float(value_sequenz['setting']['repetition_num'])
+    # TX I DC correction
+    l.tdi = float(value_sequenz['SDR setting']['correction_tx_i_dc'])
+    # TX Q DC correction
+    l.tdq = float(value_sequenz['SDR setting']['correction_tx_q_dc'])
+    # TX I Gain correction
+    l.tgi = float(value_sequenz['SDR setting']['correction_tx_i_gain'])
+    # TX Q Gain correction
+    l.tgq = float(value_sequenz['SDR setting']['correction_tx_q_gain'])
+    # TX phase adjustment
+    l.tpc = float(value_sequenz['SDR setting']['correction_tx_pahse'])
+    # RX I Gain correction
+    l.rgi = float(value_sequenz['SDR setting']['correction_rx_i_dc'])
+    # RX Q Gain correction
+    l.rgq = float(value_sequenz['SDR setting']['correction_rx_q_dc'])
+    # RX I DC correction
+    l.rdi = float(value_sequenz['SDR setting']['correction_rx_i_gain'])
+    # RX Q DC correction
+    l.rdq = float(value_sequenz['SDR setting']['correction_rx_q_gain'])
+    # RX phase adjustment
+    l.rpc = float(value_sequenz['SDR setting']['correction_rx_phase'])
 
-    l.rgi = 2047
-    l.rgq = 2047
-    l.rdi = 0
-    l.rdq = 0
-    l.rpc = 0
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
 
-    l.trp = 5e-3                                        # repetition time
-    l.tac = 82e-6                                       # acquisition time
+    # repetition time = 5e-3
+    l.trp = float(value_sequenz['Readout']['repetition_time']) * 10 ** (-3)
+
+    # acquisition time (gives minimum buffer size) =82e-6
+    l.tac = float(value_sequenz['Readout']['acquisition_time']) * 10 ** (-6)
+
     # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
-    l.t3d = [1, 0, 50, 10]
+    value = value_sequenz['Readout']['gate_signal'].split(" ")
+    l.t3d = [int(i)for i in value]   # [1, 0, 50, 10]
 
     # pulse durations
-    l.pfr = [if_frq, if_frq]                            # pulse frequency
-    l.pdr = [3e-6, 6e-6]                                # pulse  duration
+    # pulse frequency
+
+    l.pfr = [if_frq for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    # pulse  duration
+    puls2 = string2array(value_sequenz['Puls']['puls_duration'])
+
+    puls = value_sequenz['Puls']['puls_duration']
+    puls = puls.replace("[", "").replace("]", "")
+    puls = puls.split(",")
+    puls = [float(i) * 10**6 for i in puls]
+    print("puls 4 ", puls)
+    print("puls 2 ", puls2)
+    print("puls _ ", [3e-6, 6e-6])
+
+    l.pdr = puls  # [3e-6]
+
     # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
-    l.pam = [1, 1]
-    # pulse arrangement 300 means 13 us from zero approx. is then start of the first pulse
-    l.pof = [300, np.ceil(9e-6*l.sra)]
+    amplitude = [float(value_sequenz['Puls']['puls_amplitude'])for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    l.pam = amplitude  # [1]
+
+    # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
+    offset2 = string2array(value_sequenz['Puls']['puls_arangement'])
+    offset = value_sequenz['Puls']['puls_arangement']
+    offset = offset.replace("[", "").replace("]", "")
+    offset = offset.split(",")
+    offset = [float(i) * 10**6 for i in offset]
+    offset[0] = 300
+    # offset[1] = 300 + puls[0]*10**-6 + \
+    #    (9**-6 * sample_rate_sdr) + int(offset[1])
+
+    print("offset[1] , puls[0]", offset[1], puls[0])
+
+    # offset[1] = np.ceil((offset[1]) * 10**-6 *
+    #                    sample_rate_sdr) - np.ceil((puls[1]) * 10**-6 * sample_rate_sdr)
+
+    # offset[1] = np.ceil(30e-6*l.sra)
+    # l.pof = offset  # [300]
+
+    l.pof = [offset[0], np.ceil(
+        (offset[1]) * 10**-6 * l.sra)]
+
+    l.pof = [offset[0], np.ceil(
+        (offset[1] + puls[0]) * 10**-6 * l.sra)]
+
+    print("l.pof", l.pof)
+
+    print("\n \n test \n")
+    print([300, np.ceil(9e-6*l.sra)], "offset", offset)
+    print("puls l.pdr", puls)
+    print("amplitude", amplitude)
+    # **************test******************
+    # l.pfr = [if_frq, if_frq]
+    # l.pdr = [3e-6, 6e-6]                   # pulse
+    # l.pam = [1, 1]                         # amplitude
+    # .pof = [300, np.ceil(40e-6*l.sra)]     # offset
+    # ********************************
+    print("\n \n test \n")
 
     l.npu = len(l.pfr)                                  # number of pulses
 
-    l.rgn = 55.0                                        # RX gain
-    l.tgn = 40.0                                        # TX gain
+    l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
+    l.tgn = float(value_sequenz['SDR setting']['gain_tx'])  # 40.0  # TX gain
 
     RX_gainfactor = 1
 
@@ -337,7 +406,7 @@ def seq_spin(value_main, value_sequenz):
     l.rlp = 3.0e6
     l.tlp = 130.0e6                                     # RX BW
 
-    l.spt = save_dh5_file                            # directory to save to
+    l.spt = './pulse/FID'                              # directory to save to
     l.fpa = 'setup'
 
     l.run()
@@ -374,7 +443,8 @@ def seq_spin(value_main, value_sequenz):
         fdx1 = fftshift(fdx1)
 
         # scaling factor which converts the y axis (usually a proportional number of points) into uV
-        fac_p_to_uV = 447651/1e6
+        fac_p_to_uV = float(
+            value_sequenz['SDR setting']['factor_point2volts'])  # 447651/1e6
 
         tdy_mean = tdy_mean/l.nav/fac_p_to_uV/RX_gainfactor
 
@@ -434,20 +504,31 @@ def seq_comp(value_main, value_sequenz):
     # LO frequency (target frequency - base band frequency)
     l.lof = tgtfreq-if_frq
     l.sra = 30.72e6                                     # Sampling Rate
-    l.nav = 250                                         # number of averages
-    l.nrp = 1                                           # number of repetitions
 
-    l.tdi = -45                                         # TX I DC correction
-    l.tdq = 0                                           # TX Q DC correction
-    l.tgi = 2047                                        # TX I Gain correction
-    l.tgq = 2039                                        # TX Q Gain correction
-    l.tpc = 3                                           # TX phase adjustment
-
-    l.rgi = 2047
-    l.rgq = 2047
-    l.rdi = 0
-    l.rdq = 0
-    l.rpc = 0
+    # number of averages
+    l.nav = float(value_sequenz["setting"]["num_averages"])
+    # number of repetitions
+    l.nrp = float(value_sequenz['setting']['repetition_num'])
+    # TX I DC correction
+    l.tdi = float(value_sequenz['SDR setting']['correction_tx_i_dc'])
+    # TX Q DC correction
+    l.tdq = float(value_sequenz['SDR setting']['correction_tx_q_dc'])
+    # TX I Gain correction
+    l.tgi = float(value_sequenz['SDR setting']['correction_tx_i_gain'])
+    # TX Q Gain correction
+    l.tgq = float(value_sequenz['SDR setting']['correction_tx_q_gain'])
+    # TX phase adjustment
+    l.tpc = float(value_sequenz['SDR setting']['correction_tx_pahse'])
+    # RX I Gain correction
+    l.rgi = float(value_sequenz['SDR setting']['correction_rx_i_dc'])
+    # RX Q Gain correction
+    l.rgq = float(value_sequenz['SDR setting']['correction_rx_q_dc'])
+    # RX I DC correction
+    l.rdi = float(value_sequenz['SDR setting']['correction_rx_i_gain'])
+    # RX Q DC correction
+    l.rdq = float(value_sequenz['SDR setting']['correction_rx_q_gain'])
+    # RX phase adjustment
+    l.rpc = float(value_sequenz['SDR setting']['correction_rx_phase'])
 
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
@@ -491,12 +572,12 @@ def seq_comp(value_main, value_sequenz):
     l.rlp = 3.0e6                                          # RX Base-Band BW
     l.tlp = 130.0e6                                         # TX Base-Band BW
 
-    l.spt = save_dh5_file                                # directory to save to
+    l.spt = './pulse/FID'                                  # directory to save to
     l.fpa = 'setup'
 
     l.run()
 
-    if (1 == external_hardware):
+    if (1 == 0):
 
         l.readHDF()
 
@@ -541,8 +622,8 @@ def seq_comp(value_main, value_sequenz):
 
         # plt.figure(1);
         # plt.plot(tdx,tdy_comp/l.nav/447651*1e6)
-        #plt.xlabel("t in µs")
-        #plt.ylabel("Amplitude in µV")
+        # plt.xlabel("t in µs")
+        # plt.ylabel("Amplitude in µV")
         # plt.show()
 
         lof = l.HDF.attr_by_key('lof')
@@ -565,9 +646,9 @@ def seq_comp(value_main, value_sequenz):
               str(np.std(y/l.nav/len(tdx)/447651*1e6/RX_gainfactor)))
 
         # plt.figure(2);
-        #plt.plot(x, y/l.nav/len(tdx)/447651*1e6/RX_gainfactor)
-        #plt.xlabel("f in MHz")
-        #plt.ylabel("Amplitude in µV")
+        # plt.plot(x, y/l.nav/len(tdx)/447651*1e6/RX_gainfactor)
+        # plt.xlabel("f in MHz")
+        # plt.ylabel("Amplitude in µV")
         # plt.title("composite")
         # plt.show()
 
@@ -586,7 +667,7 @@ def seq_spin_phase(value_main, value_sequenz):
     def phase_shift(iptsignal, angle):
         # Resolve the signal's fourier spectrum
         spec = fft(iptsignal)
-        #freq = rfftfreq(iptsignal.size, d=dt)
+        # freq = rfftfreq(iptsignal.size, d=dt)
 
         # Perform phase shift in freqeuency domain
         # default it was +1.0j
@@ -608,45 +689,64 @@ def seq_spin_phase(value_main, value_sequenz):
     # LO frequency (target7 frequency - base band frequency)
     l.lof = tgtfreq-if_frq
     l.sra = 30.72e6                                     # Sampling Rate
-    l.nav = 250                                        # number of averages
-    l.nrp = 1                                           # number of repetitions
 
-    l.tdi = -45                                         # TX I DC correction
-    l.tdq = 0                                           # TX Q DC correction
-    l.tgi = 2047                                        # TX I Gain correction
-    l.tgq = 2039                                        # TX Q Gain correction
-    l.tpc = 3                                           # TX phase adjustment
+    # number of averages
+    l.nav = float(value_sequenz["setting"]["num_averages"])
+    # number of repetitions
 
-    l.rgi = 2047                                        # RX I Gain correction
-    l.rgq = 2047                                        # RX Q Gain correction
-    l.rdi = 0                                           # RX I DC correction
-    l.rdq = 0                                           # RX Q DC correction
-    l.rpc = 0                                           # RX phase adjustment
+    l.nrp = float(value_sequenz['setting']['repetition_num'])
+    # TX I DC correction
+    l.tdi = float(value_sequenz['SDR setting']['correction_tx_i_dc'])
+    # TX Q DC correction
+    l.tdq = float(value_sequenz['SDR setting']['correction_tx_q_dc'])
+    # TX I Gain correction
+    l.tgi = float(value_sequenz['SDR setting']['correction_tx_i_gain'])
+    # TX Q Gain correction
+    l.tgq = float(value_sequenz['SDR setting']['correction_tx_q_gain'])
+    # TX phase adjustment
+    l.tpc = float(value_sequenz['SDR setting']['correction_tx_pahse'])
+    # RX I Gain correction
+    l.rgi = float(value_sequenz['SDR setting']['correction_rx_i_dc'])
+    # RX Q Gain correction
+    l.rgq = float(value_sequenz['SDR setting']['correction_rx_q_dc'])
+    # RX I DC correction
+    l.rdi = float(value_sequenz['SDR setting']['correction_rx_i_gain'])
+    # RX Q DC correction
+    l.rdq = float(value_sequenz['SDR setting']['correction_rx_q_gain'])
+    # RX phase adjustment
+    l.rpc = float(value_sequenz['SDR setting']['correction_rx_phase'])
 
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
-    l.trp = 5e-3                                        # repetition time
-    # acquisition time (gives minimum buffer size)
-    l.tac = 82e-6
-    # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
-    l.t3d = [1, 0, 50, 10]
 
-    l.pcn = [4, 1]                                      # number of phases
-    l.pph = [0, np.pi/2]  # pulse phase (added to phase shift due to pcn)
+    # repetition time = 5e-3
+    l.trp = float(value_sequenz['Readout']['repetition_time']) * 10 ** (-3)
+
+    # acquisition time (gives minimum buffer size) =82e-6
+    l.tac = float(value_sequenz['Readout']['acquisition_time']) * 10 ** (-6)
+
+    # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
+    value = value_sequenz['Readout']['gate_signal'].split(" ")
+    l.t3d = [int(i)for i in value]   # [1, 0, 50, 10]
 
     # pulse durations
-    l.pfr = [if_frq, if_frq]                            # pulse frequency
-    l.pdr = [3e-6, 6e-6]                                # pulse  duration
-    # relative pulse amplitude
-    l.pam = [1, 1]
-    # pulse arrangement (first one is triggered then second one after 15 us)
-    l.pof = [300, np.ceil(9e-6*l.sra)]
+    # pulse frequency
+    # l.pfr = [if_frq]
+    l.pfr = [if_frq for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    # pulse  duration
+    l.pdr = string2array(value_sequenz['Puls']['puls_duration'])  # [3e-6]
+    # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
+    l.pam = [value_sequenz['Puls']['puls_amplitude']
+             for i in range(0, int(value_sequenz['Puls']['number_pulses']))]  # [1]
+    # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
+    l.pof = string2array(value_sequenz['Puls']['puls_arangement'])  # [300]
 
     l.npu = len(l.pfr)                                  # number of pulses
 
     # RX gain between 5 and 55 (usually 40 was used, 55 better and maximum)
-    l.rgn = 55.0
-    l.tgn = 40.0                                        # TX gain
+    l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
+    l.tgn = float(value_sequenz['SDR setting']['gain_tx'])  # 40.0  # TX gain
 
     # RX gain was set to 40 dB when the scaling facotr from points to V was determined - so a higher or lower values then 40 need correction for the plots
     RX_gainfactor = 1
@@ -666,7 +766,7 @@ def seq_spin_phase(value_main, value_sequenz):
     l.run()
 
     # read back and post-processing
-    if (1 == external_hardware):
+    if (1 == 1):
 
         l.readHDF()
 
