@@ -188,12 +188,12 @@ class Window_seq:
             self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
-        info_text = "last Puls set\n"
-        info_text += "Puls in sec: " + \
+        info_text = "last Pulse set\n"
+        info_text += "Pulse in sec: " + \
             str(self.puls_duration)+"\n"
         info_text += "Offset in sec: " + \
             str(self.puls_arangement)+"\n"
-        info_text += "Puls Amplitude: " + \
+        info_text += "Pulse Amplitude: " + \
             str(self.puls_amplitude)+"\n"
         self.lable_info_experiment = tk.Label(
             self.info_box, text=info_text, bg='grey')
@@ -563,7 +563,7 @@ class Window_seq:
             # delay.config(yscrollcommand=myscrollbar.set)
 
             lable_puls = tk.Label(
-                self.frame_puls, text="Puls "+str(number+1)+" in µs", bg='grey')
+                self.frame_puls, text="Pulse "+str(number+1)+" in µs", bg='grey')
             lable_puls.grid(row=number_puls, column=0)
             pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
             pulse.grid(row=number_puls, column=1, sticky="ew")
@@ -696,9 +696,9 @@ class Window_seq:
         self.number_phase_level_input.grid(row=4, column=1, sticky="ew")
         self.number_phase_level_input.insert(0, self.number_phase_level)
 
-        # puls_amplitude
+        # pulse_amplitude
         lable_puls_amplitude = tk.Label(
-            frame_readout, text="puls_amplitude", bg='grey')
+            frame_readout, text="pulse_amplitude", bg='grey')
         lable_puls_amplitude.grid(row=5, column=0, sticky="ew")
 
         self.puls_amplitude_input = tk.Entry(
@@ -739,10 +739,10 @@ class Window_seq:
         for entery in self.frame_puls.winfo_children():
             if entery.winfo_class() == 'Entry':
                 entery_value = entery.get()
-                print("Puls entery", entery, "value: ", entery_value)
+                print("Pulse entery", entery, "value: ", entery_value)
                 if len(entery_value) == 0:
                     helper.error_type_window(
-                        entery_value, int, "Puls entery", "Fill in all Puls parameter")
+                        entery_value, int, "Pulse entery", "Fill in all Puls parameter")
                     break
                 try:
                     var_input = int(entery_value)
@@ -1169,7 +1169,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
         for i, puls in enumerate(pulses):
             x_pos = (i*step)+x_min
             print(step, " x_pos ", x_pos)
-            lable_puls = "puls "+str(puls)
+            lable_puls = "pulse "+str(puls)
 
             experiment_lable = tk.Label(
                 window_puls, text=lable_puls, background="gray60")
