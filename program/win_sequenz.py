@@ -452,7 +452,7 @@ class Window_seq:
             self.frame_sdr, fg="black", bg="white")
         self.correction_tx_q_gain_input.grid(row=9, column=1, sticky="ew")
 
-        lable_correction_tx_pahse = tk.Label(self.frame_sdr, text="correction_tx_pahse", padx=Window_seq.frame_boarder,
+        lable_correction_tx_pahse = tk.Label(self.frame_sdr, text="correction_tx_phase", padx=Window_seq.frame_boarder,
                                              pady=Window_seq.frame_boarder, bg='grey')
         lable_correction_tx_pahse.grid(row=10, column=0)
         self.correction_tx_pahse_input = tk.Entry(
@@ -668,7 +668,7 @@ class Window_seq:
 
         # phase_level
         lable_phase_level = tk.Label(
-            frame_readout, text="phase_number array", bg='grey')
+            frame_readout, text="phase_level array", bg='grey')
         lable_phase_level.grid(row=2, column=0, sticky="ew")
 
         self.phase_level_input = tk.Entry(
