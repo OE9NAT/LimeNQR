@@ -569,6 +569,10 @@ class Window_seq:
             pulse.grid(row=number_puls, column=1, sticky="ew")
             # pulse.config(yscrollcommand=myscrollbar.set)
 
+            if number == 0:
+                # prevent compiling trouble on the FSDR
+                delay.insert(0, "300_000_000")
+
         # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
         frame_readout.grid(row=2, column=2, padx=Window_seq.frame_boarder,
