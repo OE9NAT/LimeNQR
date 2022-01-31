@@ -17,7 +17,7 @@ save_dh5_file = './pulse/FID'
 def string2array(value):
     value = value.replace("[", "").replace("]", "")
     value = value.split(",")
-    #print("def string2array", value)
+    # print("def string2array", value)
     return [float(i)for i in value]
 
 
@@ -63,25 +63,27 @@ def send_sdr(value_main, value_sequenz):
     else:
         print("Waring \n sequenz_select dose not exist!! \n", sequenz_select)
 
+    print("\n  \n return values from sequenz")
     # store aquiried data to filestrukture
     # [22.52604167 22.55859375 22.59114583 22.62369792 22.65625 ]
     # x_time = [s.strip('\n') for s in x_time.tolist()]
     x_time = x_time.tolist()
-    print(" x_time ", x_time[:10])
+    print(" x_time \n", x_time[:10])
+    print(" y_time \n", y_time[:10])
 
     # [[0.29129709-1.52607999j] [0.53282316-0.78878987j] [0.88875632-1.65319897j] [1.04129911-1.4370967j ] [0.20866975-0.43285671j]]
     y_time_abs = [abs(val) for sublist in y_time for val in sublist]
     y_time_compex = [val for sublist in y_time for val in sublist]
-    print(" y_time_abs ", y_time_abs[:5])
+    print(" y_time_abs\n ", y_time_abs[:5])
     # abs([0.88875632-1.65319897j]) !!!!
 
     # [83.02038574 83.07041931 83.12045288 83.17048645 83.22052002]
     x_freq = x_freq.tolist()
-    print(" x_freq ", x_freq[:5])
+    print(" x_freq\n ", x_freq[:5])
 
     # [[0.20988999] [0.06322438] [0.30136686] [0.06902654] [0.22243679]]
     y_freq = [val for sublist in y_freq for val in sublist]
-    print(" y_freq ", y_freq[:5])
+    print(" y_freq\n ", y_freq[:5])
 
     print("type x_time", type(x_time))  # type y_freq <class 'list'>
     print("type y_time_abs", type(y_time_abs))  # type y_freq <class 'list'>
@@ -336,10 +338,10 @@ def seq_spin(value_main, value_sequenz):
         0, int(value_sequenz['Puls']['number_pulses']))]
     # pulse  duration
 
-    puls = value_sequenz['Puls']['puls_duration']
-    puls = puls.replace("[", "").replace("]", "")
-    puls = puls.split(",")
-    puls = [float(i) for i in puls]
+    # puls = value_sequenz['Puls']['puls_duration']
+    # puls = puls.replace("[", "").replace("]", "")
+    # puls = puls.split(",")
+    # puls = [float(i) for i in puls]
 
     puls = string2array(value_sequenz['Puls']['puls_duration'])
 
@@ -352,10 +354,10 @@ def seq_spin(value_main, value_sequenz):
 
     # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
 
-    offset = value_sequenz['Puls']['puls_arangement']
-    offset = offset.replace("[", "").replace("]", "")
-    offset = offset.split(",")
-    offset = [float(i) for i in offset]
+    # offset = value_sequenz['Puls']['puls_arangement']
+    # offset = offset.replace("[", "").replace("]", "")
+    # offset = offset.split(",")
+    # offset = [float(i) for i in offset]
     offset = string2array(value_sequenz['Puls']['puls_arangement'])
 
     # correction for data input
@@ -466,6 +468,7 @@ def seq_comp(value_main, value_sequenz):
 
     print("comp seq \n", value_main)
     """ File from Lukas: CompositePulseseq.py adopted """
+    # !!!! hardcoding for 2 pulses
 
     # l = limr.limr('./pulseN_test_USB.cpp')
     l = limr.limr('./program/pulseN_test_USB.cpp')
@@ -511,33 +514,61 @@ def seq_comp(value_main, value_sequenz):
     # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
     # be adjusted in the ways that it fits to an integer multiply of the buffer size
 
-    l.trp = 5e-3                                        # repetition time
-    l.tac = 82e-6                                       # acquisition time
+    # repetition time
+    # l.trp = 5e-3
+    l.trp = float(value_sequenz['Readout']['repetition_time'])*10**-3
+
+    # acquisition time
+    # l.tac = 82e-6
+    l.tac = float(value_sequenz['Readout']['acquisition_time']) * 10**-6
     # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
-    l.t3d = [1, 0, 50, 10]
+    # l.t3d=[1, 0, 50, 10]
+    value = value_sequenz['Readout']['gate_signal'].split(" ")
+    l.t3d = [int(i)for i in value]
 
     # phase cycling definitions
     # number of phases (here we only need 4 phases, but the programm cycles now in steps of 45 degree and we always need those 45 degree steps)
-    l.pcn = [1, 4]
+    # l.pcn = [1, 4]
+    l.pcn = value_sequenz['Phase']['phase_number'].split(" ")
+
     # l.pcl = [0,1]                                        # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary), so only Spin Echo needs/ uses it)
-    l.pph = [0, np.pi/4]
+    # l.pph = [0, np.pi/4]
+    l.pph = value_sequenz['Phase']['phase_level'].split(" ")
+
     # l.pba = 1
 
-    # pulse durations
-    l.pfr = [if_frq, if_frq]                            # pulse frequency
-    l.pdr = [3e-6, 6e-6]                                # pulse  duration
+    # pulse frequency
+    l.pfr = [if_frq for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
 
-    # relative pulse amplitude
-    l.pam = [1, 1]
+    # pulse  duration
+    puls = string2array(value_sequenz['Puls']['puls_duration'])
+    l.pdr = puls  # [3e-6]
+
+    # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
+    amplitude = [float(value_sequenz['Puls']['puls_amplitude'])for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    l.pam = amplitude  # [1]
+
     # pulse arrangement 1 means immediate start of the pulse
-    l.pof = [300, np.ceil(3e-6*l.sra)]
+    offset = string2array(value_sequenz['Puls']['puls_arangement'])
+    # correction for data input only for 2 pulses
+    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
 
-    # l.pph = [0, np.pi/2]
+    # **************test******************
+    # l.pfr = [if_frq, if_frq]
+    # l.pdr = [3e-6, 6e-6]                   # pulse in mu sec
+    # l.pam = [1, 1]                         # amplitude
+    # l.pof = [300, np.ceil(60e-6*l.sra)]     # offset in sec
+    print("\n \n testing")
+    print("puls l.pdr", l.pdr)
+    print("offset l.pof", l.pof)
+    print("\n \n testing")
+    # ********************************
 
     l.npu = len(l.pfr)                              # number of pulses
-
-    l.rgn = 55.0                                            # RX gain
-    l.tgn = 40.0                                            # TX gain
+    l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
+    l.tgn = float(value_sequenz['SDR setting']['gain_tx'])  # 40.0  # TX gain
     # l.tgn = 30 # for noise measurements
 
     RX_gainfactor = 1
@@ -550,12 +581,30 @@ def seq_comp(value_main, value_sequenz):
     l.rlp = 3.0e6                                          # RX Base-Band BW
     l.tlp = 130.0e6                                         # TX Base-Band BW
 
+    # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
+
+    # offset = value_sequenz['Puls']['puls_arangement']
+    # offset = offset.replace("[", "").replace("]", "")
+    # offset = offset.split(",")
+    # offset = [float(i) for i in offset]
+    offset = string2array(value_sequenz['Puls']['puls_arangement'])
+
+    # correction for data input
+    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
+
+    # **************test******************
+    # l.pfr = [if_frq, if_frq]
+    # l.pdr = [3e-6, 6e-6]                   # pulse in mu sec
+    # l.pam = [1, 1]                         # amplitude
+    # l.pof = [300, np.ceil(60e-6*l.sra)]     # offset in sec
+    # ********************************
+
     l.spt = './pulse/FID'                                  # directory to save to
     l.fpa = 'setup'
 
     l.run()
 
-    if (1 == 0):
+    if (1 == external_hardware):
 
         l.readHDF()
 
@@ -580,6 +629,7 @@ def seq_comp(value_main, value_sequenz):
                     tdy_mean_0_m135 + tdy_mean_0_m45)
 
         tdy_time = tdy_comp/l.nav/447651*1e6
+        tdy_time = [list(tdy_time[i])for i in tdy_time]
 
         fdy1 = fftshift(fft(tdy_mean, axis=0), axes=0)
 
@@ -744,7 +794,7 @@ def seq_spin_phase(value_main, value_sequenz):
     l.run()
 
     # read back and post-processing
-    if (1 == 1):
+    if (1 == external_hardware):
 
         l.readHDF()
 

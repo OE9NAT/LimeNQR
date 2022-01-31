@@ -385,17 +385,17 @@ class window_main(tk.Tk):
         # lambda: win_sequenz.Window_seq("spin", self.get_values()
 
         puls_button = tk.Button(info_box, text="set FID sequenz",
-                                command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "88"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1"))  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin-Echo sequenz",
-                                command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "8"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2"))  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Comp. Puls sequenz",
-                                command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "8"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2"))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 

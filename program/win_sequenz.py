@@ -49,7 +49,7 @@ class Window_seq:
         self.window_time = 42.5  # time to read the signal
 
         self.samplerate = 30.72      # Sampling Rate in M sap per sec
-        self.num_averages = 1000        # number of averages
+        self.num_averages = 100        # number of averages
         self.repetition_num = 1         # number of repetitions
 
         self.correction_tx_i_dc = -45  # TX I DC correction
@@ -71,9 +71,9 @@ class Window_seq:
         # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
         self.gate_signal = "1 0 50 10"  # [1, 0, 50, 10]
 
-        self.phase_number = [4, 1]  # number of phases
+        self.phase_number = "1 4"  # [1, 4]  # number of phases
         # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary))
-        self.phase_level = [0, 1]
+        self.phase_level = "0 1"  # [0, 1]
         # pulse phase (added to phase shift due to pcn)
         self.phase_puls = [0, np.pi/4]
         self.number_phase_level = 1
@@ -530,19 +530,23 @@ class Window_seq:
 
         if seq_type == "fid":
             print("FID sequnez", seq_type)
-            number_pulses = 1
+            #number_pulses = 1
+            number_pulses = puls_cylce
 
         elif seq_type == "spin":
             print("spin Echo sequenz =", seq_type)
-            number_pulses = 2
+            #number_pulses = 2
+            number_pulses = puls_cylce
 
         elif seq_type == "comp":
             print("Composite Pulse", seq_type)
-            number_pulses = 3
+            #number_pulses = 2
+            number_pulses = puls_cylce
 
         elif seq_type == "spin_phase":
             print("own", seq_type)
-            number_pulses = 4
+            #number_pulses = 2
+            number_pulses = puls_cylce
 
         elif seq_type == "own":
             print("own", seq_type)
@@ -593,7 +597,7 @@ class Window_seq:
 
         # Acquirer
         lable_acquirer = tk.Label(
-            frame_readout, text="Acquirer time in ms", bg='grey')
+            frame_readout, text="Acquirer time in µs", bg='grey')
         lable_acquirer.grid(row=2, column=0, sticky="ew")
 
         self.acquisition_time_input = tk.Entry(
