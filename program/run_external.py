@@ -17,7 +17,7 @@ save_dh5_file = './pulse/FID'
 def string2array(value):
     value = value.replace("[", "").replace("]", "")
     value = value.split(",")
-    print("def string2array", value)
+    #print("def string2array", value)
     return [float(i)for i in value]
 
 
@@ -335,15 +335,13 @@ def seq_spin(value_main, value_sequenz):
     l.pfr = [if_frq for i in range(
         0, int(value_sequenz['Puls']['number_pulses']))]
     # pulse  duration
-    puls2 = string2array(value_sequenz['Puls']['puls_duration'])
 
     puls = value_sequenz['Puls']['puls_duration']
     puls = puls.replace("[", "").replace("]", "")
     puls = puls.split(",")
-    puls = [float(i) * 10**6 for i in puls]
-    print("puls 4 ", puls)
-    print("puls 2 ", puls2)
-    print("puls _ ", [3e-6, 6e-6])
+    puls = [float(i) for i in puls]
+
+    puls = string2array(value_sequenz['Puls']['puls_duration'])
 
     l.pdr = puls  # [3e-6]
 
@@ -353,44 +351,22 @@ def seq_spin(value_main, value_sequenz):
     l.pam = amplitude  # [1]
 
     # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
-    offset2 = string2array(value_sequenz['Puls']['puls_arangement'])
+
     offset = value_sequenz['Puls']['puls_arangement']
     offset = offset.replace("[", "").replace("]", "")
     offset = offset.split(",")
-    offset = [float(i) * 10**6 for i in offset]
-    offset[0] = 300
-    # offset[1] = 300 + puls[0]*10**-6 + \
-    #    (9**-6 * sample_rate_sdr) + int(offset[1])
+    offset = [float(i) for i in offset]
+    offset = string2array(value_sequenz['Puls']['puls_arangement'])
 
-    print("offset[1] , puls[0]", offset[1], puls[0])
+    # correction for data input
+    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
 
-    # offset[1] = np.ceil((offset[1]) * 10**-6 *
-    #                    sample_rate_sdr) - np.ceil((puls[1]) * 10**-6 * sample_rate_sdr)
-
-    # offset[1] = np.ceil(30e-6*l.sra)
-    # l.pof = offset  # [300]
-
-    l.pof = [offset[0], np.ceil(
-        (offset[1]) * 10**-6 * l.sra)]
-
-    l.pof = [offset[0], np.ceil(
-        (offset[1] + puls[0]) * 10**-6 * l.sra)]
-
-    l.pof = [300, np.ceil(20e-6*l.sra)]
-
-    print("l.pof", l.pof)
-
-    print("\n \n test \n")
-    print([300, np.ceil(9e-6*l.sra)], "offset", offset)
-    print("puls l.pdr", puls)
-    print("amplitude", amplitude)
     # **************test******************
     # l.pfr = [if_frq, if_frq]
-    # l.pdr = [3e-6, 6e-6]                   # pulse
+    # l.pdr = [3e-6, 6e-6]                   # pulse in mu sec
     # l.pam = [1, 1]                         # amplitude
-    # .pof = [300, np.ceil(40e-6*l.sra)]     # offset
+    # l.pof = [300, np.ceil(60e-6*l.sra)]     # offset in sec
     # ********************************
-    print("\n \n test \n")
 
     l.npu = len(l.pfr)                                  # number of pulses
 

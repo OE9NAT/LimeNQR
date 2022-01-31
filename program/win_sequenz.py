@@ -82,7 +82,7 @@ class Window_seq:
         self.puls_freq = [self.band_freq]       # pulse frequency
         self.puls_duration = [3e-06]  # diy  pulse  duration
         # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
-        self.puls_amplitude = [1]
+        self.puls_amplitude = 1
         # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
         self.puls_arangement = [300]
 
