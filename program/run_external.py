@@ -69,7 +69,8 @@ def send_sdr(value_main, value_sequenz):
     # x_time = [s.strip('\n') for s in x_time.tolist()]
     x_time = x_time.tolist()
     print(" x_time \n", x_time[:10])
-    print(" y_time \n", y_time[:10])
+    print(type(y_time[0][0]), y_time[0], " y_time \n", y_time[:10])
+    # <class 'numpy.complex128'> [(13.582009199130573-47.17961090224304j)]  y_time
 
     # [[0.29129709-1.52607999j] [0.53282316-0.78878987j] [0.88875632-1.65319897j] [1.04129911-1.4370967j ] [0.20866975-0.43285671j]]
     y_time_abs = [abs(val) for sublist in y_time for val in sublist]
@@ -88,7 +89,8 @@ def send_sdr(value_main, value_sequenz):
     print("type x_time", type(x_time))  # type y_freq <class 'list'>
     print("type y_time_abs", type(y_time_abs))  # type y_freq <class 'list'>
     print("type x_freq", type(x_freq))  # type y_freq <class 'list'>
-    print("type y_freq", type(y_freq))  # type y_freq <class 'list'>
+    # type y_freq <class 'list'>
+    print(len(y_freq), "type y_freq", type(y_freq))
 
     file_time = os.path.join("program", "scan_data_time.csv")
     file_freq = os.path.join("program", 'scan_data_freq.csv')
@@ -266,7 +268,7 @@ def seq_fid(value_main, value_sequenz):
         # print std (for SNR determination -> noise analysis without sample)
         print("std rms frequency domain next to peak X: " + str(np.std(y)))
         # print max of fft (for SNR evaluation - should give peak maximum)
-        print("value y", y)
+        print(type(y[0]), "value y", y)
         print("MAX of Signal: " + str(max(y)))
 
         return tdx, tdy_mean, x, y
@@ -553,6 +555,9 @@ def seq_comp(value_main, value_sequenz):
     # pulse arrangement 1 means immediate start of the pulse
     offset = string2array(value_sequenz['Puls']['puls_arangement'])
     # correction for data input only for 2 pulses
+    print("offset ", offset)
+    print("puls ", puls)
+    # dont run faster than the allowed :P
     l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
 
     # **************test******************
@@ -629,7 +634,10 @@ def seq_comp(value_main, value_sequenz):
                     tdy_mean_0_m135 + tdy_mean_0_m45)
 
         tdy_time = tdy_comp/l.nav/447651*1e6
-        tdy_time = [list(tdy_time[i])for i in tdy_time]
+        # print("tdy_time", tdy_time[:10])
+        # [[ 1.84069325+5.41949576j] [-0.09787128+5.64195399j][-0.23770217+4.23728919j] ...]
+
+        tdy_time = [[np.complex128(i)]for i in tdy_time]
 
         fdy1 = fftshift(fft(tdy_mean, axis=0), axes=0)
 
@@ -669,6 +677,8 @@ def seq_comp(value_main, value_sequenz):
         x = fdx1[int(len(fdy_comp)/2)+shifter:len(fdy_comp)-1-stopper]
 
         y_freq = y/l.nav/len(tdx)/447651*1e6/RX_gainfactor
+
+        y_freq = [[np.complex128(i)]for i in y_freq]
 
         print("std rms frequency domain next to peak X: " +
               str(np.std(y/l.nav/len(tdx)/447651*1e6/RX_gainfactor)))
@@ -867,11 +877,152 @@ def seq_own(value_main, value_sequenz):
     print("fid sspin_phaseeq \n", value_main)
     """own Sequenz """
 
-    # l = limr.limr('./pulseN_test_USB.cpp')
     l = limr.limr('./program/pulseN_test_USB.cpp')
-
-    # hardcoded initialization of the lime. needed if parameters (e.g. Gain, tgi, tdi, are changed and need to be set to chip)
     l.noi = -1
+
+    # target frequency of the experiment
+    tgtfreq = 83.62e6
+
+    # IF or base band frequency
+    if_frq = 1.2e6
+
+    # LO frequency (target7 frequency - base band frequency)
+    l.lof = tgtfreq-if_frq
+    # Sampling Rate
+    l.sra = 30.72e6
+    # number of averages
+    l.nav = float(value_sequenz["setting"]["num_averages"])
+    # number of repetitions
+
+    l.nrp = float(value_sequenz['setting']['repetition_num'])
+    # TX I DC correction
+    l.tdi = float(value_sequenz['SDR setting']['correction_tx_i_dc'])
+    # TX Q DC correction
+    l.tdq = float(value_sequenz['SDR setting']['correction_tx_q_dc'])
+    # TX I Gain correction
+    l.tgi = float(value_sequenz['SDR setting']['correction_tx_i_gain'])
+    # TX Q Gain correction
+    l.tgq = float(value_sequenz['SDR setting']['correction_tx_q_gain'])
+    # TX phase adjustment
+    l.tpc = float(value_sequenz['SDR setting']['correction_tx_pahse'])
+    # RX I Gain correction
+    l.rgi = float(value_sequenz['SDR setting']['correction_rx_i_dc'])
+    # RX Q Gain correction
+    l.rgq = float(value_sequenz['SDR setting']['correction_rx_q_dc'])
+    # RX I DC correction
+    l.rdi = float(value_sequenz['SDR setting']['correction_rx_i_gain'])
+    # RX Q DC correction
+    l.rdq = float(value_sequenz['SDR setting']['correction_rx_q_gain'])
+    # RX phase adjustment
+    l.rpc = float(value_sequenz['SDR setting']['correction_rx_phase'])
+
+    # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size from Cpp, so the number here will automatically
+    # be adjusted in the ways that it fits to an integer multiply of the buffer size
+
+    # repetition time = 5e-3
+    l.trp = float(value_sequenz['Readout']['repetition_time']) * 10 ** (-3)
+
+    # acquisition time (gives minimum buffer size) =82e-6
+    l.tac = float(value_sequenz['Readout']['acquisition_time']) * 10 ** (-6)
+
+    # GPIO Pin3 is centered around the pulse (used as a Gate Signal)
+    value = value_sequenz['Readout']['gate_signal'].split(" ")
+    l.t3d = [int(i)for i in value]   # [1, 0, 50, 10]
+
+    # pulse durations
+    # pulse frequency
+
+    l.pfr = [if_frq for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    # pulse  duration
+
+    # puls = value_sequenz['Puls']['puls_duration']
+    # puls = puls.replace("[", "").replace("]", "")
+    # puls = puls.split(",")
+    # puls = [float(i) for i in puls]
+
+    puls = string2array(value_sequenz['Puls']['puls_duration'])
+    l.pdr = puls  # [3e-6]
+
+    # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
+    amplitude = [float(value_sequenz['Puls']['puls_amplitude'])for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    l.pam = amplitude  # [1]
+
+    # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
+
+    # offset = value_sequenz['Puls']['puls_arangement']
+    # offset = offset.replace("[", "").replace("]", "")
+    # offset = offset.split(",")
+    # offset = [float(i) for i in offset]
+    offset = string2array(value_sequenz['Puls']['puls_arangement'])
+
+    # correction for data input
+    print("offset", offset)
+    print("puls", puls)
+    #l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
+
+    puls = [float(0)] + puls  # shift pulses to align with offset
+    offset_shift = []
+    for i, val in enumerate(offset):
+        #print(i, "offset:", type(offset[i]), " pulse:", type(puls[i]))
+        #print(i, "offset:", (offset[i]), " pulse:", (puls[i]))
+        offset_sum = puls[i] + offset[i]
+        offset_sum = offset_sum * l.sra
+        offset_sum = np.ceil(offset_sum)
+        #print("offset_sum", offset_sum)
+        offset_shift.append(offset_sum)
+    # first offest parameter defalt set, hardware requirement
+    offset_shift[0] = 300
+
+    # offset = [np.ceil(float(offset[i] + puls[i]) * l.sra)
+    #          for i, val in enumerate(offset)]
+
+    l.pof = offset_shift
+    print("l.pof ", l.pof)
+    # **************test******************
+    #l.pfr = [if_frq, if_frq]
+    # l.pdr = [3e-6, 6e-6]                   # pulse in mu sec
+    # l.pam = [1, 1]                         # amplitude
+    # l.pof = [300, np.ceil(30e-6*l.sra)]    # offset in sec
+    # ********************************
+
+    l.npu = len(l.pfr)                         # number of pulses
+
+    l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
+    l.tgn = float(value_sequenz['SDR setting']['gain_tx'])  # 40.0  # TX gain
+
+    RX_gainfactor = 1
+
+    if l.rgn == 40:
+        RX_gainfactor = 1
+    else:
+        RX_gainfactor = 10**((l.rgn-40)/20)
+
+    # RX BW (IF or base band low pass filter)
+    l.rlp = 3.0e6
+    l.tlp = 130.0e6                                     # RX BW
+
+    l.spt = save_dh5_file                            # directory to save to
+    l.fpa = 'setup'
+
+    print("\n ________\n", "start sequenz", "\n ________\n")
+    l.run()
+
+    # retun values
+    x_time = np.array([22.0, 22.1, 22.2, 22.3, 22.4,
+                      22.5, 22.6, 22.7, 22.8, 22.9])
+    y_time = [0.2+9.70j, -1.5+3.0j, -2.0 + 5.31j, -0.1+3.0j, -0.1 -
+              0.4j, 0.4-2.3j, 1.3-3.3j, -0.5-4.1j, -1.7-6.4j, -1.9-7.0j]
+    y_time = [0.3+i + 1.50j for i in range(10)]
+    y_time = [[np.complex128(i)]for i in y_time]
+    # y_time <class 'numpy.complex128'> [0.19533675+9.700897j]
+
+    x_freq = np.array([83.0, 83.1, 83.2, 83.3, 83.4, 83.5, 83.6, 83.7, 83.8])
+    y_freq = [0.1, 0.2, 0.3, 0.5, 1.9, 0.5, 0.3, 0.2, 0.1]
+    y_freq = np.array([[np.array(i)]for i in y_freq])
+
+    return x_time, y_time, x_freq, y_freq
 
 
 def send_tune_match(tune, match, tm_step, tm_lut):
