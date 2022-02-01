@@ -9,6 +9,7 @@ import numpy as np
 
 import tkinter as tk
 import tkinter.ttk as TTK  # use for Combobox
+from tkinter import filedialog
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
                                                NavigationToolbar2Tk)
@@ -30,6 +31,13 @@ logo_path = value_set.logo_path
 
 # class Seq_values:
 #    print("class Sequenz values setup")
+
+# helper fuktion
+def string2array(value):
+    value = value.replace("[", "").replace("]", "")
+    value = value.split(",")
+    # print("def string2array", value)
+    return [float(i)for i in value]
 
 
 class Window_seq:
@@ -189,10 +197,11 @@ class Window_seq:
         self.lable_info_experiment.pack()
 
         info_text = "last Pulse set\n"
+        # max number of carakter to 20 as to big
         info_text += "Pulse in sec: " + \
-            str(self.puls_duration)+"\n"
+            str(self.puls_duration)[:20]+"\n"
         info_text += "Offset in sec: " + \
-            str(self.puls_arangement)+"\n"
+            str(self.puls_arangement)[:20]+"\n"
         info_text += "Pulse Amplitude: " + \
             str(self.puls_amplitude)+"\n"
         self.lable_info_experiment = tk.Label(
@@ -718,7 +727,8 @@ class Window_seq:
 
         # Buttens
         frame_Buttens = tk.Frame(self.win_seq, bg='grey')
-        frame_Buttens.grid(row=4, column=1, padx=2, pady=2, sticky="nsew")
+        frame_Buttens.grid(row=4, columnspan=2, column=1,
+                           padx=2, pady=2, sticky="nsew")
 
         button_run = tk.Button(frame_Buttens, text="load",
                                command=lambda: Window_seq.load_seq(self))  # load_last_values)
@@ -807,6 +817,9 @@ class Window_seq:
 
         print("save settings to .cfg file")
         path_settings = os.path.join(file_path, file)
+
+        # storage = file_set.main_data_path  # "Storage_vault"
+        #path_settings = os.path.join(storage, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
             # path_settings = filedialog.askopenfilename(
@@ -905,61 +918,127 @@ class Window_seq:
 
         seq_variabels = Window_seq.read2cfg(self)
 
+        # infobox
+        self.sequenz_type_input.delete(0, 'end')
+        self.sequenz_type_input.insert(
+            0, seq_variabels["setting"]["sequenz_type"])
+
+        # puls
+
+        # clear all elements
+        for widgets in self.frame_puls.winfo_children():
+            widgets.destroy()
+        # fill in all new parameters
+
+        number_pulses = int(seq_variabels["Puls"]["number_pulses"])
+        offset_store = string2array(seq_variabels["Puls"]["puls_arangement"])
+        pulse_store = string2array(seq_variabels["Puls"]["puls_duration"])
+
+        for number in range(number_pulses):
+            number_puls = number*2+1
+            number_delay = number*2
+
+            lable_delay = tk.Label(
+                self.frame_puls, text="Offset "+str(number+1)+" in µs", bg='grey')
+            lable_delay.grid(row=number_delay, column=0)
+            delay = tk.Entry(self.frame_puls, fg="black", bg="white")
+            delay.grid(row=number_delay, column=1, sticky="ew")
+            delay.insert(0, str(round((offset_store[number]*10**6), 4)))
+
+            lable_puls = tk.Label(
+                self.frame_puls, text="Pulse "+str(number+1)+" in µs", bg='grey')
+            lable_puls.grid(row=number_puls, column=0)
+            pulse = tk.Entry(self.frame_puls, fg="black", bg="white")
+            pulse.grid(row=number_puls, column=1, sticky="ew")
+            pulse.insert(0, str(round((pulse_store[number]*10**6), 4)))
+
+        # read Readout
+        self.repetition_time_input.delete(0, 'end')
+        self.repetition_time_input.insert(
+            0, seq_variabels["Readout"]["repetition_time"])
+        self.acquisition_time_input.delete(0, 'end')
+        self.acquisition_time_input.insert(
+            0, seq_variabels["Readout"]["acquisition_time"])
+        self.gate_signal_input.delete(0, 'end')
+        self.gate_signal_input.insert(
+            0, seq_variabels["Readout"]["gate_signal"])
+        self.blank_time_input.delete(0, 'end')
         self.blank_time_input.insert(0, seq_variabels["setting"]["blank_time"])
+        self.window_time_input.delete(0, 'end')
         self.window_time_input.insert(
             0, seq_variabels["setting"]["blank_time"])
 
-        # read Readout
-        self.repetition_time_input.insert(
-            0, seq_variabels["Readout"]["repetition_time"])
-        self.acquisition_time_input.insert(
-            0, seq_variabels["Readout"]["acquisition_time"])
-        self.gate_signal_input.insert(
-            0, seq_variabels["Readout"]["gate_signal"])
-
         # read SDR Settings
+        self.correction_tx_i_dc_input.delete(0, 'end')
         self.correction_tx_i_dc_input.insert(
             0, seq_variabels["SDR setting"]["correction_tx_i_dc"])
+        self.correction_tx_q_dc_input.delete(0, 'end')
         self.correction_tx_q_dc_input.insert(
             0, seq_variabels["SDR setting"]["correction_tx_q_dc"])
+        self.correction_tx_i_gain_input.delete(0, 'end')
         self.correction_tx_i_gain_input.insert(
             0, seq_variabels["SDR setting"]["correction_tx_i_gain"])
+        self.correction_tx_q_gain_input.delete(0, 'end')
         self.correction_tx_q_gain_input.insert(
             0, seq_variabels["SDR setting"]["correction_tx_q_gain"])
+        self.correction_tx_pahse_input.delete(0, 'end')
         self.correction_tx_pahse_input.insert(
             0, seq_variabels["SDR setting"]["correction_tx_pahse"])
+        self.correction_rx_i_dc_input.delete(0, 'end')
         self.correction_rx_i_dc_input.insert(
             0, seq_variabels["SDR setting"]["correction_rx_i_dc"])
+        self.correction_rx_q_dc_input.delete(0, 'end')
         self.correction_rx_q_dc_input.insert(
             0, seq_variabels["SDR setting"]["correction_rx_q_dc"])
+        self.correction_rx_i_gain_input.delete(0, 'end')
         self.correction_rx_i_gain_input.insert(
             0, seq_variabels["SDR setting"]["correction_rx_i_gain"])
+        self.correction_rx_q_gain_input.delete(0, 'end')
         self.correction_rx_q_gain_input.insert(
             0, seq_variabels["SDR setting"]["correction_rx_q_gain"])
+        self.correction_rx_phase_input.delete(0, 'end')
         self.correction_rx_phase_input.insert(
             0, seq_variabels["SDR setting"]["correction_rx_phase"])
+        self.low_pass_rx_input.delete(0, 'end')
         self.low_pass_rx_input.insert(
             0, seq_variabels["SDR setting"]["low_pass_rx"])
+        self.low_pass_tx_input.delete(0, 'end')
         self.low_pass_tx_input.insert(
             0, seq_variabels["SDR setting"]["low_pass_tx"])
+        self.gain_rx_input.delete(0, 'end')
         self.gain_rx_input.insert(0, seq_variabels["SDR setting"]["gain_rx"])
+        self.gain_tx_input.delete(0, 'end')
         self.gain_tx_input.insert(0, seq_variabels["SDR setting"]["gain_tx"])
 
         # Phase and puls paramterer
+        self.phase_number_input.delete(0, 'end')
         self.phase_number_input.insert(
             0, seq_variabels["Phase"]["phase_number"])
+        self.phase_level_input.delete(0, 'end')
         self.phase_level_input.insert(0, seq_variabels["Phase"]["phase_level"])
+        self.phase_puls_input.delete(0, 'end')
         self.phase_puls_input.insert(0, seq_variabels["Phase"]["phase_puls"])
+        self.number_phase_level_input.delete(0, 'end')
         self.number_phase_level_input.insert(
             0, seq_variabels["Phase"]["number_phase_level"])
+        self.puls_amplitude_input.delete(0, 'end')
         self.puls_amplitude_input.insert(
             0, seq_variabels["Puls"]["puls_amplitude"])
 
         return seq_variabels
 
     def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
+
+        # popup filehandler
+        #file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+
+        path = os.path.join(file_path, file)
+        path_settings = filedialog.askopenfilename(
+            initialdir=path, title='select settings_sequenz.cfg file')
+        print(path_settings)
+
         " read .cfg file from file "
-        path_settings = os.path.join(file_path, file)
+        #path_settings = os.path.join(file_path, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
 

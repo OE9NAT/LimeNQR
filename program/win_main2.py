@@ -933,7 +933,7 @@ class window_main(tk.Tk):
                                       "freq_step": self.freq_step_input.get(), "freq_repetitions": self.average_input.get()}
         self.import_values["tunematch"] = {"tune": self.Tune_U_max_input.get(
         ), "match": self. Match_U_max_input.get(), "step": self.V_step_input.get(), "lut": self.V_step_input.get()}
-        self.import_values["load"] = {"sample": value_set._load_sample,
+        self.import_values["load"] = {"storage": file_set.main_data_path, "sample": value_set._load_sample,
                                       "experiment": value_set._load_experiment, "data": value_set._load_data}
         self.import_values["sequenz"] = {
             "sequenz": "fid"}  # fid, spin, comp, spin_phase
