@@ -346,6 +346,11 @@ class window_main(tk.Tk):
         self.arduino_com_input.grid(row=5, column=1, padx=5, pady=5)
         self.arduino_com_input.insert(0, "COM 4")
 
+        # rund
+        self.send_TMfile = tk.Button(
+            frame_tm, text="generate TM-file", command=lambda: print("not implement"), foreground="green")
+        self.send_TMfile.grid(row=6, column=0, padx=5, pady=5, columnspan=1)
+
         ######----- info box  ------######
         info_box = tk.LabelFrame(self, text="info box", bg='grey')
         info_box.grid(row=0, column=2, padx=frame_boarder,
@@ -400,7 +405,7 @@ class window_main(tk.Tk):
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
-                                command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values()))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2"))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
@@ -760,14 +765,14 @@ class window_main(tk.Tk):
         self.time_line = self.time_plot.plot(t, s1)
         self.time_plot.title.set_text("Time")
         self.time_plot.set_xlabel('time [s]')
-        self.time_plot.set_ylabel('Amplituden [V]')
+        self.time_plot.set_ylabel('Amplituden [a.u]')
         self.time_plot.grid()
 
         self.feq_plot = plt.subplot(212)
         self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
         self.feq_plot.set_xlabel('Frequency [kHz]')
-        self.feq_plot.set_ylabel('Amplituden [V]')
+        self.feq_plot.set_ylabel('Amplituden [a.u]')
         self.feq_plot.grid()
 
         return self.fig

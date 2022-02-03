@@ -584,7 +584,8 @@ class Window_seq:
 
             if number == 0:
                 # prevent compiling trouble on the FSDR
-                delay.insert(0, "300_000_000")
+                # delay.insert(0, "300_000_000") # in samples
+                delay.insert(0, "12")  # in musec
 
         # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
@@ -811,6 +812,13 @@ class Window_seq:
 
         # save to cfg file
         seq_variabels = Window_seq.save2cfg(self)
+
+        # save to cfg file to experiment strukture
+        filename = "fid.cfg"
+        path = os.path.dirname(sys.argv[0])
+        path = os.path.join(path, "Storage_vault",
+                            "_test_Sample", "_test_Experiment", "_test_Data")
+        seq_variabels = Window_seq.save2cfg(self, filename, path)
         return seq_variabels
 
     def save2cfg(self, file="program/setting_sequenz.cfg", file_path=os.path.dirname(sys.argv[0])):

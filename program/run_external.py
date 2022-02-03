@@ -1,8 +1,8 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.fftpack import fft, fftshift, fftfreq
 import limr
+from scipy.fftpack import fft, fftshift, fftfreq, ifft, ifftshift
 
 import csv
 
@@ -51,9 +51,6 @@ def send_sdr(value_main, value_sequenz):
         [x_time, y_time, x_freq, y_freq] = seq_comp(value_main, value_sequenz)
 
     elif sequenz_select == "spin_phase":
-        [x_time, y_time, x_freq, y_freq] = seq_fid(value_main, value_sequenz)
-
-    elif sequenz_select == "spin_phase":
         [x_time, y_time, x_freq, y_freq] = seq_spin_phase(
             value_main, value_sequenz)
 
@@ -72,8 +69,8 @@ def send_sdr(value_main, value_sequenz):
     print(type(y_time[0][0]), y_time[0], " y_time \n", y_time[:10])
     # <class 'numpy.complex128'> [(13.582009199130573-47.17961090224304j)]  y_time
 
-    # [[0.29129709-1.52607999j] [0.53282316-0.78878987j] [0.88875632-1.65319897j] [1.04129911-1.4370967j ] [0.20866975-0.43285671j]]
-    y_time_abs = [abs(val) for sublist in y_time for val in sublist]
+    # [[0.29129709-1.5607999j] [0.53282316-0.78878987j] [0.88875632-1.65319897j] [1.04129911-1.4370967j ] [0.20866975-0.43285671j]]
+    y_time_abs = [np.real(val) for sublist in y_time for val in sublist]
     y_time_compex = [val for sublist in y_time for val in sublist]
     print(" y_time_abs\n ", y_time_abs[:5])
     # abs([0.88875632-1.65319897j]) !!!!
@@ -363,7 +360,8 @@ def seq_spin(value_main, value_sequenz):
     offset = string2array(value_sequenz['Puls']['puls_arangement'])
 
     # correction for data input
-    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
+    l.pof = [np.ceil((offset[0]) * l.sra),
+             np.ceil((offset[1] + puls[0]) * l.sra)]
 
     # **************test******************
     # l.pfr = [if_frq, if_frq]
@@ -400,7 +398,8 @@ def seq_spin(value_main, value_sequenz):
         l.readHDF()
 
         # evaluation range, defines: blanking time and window length
-        evran = [34.5, 54.5]
+        evran = [float(value_sequenz['setting']['blank_time']),
+                 float(value_sequenz['setting']['window_time'])]  # [22.5, 42.5]
 
         # np.where sometimes does not work out, so it is put in a try except
         # always check the console for errors
@@ -535,7 +534,7 @@ def seq_comp(value_main, value_sequenz):
 
     # l.pcl = [0,1]                                        # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary), so only Spin Echo needs/ uses it)
     # l.pph = [0, np.pi/4]
-    l.pph = value_sequenz['Phase']['phase_level'].split(" ")
+    l.pph = value_sequenz['Phase']['phase_puls'].split(" ")
 
     # l.pba = 1
 
@@ -558,7 +557,8 @@ def seq_comp(value_main, value_sequenz):
     print("offset ", offset)
     print("puls ", puls)
     # dont run faster than the allowed :P
-    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
+    l.pof = [np.ceil((offset[0]) * l.sra),
+             np.ceil((offset[1] + puls[0]) * l.sra)]
 
     # **************test******************
     # l.pfr = [if_frq, if_frq]
@@ -595,7 +595,8 @@ def seq_comp(value_main, value_sequenz):
     offset = string2array(value_sequenz['Puls']['puls_arangement'])
 
     # correction for data input
-    l.pof = [offset[0], np.ceil((offset[1] + puls[0]) * l.sra)]
+    l.pof = [np.ceil((offset[0]) * l.sra),
+             np.ceil((offset[1] + puls[0]) * l.sra)]
 
     # **************test******************
     # l.pfr = [if_frq, if_frq]
@@ -613,7 +614,8 @@ def seq_comp(value_main, value_sequenz):
 
         l.readHDF()
 
-        evran = [27.5, 47.5]
+        evran = [float(value_sequenz['setting']['blank_time']),
+                 float(value_sequenz['setting']['window_time'])]  # [27.5, 47.5]
 
         evidx = np.where((l.HDF.tdx > evran[0]) & (l.HDF.tdx < evran[1]))[0]
 
@@ -696,6 +698,7 @@ def seq_comp(value_main, value_sequenz):
 
 
 def seq_spin_phase(value_main, value_sequenz):
+
     print("spin_phase seq \n", value_main)
     """ file from Lukas SpinEchoPhaseCyclingseq.py adopted """
 
@@ -713,7 +716,7 @@ def seq_spin_phase(value_main, value_sequenz):
 
         # Inverse FFT back to time domain
         phaseshift = ifft(spec, n=len(iptsignal))
-        return
+        return phaseshift
 
     # hardcoded initialization of the lime. needed if parameters (e.g. Gain, tgi, tdi, are changed and need to be set to chip)
     l.noi = -1
@@ -772,15 +775,47 @@ def seq_spin_phase(value_main, value_sequenz):
     # l.pfr = [if_frq]
     l.pfr = [if_frq for i in range(
         0, int(value_sequenz['Puls']['number_pulses']))]
+    puls = string2array(value_sequenz['Puls']['puls_duration'])
     # pulse  duration
-    l.pdr = string2array(value_sequenz['Puls']['puls_duration'])  # [3e-6]
+    l.pdr = puls  # [3e-6]
     # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
-    l.pam = [value_sequenz['Puls']['puls_amplitude']
-             for i in range(0, int(value_sequenz['Puls']['number_pulses']))]  # [1]
+
+    # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
+    amplitude = [float(value_sequenz['Puls']['puls_amplitude'])for i in range(
+        0, int(value_sequenz['Puls']['number_pulses']))]
+    l.pam = amplitude  # [1]
+
     # pulse arrangement 1 means immediate start of the pulse (3us from zero approx. is then start of the first pulse)
-    l.pof = string2array(value_sequenz['Puls']['puls_arangement'])  # [300]
+
+    # offset = value_sequenz['Puls']['puls_arangement']
+    # offset = offset.replace("[", "").replace("]", "")
+    # offset = offset.split(",")
+    # offset = [float(i) for i in offset]
+    offset = string2array(value_sequenz['Puls']['puls_arangement'])
+
+    # correction for data input
+    l.pof = [np.ceil((offset[0]) * l.sra),
+             np.ceil((offset[1] + puls[0]) * l.sra)]
 
     l.npu = len(l.pfr)                                  # number of pulses
+
+    # phase cycling definitions
+    # number of phases (here we only need 4 phases, but the programm cycles now in steps of 45 degree and we always need those 45 degree steps)
+    # l.pcn = [1, 4]
+    #l.pcn = value_sequenz['Phase']['phase_number'].split(" ")
+
+    # l.pcl = [0,1]                                        # pcyc level (only needed if more then 1 pulse is used (and a relative / different phase is necessary), so only Spin Echo needs/ uses it)
+    # l.pph = [0, np.pi/4]
+    #l.pph = value_sequenz['Phase']['phase_puls'].split(" ")
+
+    # test
+    l.pcn = [4, 1]                                      # number of phases
+    l.pph = [0, np.pi/2]  # pulse phase (added to phase shift due to pcn)
+    # test
+
+    print("-----------------------------------------------------------------------------------------------------------------------------------------------")
+    print("\n \n puls l.pof ", l.pof)
+    print("offset l.pdr  ", l.pdr)
 
     # RX gain between 5 and 55 (usually 40 was used, 55 better and maximum)
     l.rgn = float(value_sequenz['SDR setting']['gain_rx'])  # 55.0    # RX gain
@@ -809,7 +844,8 @@ def seq_spin_phase(value_main, value_sequenz):
         l.readHDF()
 
         # select range which should be investigated (ECHO time setting)
-        evran = [35, 55]
+        evran = [float(value_sequenz['setting']['blank_time']),
+                 float(value_sequenz['setting']['window_time'])]
 
         evidx = np.where((l.HDF.tdx > evran[0]) & (l.HDF.tdx < evran[1]))[0]
 
@@ -830,8 +866,14 @@ def seq_spin_phase(value_main, value_sequenz):
         k3 = phase_shift(tdy_mean_180_90, 180)
         k4 = phase_shift(tdy_mean_270_90, 90)
 
+        print(type(k1), "k1", k1[:5])
+        print("k2", k2[:5])
+        print("k3", k3[:5])
+        print("k4", k4[:5])
+
         tdy_mean_self = (k1+k2+k3+k4)
         tdy_time = tdy_mean_self/l.nav/447651*1e6/RX_gainfactor/4
+        tdy_time = tdy_mean_self
 
         # #plot resulting time domain data and scale it to uV
         # plt.figure(1);
@@ -843,7 +885,7 @@ def seq_spin_phase(value_main, value_sequenz):
         fdy1 = fftshift(fft(tdy_mean_self, axis=0), axes=0)
 
         fdx1 = fftfreq(len(fdy1))*l.sra/1e6
-        fdx1 = fftshift(fdx1)
+        #fdx1 = fftshift(fdx1)
 
         # for single side spectrum and shift (only single frequency)
         lof = l.HDF.attr_by_key('lof')
@@ -867,6 +909,7 @@ def seq_spin_phase(value_main, value_sequenz):
         # plt.ylabel("Amplitude in µV")
         # plt.title("double sided spectrum with phase cycling")
         # plt.show()
+        tdy_time = [[np.complex128(i)]for i in tdy_time]
 
         return tdx, tdy_time, x, y
     else:
