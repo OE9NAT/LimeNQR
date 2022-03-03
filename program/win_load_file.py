@@ -26,7 +26,7 @@ class Puls:
         print("\n ___ \n time of Acquire ", TA)
 
     def add_puls(P, TP, TE):
-        print("add puls to sequenz")
+        print("add puls to sequence")
 
 ### save new experiment ###
 
@@ -70,7 +70,7 @@ def save_values(path="test_data", experiment="test_experiment", data="test_data"
     config["filepath"] = {"path": path,
                           "experiment": experiment, "data": data}
 
-    # save sequenz file
+    # save sequence file
     data = path+"/"+experiment+"/"+"config.cfg"
     try:
         with open(data, "r") as configfile:
@@ -80,8 +80,8 @@ def save_values(path="test_data", experiment="test_experiment", data="test_data"
         print("_____________________ TEST pre ______________________")
         print("available of file_path ___ ",
               config.has_option(cfg_section, "file_path"))
-        print("available of puls_sequenz ___ ",
-              config.has_option(cfg_section, "puls_sequenz"))
+        print("available of puls_sequence ___ ",
+              config.has_option(cfg_section, "puls_sequence"))
         print("types of sections avalibel ____ ", config.sections())
         # print("types of options avalibel of option ___ ", config.has_option(cfg_section, "file_path"))
         print("_____________________ TEST after ______________________")
@@ -175,7 +175,7 @@ class win_load_file(tk.Tk):
         self.experiment_label.grid(row=1, column=0, padx=5, pady=5)
 
         self.frame_path_set = tk.Label(
-            self.frame_path, text="Daten: \n Example: FID,Echo ")
+            self.frame_path, text="Data: \n Example: FID,Echo ")
         self.frame_path_set.grid(row=1, column=0, padx=5, pady=5)
 
         lable_text = tk.Label(window_experiment, text="Set Experiment strukture ",
@@ -240,7 +240,7 @@ class win_load_file(tk.Tk):
                                       padx=5, pady=5, sticky="ew")
             print("save all parameters to .cfg file")
             status_lable = tk.Label(
-                window_experiment, text="updated sequenz !!")
+                window_experiment, text="updated sequence !!")
             status_lable.place(x=10, y=250, width=500,
                                height=text_input_height)
 

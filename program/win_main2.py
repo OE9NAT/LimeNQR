@@ -991,7 +991,7 @@ class window_main(tk.Tk):
             text="Sample: "+value_set._load_sample)
         self.lable_info_experiment.config(
             text="Experiment: "+value_set._load_experiment)
-        self.lable_info_data.config(text="Daten: "+value_set._load_data)
+        self.lable_info_data.config(text="Data: "+value_set._load_data)
 
         # read back sequenz data from entery Window
         self.value_sequenz = Sequenz.save2cfg()
