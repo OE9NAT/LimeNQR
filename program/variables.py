@@ -235,6 +235,8 @@ class Value_Settings:
     def save_settings(self, value):
         # save settings form ROM and save it to setting.cfg file
         print("save_settings variables.py \n ", type(value), "\n", value)
+        print(
+            "********************************** save file *******************************")
         # <class 'dict'>
         # {'freq': {'freq_start': '1', 'freq_end': '2', 'freq_step': '3', 'freq_repetitions': '4'},
         # 'tunematch': {'tune': '3.3', 'match': '3.3', 'step': '50', 'lut': '50'},
@@ -259,10 +261,15 @@ class Value_Settings:
             path_settings, storage, sample_path, exp_path, data_path, setting_name)
         print("setting file: ", path_settings)
 
+        # if path not exist
+        if not os.path.exists(os.path.dirname(path_settings)):
+            storage_path = os.path.dirname(path_settings)
+            print("storage_path", storage_path)
+            os.makedirs(storage_path)
+
+        # if file not exist
         if not os.path.exists(path_settings):
             print("file Setting not found")
-            storage_path = os.path.dirname(path_settings)
-            os.makedirs(storage_path)
 
             logger_win_variables.warning(
                 "function.py, def load_setting, path_settings not found")
@@ -304,6 +311,7 @@ class Value_Settings:
         config_file["TandM_settings"]["tm_step_value"] = value["tunematch"]["step"]
         config_file["TandM_settings"]["tm_lut_value"] = value["tunematch"]["lut"]
 
+        config_file["storage_defalt"]["main_storage"] = File_Settings.main_data_path
         config_file["storage_defalt"]["seq_data"] = value["load"]["sample"]
         config_file["storage_defalt"]["seq_experiment"] = value["load"]["experiment"]
         config_file["storage_defalt"]["seq_cycle"] = value["load"]["data"]
