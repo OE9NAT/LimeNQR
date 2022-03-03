@@ -23,7 +23,7 @@ import function as helper
 
 logger_seq = logging.getLogger('win_sequenz')
 logger_seq.addHandler(logging.StreamHandler())
-logger_seq.info("logging from winsow sequenz at start up")
+logger_seq.info("logging from winsow sequence at start up")
 
 value_set = variables.Value_Settings()
 logo_path = value_set.logo_path
@@ -165,7 +165,7 @@ class Window_seq:
         frame_title = tk.Frame(self.win_seq, bg="grey")
         frame_title.grid(columnspan=3, row=0, column=0, padx=Window_seq.frame_boarder,
                          pady=Window_seq.frame_boarder, sticky="nsew")
-        lable_text = tk.Label(frame_title, text="Set Sequenz ",
+        lable_text = tk.Label(frame_title, text="Set sequence ",
                               foreground="green", background="OliveDrab4", font=("Helvetica", 30))
         lable_text.pack(fill="x")
 
@@ -175,7 +175,7 @@ class Window_seq:
                            pady=Window_seq.frame_boarder, sticky="nsew")
 
         self.input_info_sequenz = tk.Label(
-            self.info_box, text="Sequenz selected:", bg='grey')
+            self.info_box, text="sequence selected:", bg='grey')
         self.input_info_sequenz.pack()
 
         self.sequenz_type_input = tk.Entry(
@@ -308,7 +308,7 @@ class Window_seq:
 
             if amplitude < 1.5:
                 fig_plot.set_ylim(-1.2, 1.7)
-            fig_plot.set_title("Sequenz of Pulssequenz")
+            fig_plot.set_title("Sequence of Pulssequence")
             fig_plot.set_xlabel("Time in µs")
             fig_plot.set_ylabel("Amplitude")
 
@@ -821,7 +821,7 @@ class Window_seq:
         seq_variabels = Window_seq.save2cfg(self, filename, path)
         return seq_variabels
 
-    def save2cfg(self, file="program/setting_sequenz.cfg", file_path=os.path.dirname(sys.argv[0])):
+    def save2cfg(self, file="program/setting_sequence.cfg", file_path=os.path.dirname(sys.argv[0])):
 
         print("save settings to .cfg file")
         path_settings = os.path.join(file_path, file)
@@ -1035,7 +1035,7 @@ class Window_seq:
 
         return seq_variabels
 
-    def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequenz.cfg"):
+    def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequence.cfg"):
 
         # popup filehandler
         #file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -1294,7 +1294,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
     text_input_height = 30
 
     # Title
-    lable_text = tk.Label(window_puls, text="Set Puls sequenz ",
+    lable_text = tk.Label(window_puls, text="Set Puls sequence ",
                           foreground="green", background="gray70", font=("Helvetica", 30))
     lable_text.place(x=300, y=5, width=400, height=50)
 
@@ -1367,7 +1367,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
 
     ###_______ Buttens _________#
     butons_y = 700
-    load_button = tk.Button(window_puls, text="Load sequenz", background="SkyBlue4",
+    load_button = tk.Button(window_puls, text="Load sequence", background="SkyBlue4",
                             command=lambda:  load_file(experiment_dict["data"], experiment_dict["experiment"], experiment_dict["cycle"]))
     load_button.place(x=50, y=butons_y, width=140, height=50)
 

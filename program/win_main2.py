@@ -334,11 +334,11 @@ class window_main(tk.Tk):
         self.send_TMfile.grid(row=4, column=0, padx=5, pady=5)
 
         self.send_TMfile = tk.Button(
-            frame_tm, text="Send to Arduino", command=self.send_arduino, foreground="green")
+            frame_tm, text="Send to MC", command=self.send_arduino, foreground="green")
         self.send_TMfile.grid(row=4, column=1, padx=5, pady=5, columnspan=1)
 
         # Comport Arduino
-        self.Match_U_max_lable = tk.Label(frame_tm, text="Arduino COMport: ")
+        self.Match_U_max_lable = tk.Label(frame_tm, text="MC COMport: ")
         self.Match_U_max_lable.grid(row=5, column=0, padx=5, pady=5)
 
         self.arduino_com_input = tk.Entry(
@@ -377,7 +377,7 @@ class window_main(tk.Tk):
         # info frequenz
         # puls
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info: \nP:\nTP:\nA:", bg='grey')
+            info_box, text="Puls info: \npuls:\noffset:", bg='grey')
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
@@ -389,17 +389,17 @@ class window_main(tk.Tk):
 
         # lambda: win_sequenz.Window_seq("spin", self.get_values()
 
-        puls_button = tk.Button(info_box, text="set FID sequenz",
+        puls_button = tk.Button(info_box, text="set FID sequence",
                                 command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1"))  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Spin-Echo sequenz",
+        spin_button = tk.Button(info_box, text="set Spin-Echo sequence",
                                 command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2"))  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Comp. Puls sequenz",
+        spin_button = tk.Button(info_box, text="set Comp. Puls sequence",
                                 command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2"))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
@@ -411,7 +411,7 @@ class window_main(tk.Tk):
 
         own_number_puls = tk.Entry(info_box, fg="black", bg="white")
         own_number_puls.grid(row=7, column=1, sticky="ew")
-        own_button = tk.Button(info_box, text="own sequenz \n number of Pulses:",
+        own_button = tk.Button(info_box, text="own sequence \n number of Pulses:",
                                command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get()))  # windows_file)
         own_button.grid(row=7, column=0,
                         padx=2, pady=2, sticky="ew")
@@ -567,7 +567,7 @@ class window_main(tk.Tk):
         print("experiment_path in save_measurment \n", experiment_path)
 
         var_sequenz = Sequenz.save2cfg(
-            file="setting_sequenz.cfg", file_path=experiment_path)
+            file="setting_sequence.cfg", file_path=experiment_path)
 
         self.saved_poup = tk.Label(
             self.frame_measure, text='settings saved', font=(7), background="chartreuse4")
