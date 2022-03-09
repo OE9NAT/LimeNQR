@@ -112,14 +112,16 @@ class Window_seq:
         # Window_seq.window_sequenz(self, seq_type)
 
     # @staticmethod  # property
-    def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1"):
+    def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1", value_set="none"):
         print("type of sequenz: ", seq_type)
+        value_settings["sequenz"]["sequenz"] = seq_type
         print("settings variables: \n \n", value_settings)
         # settings variables:  {'freq': {'freq_start': '1000', 'freq_end': '2000', 'freq_step': '100', 'freq_repetitions': '10'}, 'tunematch': {'tune': '3.3', 'match': '5', 'step': '10', 'lut': '10'}, 'load': {'sample': '_test_Sample', 'experiment': '_test_Experiment', 'data': '_test_Data'}, 'sequenz': {'sequenz': 'fid'}}
         print("settings variables: \n \n", value_settings["freq"])
         self.puls_freq = value_settings["freq"]
         self.storage = value_settings["load"]
         self.sequenz_type = seq_type
+        value_set.set_seq = seq_type
 
         print("number of puls_cylce of sequenz: ", puls_cylce)
         puls_cylce = int(puls_cylce)
@@ -220,6 +222,8 @@ class Window_seq:
         frame_plot = tk.Frame(self.win_seq, bg="grey")
         frame_plot.grid(columnspan=2, row=1, column=1, padx=Window_seq.frame_boarder,
                         pady=Window_seq.frame_boarder, sticky="nsew")
+
+        # return value_settings
 
         def plot_sequenz(selfoffset, puls, delay=20, window=40, frequency=100, amplitude=1):
             rest = 10  # end of puls

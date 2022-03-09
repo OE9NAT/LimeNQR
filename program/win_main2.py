@@ -388,29 +388,29 @@ class window_main(tk.Tk):
         # lambda: win_sequenz.Window_seq("spin", self.get_values()
 
         puls_button = tk.Button(info_box, text="set FID sequence",
-                                command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1", value_set))  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin-Echo sequence",
-                                command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Comp. Puls sequence",
-                                command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
-                                command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2"))  # windows_file)
+                                command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         own_number_puls = tk.Entry(info_box, fg="black", bg="white")
         own_number_puls.grid(row=7, column=1, sticky="ew")
         own_button = tk.Button(info_box, text="own sequence \n number of Pulses:",
-                               command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get()))  # windows_file)
+                               command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get(), value_set))  # windows_file)
         own_button.grid(row=7, column=0,
                         padx=2, pady=2, sticky="ew")
 
@@ -556,6 +556,7 @@ class window_main(tk.Tk):
         # print("save settings to ", sample, experiment, data, "setting.cfg")
 
         # gread GUI and save to class Value_Settings
+        #value_set.set_seq = "123"
         value_set.save_settings = self.get_values()
 
         # save Sequenz data to Experiment strukture
@@ -564,6 +565,8 @@ class window_main(tk.Tk):
         experiment_path = os.path.join(path, sample, experiment, data)
         print("experiment_path in save_measurment \n", experiment_path)
 
+        var_sequenz = Sequenz.save2cfg(
+            file="setting_sequence.cfg", file_path=experiment_path)
         var_sequenz = Sequenz.save2cfg(
             file="setting_sequence.cfg", file_path=experiment_path)
 
@@ -939,7 +942,7 @@ class window_main(tk.Tk):
         self.import_values["load"] = {"storage": file_set.main_data_path, "sample": value_set._load_sample,
                                       "experiment": value_set._load_experiment, "data": value_set._load_data}
         self.import_values["sequenz"] = {
-            "sequenz": "fid"}  # fid, spin, comp, spin_phase
+            "sequenz": value_set._sequence}  # fid, spin, comp, spin_phase
 
         # self.experiment_path_input
 

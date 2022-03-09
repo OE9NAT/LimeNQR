@@ -34,6 +34,8 @@ class Value_Settings:
         self._load_experiment = "Bismut"
         self._load_data = "FID"
 
+        self._sequence = "NONE"
+
         # get size of screen
         window = tk.Tk()
         screen_width = window.winfo_screenwidth()
@@ -157,7 +159,19 @@ class Value_Settings:
         print("getter variables.py get_freq")
         return [self._load_sample, self._load_experiment, self._load_data]
 
+    # self._sequence
+    @import_setting.setter
+    def set_seq(self, value):
+        print("setter value define_filestrukture", value)
+        self._sequence = value
+
+    @import_setting.getter
+    def get_seq(self):
+        print("getter variables.py get_freq")
+        return self._sequence
+
     # logo path
+
     @import_setting.getter
     def logo_path(self):
         print(self._log_path, "\n")

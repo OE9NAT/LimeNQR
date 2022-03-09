@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import limr
 from scipy.fftpack import fft, fftshift, fftfreq, ifft, ifftshift
 import csv
-
+import serial
 import time
 #from subprocess import call, Popen
 #import itertools
@@ -36,7 +36,7 @@ def send_sdr(value_main, value_sequenz):
     # 'sequenz': {'sequenz': 'fid'}} # fid, spin, comp, spin_phase,own
     sequenz_select = value_main.get("sequenz").get("sequenz")
     print("value_sequenz ", value_sequenz)
-    # {'start': {'datum created:': '2022-01-19 23:26:53.497312', 'user created:': 'User: MALIN Philipp', 'experiment:': "['Experiment initialise']", 'experiment parameter:': '[1.2]'},
+    # {'start': {'datum created:': '2022-01-19 23:26:53.497312', 'user created:': 'User: laborPC', 'experiment:': "['Experiment initialise']", 'experiment parameter:': '[1.2]'},
     # 'setting': {'sequenz_type': 'fid', 'target_freq': '83.62', 'band_freq': '1.2', 'lo_freq': '82420000.0'},
     # 'SDR setting': {'correction_tx_i_dc': '-45', 'correction_tx_q_dc': '0', 'correction_tx_i_gain': '2047', 'correction_tx_q_gain': '2039', 'correction_tx_pahse': '3',    'correction_rx_i_dc': '0', 'correction_rx_q_dc': '0', 'correction_rx_i_gain': '2047', 'correction_rx_q_gain': '2047', 'correction_rx_phase': '0', 'low_pass_rx': '3000000.0', 'low_pass_tx': '130000000.0', 'gain_rx': '55.0', 'gain_tx': '40.0'},
     # 'Puls': {'puls_freq': '[1.2]', 'puls_duration': '[3e-06]', 'puls_amplitude': '[1]', 'puls_arangement': '[300]', 'puls_count': '1'},
@@ -45,13 +45,15 @@ def send_sdr(value_main, value_sequenz):
     sequenz_select = value_sequenz["setting"]["sequenz_type"]
 
     print("selected sequenz: ", sequenz_select)
-    sequenz_freq_step = value_main.get("freq").get("freq_step")
+    sequenz_freq_step = int(value_main.get("freq").get("freq_step"))
     print("frequenzy step, singel=1 or multi-band>1:", sequenz_freq_step)
     if sequenz_select == "fid":
 
-        if True:
+        if sequenz_freq_step > 1:
             # Frequency band
-            print("freq band measurment")
+            print("\n*********++++*//\nfreq band measurment")
+            [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
+                value_main, value_sequenz)
 
         else:
             # one Frequency
@@ -78,7 +80,9 @@ def send_sdr(value_main, value_sequenz):
     # store aquiried data to filestrukture
     # [22.52604167 22.55859375 22.59114583 22.62369792 22.65625 ]
     # x_time = [s.strip('\n') for s in x_time.tolist()]
-    x_time = x_time.tolist()
+    print(" x_time \n", x_time[:10])
+    x_time = list(x_time)
+    #x_time = x_time.tolist()
     print(" x_time \n", x_time[:10])
     print(type(y_time[0][0]), y_time[0], " y_time \n", y_time[:10])
     # <class 'numpy.complex128'> [(13.582009199130573-47.17961090224304j)]  y_time
@@ -291,9 +295,9 @@ def broad_seq_fid(value_main, value_sequenz):
     print("broad frequency FID")
 
     U_Tune_max = 5.0  # max voltage for tuning cap
-    U_Tune_max = value_main.get("tunematch").get("tune")
+    #U_Tune_max = value_main.get("tunematch").get("tune")
     U_Match_max = 5.0  # max voltage for matching cap
-    U_Match_max = value_main.get("tunematch").get("match")
+    #U_Match_max = value_main.get("tunematch").get("match")
 
     #vec = list()
     #ref = list()
@@ -303,13 +307,13 @@ def broad_seq_fid(value_main, value_sequenz):
     freqList = list()
 
     start_flag = 'Set_Voltage\n'
-    arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200)
+    arduino = serial.Serial(port='/dev/ttyACM2', baudrate=115200)
     time.sleep(1)
 
     arduino.write(start_flag.encode())
 
-    filename = 'scantry2.csv'
-    TMfile = 'TM83_84.csv'
+    filename = './program/scantry2.csv'
+    TMfile = './program/TM83_84.csv'
     averages = 5000
     sampleRate = 30.72e6
 
@@ -351,7 +355,7 @@ def broad_seq_fid(value_main, value_sequenz):
         # l.sra = 30.72e6                                      # Sampling Rate
 
         # number of averages
-        l.nav = float(value_sequenz["setting"]["num_averages"])
+        #l.nav = float(value_sequenz["setting"]["num_averages"])
         l.nrp = 1                                               # number of repetitions
 
         # repetition and acquisition time (acquisition time can only be an integer multiple of the buffer size)
@@ -513,9 +517,20 @@ def broad_seq_fid(value_main, value_sequenz):
 
     print("STD: " + str(np.std(np_data[:, 1])))
 
-    if (1 == external_hardware):
+    x_time = np.array([22.0, 22.1, 22.2, 22.3, 22.4,
+                      22.5, 22.6, 22.7, 22.8, 22.9])
+    y_time = [0.2+9.70j, -1.5+3.0j, -2.0 + 5.31j, -0.1+3.0j, -0.1 -
+              0.4j, 0.4-2.3j, 1.3-3.3j, -0.5-4.1j, -1.7-6.4j, -1.9-7.0j]
+    y_time = [0.3+i + 1.50j for i in range(10)]
+    y_time = [[np.complex128(i)]for i in y_time]
 
-        return tdx, tdy, np_data[:, 0], np_data[:, 1]  # time x-y , freq x-y
+    x_freq = np.array(np_data[:, 0])
+    y_freq = np.array([[np.array(i)]for i in np_data[:, 1]])
+
+    if (1 == 1):
+        #print("np_data[:, 0]", np_data[:, 0])
+        #print("np_data[:, 1]", np_data[:, 1])
+        return x_time, y_time, x_freq, y_freq  # time x-y , freq x-y
     else:
         raise Exception(" hardware is missing")
 
