@@ -31,6 +31,21 @@ logger_start.info("logging from start up")
 
 
 def test_version():
+    """
+    # Description:
+
+    Verification of the installed and use Python syste version
+
+    # Args:
+
+    NONE
+
+    # Returns:
+
+    True = if tested verifications passes
+    False = if tested verification fails
+
+    """
 
     # python system  check
     # print(sys.version)
@@ -41,7 +56,7 @@ def test_version():
     if not sys.version_info[:2][0] > 2:
         print("\n Error \n installed python: ", "version ",
               version[0], ".", version[1], sep="")
-        #print("version available ",sys.version_info)
+        # print("version available ",sys.version_info)
         print("\n minimum requirements is python 3.7 \n ERROR end")
         return False
 
@@ -50,14 +65,30 @@ def test_version():
 
 
 def test_import():
-    #print("\n python modulse avalibel: ")
-    #os.system('pip list')
-    #print("\n end python modulse")
+    """
+    # Description:
 
-    #print("eggs geladen: ",'eggs' in sys.modules)
-    #print("numpy geladen: ",'numpy' in sys.modules)
+    Verification of all used modues what are used in the Projekt.
+    If the module is able to be imported.
 
-    #print("INFO imported \n")
+    # Args:
+
+    NONE
+
+    # Returns:
+
+    True = if tested verifications passes
+    False = if tested verification fails
+
+    """
+    # print("\n python modulse avalibel: ")
+    # os.system('pip list')
+    # print("\n end python modulse")
+
+    # print("eggs geladen: ",'eggs' in sys.modules)
+    # print("numpy geladen: ",'numpy' in sys.modules)
+
+    # print("INFO imported \n")
     # print(*sys.modules.keys(),sep="\n")
 
     # list of all necessery imports
@@ -66,23 +97,23 @@ def test_import():
         import matplotlib
         import tkinter
         import tkinter.ttk
-        #from tkinter import scrolledtext
+        # from tkinter import scrolledtext
 
         import matplotlib.pyplot
-        #from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+        # from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
         import configparser
         import queue
         import PIL
         import logging
         import h5py
-        #import RPi
+        # import RPi
 
     except ModuleNotFoundError as err:
         # Error handling
         print("\n #### ERROR loading import ####\n")
         print(err)
         print("\n#### ERROR loading import #### \n")
-        #os.system('python -m pip install '+str(err))
+        # os.system('python -m pip install '+str(err))
 
         return False
     else:
@@ -90,11 +121,42 @@ def test_import():
 
 
 def test_settings():
+    """
+    # Description:
+
+    Space holder for additional requirement verification that want
+    to be thestet at startup
+
+    # Args:
+
+    NONE
+
+    # Returns:
+
+    True = if tested verifications passes
+    False = if tested verification fails
+
+    """
 
     return True
 
 
 def info_dialog():
+    """
+    # Description:
+
+    Info text for presenting on startup
+
+    # Args:
+
+    NONE
+
+    # Returns:
+
+    message box of all of its information
+
+    """
+
     text = """************************************************  \n
     Autor: Philipp MALIN
     Date: 01.07.2021
@@ -105,18 +167,18 @@ def info_dialog():
     return text
 
 
-# start programm
+# start main programm
 if __name__ == "__main__":
     print("start GUI")
-
+    # thread count form the system
     print("number of treads running: ", threading.active_count())
     print("current treads: ", threading.current_thread())
     print("list of all treads: ", threading.enumerate())
 
     print(info_dialog())
+
     # do all checks
     test_dict = {}
-
     test_dict["test_version"] = test_version()
     test_dict["test_import"] = test_import()
     test_dict["test_settings"] = test_settings()
@@ -125,7 +187,7 @@ if __name__ == "__main__":
 
     if False in test_dict.values():
         test_import()
-        #print("ERROR \n problem with imports \n")
+        # print("ERROR \n problem with imports \n")
 
         raise ImportError("imports are not satisfied")
 

@@ -105,7 +105,7 @@ if 'setting_dict' not in locals():
     freq_average = "123"
 
     # freq_start = StringVar(window, value=freq_start)
-freq_start_num = "123xxxx"
+# freq_start_num = "123xxxx"
 
 # def puls_sequenz():
 #    file_path=file_path_input.get()
@@ -222,8 +222,6 @@ class window_main(tk.Tk):
         self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite
 
         # start frequency
-        # freq_start = tk.StringVar(self, value=freq_start_num)
-
         self.freq_start_lable = tk.Label(
             self.frame_measure, text="START frequency: ")
         self.freq_start_lable.grid(row=1, column=0, padx=5, pady=5)

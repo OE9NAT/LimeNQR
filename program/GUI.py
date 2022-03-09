@@ -23,14 +23,7 @@ print("-_____GUI imports_end____-")
 logging.basicConfig(filename="logging.log", level=logging.DEBUG,  # <- set logging level
                     format="%(asctime)s:%(levelname)s:%(message)s")  # set level
 
-# log = logging.getLogger("log")
-
-# log = logging.getLogger(__name__)
-# log.setLevel(logging.WARNING)
-# file_handler = logging.FileHandler("logging.log")
-# formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
-# file_handler.setFormatter(formatter)
-# log.addHandler(file_handler)
+# Set up multpiple Log handler
 
 loggerGUI = logging.getLogger(__name__)
 loggerGUI.setLevel(logging.DEBUG)  # <- set logging level
@@ -59,8 +52,6 @@ print("-_____GUI own imports_end____-")
 # colour http://www.science.smith.edu/dftwiki/images/thumb/3/3d/TkInterColorCharts.png/700px-TkInterColorCharts.png
 
 print("___start GUI analys")
-
-
 # constant Variabels
 
 
