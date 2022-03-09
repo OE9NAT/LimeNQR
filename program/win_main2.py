@@ -3,9 +3,9 @@ import run_external
 import logging  # DEBUG INFO WARNING ERROR
 import csv
 import win_plot
-import win_seq_own
-import win_seq_spin
-import win_seq_puls
+#import win_seq_own
+#import win_seq_spin
+#import win_seq_puls
 from function import *
 from tkinter import scrolledtext   # use for logger
 from tkinter import filedialog
@@ -197,10 +197,11 @@ class window_main(tk.Tk):
 
         seq_menu = tk.Menu(menuleiste, tearoff=1)
         seq_menu.add_command(
-            label="seq spin", command=win_seq_puls.windows_file)
+            label="seq spin", command=lambda: print("dropdown sequenz puls"))
         seq_menu.add_command(
-            label="seq puls", command=lambda: logger.info("dropdown sequenz puls"))
-        seq_menu.add_command(label="seq own", command=win_seq_own.windows_file)
+            label="seq puls", command=lambda: print("dropdown sequenz puls"))
+        seq_menu.add_command(
+            label="seq own", command=lambda: print("dropdown sequenz puls"))
         # Drop-down generieren
         menuleiste.add_cascade(label="Sequenz", menu=seq_menu)
 
@@ -838,13 +839,13 @@ class window_main(tk.Tk):
         self.time_plot.plot(data_time, data_value)
         self.time_plot.title.set_text("Time")
         self.time_plot.set_xlabel('time [s]')
-        self.time_plot.set_ylabel('Amplituden [V]')
+        self.time_plot.set_ylabel('Amplituden')
         self.time_plot.grid()
 
         self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
         self.feq_plot.set_xlabel('Frequency [kHz]')
-        self.feq_plot.set_ylabel('Amplituden [V]')
+        self.feq_plot.set_ylabel('Amplituden ')
         self.feq_plot.grid()
 
         # call the draw method on your canvas
