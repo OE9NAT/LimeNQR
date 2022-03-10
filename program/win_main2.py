@@ -224,7 +224,7 @@ class window_main(tk.Tk):
 
         # start frequency
         self.freq_start_lable = tk.Label(
-            self.frame_measure, text="START frequency: ")
+            self.frame_measure, text="START Frequency: ")
         self.freq_start_lable.grid(row=1, column=0, padx=5, pady=5)
         # simple_label("MHz",270,100)
 
@@ -238,7 +238,7 @@ class window_main(tk.Tk):
 
         # end frequency
         self.freq_end_lable = tk.Label(
-            self.frame_measure, text="END frequency: ")
+            self.frame_measure, text="END Frequency: ")
         self.freq_end_lable.grid(row=2, column=0, padx=5, pady=5)
         # simple_label("MHz",270,150)
 
@@ -250,7 +250,7 @@ class window_main(tk.Tk):
 
         # freq Steps
         self.freq_step_lable = tk.Label(
-            self.frame_measure, text="frequency steps: ")
+            self.frame_measure, text="Frequency Steps: ")
         self.freq_step_lable.grid(row=3, column=0, padx=5, pady=5)
         # simple_label("steps",270,200)
         tk.Label(self.frame_measure, text="step").grid(row=3, column=2, padx=3)
@@ -261,7 +261,7 @@ class window_main(tk.Tk):
 
         # average
         self.average_lable = tk.Label(
-            self.frame_measure, text="average: ")
+            self.frame_measure, text="Average: ")
         self.average_lable.grid(row=4, column=0, padx=5, pady=5)
         tk.Label(self.frame_measure, text="step").grid(row=4, column=2, padx=3)
 
@@ -271,13 +271,13 @@ class window_main(tk.Tk):
 
         # Butten save settings to settings.cfg
         self.button_run = tk.Button(
-            self.frame_measure, text="SAVE all", command=self.save_measurment, foreground="green")
+            self.frame_measure, text="SAVE All", command=self.save_measurment, foreground="green")
         self.button_run.grid(row=5, column=0, rowspan=1,
                              padx=5, pady=5, sticky="ew")
 
         # Butten load last settings from settings.cfg
         self.button_last_run = tk.Button(
-            self.frame_measure, text="load saved settings", command=self.load_settings)
+            self.frame_measure, text="Load Saved Settings", command=self.load_settings)
         self.button_last_run.grid(row=7, column=0,
                                   padx=5, pady=5, sticky="ew")
 
@@ -309,7 +309,7 @@ class window_main(tk.Tk):
         tk.Label(frame_tm, text="V").grid(row=1, column=2, padx=3)
 
         # Voltage steps
-        self.V_step_lable = tk.Label(frame_tm, text="Number of freq. : ")
+        self.V_step_lable = tk.Label(frame_tm, text="Number of Freq. : ")
         self.V_step_lable.grid(row=2, column=0, padx=5, pady=5)
 
         self.V_step_input = tk.Entry(
@@ -376,7 +376,7 @@ class window_main(tk.Tk):
         # info frequenz
         # puls
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info: \npuls:\noffset:", bg='grey')
+            info_box, text="Puls info: \n  number of Pulses: ", bg='grey')
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
@@ -388,29 +388,29 @@ class window_main(tk.Tk):
 
         # lambda: win_sequenz.Window_seq("spin", self.get_values()
 
-        puls_button = tk.Button(info_box, text="set FID sequence",
+        puls_button = tk.Button(info_box, text="Set FID Sequence",
                                 command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1", value_set))  # windows_file)
         puls_button.grid(row=3, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Spin-Echo sequence",
+        spin_button = tk.Button(info_box, text="Set Spin-Echo Sequence",
                                 command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Comp. Puls sequence",
+        spin_button = tk.Button(info_box, text="Set Comp. Puls Sequence",
                                 command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="set Spin_Echo phase seq.",
+        spin_button = tk.Button(info_box, text="Set Spin_Echo Phase Seq.",
                                 command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         own_number_puls = tk.Entry(info_box, fg="black", bg="white")
         own_number_puls.grid(row=7, column=1, sticky="ew")
-        own_button = tk.Button(info_box, text="own sequence \n number of Pulses:",
+        own_button = tk.Button(info_box, text="Own Sequence \n Number of Pulses:",
                                command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get(), value_set))  # windows_file)
         own_button.grid(row=7, column=0,
                         padx=2, pady=2, sticky="ew")
@@ -451,7 +451,7 @@ class window_main(tk.Tk):
         toolbarFrame.grid(row=2, column=0, padx=2, pady=2)  # ,sticky="ew")
         toolbar = NavigationToolbar2Tk(self.canvas, toolbarFrame)
 
-        button_reload = tk.Button(frame_plot, text="auto-update plot",
+        button_reload = tk.Button(frame_plot, text="Auto-Update Plot",
                                   command=self.plot_update, background="chartreuse4")
         button_reload.grid(row=2, column=1, padx=2, pady=2, sticky="ew")
 
@@ -462,7 +462,7 @@ class window_main(tk.Tk):
         frame_logger = tk.Frame(self, bg='grey')
         frame_logger.grid(row=2, column=0, sticky="nsew", padx=2, pady=2)
         file_path_lable = tk.Label(
-            frame_logger, text="debug logger: ", foreground="green", background="black")
+            frame_logger, text="Debug Logger: ", foreground="green3", background="grey20")
         # .grid(row=0, column=0)
         file_path_lable.pack(fill="x", padx=2, pady=2)
 
@@ -494,7 +494,7 @@ class window_main(tk.Tk):
         self.frame_Buttens = tk.Frame(self, bg='grey')
         self.frame_Buttens.grid(row=1, padx=2, pady=2, sticky="nsew")
 
-        self.button_run = tk.Button(self.frame_Buttens, text="Load last run",
+        self.button_run = tk.Button(self.frame_Buttens, text="Load last Run",
                                     command=self.load_settings2)  # load_last_values)
         self.button_run.pack(fill="x", padx=2, pady=2)
 
@@ -512,7 +512,7 @@ class window_main(tk.Tk):
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
-            self.frame_Buttens, text="PLOT", command=win_plot.win_plot)
+            self.frame_Buttens, text="Re-Evaluate & Ploting", command=win_plot.win_plot)
         plot_button.pack(fill="x", padx=2, pady=2)
 
         exit_button = tk.Button(
@@ -735,9 +735,10 @@ class window_main(tk.Tk):
 
         # file = filedialog.askopenfilename(initialdir='/home/',title='select .h5 file to plot')
         # file = "/home/pi/Bach_arbeit/signals_TEST/live_scan_data.csv"
+        #file = "signals_TEST/live_scan_data.csv"
 
-        file = "signals_TEST/live_scan_data.csv"
-        # file_name = os.path.join(folder_signal, file)
+        file = "program/init_mainplot_scan_data.csv"
+        # file = os.path.join(folder_signal, file)
 
         with open(file, newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter='\t', quotechar='|')
@@ -831,7 +832,7 @@ class window_main(tk.Tk):
         # data_fequency = [float(data[i][0]) for i, val in enumerate(data)]
         # data_amplitude = [float(data[i][1]) for i, val in enumerate(data)]
 
-        # call the clear method on your axes
+        # call the clear method on your plot
         self.time_plot.clear()
         self.feq_plot.clear()
 

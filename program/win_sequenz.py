@@ -1321,7 +1321,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
 
     # numer of puls inputs
     cycle_lable = tk.Label(
-        window_puls, text="set number \n of pulses: \n 1", background="gray60")
+        window_puls, text="Set number \n of pulses: \n 1", background="gray60")
     cycle_lable.place(x=40, y=160, width=80, height=60)
 
     # picture

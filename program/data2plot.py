@@ -104,22 +104,22 @@ def plot(filename):
     ax1.plot(stimulus_time, stimulus_data)
     ax1.set_title("Time-domain stimulus", fontdict={'size': 10})
     ax1.set_xlabel('time in µsec', fontsize=8)
-    ax1.set_ylabel('amplitude in mV', fontsize=8)
+    ax1.set_ylabel('amplitude in a.u.', fontsize=8)
 
     ax2.plot(replay_time, replay_data)
     ax2.set_title("Time-domain replay", fontdict={'size': 10})
     ax2.set_xlabel('time in µsec', fontsize=8)
-    ax2.set_ylabel('amplitude in mV', fontsize=8)
+    ax2.set_ylabel('amplitude in a.u.', fontsize=8)
 
     ax3.plot(stimulus_data_fft)
     ax3.set_title("Frequency-domain stimulus", fontdict={'size': 10})
     ax3.set_xlabel('frequency in Hz', fontsize=8)
-    ax3.set_ylabel('amplitude in mV', fontsize=8)
+    ax3.set_ylabel('amplitude in a.u.', fontsize=8)
 
     ax4.plot(replay_data_fft)
     ax4.set_title("Frequency-domain replay", fontdict={'size': 10})
     ax4.set_xlabel('frequency in Hz', fontsize=8)
-    ax4.set_ylabel('amplitude in mV', fontsize=8)
+    ax4.set_ylabel('amplitude in a.u.', fontsize=8)
 
     plt.savefig("save_filename"+".jpg")
     # plt.show()

@@ -14,51 +14,48 @@ import matplotlib
 import numpy as np
 import os
 import sys
-print("-_____GUI start____-")
 
 
-print("-_____GUI imports_end____-")
+def GUI_start():
+    print("-_____GUI start____-")
 
+    print("-_____GUI imports_end____-")
 
-logging.basicConfig(filename="logging.log", level=logging.DEBUG,  # <- set logging level
-                    format="%(asctime)s:%(levelname)s:%(message)s")  # set level
+    logging.basicConfig(filename="logging.log", level=logging.DEBUG,  # <- set logging level
+                        format="%(asctime)s:%(levelname)s:%(message)s")  # set level
 
-# Set up multpiple Log handler
+    # Set up multpiple Log handler
 
-loggerGUI = logging.getLogger(__name__)
-loggerGUI.setLevel(logging.DEBUG)  # <- set logging level
+    loggerGUI = logging.getLogger(__name__)
+    loggerGUI.setLevel(logging.DEBUG)  # <- set logging level
 
-logging_handler = logging.FileHandler("log_GUI_file.log")
-formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(message)s")
-logging_handler.setFormatter(formatter)
+    logging_handler = logging.FileHandler("log_GUI_file.log")
+    formatter = logging.Formatter("%(asctime)s:%(levelname)s:%(message)s")
+    logging_handler.setFormatter(formatter)
 
-loggerGUI.addHandler(logging_handler)
-loggerGUI.info("set upp logger in puls_win.py")
+    loggerGUI.addHandler(logging_handler)
+    loggerGUI.info("set upp logger in puls_win.py")
 
-logger_gui = logging.getLogger('GUI')
-logger_gui.addHandler(logging.StreamHandler())
-logger_gui.info("logging from GUI start up")
+    logger_gui = logging.getLogger('GUI')
+    logger_gui.addHandler(logging.StreamHandler())
+    logger_gui.info("logging from GUI start up")
 
+    # own imports
 
-# own imports
+    # windows
+    # from puls_win import *
+    # from pre_expsetup import *
+    print("-_____GUI own imports_end____-")
 
-# windows
-# from puls_win import *
-# from pre_expsetup import *
-print("-_____GUI own imports_end____-")
+    ###
+    # colour http://www.science.smith.edu/dftwiki/images/thumb/3/3d/TkInterColorCharts.png/700px-TkInterColorCharts.png
 
+    print("___start GUI analys")
+    # constant Variabels
 
-###
-# colour http://www.science.smith.edu/dftwiki/images/thumb/3/3d/TkInterColorCharts.png/700px-TkInterColorCharts.png
+    # show window, wait for user imput
+    win_main = window_main()
+    win_main.mainloop()
 
-print("___start GUI analys")
-# constant Variabels
-
-
-# show window, wait for user imput
-win_main = window_main()
-win_main.mainloop()
-
-
-# end
-print("_____end from GUI_analyzer___")
+    # end
+    print("_____end from GUI_analyzer___")

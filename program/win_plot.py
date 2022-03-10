@@ -1,4 +1,4 @@
-from data2plot import *
+import data2plot
 import configparser
 import os
 import sys
@@ -52,18 +52,25 @@ def win_plot():
     window_plot.option_add("Helvetica", '10')  # Frischart und groesse
     # window_main.resizable(width=False, height=False) #  False = no resize
 
-    # window_main.minsize(380, 380) #(width_minsize=1200, height_minsize=800)
-    #window_main.maxsize(1200, 1100)
+    window_plot.minsize(380, 380)  # (width_minsize=1200, height_minsize=800)
+    #window_plot.maxsize(1200, 1100)
+
+    window_plot.grid_columnconfigure(0, weight=1, minsize=300)
+    window_plot.grid_columnconfigure(1, weight=1, minsize=300)
+    window_plot.grid_rowconfigure(0, weight=1, minsize=50)
+    window_plot.grid_rowconfigure(1, weight=1, minsize=10)
 
     #######----- Title, Outlines, Shape ------##########
-    canvas = tk.Canvas(window_plot)
-    canvas.pack()
 
     # Title
+    frame_title = tk.Frame(window_plot, bg='grey')
+    frame_title.grid(row=0, column=0, sticky="nsew",
+                     padx=2, pady=2, columnspan=1)
+
     #"red" "orange" "yellow" "green" "blue" "purple" "white" "black"
-    lable_text = tk.Label(window_plot, text="Projekt Title ",
+    lable_text = tk.Label(frame_title, text="Re-Evaluate & Visualisation",
                           foreground="green", background="black", font=("Helvetica", 30))
-    lable_text.place(x=450, y=5, width=400, height=50)
+    lable_text.pack(fill="x", padx=2, pady=2)
 
     # Pull-down-Menu
     menuleiste = tk.Menu(window_plot)
@@ -94,82 +101,103 @@ def win_plot():
     window_plot.config(menu=menuleiste)  # Menueleiste an Fenster uebergeben
 
     ######----- Plotter  ------######
-    #btn = tk.Label(window_main, text='A simple plot', foreground="green",background="white", font=("Arial Bold", 15))
-    #btn.place(x = 10, y = 350, width=200, height=30)
+    frame_plot = tk.Frame(window_plot, bg='grey')
+    frame_plot.grid(row=1, column=0, sticky="nsew", padx=2, pady=2)
+    frame_plot.grid_rowconfigure(1, weight=1, minsize=10)
+    frame_plot.grid_columnconfigure(1, weight=1, minsize=300)
 
-    t = np.arange(0.0, 2.0, 0.01)
-    s1 = np.sin(2*np.pi*t)
-    s2 = np.sin(4*np.pi*t)
-
-    plt.figure()
-    fig = plt.figure(figsize=(1, 2))
-    #fig = plt.figure()
+    #t = np.arange(0.0, 2.0, 0.01)
+    #s1 = np.sin(2*np.pi*t)
+    #s2 = np.sin(4*np.pi*t)
+#
+    # plt.figure()
+    #fig = plt.figure(figsize=(1, 2))
+    ##fig = plt.figure()
     # set the spacing between subplots
-    plt.subplots_adjust(left=0.07, bottom=0.06, right=0.99,
-                        top=0.9, wspace=0.4, hspace=0.4)
-
-    time_plot = plt.subplot(211)
-    plt.plot(t, s1)
-    time_plot.title.set_text("Time")
-    plt.grid()
-
-    feq_plot = plt.subplot(212)
-    plt.plot(t, 2*s1)
-    feq_plot.title.set_text("Frequency")
-    plt.grid()
-
-    files = []
-    #folder_signal = "D:/UNI/Bacharbeit/lukas_bararbeit/signals"
-    folder_signal = "/home/pi/lukas_bararbeit/signals/"
-
+    # plt.subplots_adjust(left=0.07, bottom=0.06, right=0.99,
+    #                    top=0.9, wspace=0.4, hspace=0.4)
+    #
+    #time_plot = plt.subplot(211)
+    #plt.plot(t, s1)
+    # time_plot.title.set_text("Time")
+    # plt.grid()
+    #
+    #feq_plot = plt.subplot(212)
+    #plt.plot(t, 2*s1)
+    # feq_plot.title.set_text("Frequency")
+    # plt.grid()
+    #
+    #files = []
+    ##folder_signal = "D:/UNI/Bacharbeit/lukas_bararbeit/signals"
+    #folder_signal = "/home/pi/lukas_bararbeit/signals/"
+    #
     # plot al data to file
-    plot_all = False
-    if plot_all:
-        for file in os.listdir(folder_signal):
-            if file.endswith(".h5"):
-                file_name = os.path.join(folder_signal, file)
-                # print(file_name,"\n")
-                files.append(file_name)
-
-        for file in files:
-            print("\n \n lopp test  \n \n ")
-            print(file)
-            fig = plot(file)
+    #plot_all = False
+    # if plot_all:
+    #    for file in os.listdir(folder_signal):
+    #        if file.endswith(".h5"):
+    #            file_name = os.path.join(folder_signal, file)
+    #            # print(file_name,"\n")
+    #            files.append(file_name)
+    #
+    #    for file in files:
+    #        print("\n \n lopp test  \n \n ")
+    #        print(file)
+    #        fig = plot(file)
 
     # plotr on screen
     file = filedialog.askopenfilename(
         title='select signal .h5 file')  # initialdir='/home/'
-    fig = plot(file)  # funktion in in data2plot.py
+    fig = data2plot.plot(file)
 
-    # specify the window as master
-    canvas = FigureCanvasTkAgg(fig, master=window_plot)
+    canvas = FigureCanvasTkAgg(fig, master=frame_plot)
+    canvas.get_tk_widget().pack(fill="x", padx=2, pady=2)
     canvas.draw()
-    canvas.get_tk_widget().place(x=20, y=60, width=800, height=800)
+
+    def update_plot(canvas):
+
+        file = filedialog.askopenfilename(
+            title='select signal .h5 file')  # initialdir='/home/'
+
+        for item in canvas.get_tk_widget().find_all():
+            canvas.get_tk_widget().delete(item)
+
+        print("test1 ____________________________________________")
+        fig2 = data2plot.plot(file)
+
+        canvas = FigureCanvasTkAgg(fig2, master=frame_plot)
+        canvas.get_tk_widget().pack(fill="x", padx=2, pady=2)
+        canvas.draw()
+        print("test2 ____________________________________________")
 
     # navigation toolbar for the Plot
-    toolbarFrame = tk.Frame(master=window_plot)
-    toolbarFrame.place(x=50, y=820, width=450, height=35)
+    toolbarFrame = tk.Frame(master=frame_plot)
+    toolbarFrame.pack(fill="x", padx=2, pady=2)
     toolbar = NavigationToolbar2Tk(canvas, toolbarFrame)
 
     ######----- Buttens  ------######
+    frame_butten = tk.Frame(window_plot, bg='grey')
+    frame_butten.grid(row=1, column=1, sticky="nsew", padx=2, pady=2)
+    frame_butten.grid_rowconfigure(1, weight=1, minsize=10)
+    frame_butten.grid_columnconfigure(1, weight=1, minsize=300)
     butons_X = 1000  # hight of buttens
 
-    button_val = tk.Button(window_plot, text="select file", background="SkyBlue4",
+    button_val = tk.Button(frame_butten, text="select file", background="SkyBlue4",
                            command=lambda:  open_file())  # ,foreground="red")
-    button_val.place(x=butons_X, y=200, width=150, height=50)
+    button_val.pack(fill="x", padx=2, pady=2)
 
-    close_button = tk.Button(window_plot, text="select folder",
+    close_button = tk.Button(frame_butten, text="select folder",
                              background="SkyBlue4", command=lambda:  open_folder())
-    close_button.place(x=butons_X, y=300, width=150, height=50)
+    close_button.pack(fill="x", padx=2, pady=2)
 
-    button_run = tk.Button(window_plot, text="Plot data",
-                           command=lambda: print("run"), background="chartreuse4")
-    button_run.place(x=butons_X, y=400, width=150, height=50)
+    button_run = tk.Button(frame_butten, text="Plot data",
+                           command=lambda: update_plot(canvas), background="chartreuse4")
+    button_run.pack(fill="x", padx=2, pady=2)
 
-    exit_button = tk.Button(window_plot, text="Close",
+    exit_button = tk.Button(frame_butten, text="Close",
                             background="tomato4", command=window_plot.destroy)
     # exit_button = tk.Button(window_main, text="Beenden", command=window_main.quit)#.destroy) #window_main.quit
-    exit_button.place(x=butons_X, y=500, width=150, height=50)
+    exit_button.pack(fill="x", padx=2, pady=2)
 
     return window_plot
 

@@ -19,6 +19,10 @@ from logging.handlers import QueueHandler
 if not os.path.exists("log"):
     os.makedirs("log")
 
+# Check if dh5_file file exist for saving all measured files
+if not os.path.exists("log/dh5_file"):
+    os.makedirs("log/dh5_file")
+
 
 logging.basicConfig(filename="log/DEFAULT_log.log",
                     level=logging.DEBUG,  # <- set logging level
@@ -198,5 +202,6 @@ if __name__ == "__main__":
     sys.path.append("program")
 
     import GUI  # start GUI
+    GUI.GUI_start()
 
     print("-_____END check start of GUI ____-")

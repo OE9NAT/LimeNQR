@@ -118,7 +118,7 @@ class win_load_file(tk.Tk):
         self.experiment = experiment
         self.data = data
 
-        text_log = "class window _main calling filestrukture"
+        text_log = "class window _main calling filestructure"
         text_log = text_log + "path " + path + "\n"
         text_log = text_log + "experiment " + experiment + "\n"
         text_log = text_log + "data " + data + "\n"
@@ -145,7 +145,7 @@ class win_load_file(tk.Tk):
                                 pady=frame_boarder, sticky="nsew")
 
         self.strukture_title = tk.Label(
-            frame_path_view, text="Set Experiment Strukture ")
+            frame_path_view, text="Set Experiment Structure ")
         self.strukture_title.grid(
             row=0, column=0, columnspan=2, padx=5, pady=5)
 
@@ -178,7 +178,7 @@ class win_load_file(tk.Tk):
             self.frame_path, text="Data: \n Example: FID,Echo ")
         self.frame_path_set.grid(row=1, column=0, padx=5, pady=5)
 
-        lable_text = tk.Label(window_experiment, text="Set Experiment strukture ",
+        lable_text = tk.Label(window_experiment, text="Set Experiment structure ",
                               foreground="green", background="OliveDrab4", font=("Helvetica", 30))
         lable_text.place(x=50, y=10, width=500, height=50)
 

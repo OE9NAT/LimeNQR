@@ -59,8 +59,10 @@ class Value_Settings:
             self._log_path = os.path.abspath(os.path.dirname(
                 sys.argv[0])) + "\program\icon_logo.xbm"
             window.wm_iconbitmap(bitmap=self._log_path)
+        else:
+            pass
         window.destroy()
-        print("path of logo: ", self._log_path)
+        #print("path of logo: ", self._log_path)
 
     @staticmethod
     def hallo_word():
@@ -613,14 +615,14 @@ class File_Settings:
         frame_boarder = 3
 
         # Title
-        lable_text = tk.Label(self.main_frame, text="Set Experiment strukture ",
+        lable_text = tk.Label(self.main_frame, text="Set Experiment Structure ",
                               foreground="green", background="OliveDrab4", font=("Helvetica", 30),)
         lable_text.pack()  # , columnspan=1)
 
         # Parameters
 
         self.frame_parameter = tk.LabelFrame(
-            self.window_experiment, text="selected Parameters", bg='grey')
+            self.window_experiment, text="Selected Parameters", bg='grey')
         self.frame_parameter.grid(
             row=1, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
 
@@ -658,7 +660,7 @@ class File_Settings:
 
         # New Experiment parameter
         self.frame_experiment = tk.LabelFrame(
-            self.window_experiment, text="new Expeiment-Parameters", bg='grey')
+            self.window_experiment, text="New Expeiment-Parameters", bg='grey')
         self.frame_experiment.grid(
             row=4, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
         self.frame_experiment.grid_columnconfigure(0, weight=2)
@@ -666,7 +668,7 @@ class File_Settings:
 
         gray_light = "gray70"
         path_lable_input = tk.Label(
-            self.frame_experiment, text="Set Sample foldername: \n Ex: TuGraz", background=gray_light)
+            self.frame_experiment, text="Set Sample Folder Name: \n Ex: TuGraz", background=gray_light)
         path_lable_input.grid(row=0, column=0)
         self.sample = tk.Entry(self.frame_experiment,
                                fg="black", bg="white", width=40)
@@ -674,7 +676,7 @@ class File_Settings:
                          pady=frame_boarder, sticky="nsew")
 
         experiment_lable_input = tk.Label(
-            self.frame_experiment, text="Set Experiment foldername: \n Ex: Bismut", background=gray_light)
+            self.frame_experiment, text="Set Experiment Folder Name: \n Ex: Bismut", background=gray_light)
         experiment_lable_input.grid(row=1, column=0)
         self.experiment = tk.Entry(
             self.frame_experiment, fg="black", bg="white", width=40)
@@ -682,37 +684,37 @@ class File_Settings:
                              pady=frame_boarder, sticky="nsew")
 
         cycle_lable_input = tk.Label(
-            self.frame_experiment, text="Set Data foldername: \n Ex: FID, Spin-Echo,", background=gray_light)
+            self.frame_experiment, text="Set Data Folder Name: \n Ex: FID, Spin-Echo,", background=gray_light)
         cycle_lable_input.grid(row=2, column=0)
         self.data = tk.Entry(self.frame_experiment,
                              fg="black", bg="white", width=40)
         self.data.grid(row=2, column=1, padx=frame_boarder,
                        pady=frame_boarder, sticky="nsew")
 
-        save_button = tk.Button(self.frame_experiment, text="set Parameters",
+        save_button = tk.Button(self.frame_experiment, text="Set Parameters",
                                 background="SkyBlue4", command=lambda: File_Settings.generate_folder(self, sample=self.sample.get(), experiment=self.experiment.get(), data=self.data.get()))
         save_button.grid(row=3, column=0, columnspan=2, sticky="nsew")
 
         # Buttons
         self.frame_buttens = tk.LabelFrame(
-            self.window_experiment, text="load Expeiment-Parameters", bg='grey')
+            self.window_experiment, text="Load Expeiment-Parameters", bg='grey')
         self.frame_buttens.grid(
             row=3, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
         self.frame_buttens.grid_columnconfigure(0, weight=2)
         self.frame_buttens.grid_columnconfigure(1, weight=2)
         self.frame_buttens.grid_columnconfigure(2, weight=1)
 
-        save_button = tk.Button(self.frame_buttens, text="load pre-existing settings",
+        save_button = tk.Button(self.frame_buttens, text="Load Pre-Existing Settings",
                                 command=lambda:  File_Settings.load_folder(self))
         save_button.grid(row=0, column=0, padx=frame_boarder,
                          pady=frame_boarder, sticky="nsew")
 
-        save_close_button = tk.Button(self.frame_buttens, text="save & close window",
+        save_close_button = tk.Button(self.frame_buttens, text="Save & Close Window",
                                       background="chartreuse4", command=lambda: File_Settings.save_close(self))
         save_close_button.grid(row=0, column=1, padx=frame_boarder,
                                pady=frame_boarder, sticky="nsew")
 
-        close_button = tk.Button(self.frame_buttens, text="close window",
+        close_button = tk.Button(self.frame_buttens, text="Close Window",
                                  background="red3", command=self.window_experiment.destroy)
         close_button.grid(row=0, column=2, padx=frame_boarder,
                           pady=frame_boarder, sticky="nsew")
@@ -722,7 +724,7 @@ class File_Settings:
             self.window_experiment, text="Comment for Experiment: ", background=gray_light)
         self.frame_comment.grid(row=2, column=0, sticky="nsew")
 
-        tk.Label(self.frame_comment, text="Area to comment on the experiment",
+        tk.Label(self.frame_comment, text="Area to Comment on the Experiment",
                  background=gray_light).pack()
 
         self.txt_experiment = tk.Text(
@@ -730,14 +732,14 @@ class File_Settings:
         # fill="Fill in comments for the eperiment ",
         self.txt_experiment.pack(padx=2, pady=2, expand=True)
         self.txt_experiment.insert(
-            tk.END, "Comments for the Experiment collected:")
+            tk.END, "Comments for the Experiment Collected:")
 
-        tk.Label(self.frame_comment, text="Area to comment on the Data",
+        tk.Label(self.frame_comment, text="Area to Comment on the Data",
                  background=gray_light).pack()
         self.txt_data = tk.Text(self.frame_comment, fg="black",
                                 bg="white", width=50, height=6)
 
         self.txt_data.pack(padx=2, pady=2, expand=True)
-        self.txt_data.insert(tk.END, "Comments for the data collected:")
+        self.txt_data.insert(tk.END, "Comments for the Data Collected:")
 
-        return print("closing load file")
+        return print("Closing load File")

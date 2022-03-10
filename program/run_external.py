@@ -13,8 +13,12 @@ import time
 
 print("RUN sequenz")
 
-external_hardware = True  # False
-save_dh5_file = './pulse/FID'
+external_hardware = True  # False True
+if os.environ.get('OS', '') == 'Windows_NT':
+    external_hardware = False
+
+#save_dh5_file = './pulse/FID'
+save_dh5_file = './log/dh5_file'
 
 
 # helper fuktion
@@ -390,7 +394,7 @@ def broad_seq_fid(value_main, value_sequenz):
         l.run()
 
         # read back file and plot time signal + shifted fft
-        if (1 == 1):
+        if (1 == external_hardware):
 
             # reads back the file which was recently saved
             l.readHDF()
@@ -527,7 +531,7 @@ def broad_seq_fid(value_main, value_sequenz):
     x_freq = np.array(np_data[:, 0])
     y_freq = np.array([[np.array(i)]for i in np_data[:, 1]])
 
-    if (1 == 1):
+    if (1 == external_hardware):
         #print("np_data[:, 0]", np_data[:, 0])
         #print("np_data[:, 1]", np_data[:, 1])
         return x_time, y_time, x_freq, y_freq  # time x-y , freq x-y
