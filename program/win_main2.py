@@ -197,13 +197,13 @@ class window_main(tk.Tk):
 
         seq_menu = tk.Menu(menuleiste, tearoff=1)
         seq_menu.add_command(
-            label="seq spin", command=lambda: print("dropdown sequenz puls"))
+            label="seq spin", command=lambda: print("dropdown sequenz Spin"))
         seq_menu.add_command(
-            label="seq puls", command=lambda: print("dropdown sequenz puls"))
+            label="seq puls", command=lambda: print("dropdown sequenz Puls"))
         seq_menu.add_command(
-            label="seq own", command=lambda: print("dropdown sequenz puls"))
+            label="seq own", command=lambda: print("dropdown sequenz Own"))
         # Drop-down generieren
-        menuleiste.add_cascade(label="Sequenz", menu=seq_menu)
+        menuleiste.add_cascade(label="Sequence", menu=seq_menu)
 
         self.config(menu=menuleiste)  # Menueleiste an Fenster uebergeben
         self.update()
@@ -253,7 +253,8 @@ class window_main(tk.Tk):
             self.frame_measure, text="Frequency Steps: ")
         self.freq_step_lable.grid(row=3, column=0, padx=5, pady=5)
         # simple_label("steps",270,200)
-        tk.Label(self.frame_measure, text="step").grid(row=3, column=2, padx=3)
+        tk.Label(self.frame_measure, text="steps").grid(
+            row=3, column=2, padx=3)
 
         self.freq_step_input = tk.Entry(
             self.frame_measure, justify="right", fg="black", bg="white", width=10)
@@ -263,7 +264,8 @@ class window_main(tk.Tk):
         self.average_lable = tk.Label(
             self.frame_measure, text="Average: ")
         self.average_lable.grid(row=4, column=0, padx=5, pady=5)
-        tk.Label(self.frame_measure, text="step").grid(row=4, column=2, padx=3)
+        tk.Label(self.frame_measure, text="steps").grid(
+            row=4, column=2, padx=3)
 
         self.average_input = tk.Entry(
             self.frame_measure, justify="right", fg="black", bg="white", width=10)
@@ -277,19 +279,20 @@ class window_main(tk.Tk):
 
         # Butten load last settings from settings.cfg
         self.button_last_run = tk.Button(
-            self.frame_measure, text="Load Saved Settings", command=self.load_settings)
+            self.frame_measure, text="Load Settings", command=self.load_settings)
         self.button_last_run.grid(row=7, column=0,
                                   padx=5, pady=5, sticky="ew")
 
         ######----- Tune&Match Settings ------######
-        frame_tm = tk.LabelFrame(self, text="Tune&Match Settings", bg='grey')
+        frame_tm = tk.LabelFrame(
+            self, text="Tune and Match Settings", bg='grey')
         frame_tm.grid(row=0, column=1, padx=frame_boarder,
                       pady=frame_boarder, sticky="nsew")
         self.grid_rowconfigure(1, weight=1, minsize=240)
         self.grid_columnconfigure(1, weight=1, minsize=280)
 
         # Tune U_max
-        self.Tune_U_max_lable = tk.Label(frame_tm, text="Tune U_max: ")
+        self.Tune_U_max_lable = tk.Label(frame_tm, text="Tune Umax: ")
         self.Tune_U_max_lable.grid(row=0, column=0, padx=5, pady=5)
         # simple_label("V",620,100)
         tk.Label(frame_tm, text="V").grid(row=0, column=2, padx=3)
@@ -299,7 +302,7 @@ class window_main(tk.Tk):
         self.Tune_U_max_input.grid(row=0, column=1, padx=5, pady=5)
 
         # Match U_max
-        self.Match_U_max_lable = tk.Label(frame_tm, text="Match U_max  : ")
+        self.Match_U_max_lable = tk.Label(frame_tm, text="Match Umax  : ")
         self.Match_U_max_lable.grid(row=1, column=0, padx=5, pady=5)
 
         self.Match_U_max_input = tk.Entry(
@@ -316,7 +319,7 @@ class window_main(tk.Tk):
             frame_tm, fg="black", bg="white", width=10)
         self.V_step_input.grid(row=2, column=1, padx=5, pady=5)
 
-        tk.Label(frame_tm, text="V").grid(row=2, column=2, padx=3)
+        tk.Label(frame_tm, text="steps").grid(row=2, column=2, padx=3)
 
         # LUT Size
         self.LUT_lable = tk.Label(frame_tm, text="LUT Size :")
@@ -325,7 +328,7 @@ class window_main(tk.Tk):
         self.LUT_input = tk.Entry(frame_tm, fg="black", bg="white", width=10)
         self.LUT_input.grid(row=3, column=1, padx=5, pady=5)
 
-        tk.Label(frame_tm, text="step").grid(row=3, column=2, padx=3)
+        tk.Label(frame_tm, text="steps").grid(row=3, column=2, padx=3)
 
         # Buttens
         self.send_TMfile = tk.Button(
@@ -376,13 +379,13 @@ class window_main(tk.Tk):
         # info frequenz
         # puls
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info: \n  number of Pulses: ", bg='grey')
+            info_box, text="Sequence info: \n Pulse Info:", bg='grey')
         self.lable_info_puls.grid(
             row=0, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
         type_sequenz = self.get_values()["sequenz"]["sequenz"]
         self.lable_info_puls = tk.Label(
-            info_box, text="Puls info:"+type_sequenz, bg='grey')
+            info_box, text="Sequence selected:"+type_sequenz, bg='grey')
         self.lable_info_puls.grid(
             row=1, column=1, padx=3, pady=3, rowspan=3)  # columnspan=3   rowspan=3
 
@@ -398,19 +401,19 @@ class window_main(tk.Tk):
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="Set Comp. Puls Sequence",
+        spin_button = tk.Button(info_box, text="Set Composite Puls Seq.",
                                 command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="Set Spin_Echo Phase Seq.",
+        spin_button = tk.Button(info_box, text="Set Spin-Echo Phase Seq.",
                                 command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=6, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
         own_number_puls = tk.Entry(info_box, fg="black", bg="white")
         own_number_puls.grid(row=7, column=1, sticky="ew")
-        own_button = tk.Button(info_box, text="Own Sequence \n Number of Pulses:",
+        own_button = tk.Button(info_box, text="Own puls Sequence \n Number of Pulses:",
                                command=lambda: Sequenz.window_sequenz("own", self.get_values(), own_number_puls.get(), value_set))  # windows_file)
         own_button.grid(row=7, column=0,
                         padx=2, pady=2, sticky="ew")
@@ -508,11 +511,11 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            self.frame_Buttens, text="Filestrukture", command=lambda: file_set.save_experiment)
+            self.frame_Buttens, text="Filestructure", command=lambda: file_set.save_experiment)
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
-            self.frame_Buttens, text="Re-Evaluate & Ploting", command=win_plot.win_plot)
+            self.frame_Buttens, text="Re-Evaluate\n & \n Visualization", command=win_plot.win_plot)
         plot_button.pack(fill="x", padx=2, pady=2)
 
         exit_button = tk.Button(

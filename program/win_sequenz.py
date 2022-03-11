@@ -185,14 +185,14 @@ class Window_seq:
         self.sequenz_type_input.pack()
         self.sequenz_type_input.insert(0, self.sequenz_type)
 
-        info_text = "Measurment Settings\n"
+        info_text = "Measurement Settings\n"
         info_text += "START frequency: " + \
             str(value_settings["freq"]["freq_start"])+"\n"
-        info_text += "END frequency: " + \
+        info_text += "END Frequency: " + \
             str(value_settings["freq"]["freq_end"])+"\n"
-        info_text += "frequency steps: " + \
+        info_text += "Frequency Steps: " + \
             str(value_settings["freq"]["freq_step"])+"\n"
-        info_text += "average: " + \
+        info_text += "Nr. of Averages: " + \
             str(value_settings["freq"]["freq_repetitions"])+"\n"
         self.lable_info_experiment = tk.Label(
             self.info_box, text=info_text, bg='grey')
@@ -210,7 +210,7 @@ class Window_seq:
             self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
-        info_text = "\n Experiment strukture:"+"\n"
+        info_text = "\n Experiment structure:"+"\n"
         info_text += "Sample: " + value_settings["load"]["sample"] + "\n"
         info_text += "Experiment: " + value_settings["load"]["experiment"]+"\n"
         info_text += "Data: " + value_settings["load"]["data"]+"\n"
@@ -589,7 +589,7 @@ class Window_seq:
             if number == 0:
                 # prevent compiling trouble on the FSDR
                 # delay.insert(0, "300_000_000") # in samples
-                delay.insert(0, "12")  # in musec
+                delay.insert(0, "300000000")  # in musec
 
         # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')

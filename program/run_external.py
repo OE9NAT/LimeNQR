@@ -56,8 +56,8 @@ def send_sdr(value_main, value_sequenz):
         if sequenz_freq_step > 1:
             # Frequency band
             print("\n*********++++*//\nfreq band measurment")
-            [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
-                value_main, value_sequenz)
+            # [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
+            #    value_main, value_sequenz)
 
         else:
             # one Frequency
@@ -138,7 +138,8 @@ def seq_fid(value_main, value_sequenz):
     l.noi = -1
 
     # target frequency of the experiment
-    tgtfreq = 83.62e6
+    tgtfreq = float(value_main["freq"]["freq_start"]) * 10 ** (6)
+    tgtfreq = 83.55e6
 
     # IF or base band frequency
     if_frq = 1.2e6
@@ -193,6 +194,7 @@ def seq_fid(value_main, value_sequenz):
         0, int(value_sequenz['Puls']['number_pulses']))]
     # pulse  duration
     l.pdr = string2array(value_sequenz['Puls']['puls_duration'])  # [3e-6]
+
     # relative pulse amplitude (only makes sense if 2 or more pulses are in the sequence)
     l.pam = [value_sequenz['Puls']['puls_amplitude']
              for i in range(0, int(value_sequenz['Puls']['number_pulses']))]  # [1]
@@ -311,7 +313,7 @@ def broad_seq_fid(value_main, value_sequenz):
     freqList = list()
 
     start_flag = 'Set_Voltage\n'
-    arduino = serial.Serial(port='/dev/ttyACM2', baudrate=115200)
+    arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200)
     time.sleep(1)
 
     arduino.write(start_flag.encode())

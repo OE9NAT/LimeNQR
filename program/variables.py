@@ -668,7 +668,7 @@ class File_Settings:
 
         gray_light = "gray70"
         path_lable_input = tk.Label(
-            self.frame_experiment, text="Set Sample Folder Name: \n Ex: TuGraz", background=gray_light)
+            self.frame_experiment, text="Set Sample Folder Name: \n Example: TuGraz", background=gray_light)
         path_lable_input.grid(row=0, column=0)
         self.sample = tk.Entry(self.frame_experiment,
                                fg="black", bg="white", width=40)
@@ -676,7 +676,7 @@ class File_Settings:
                          pady=frame_boarder, sticky="nsew")
 
         experiment_lable_input = tk.Label(
-            self.frame_experiment, text="Set Experiment Folder Name: \n Ex: Bismut", background=gray_light)
+            self.frame_experiment, text="Set Experiment Folder Name: \n Example: Bismut", background=gray_light)
         experiment_lable_input.grid(row=1, column=0)
         self.experiment = tk.Entry(
             self.frame_experiment, fg="black", bg="white", width=40)
@@ -684,7 +684,7 @@ class File_Settings:
                              pady=frame_boarder, sticky="nsew")
 
         cycle_lable_input = tk.Label(
-            self.frame_experiment, text="Set Data Folder Name: \n Ex: FID, Spin-Echo,", background=gray_light)
+            self.frame_experiment, text="Set Data Folder Name: \n Example: FID, Spin-Echo,", background=gray_light)
         cycle_lable_input.grid(row=2, column=0)
         self.data = tk.Entry(self.frame_experiment,
                              fg="black", bg="white", width=40)
@@ -697,7 +697,7 @@ class File_Settings:
 
         # Buttons
         self.frame_buttens = tk.LabelFrame(
-            self.window_experiment, text="Load Expeiment-Parameters", bg='grey')
+            self.window_experiment, text="Load Experiment-Parameters", bg='grey')
         self.frame_buttens.grid(
             row=3, column=0, padx=frame_boarder, pady=frame_boarder, sticky="nsew")
         self.frame_buttens.grid_columnconfigure(0, weight=2)
