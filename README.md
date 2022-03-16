@@ -1,4 +1,4 @@
-# GUI for a LimeNQR controller
+# GUI for SDR based NQR system - "LimeNQR"
 
 To start gui run start.py file.
 
