@@ -126,8 +126,7 @@ class window_main(tk.Tk):
         # main window
         logger_win_main.info("start__ win_main2 start class window_main init")
         # self = tk.Tk()
-        self.title(
-            "Magnetic Resonance Imaging - Contrast Agent Analyse Controller - Main")
+        self.title("LimeNQR - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
         self.wm_iconbitmap(bitmap=logo_path)
         # try:
@@ -770,15 +769,15 @@ class window_main(tk.Tk):
         self.time_plot = plt.subplot(211)
         self.time_line = self.time_plot.plot(t, s1)
         self.time_plot.title.set_text("Time")
-        self.time_plot.set_xlabel('time [s]')
-        self.time_plot.set_ylabel('Amplituden [a.u]')
+        self.time_plot.set_xlabel('Time in µs')
+        self.time_plot.set_ylabel('Amplituden in a.u')
         self.time_plot.grid()
 
         self.feq_plot = plt.subplot(212)
         self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
-        self.feq_plot.set_xlabel('Frequency [kHz]')
-        self.feq_plot.set_ylabel('Amplituden [a.u]')
+        self.feq_plot.set_xlabel('Frequency in MHz')
+        self.feq_plot.set_ylabel('Amplituden in a.u')
         self.feq_plot.grid()
 
         return self.fig
@@ -842,14 +841,14 @@ class window_main(tk.Tk):
         # plot the new data
         self.time_plot.plot(data_time, data_value)
         self.time_plot.title.set_text("Time")
-        self.time_plot.set_xlabel('time [s]')
-        self.time_plot.set_ylabel('Amplituden')
+        self.time_plot.set_xlabel('Time in µs')
+        self.time_plot.set_ylabel('Amplitude in a.u.')
         self.time_plot.grid()
 
         self.feq_plot.plot(data_fequency, data_amplitude)
         self.feq_plot.title.set_text("Frequency")
-        self.feq_plot.set_xlabel('Frequency [kHz]')
-        self.feq_plot.set_ylabel('Amplituden ')
+        self.feq_plot.set_xlabel('Frequency in MHz')
+        self.feq_plot.set_ylabel('Amplitude in a.u.')
         self.feq_plot.grid()
 
         # call the draw method on your canvas

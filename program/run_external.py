@@ -139,7 +139,7 @@ def seq_fid(value_main, value_sequenz):
 
     # target frequency of the experiment
     tgtfreq = float(value_main["freq"]["freq_start"]) * 10 ** (6)
-    tgtfreq = 83.55e6
+    tgtfreq = 83.56e6
 
     # IF or base band frequency
     if_frq = 1.2e6
@@ -256,7 +256,7 @@ def seq_fid(value_main, value_sequenz):
         fac_p_to_uV = float(
             value_sequenz['SDR setting']['factor_point2volts'])  # 447651/1e6
         # fac_p_to_uV = 447651/1e6
-        tdy_mean = tdy_mean/l.nav/fac_p_to_uV/RX_gainfactor
+        tdy_mean = tdy_mean/l.nav
 
         plt.figure(1)
         plt.plot(tdx, tdy_mean)  # zeit plot
@@ -277,7 +277,7 @@ def seq_fid(value_main, value_sequenz):
         stopper = 270  # 300
         # here the right side of the spectrum is selected
         y = abs((fdy1[int(len(fdy1)/2)+shifter:len(fdy1)-1-stopper])) / \
-            len(tdx)/fac_p_to_uV/l.nav/RX_gainfactor
+            len(tdx)/l.nav
         x = fdx1[int(len(fdy1)/2)+shifter:len(fdy1)-1-stopper]
 
         plt.figure(5)
