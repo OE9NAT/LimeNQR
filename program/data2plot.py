@@ -113,12 +113,12 @@ def plot(filename):
 
     ax3.plot(stimulus_data_fft)
     ax3.set_title("Frequency-domain stimulus", fontdict={'size': 10})
-    ax3.set_xlabel('frequency in Hz', fontsize=8)
+    ax3.set_xlabel('frequency in MHz', fontsize=8)
     ax3.set_ylabel('amplitude in a.u.', fontsize=8)
 
     ax4.plot(replay_data_fft)
     ax4.set_title("Frequency-domain replay", fontdict={'size': 10})
-    ax4.set_xlabel('frequency in Hz', fontsize=8)
+    ax4.set_xlabel('frequency in MHz', fontsize=8)
     ax4.set_ylabel('amplitude in a.u.', fontsize=8)
 
     plt.savefig("save_filename"+".jpg")

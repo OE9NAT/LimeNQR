@@ -140,7 +140,7 @@ class Window_seq:
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
         try:
             self.win_seq.wm_iconbitmap(
-                bitmap="C:/Users/MALIN Philipp/git/bacharbeit/program/icon_logo.ico")
+                bitmap="C:/Users/Malin/GIT/bacharbeit/program/icon_logo.ico")
         except Exception:
             pass
 
@@ -151,11 +151,10 @@ class Window_seq:
 
         # zeilen hoehe
         self.win_seq.grid_rowconfigure(0, weight=1, minsize=60)  # zeilen hoehe
+        self.win_seq.grid_rowconfigure(1, weight=1, minsize=160)
+        self.win_seq.grid_rowconfigure(2, weight=10, minsize=90)
         self.win_seq.grid_rowconfigure(
-            1, weight=2, minsize=40)  # zeilen hoehe
-        self.win_seq.grid_rowconfigure(
-            2, weight=3, minsize=100)  # zeilen hoehe
-        self.win_seq.grid_rowconfigure(3, weight=4, minsize=60)  # zeilen hoehe
+            3, weight=10, minsize=60)  # zeilen hoehe
         # self.win_seq.grid_rowconfigure(4, weight=4, minsize=50)  # zeilen hoehe
 
         # spalten breite
@@ -290,14 +289,15 @@ class Window_seq:
             # plt.plot(sinus, 'ro')
             fig_plot.plot(time, sinus_puls)
             fig_plot.plot(x_puls, y_puls)
-            fig_plot.legend(['Puls frequenzy', 'Enwrap of Puls'])
+            fig_plot.legend(['Puls frequenzy', 'Enwrap of Puls'],
+                            bbox_to_anchor=(1, 0), loc="lower right")
 
             off_bool = True
             point_summ = 0
             for count, point in enumerate(duration_list):
                 if off_bool:
                     fig_plot.annotate('Offset '+str(int(count/2+1)), (point_summ, 1),
-                                      textcoords="offset points", xytext=(2, -20), ha='left')
+                                      textcoords="offset points", xytext=(2, -60), ha='left', rotation=90)
                     off_bool = False
                 else:
                     fig_plot.annotate('Puls '+str(int((count+1)/2)), (point_summ, 1),
@@ -306,9 +306,9 @@ class Window_seq:
                 point_summ += point
 
             fig_plot.annotate('Start acquisition', (window_start, 1),
-                              textcoords="offset points", xytext=(2, 10), ha='left')
+                              textcoords="offset points", xytext=(2, 20), ha='left')
             fig_plot.annotate('Stop acquisition', (window_start+window, 1),
-                              textcoords="offset points", xytext=(2, 10), ha='left')
+                              textcoords="offset points", xytext=(2, -90), ha='left', rotation=90)
 
             if amplitude < 1.5:
                 fig_plot.set_ylim(-1.2, 1.7)
@@ -409,7 +409,7 @@ class Window_seq:
         self.frame_sdr = tk.LabelFrame(
             self.win_seq, text="SDR Settings", bg='grey')
         self.frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
-                            pady=Window_seq.frame_boarder, sticky="nsew", rowspan=2)
+                            pady=Window_seq.frame_boarder, sticky="nsew", rowspan=3)
         self.frame_sdr.grid_columnconfigure(0, weight=1)
         self.frame_sdr.grid_columnconfigure(1, weight=1)
 
@@ -730,7 +730,25 @@ class Window_seq:
         self.puls_amplitude_input.grid(row=5, column=1, sticky="ew")
         self.puls_amplitude_input.insert(0, self.puls_amplitude)
 
-        #
+        if seq_type == "fid":
+            frame_readout.destroy()
+
+        if seq_type == "spin":
+            frame_readout.destroy()
+
+        def toggle(show_state):
+            if bool(show_state):
+                print("toogle hide sdr Settings")
+                self.frame_sdr.grid_forget()
+
+                self.toggle_button.configure(text='SDR settings show')
+                show.set(0)
+            else:
+                print("toogle sow")
+                self.frame_sdr.grid(row=2, column=0, padx=Window_seq.frame_boarder,
+                                    pady=Window_seq.frame_boarder, sticky="nsew", rowspan=3)
+                self.toggle_button.configure(text='SDR settings hide')
+                show.set(1)
 
         # Buttens
         frame_Buttens = tk.Frame(self.win_seq, bg='grey')
@@ -739,19 +757,26 @@ class Window_seq:
 
         button_run = tk.Button(frame_Buttens, text="load",
                                command=lambda: Window_seq.load_seq(self))  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2, side="left")
+        button_run.pack(fill="both", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="save",
                                command=lambda: Window_seq.save_seq(self))  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2, side="left")
+        button_run.pack(fill="both", padx=2, pady=2, side="left")
+
+        show = tk.IntVar()
+        show.set(1)
+        self.toggle_button = tk.ttk.Checkbutton(frame_Buttens, text='SDR settings hide', command=lambda: toggle(show.get()),
+                                                variable=show, style='Toolbutton')
+        self.toggle_button.pack(fill="both", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="test",
                                command=lambda: print("space for expantion "))  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2, side="left")
+        button_run.pack(fill="both", padx=2, pady=2, side="left")
 
         button_run = tk.Button(frame_Buttens, text="close",
                                background="tomato4", command=self.win_seq.destroy)  # load_last_values)
-        button_run.pack(fill="x", padx=2, pady=2, side="right")
+        button_run.pack(fill="both", padx=2, pady=2,
+                        expand="true", side="right")
 
     @ staticmethod
     def save_seq(self):
