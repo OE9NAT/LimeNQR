@@ -5,9 +5,33 @@ As one of the requirement was that the Software will be used for a lab exercise 
 
 To start the GUI, run in the terminal window the start.py file with python.
 ```
->python3 --version
->python3 start.py
+>python --version
+>python start.py
 >
+
+logging from start up
+start GUI
+number of treads running:  1
+current treads:  <_MainThread(MainThread, started 14904)>
+list of all treads:  [<_MainThread(MainThread, started 14904)>]
+************************************************
+
+    Autor: Philipp MALIN
+    Date: 01.07.2021
+    Version: 1.2
+    Description: Grapical user interface to control SDR
+                 for MR-Analys of contrast medium.
+
+************************************************
+Python version  3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021,
+start test python version 3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021, 20:19:38) [MSC v.1929 64 bit (AMD64)]
+Check list:
+('test_version', True)
+('test_import', True)
+('test_settings', True)
+
+
+imports alles ok
 ```
 
 The Program will first check for the right version of python. 
