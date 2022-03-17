@@ -136,7 +136,7 @@ class Window_seq:
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")
         self.win_seq = tk.Tk()
-        self.win_seq.title("Magnetic Resonance Imaging - Sequenz Manager")
+        self.win_seq.title("LimeNQR - Sequenz Manager")
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
         try:
             self.win_seq.wm_iconbitmap(
@@ -185,14 +185,14 @@ class Window_seq:
         self.sequenz_type_input.pack()
         self.sequenz_type_input.insert(0, self.sequenz_type)
 
-        info_text = "Measurment Settings\n"
+        info_text = "Measurement Settings\n"
         info_text += "START frequency: " + \
             str(value_settings["freq"]["freq_start"])+"\n"
-        info_text += "END frequency: " + \
+        info_text += "END Frequency: " + \
             str(value_settings["freq"]["freq_end"])+"\n"
-        info_text += "frequency steps: " + \
+        info_text += "Frequency Steps: " + \
             str(value_settings["freq"]["freq_step"])+"\n"
-        info_text += "average: " + \
+        info_text += "Nr. of Averages: " + \
             str(value_settings["freq"]["freq_repetitions"])+"\n"
         self.lable_info_experiment = tk.Label(
             self.info_box, text=info_text, bg='grey')
@@ -210,7 +210,7 @@ class Window_seq:
             self.info_box, text=info_text, bg='grey')
         self.lable_info_experiment.pack()
 
-        info_text = "\n Experiment strukture:"+"\n"
+        info_text = "\n Experiment structure:"+"\n"
         info_text += "Sample: " + value_settings["load"]["sample"] + "\n"
         info_text += "Experiment: " + value_settings["load"]["experiment"]+"\n"
         info_text += "Data: " + value_settings["load"]["data"]+"\n"
@@ -305,9 +305,9 @@ class Window_seq:
                     off_bool = True
                 point_summ += point
 
-            fig_plot.annotate('Blanking', (point_summ, 1),
-                              textcoords="offset points", xytext=(2, -20), ha='left')
-            fig_plot.annotate('Window', (window_start, 1),
+            fig_plot.annotate('Start acquisition', (window_start, 1),
+                              textcoords="offset points", xytext=(2, 10), ha='left')
+            fig_plot.annotate('Stop acquisition', (window_start+window, 1),
                               textcoords="offset points", xytext=(2, 10), ha='left')
 
             if amplitude < 1.5:
@@ -315,6 +315,8 @@ class Window_seq:
             fig_plot.set_title("Sequence of Pulssequence")
             fig_plot.set_xlabel("Time in µs")
             fig_plot.set_ylabel("Amplitude")
+            fig_plot.set_yticklabels([])
+            fig_plot.set_xticklabels([])
 
             #fig_plot.savefig('plot.jpg', dpi=300)
             # fig_plot.show()
@@ -589,7 +591,7 @@ class Window_seq:
             if number == 0:
                 # prevent compiling trouble on the FSDR
                 # delay.insert(0, "300_000_000") # in samples
-                delay.insert(0, "12")  # in musec
+                delay.insert(0, "300000000")  # in musec
 
         # # time of Readout
         frame_readout = tk.LabelFrame(self.win_seq, text="Readout", bg='grey')
@@ -631,7 +633,7 @@ class Window_seq:
 
         # blank_time
         lable_blank_time = tk.Label(
-            frame_readout, text="Blanking time in ms", bg='grey')
+            frame_readout, text="Start acquisition in µs", bg='grey')
         lable_blank_time.grid(row=4, column=0, sticky="ew")
 
         self.blank_time_input = tk.Entry(
@@ -641,7 +643,7 @@ class Window_seq:
 
         # window_time
         lable_window_time = tk.Label(
-            frame_readout, text="Window time in ms", bg='grey')
+            frame_readout, text="Stop acquisition in µs", bg='grey')
         lable_window_time.grid(row=5, column=0, sticky="ew")
 
         self.window_time_input = tk.Entry(

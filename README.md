@@ -1,4 +1,4 @@
-# GUI for a SDR controlled magnetic resonance imaging - contrast agent analyse controller
+# GUI for SDR based NQR system - "LimeNQR"
 
 To start gui run start.py file.
 
