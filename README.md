@@ -4,11 +4,11 @@ A intuitive gaphical user interface (GUI) for a software defined radio (SDR) whi
 As one of the requirement was that the Software will be used for a lab exercise with students, it should include warning statements if destructive settings are saved to be run on the SDR. On the other hand for experienced user it has the ability to load standardised .cfg files from the system.
 
 To start the GUI, run in the terminal window the start.py file with python.
-´´´
+```
 >python --version
 >python3 start.py
 >
-´´´
+```
 
 This Program will first chek the right version of python. 
 It will also chek if all necessary imports and modulse are available.
