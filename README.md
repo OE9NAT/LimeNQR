@@ -5,7 +5,9 @@ As one of the requirement was that the Software will be used for a lab exercise 
 
 To start the GUI, run in the terminal window the start.py file with python.
 ´´´
+>python --version
 >python3 start.py
+>
 ´´´
 
 This Program will first chek the right version of python. 
