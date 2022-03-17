@@ -5,22 +5,17 @@ As one of the requirement was that the Software will be used for a lab exercise 
 
 To start the GUI, run in the terminal window the start.py file with python.
 ```
->python --version
+>python3 --version
 >python3 start.py
 >
 ```
 
-This Program will first chek the right version of python. 
-It will also chek if all necessary imports and modulse are available.
+The Program will first check for the right version of python. 
+It will also check if all necessary imports and modulse are available.
 
-After loading the setting.cfg file it will check for plausilbility and 
-hardware limits of all variables set.
-
-
-Lanching the main.py will show the GUI of the main Window. It is 
-desined that everythink can be started and controled from there. 
-It will allow the user to load preset files from previus measuremnts
-but he can also set some new variables. 
+Lanching will show the main window where everythink can be controled from and also start the sequence. 
+![main window](https://github.com/OE9NAT/bacharbeit/blob/on_hardware2/images/win_main.JPG)
+It will allow the user to load preset files from previus measuremnts but he can also set some new variables. 
 
 After selectingt all parameters and setting its limits for the range of
  intrest the information can first be send to the Arduino to set the 
