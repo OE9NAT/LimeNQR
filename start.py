@@ -166,7 +166,7 @@ def info_dialog():
     Date: 01.07.2021
     Version: 1.2
     Description: Grapical user interface to control SDR
-                 for MR-Analys of contrast medium.
+                 for Nuclear Quadrupole Resonance spectroscopy.
     \n************************************************  """
     return text
 
