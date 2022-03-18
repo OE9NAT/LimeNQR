@@ -7,8 +7,10 @@ To start the GUI, run in the terminal window the start.py file with python.
 ```
 >python --version
 >python start.py
->
 
+```
+Output:
+```
 logging from start up
 start GUI
 number of treads running:  1
@@ -20,7 +22,7 @@ list of all treads:  [<_MainThread(MainThread, started 14904)>]
     Date: 01.07.2021
     Version: 1.2
     Description: Grapical user interface to control SDR
-                 for MR-Analys of contrast medium.
+                 for Nuclear Quadrupole Resonance spectroscopy.
 
 ************************************************
 Python version  3.9.7 (tags/v3.9.7:1016ef3, Aug 30 2021,
