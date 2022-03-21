@@ -44,7 +44,7 @@ The Program will first check for the right version of python.
 It will also check if all necessary imports and modulse are available.
 
 Lanching will show the main window where everythink can be controlled from and also presents the start butten to run the sequence. 
-![main window](https://github.com/OE9NAT/bacharbeit/blob/on_hardware2/images/win_main.JPG)
+![main window](https://github.com/OE9NAT/bacharbeit/blob/on_hardware2/images/main_window_0.JPG)
 It will allow the user to load preset files from previus measuremnts but he can also set some new variables. 
 
 After selectingt all parameters and setting its limits for the range of intrest the information will be sent to the hardware automaticaly.  First the tuning and matching unit will set the resonat circuit and than the SDR will make the measurment at the particular frequency. The repetative measurment process will be done for the number of samples averages adjusted. Reiterating the tuning and matching for the specified frequency band range will follow in the specified step size.
