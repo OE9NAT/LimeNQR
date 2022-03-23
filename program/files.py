@@ -9,7 +9,8 @@ def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
     window_experiment = tk.Tk()
     window_experiment.title("load experiment")
     # window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
-    window_experiment.wm_iconbitmap(bitmap=logo_path)
+    # window_experiment.wm_iconbitmap(bitmap=logo_path)
+
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_experiment.geometry("600x520")
     window_experiment.option_add("Helvetica", '10')  # Frischart und groesse

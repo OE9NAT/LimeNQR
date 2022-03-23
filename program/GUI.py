@@ -1,6 +1,6 @@
 import logging  # DEBUG INFO WARNING ERROR
 import tkinter.ttk as TTK  # use for Combobox
-from win_main2 import *
+import win_main2
 from function import *
 from logging.handlers import QueueHandler
 import queue
@@ -17,9 +17,10 @@ import sys
 
 
 def GUI_start():
+    """This will initialise the loggers
+    After all imports it will start the main window 
+    """
     print("-_____GUI start____-")
-
-    print("-_____GUI imports_end____-")
 
     logging.basicConfig(filename="logging.log", level=logging.DEBUG,  # <- set logging level
                         format="%(asctime)s:%(levelname)s:%(message)s")  # set level
@@ -40,21 +41,14 @@ def GUI_start():
     logger_gui.addHandler(logging.StreamHandler())
     logger_gui.info("logging from GUI start up")
 
-    # own imports
-
     # windows
     # from puls_win import *
     # from pre_expsetup import *
-    print("-_____GUI own imports_end____-")
-
-    ###
-    # colour http://www.science.smith.edu/dftwiki/images/thumb/3/3d/TkInterColorCharts.png/700px-TkInterColorCharts.png
+    print("-_____GUI init of logging end____-")
 
     print("___start GUI analys")
-    # constant Variabels
-
     # show window, wait for user imput
-    win_main = window_main()
+    win_main = win_main2.window_main()
     win_main.mainloop()
 
     # end

@@ -53,11 +53,11 @@ def send_sdr(value_main, value_sequenz):
     print("frequenzy step, singel=1 or multi-band>1:", sequenz_freq_step)
     if sequenz_select == "fid":
 
-        if sequenz_freq_step > 1:
+        if sequenz_freq_step > 2:
             # Frequency band
             print("\n*********++++*//\nfreq band measurment")
-            # [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
-            #    value_main, value_sequenz)
+            [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
+                value_main, value_sequenz)
 
         else:
             # one Frequency

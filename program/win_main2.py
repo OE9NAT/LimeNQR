@@ -3,9 +3,6 @@ import run_external
 import logging  # DEBUG INFO WARNING ERROR
 import csv
 import win_plot
-#import win_seq_own
-#import win_seq_spin
-#import win_seq_puls
 from function import *
 from tkinter import scrolledtext   # use for logger
 from tkinter import filedialog
@@ -29,10 +26,10 @@ logo_path = value_set.logo_path
 
 # read from settings.cfg
 var_setting = value_set.import_setting
-# # setter
+# setter
 # value_set.set_freq = (22, 22, 22, 22)
 # print("get start", value_set._freq_start)
-# # getter
+# getter
 # print("getter", value_set.get_freq)
 
 
@@ -107,19 +104,15 @@ if 'setting_dict' not in locals():
     # freq_start = StringVar(window, value=freq_start)
 # freq_start_num = "123xxxx"
 
-# def puls_sequenz():
-#    file_path=file_path_input.get()
-#    experiment_path=experiment_path_input.get()
-#    cycle_path=cycle_path_input.get()
-#
-#    windows_file(file_path,experiment_path,cycle_path)
 
-
-# def window_main():
 class window_main(tk.Tk):
     time_autosave = 5000  # in ms
 
     def __init__(self, *args, **kwargs):
+        """initialisation of the main window
+        This will show all essential parameters. 
+        This allows to be jump to all essentail windows
+        """
         tk.Tk.__init__(self, *args, **kwargs)
         self.value_sequenz = Sequenz.save2cfg()
 
@@ -129,18 +122,25 @@ class window_main(tk.Tk):
         self.title("LimeNQR - Main")
         # self.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
         self.wm_iconbitmap(bitmap=logo_path)
-        # try:
-        #     # for linux
-        #     log_path = "@/" + \
-        #         os.path.abspath(os.path.dirname(
-        #             sys.argv[0])) + "/program/stethoskop.xbm"
-        #     self.wm_iconbitmap(bitmap=log_path)
-        # except:
-        #     # for windows
-        #     log_path = os.path.abspath(os.path.dirname(
-        #         sys.argv[0])) + "/program/stethoskop.xbm"
-        #     self.wm_iconbitmap(bitmap=log_path)
-        # Fensterbreite,hoehe, on secreen offset x, on screen offset y
+        try:
+            # for linux
+            log_path = "@/" + \
+                os.path.abspath(os.path.dirname(
+                    sys.argv[0])) + "/program/stethoskop.xbm"
+            self.wm_iconbitmap(bitmap=log_path)
+        except:
+            pass
+
+        try:
+            # for windows
+            log_path = os.path.abspath(os.path.dirname(
+                sys.argv[0])) + "/program/icon_logo.ico"
+            self.wm_iconbitmap(bitmap=log_path)
+
+        except:
+            pass
+
+        # Fensterbreite, hoehe, on secreen offset x, on screen offset y
         self.minsize(380, 400)  # (width_minsize=1200, height_minsize=800)
         # self.maxsize(1200, 850)
         # self.geometry("1000x750+400+100")
@@ -708,6 +708,7 @@ class window_main(tk.Tk):
         return
 
     def set_measur(self, start=11, stop=22, step=33, average=44):
+
         # self.freq_start_input.config(text=start)
         print("\n self_______\n", self)
 

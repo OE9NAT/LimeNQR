@@ -330,7 +330,7 @@ class Window_seq:
             offset = [5]
             delay = 4
             window = 15
-            freq_plot = int(value_settings["freq"]["freq_start"])
+            freq_plot = float(value_settings["freq"]["freq_start"])
 
             plot_fig = plot_sequenz(
                 offset, puls, frequency=freq_plot, amplitude=1)

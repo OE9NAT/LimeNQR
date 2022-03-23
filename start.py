@@ -110,6 +110,14 @@ def test_import():
         import PIL
         import logging
         import h5py
+
+        import os
+        import sys
+        import scipy
+        import csv
+        import serial
+        import time
+
         # import RPi
 
     except ModuleNotFoundError as err:
@@ -164,7 +172,7 @@ def info_dialog():
     text = """************************************************  \n
     Autor: Philipp MALIN
     Date: 01.07.2021
-    Version: 1.2
+    Version: 1.0
     Description: Grapical user interface to control SDR
                  for Nuclear Quadrupole Resonance spectroscopy.
     \n************************************************  """

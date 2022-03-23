@@ -70,6 +70,15 @@ class Value_Settings:
 
     @property
     def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting_last_run.cfg"):
+        """kijiojoijoijoijoi testS
+
+        Args:
+            path (_type_, optional): _description_. Defaults to os.path.dirname(sys.argv[0]).
+            file (str, optional): _description_. Defaults to "program/setting_last_run.cfg".
+
+        Returns:
+            _type_: _description_
+        """
         # read settings form setting.cfg file
         # path_settings = path+"/"+file
         print("@property import_settings")
@@ -598,6 +607,24 @@ class File_Settings:
         # self.window_experiment.wm_iconbitmap(bitmap="@/home/pi/Bach_arbeit/stethoskop.xbm")
         # self.window_experiment.wm_iconbitmap(bitmap=logo_path)
         # Fensterbreite,hoehe, on secreen offset x, on screen offset y
+
+        try:
+            # for linux
+            log_path = "@/" + \
+                os.path.abspath(os.path.dirname(
+                    sys.argv[0])) + "/program/stethoskop.xbm"
+            self.window_experiment.wm_iconbitmap(bitmap=log_path)
+        except:
+            pass
+
+        try:
+            # for windows
+            log_path = os.path.abspath(os.path.dirname(
+                sys.argv[0])) + "\program\icon_logo.ico"
+            self.window_experiment.wm_iconbitmap(bitmap=log_path)
+
+        except:
+            pass
 
         # self.window_experiment.geometry("800x750")
         self.window_experiment.option_add(
