@@ -261,7 +261,7 @@ class window_main(tk.Tk):
 
         # average
         self.average_lable = tk.Label(
-            self.frame_measure, text="Average: ")
+            self.frame_measure, text="Averages: ")
         self.average_lable.grid(row=4, column=0, padx=5, pady=5)
         tk.Label(self.frame_measure, text="steps").grid(
             row=4, column=2, padx=3)
@@ -331,7 +331,7 @@ class window_main(tk.Tk):
 
         # Buttens
         self.send_TMfile = tk.Button(
-            frame_tm, text="Read TM-file", command=lambda: self.read_tm(), foreground="red4")
+            frame_tm, text="Read T/M-file", command=lambda: self.read_tm(), foreground="red4")
         self.send_TMfile.grid(row=4, column=0, padx=5, pady=5)
 
         self.send_TMfile = tk.Button(
@@ -349,7 +349,7 @@ class window_main(tk.Tk):
 
         # rund
         self.send_TMfile = tk.Button(
-            frame_tm, text="generate TM-file", command=lambda: print("not implement"), foreground="green")
+            frame_tm, text="generate T/M-file", command=lambda: print("not implement"), foreground="green")
         self.send_TMfile.grid(row=6, column=0, padx=5, pady=5, columnspan=1)
 
         ######----- info box  ------######
@@ -400,7 +400,7 @@ class window_main(tk.Tk):
         spin_button.grid(row=4, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
 
-        spin_button = tk.Button(info_box, text="Set Composite Puls Seq.",
+        spin_button = tk.Button(info_box, text="Set Composite Pulse Seq.",
                                 command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2", value_set))  # windows_file)
         spin_button.grid(row=5, column=0, columnspan=2,
                          padx=2, pady=2, sticky="ew")
@@ -510,7 +510,7 @@ class window_main(tk.Tk):
         button_run.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(
-            self.frame_Buttens, text="Filestructure", command=lambda: file_set.save_experiment)
+            self.frame_Buttens, text="File structure", command=lambda: file_set.save_experiment)
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         plot_button = tk.Button(
