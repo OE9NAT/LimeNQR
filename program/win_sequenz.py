@@ -34,6 +34,14 @@ logo_path = value_set.logo_path
 
 # helper fuktion
 def string2array(value):
+    """covert a long string format into a list
+
+    Args:
+        value (string): long list of numbers
+
+    Returns:
+        array: an arrar of float numbers
+    """
     value = value.replace("[", "").replace("]", "")
     value = value.split(",")
     # print("def string2array", value)
@@ -41,7 +49,14 @@ def string2array(value):
 
 
 class Window_seq:
+    """will launch the main window to enter the Variable.
+    In the init, values will be pre-set.
+
+    Returns:
+        all values aquiriert will be saved to files as specified by the user.
+    """
     print("class Sequenz Window setup")
+    # class varaibels
     frame_boarder = 4
     max_number_puls = 10
 
@@ -224,7 +239,20 @@ class Window_seq:
 
         # return value_settings
 
-        def plot_sequenz(selfoffset, puls, delay=20, window=40, frequency=100, amplitude=1):
+        def plot_sequenz(offset, puls, delay=20, window=40, frequency=100, amplitude=1):
+            """generates a figure with the use of matplotlib.figure  for visualising the Sequenz generator.
+
+            Args:
+                offset (list of integer): A list of integers of each duration of the offset in arbitrary units
+                puls (list of integer): A list of integers of each duration of the pulse arbitrary units
+                delay (int, optional): time to delay the window off before the window time starts. Defaults to 20 arbitrary units.
+                window (int, optional): durationtime of aquisition time. Defaults to 40 arbitrary units.
+                frequency (int, optional): scale of frequency. Defaults to 100 arbitrary units.
+                amplitude (int, optional): deflection of the Signal. Defaults to 1 arbitrary units.
+
+            Returns:
+                figure: returne a figure of subplots for the use matplotlib.figure
+            """
             rest = 10  # end of puls
 
             duration = []
@@ -272,16 +300,16 @@ class Window_seq:
                           1 else 0 for count, value in enumerate(y_puls)]
 
             # with dampend responce
-            #print("window_start,", window_start*sample_rate)
+            # print("window_start,", window_start*sample_rate)
             window_start_upsample = window_start*sample_rate
 
             sinus_puls = [sinus_puls[count] * (np.exp(-(count-window_start_upsample-200)*0.0001)) if count >
                           window_start_upsample else sinus_puls[count] for count, value in enumerate(sinus_puls)]
 
-            #print(len(x_puls), "x_puls", x_puls[0: 15])
-            #print(len(y_puls), "y_puls", y_puls[0: 15])
-            #print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
-            #print(len(time), "time \n", time[0: 5])
+            # print(len(x_puls), "x_puls", x_puls[0: 15])
+            # print(len(y_puls), "y_puls", y_puls[0: 15])
+            # print(len(sinus_puls), "sinus_puls \n", sinus_puls[0: 5])
+            # print(len(time), "time \n", time[0: 5])
 
             figure = Figure(figsize=(5, 5), dpi=100)
             fig_plot = figure.add_subplot()
@@ -318,7 +346,7 @@ class Window_seq:
             fig_plot.set_yticklabels([])
             fig_plot.set_xticklabels([])
 
-            #fig_plot.savefig('plot.jpg', dpi=300)
+            # fig_plot.savefig('plot.jpg', dpi=300)
             # fig_plot.show()
 
             return figure
@@ -545,22 +573,22 @@ class Window_seq:
 
         if seq_type == "fid":
             print("FID sequnez", seq_type)
-            #number_pulses = 1
+            # number_pulses = 1
             number_pulses = puls_cylce
 
         elif seq_type == "spin":
             print("spin Echo sequenz =", seq_type)
-            #number_pulses = 2
+            # number_pulses = 2
             number_pulses = puls_cylce
 
         elif seq_type == "comp":
             print("Composite Pulse", seq_type)
-            #number_pulses = 2
+            # number_pulses = 2
             number_pulses = puls_cylce
 
         elif seq_type == "spin_phase":
             print("own", seq_type)
-            #number_pulses = 2
+            # number_pulses = 2
             number_pulses = puls_cylce
 
         elif seq_type == "own":
@@ -737,6 +765,11 @@ class Window_seq:
             frame_readout.destroy()
 
         def toggle(show_state):
+            """toggle the SDR settings frame for a greater overview
+
+            Args:
+                show_state (boolien): state showing or hiding the window
+            """
             if bool(show_state):
                 print("toogle hide sdr Settings")
                 self.frame_sdr.grid_forget()
@@ -780,7 +813,11 @@ class Window_seq:
 
     @ staticmethod
     def save_seq(self):
-        # get input parameter and save to class variables
+        """get input parameter and save to class variables
+
+        Returns:
+            dictionary: a dictionary of all variables of the sequence
+        """
 
         self.sequenz_type = self.sequenz_type_input.get()
 
@@ -802,12 +839,12 @@ class Window_seq:
 
         delay_array = read_array[::2].copy()
         pulse_array = read_array[1::2].copy()
-        #print("pulse_array", pulse_array)
-        #print("delay_array", delay_array)
+        # print("pulse_array", pulse_array)
+        # print("delay_array", delay_array)
         self.puls_arangement = delay_array
         self.puls_duration = pulse_array
 
-        #self.puls_freq = [12377777777]
+        # self.puls_freq = [12377777777]
         self.blank_time = self.blank_time_input.get()
         self.window_time = self.window_time_input.get()
 
@@ -853,12 +890,21 @@ class Window_seq:
         return seq_variabels
 
     def save2cfg(self, file="program/setting_sequence.cfg", file_path=os.path.dirname(sys.argv[0])):
+        """save all parameters to the file set.
+
+        Args:
+            file (str, optional): _description_. Defaults to "program/setting_sequence.cfg".
+            file_path (os.path, optional): _description_. Defaults to os.path.dirname(sys.argv[0]).
+
+        Returns:
+            dictonary : return all saved parameters
+        """
 
         print("save settings to .cfg file")
         path_settings = os.path.join(file_path, file)
 
         # storage = file_set.main_data_path  # "Storage_vault"
-        #path_settings = os.path.join(storage, file)
+        # path_settings = os.path.join(storage, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
             # path_settings = filedialog.askopenfilename(
@@ -953,6 +999,11 @@ class Window_seq:
         return {s: dict(configParser_new.items(s)) for s in configParser_new.sections()}
 
     def load_seq(self):
+        """acquire saved data from storea and load into the file handler and visualise the data in the GUI
+
+        Returns:
+            dictonary: dictonray of all loaded parameters
+        """
         print("load all variabels from .cfg file")
 
         seq_variabels = Window_seq.read2cfg(self)
@@ -1067,9 +1118,18 @@ class Window_seq:
         return seq_variabels
 
     def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequence.cfg"):
+        """take the .cfg file and format it into a dictonray
+
+        Args:
+            file_path (filepath, optional): path of the program. Defaults to os.path.dirname(sys.argv[0]).
+            file (str, optional): path of the file to be loaded. Defaults to "program/setting_sequence.cfg".
+
+        Returns:
+            dictonray: hand over all parameters to be processed for loading into the system
+        """
 
         # popup filehandler
-        #file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
+        # file_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
         path = os.path.join(file_path, file)
         path_settings = filedialog.askopenfilename(
@@ -1077,7 +1137,7 @@ class Window_seq:
         print(path_settings)
 
         " read .cfg file from file "
-        #path_settings = os.path.join(file_path, file)
+        # path_settings = os.path.join(file_path, file)
         if not os.path.exists(path_settings):
             print("file Setting not found", path_settings)
 
@@ -1091,6 +1151,16 @@ class Window_seq:
 
 
 def save_file(path, experiment="test_experiment_1", cycle="test_cycle_11"):
+    """check if the storage strukture exist, othersise generate the correspondingly needed folders
+
+    Args:
+        path (string path): location of where to save the file
+        experiment (str, optional): subfolder for storage. Defaults to "test_experiment_1".
+        cycle (str, optional): subsubfolder for declaing the storage. Defaults to "test_cycle_11".
+    Returns:
+        boolean: True if folders could be found or were generated,
+                 False if not possible
+    """
     print("def save")
     print("experiment" + experiment + "cycle" + cycle)
 
@@ -1102,13 +1172,21 @@ def save_file(path, experiment="test_experiment_1", cycle="test_cycle_11"):
     except OSError as error:
         print("error file1 Experiment olready exists")
         logger_seq.error('error message')
+        return False
 
-    return "testing save"
+    return True
 
 # read and save input vales from GUI and save it to config.cfg file
 
 
 def save_values(path="test_data", experiment="test_experiment", cycle="test_cycle"):
+    """collect Parameters and save to handed over structure
+
+    Args:
+        path (str, optional): mainfolder to save acquire measurment data. Defaults to "test_data".
+        experiment (str, optional): subfolder to save acquire measurment data. Defaults to "test_experiment".
+        cycle (str, optional): subsubfolder to save acquire measurment data. Defaults to "test_cycle".
+    """
     cfg_section = "puls_sequenz"
     input_values = {}
     print("save to cfg_section: " + cfg_section)
@@ -1171,8 +1249,18 @@ def save_values(path="test_data", experiment="test_experiment", cycle="test_cycl
 
 ### loading data from past experiments ####
 def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
-    print("load")
-    print("path"+path+"experiment" + experiment + "cycle" + cycle)
+    """load Parameters from storage to handed over to the sytem
+
+    Args:
+        path (str, optional): mainfolder to save acquire measurment data. Defaults to "test_data".
+        experiment (str, optional): subfolder to save acquire measurment data. Defaults to "test_experiment".
+        cycle (str, optional): subsubfolder to save acquire measurment data. Defaults to "test_cycle".
+
+    Returns:
+        boolean: True if files could be loaed
+    """
+    print("def: load_file: \n path"+path +
+          "experiment" + experiment + "cycle" + cycle)
 
     import tkinter as tk
     # import tkinter.ttk as TTK #use for Combobox
@@ -1264,10 +1352,17 @@ def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
                              background="tomato4", command=window_experiment.destroy)
     close_button.place(x=410, y=450, width=140, height=50)
 
-    return print("closing load file")
+    return True
 
 
 def windows_file(path="test_data", experiment="test_experiment", cycle="test_cycle"):
+    """Window of setting the set Puls sequence from a funktion. Basic setupfor minimal settings. Update from thins Funktion is the class Window_seq
+
+    Args:
+        path (str, optional): main folder. Defaults to "test_data".
+        experiment (str, optional): subfolder. Defaults to "test_experiment".
+        cycle (str, optional): subsubfolder for saving the experiment Data. Defaults to "test_cycle".
+    """
 
     # helper function
     def simple_label(text_unit, column, row):
@@ -1312,7 +1407,7 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
     ######----- Setup of gui ------######
     window_puls = tk.Tk()
     window_puls.title("Set Puls")
-    window_puls.wm_iconbitmap(bitmap=logo_path)
+    # window_puls.wm_iconbitmap(bitmap=logo_path)
     # Fensterbreite,hoehe, on secreen offset x, on screen offset y
     window_puls.geometry("1000x800+1000+100")
     window_puls.option_add("Helvetica", '10')  # Frischart und groesse
@@ -1353,18 +1448,18 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
 
     # picture
 
-    image_path = os.path.abspath(os.path.dirname(
-        sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
+    # image_path = os.path.abspath(os.path.dirname(
+    #     sys.argv[0]))+"/program/sequenz/puls_seq.JPG"
     # image_path = "/home/pi/Bach_arbeit/program/sequenz/puls_seq.JPG"
-    image = Image.open(image_path)
-    image_puls = image.resize((750, 300))
-    image_puls = ImageTk.PhotoImage(image_puls, master=window_puls)
-    # image_puls = ImageTk.PhotoImage(Image.open(image_path))
-    pic_label = tk.Label(window_puls, image=image_puls)
-    pic_label.pack(fill="both", expand="yes")
-    pic_label.image = image_puls
-    pic_label.place(x=150, y=160)
-    image.close()
+    # image = Image.open(image_path)
+    # image_puls = image.resize((750, 300))
+    # image_puls = ImageTk.PhotoImage(image_puls, master=window_puls)
+    # # image_puls = ImageTk.PhotoImage(Image.open(image_path))
+    # pic_label = tk.Label(window_puls, image=image_puls)
+    # pic_label.pack(fill="both", expand="yes")
+    # pic_label.image = image_puls
+    # pic_label.place(x=150, y=160)
+    # image.close()
 
     ### Input #
     unit_puls = "ms"
@@ -1421,12 +1516,12 @@ def windows_file(path="test_data", experiment="test_experiment", cycle="test_cyc
     close_button.place(x=800, y=butons_y, width=150, height=50)
 
     # show window, wait for user imput
-    # window_puls.mainloop()
-    # return window_puls
 
 
 # colour http://www.science.smith.edu/dftwiki/images/thumb/3/3d/TkInterColorCharts.png/700px-TkInterColorCharts.png
 if __name__ == "__main__":
+    """ stand alone testing of Sequenz generator
+    """
     # for testing
     print("-_____start import puls_win")
     import os

@@ -55,11 +55,13 @@ class Value_Settings:
                     sys.argv[0])) + "/program/icon_logo.xbm"
             window.wm_iconbitmap(bitmap=self._log_path)
         except:
+            pass
+        try:
             # for windows
             self._log_path = os.path.abspath(os.path.dirname(
                 sys.argv[0])) + "\program\icon_logo.xbm"
             window.wm_iconbitmap(bitmap=self._log_path)
-        else:
+        except:
             pass
         window.destroy()
         #print("path of logo: ", self._log_path)
