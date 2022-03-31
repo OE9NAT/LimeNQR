@@ -56,7 +56,9 @@ With further development it will allow a detailed analysis of the last measured 
 
 Have a great measurment.
 
+Fore more information visit the ![Wiki Page](https://github.com/OE9NAT/bacharbeit/wiki)
 
-https://asciiflow.com/#/
+
+[comment]: # https://asciiflow.com/#/
 
 
