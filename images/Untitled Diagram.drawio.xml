@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-01-26T20:02:56.537Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36" etag="frNmFuBooLq0JJZbf3Gq" version="16.4.7" type="github">
+<mxfile host="app.diagrams.net" modified="2022-03-31T19:49:29.231Z" agent="5.0 (Windows)" etag="_mgnnghf-ugXhNSUd3ig" version="17.4.0" type="github">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="1674" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2249" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
@@ -58,13 +58,13 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="owAq0KQiyDN5g83FiSza-5" value="generate new Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="owAq0KQiyDN5g83FiSza-5" value="Generate new sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="230" y="390" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="owAq0KQiyDN5g83FiSza-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="owAq0KQiyDN5g83FiSza-8" target="owAq0KQiyDN5g83FiSza-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="owAq0KQiyDN5g83FiSza-8" value="load Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="owAq0KQiyDN5g83FiSza-8" value="Load sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="390" y="390" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="owAq0KQiyDN5g83FiSza-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="owAq0KQiyDN5g83FiSza-14" target="owAq0KQiyDN5g83FiSza-15" edge="1">
@@ -79,7 +79,7 @@
         <mxCell id="owAq0KQiyDN5g83FiSza-14" value="Do changes as nessesery" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="390" y="480" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="owAq0KQiyDN5g83FiSza-15" value="Save parameter to experiment strukture" style="rounded=1;whiteSpace=wrap;html=1;gradientColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="owAq0KQiyDN5g83FiSza-15" value="Save parameter to experiment structure" style="rounded=1;whiteSpace=wrap;html=1;gradientColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="310" y="600" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="owAq0KQiyDN5g83FiSza-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Helvetica;fontSize=12;fontColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="owAq0KQiyDN5g83FiSza-19" target="owAq0KQiyDN5g83FiSza-22" edge="1">
@@ -100,7 +100,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="owAq0KQiyDN5g83FiSza-22" value="generate new Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="owAq0KQiyDN5g83FiSza-22" value="Generate new Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-520" y="390" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="owAq0KQiyDN5g83FiSza-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="owAq0KQiyDN5g83FiSza-24" target="owAq0KQiyDN5g83FiSza-26" edge="1">
@@ -108,7 +108,7 @@
             <mxPoint x="-300" y="480" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="owAq0KQiyDN5g83FiSza-24" value="load Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="owAq0KQiyDN5g83FiSza-24" value="Load Sequenz" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-360" y="390" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="owAq0KQiyDN5g83FiSza-26" value="Set and save Structure" style="rounded=1;whiteSpace=wrap;html=1;gradientColor=none;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
