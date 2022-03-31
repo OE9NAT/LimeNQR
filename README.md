@@ -59,6 +59,5 @@ Have a great measurment.
 Fore more information visit the ![Wiki Page](https://github.com/OE9NAT/bacharbeit/wiki)
 
 
-[comment]: # (https://asciiflow.com/#/ )
 
 
