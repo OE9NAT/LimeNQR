@@ -125,8 +125,9 @@ def get_info_dialog():
     ************************\n\
     Autor: Philipp MALIN\n\
     Date: 01.07.2021\n\
-    Version: 0.02\n\
-    Description: Program to control \n\
+    Version: 1.0\n\
+    Description: Grapical user interface to control SDR\n\
+                 for Nuclear Quadrupole Resonance spectroscopy.\n\
     ************************"
     tk.messagebox.showinfo(message=m_text, title="Info")
 

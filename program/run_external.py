@@ -31,6 +31,15 @@ def string2array(value):
 
 # sequenz selection
 def send_sdr(value_main, value_sequenz):
+    """Execution of the sequence from the main window.
+    It will hand over the parameters to the sequence what will send all parameterst to the sdr and will control the execution of the sequence.
+
+    It handels the returened data from the sequence and will save it to set filestrukture
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+    """
     print("RUN SDR sequenz ")
     print("value_main ", value_main)
     # value_main =
@@ -55,7 +64,6 @@ def send_sdr(value_main, value_sequenz):
 
         if sequenz_freq_step > 2:
             # Frequency band
-            print("\n*********++++*//\nfreq band measurment")
             [x_time, y_time, x_freq, y_freq] = broad_seq_fid(
                 value_main, value_sequenz)
 
@@ -128,8 +136,21 @@ def send_sdr(value_main, value_sequenz):
 
 
 def seq_fid(value_main, value_sequenz):
+    """
+    singel frequency Free Induction Decay (FID) sequence measurment
+    file from lukas FIDseq.py adopted
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
     print("fid seq \n", value_main)
-    """ file from lukas FIDseq.py adopted """
 
     # l = limr.limr('./pulseN_test_USB.cpp')
     l = limr.limr('./program/pulseN_test_USB.cpp')
@@ -298,6 +319,20 @@ def seq_fid(value_main, value_sequenz):
 
 
 def broad_seq_fid(value_main, value_sequenz):
+    """
+    multi frequency free induction decay (FID) sequence measruemnt
+    file from lukas FIDcut.py adopted
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
     print("broad frequency FID")
 
     U_Tune_max = 5.0  # max voltage for tuning cap
@@ -542,6 +577,20 @@ def broad_seq_fid(value_main, value_sequenz):
 
 
 def seq_spin(value_main, value_sequenz):
+    """
+    Spin-Echo sequence 
+    file from lukas SpinEchoseq.py adopted
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
     print("\n \n spin seq \n", value_main)
     """ File from Lukas: SpinEchoseq.py adopted """
 
@@ -734,6 +783,20 @@ def seq_spin(value_main, value_sequenz):
 
 
 def seq_comp(value_main, value_sequenz):
+    """
+    composite pulse sequence with pulses that change their phase in time
+    file from lukas CompositePulseseq.py adopted
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
 
     print("comp seq \n", value_main)
     """ File from Lukas: CompositePulseseq.py adopted """
@@ -966,6 +1029,20 @@ def seq_comp(value_main, value_sequenz):
 
 
 def seq_spin_phase(value_main, value_sequenz):
+    """
+    spin-echo with phase-cycling  sequence 
+    file from lukas SpinEchoPhaseCyclingseq.py adopted
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
 
     print("spin_phase seq \n", value_main)
     """ file from Lukas SpinEchoPhaseCyclingseq.py adopted """
@@ -1185,8 +1262,20 @@ def seq_spin_phase(value_main, value_sequenz):
 
 
 def seq_own(value_main, value_sequenz):
-    print("fid sspin_phaseeq \n", value_main)
-    """own Sequenz """
+    """
+    own to desine arbitrary sequence used with up to 10 pulses und all its dependet phases
+
+    Args:
+        value_main (dict): all parameterst from the main window 
+        value_sequenz (dict): all parameters dependent on the sequence
+
+    Raises:
+        Exception: if not possible to send to the hardware
+
+    Returns:
+        list, list, list, list: steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain
+    """
+    print("own sequence\n", value_main)
 
     l = limr.limr('./program/pulseN_test_USB.cpp')
     l.noi = -1
@@ -1337,6 +1426,15 @@ def seq_own(value_main, value_sequenz):
 
 
 def send_tune_match(tune, match, tm_step, tm_lut):
+    """provisions for development of a new tuning and matching system
+
+    Args:
+        tune (float): max voltage range of tunig capacitor
+        match (float): max voltage range of matching capacitor
+        tm_step (int): step size of measured data
+        tm_lut (int): resolution of saved measured data
+
+    """
     print("start tune and match sequenz on Arduino ")
     print("tune ", tune)
     print("match ", match)

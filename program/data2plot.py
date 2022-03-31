@@ -6,6 +6,15 @@ import os
 
 
 def plot(filename):
+    """Generates a figer from a file which has a predefined format. 
+    The use is, to call saved files and generates plots for reevaluation in the GUI window
+
+    Args:
+        filename (string): takes a file path with a predefined filestrukture 
+
+    Returns:
+        figure: figure of a type matplotlib which can be ploted
+    """
     #filename = "file.hdf5"
     #filename = "./signals/20210916_174823_setup.h5"
     #filename = "/home/pi/lukas_bararbeit/signals/11111111111_093701_setup.h5"

@@ -107,11 +107,12 @@ if 'setting_dict' not in locals():
 
 class window_main(tk.Tk):
     time_autosave = 5000  # in ms
+    """Gernerates the main window to call and handel all variabels and processes from a central position.
+    """
 
     def __init__(self, *args, **kwargs):
         """initialisation of the main window
-        This will show all essential parameters. 
-        This allows to be jump to all essentail windows
+        Set all essential parameters. 
         """
         tk.Tk.__init__(self, *args, **kwargs)
         self.value_sequenz = Sequenz.save2cfg()
@@ -196,11 +197,18 @@ class window_main(tk.Tk):
 
         seq_menu = tk.Menu(menuleiste, tearoff=1)
         seq_menu.add_command(
-            label="seq spin", command=lambda: print("dropdown sequenz Spin"))
+            label="FID Sequence", command=lambda: Sequenz.window_sequenz("fid", self.get_values(), "1", value_set))
         seq_menu.add_command(
-            label="seq puls", command=lambda: print("dropdown sequenz Puls"))
+            label="Spin Sequence", command=lambda: Sequenz.window_sequenz("spin", self.get_values(), "2", value_set))
         seq_menu.add_command(
-            label="seq own", command=lambda: print("dropdown sequenz Own"))
+            label="Composite Sequence", command=lambda: Sequenz.window_sequenz("comp", self.get_values(), "2", value_set))
+        seq_menu.add_command(
+            label="Composite Sequence", command=lambda: Sequenz.window_sequenz("spin_phase", self.get_values(), "2", value_set))
+        seq_menu.add_command(
+            label="10 Puls Sequence", command=lambda: Sequenz.window_sequenz("own", self.get_values(), "10", value_set))
+
+        seq_menu.add_command(
+            label="expantion", command=lambda: print("Add more sequences"))
         # Drop-down generieren
         menuleiste.add_cascade(label="Sequence", menu=seq_menu)
 
@@ -524,7 +532,7 @@ class window_main(tk.Tk):
         exit_button.pack(fill="x", padx=2, pady=2)
 
         Filestrukture = tk.Button(self.frame_Buttens, text="Test",
-                                  background="SkyBlue4", activebackground="red", command=lambda: print("Filestrukture"))
+                                  background="SkyBlue4", activebackground="red", command=lambda: print("Test Butten, Date:"+str(datetime.date.today())))
         Filestrukture .pack(fill="x", padx=2, pady=2)
 
         ### ----- final settings --####
@@ -546,7 +554,9 @@ class window_main(tk.Tk):
         # return self
 
     def save_measurment(self):
-        print("save_measurment to settings.cfg")
+        """Handels the saving to a  settings.cfg file
+        """
+        #print("save_measurment to settings.cfg")
 
         storage_values = value_set.get_load
         sample = storage_values[0]
@@ -580,6 +590,8 @@ class window_main(tk.Tk):
         self.saved_poup.after(3000, lambda: self.saved_poup.grid_forget())
 
     def load_settings(self):
+        """Handels the loading from a  settings.cfg file into the system
+        """
         # select settings.cfg
 
         path_settings = os.path.abspath(os.path.dirname(sys.argv[0]))
@@ -630,7 +642,8 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def load_settings2(self):
-        # load setting_last_run.cfg from last saved to GUI
+        """load setting_last_run.cfg from last saved from GUI
+        """
 
         path_setting = os.path.abspath(os.path.dirname(sys.argv[0]))
         # setting_dict = load_setting(path_setting, file="/program/setting.cfg") # from helper funktion OLD.
@@ -708,6 +721,14 @@ class window_main(tk.Tk):
         return
 
     def set_measur(self, start=11, stop=22, step=33, average=44):
+        """set the frequency parameters into the GUI specified enterys
+
+        Args:
+            start (int, optional): start frequency. Defaults to 11.
+            stop (int, optional): stop frequency. Defaults to 22.
+            step (int, optional): frequency steps. Defaults to 33.
+            average (int, optional): number of averages per frequency step. Defaults to 44.
+        """
 
         # self.freq_start_input.config(text=start)
         print("\n self_______\n", self)
@@ -731,6 +752,18 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def plot_live(self, s1="", t1="", s2="", t2=""):
+        """initialising generating the plot on the main window.
+        Handing over Time and Frequency data for the first generation of the plot. Later all changes will be made with the funktion def: plot_update()
+
+        Args:
+            s1 (str, optional): plot for timedomain the representative amplitude values. Defaults to "".
+            t1 (str, optional): plot for timedomain the representative interval time values. Defaults to "".
+            s2 (str, optional): plot for frequencydomain the representative amplitude values. Defaults to "".
+            t2 (str, optional): plot for frequencydomain the representative interval time values. Defaults to "".
+
+        Returns:
+            _type_: _description_
+        """
         # plot data when first startet GUI
         t = np.arange(0.0, 2.0, 0.01)
         s1 = np.sin(20*np.pi*t)
@@ -862,6 +895,8 @@ class window_main(tk.Tk):
         self.after(2000, self.plot_update)
 
     def read_tm(self):
+        """read a tuning and matching file into the system for setting its parameters
+        """
         print("def read_tm")
         self.logtext_area.insert(tk.INSERT, "read tm-file\n")
         file = filedialog.askopenfilename(
@@ -891,7 +926,15 @@ class window_main(tk.Tk):
 
         logger_win_main.info("def read_tm "+text)
 
-    def set_tm(self, tune=5, match=100, tm_step=100, lut=10):
+    def set_tm(self, tune=5, match=100, tm_step=100, lut=50):
+        """read from the main window tuning and matching parameters and set them in the system variabels for processing
+
+        Args:
+            tune (int, optional): maximum voltage for the tuning circuit to tune up to. Defaults to 5.
+            match (int, optional):  maximum voltage for the matching circuit to tune up to. Defaults to 100.
+            tm_step (int, optional): number of steps samples generated. Defaults to 100.
+            lut (int, optional): recoreded samples for interpolation. Defaults to 50.
+        """
         self.Tune_U_max_input.delete("0", "end")
         self.Tune_U_max_input.insert(0, tune)
         self.Match_U_max_input.delete("0", "end")
@@ -911,6 +954,8 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def send_arduino(self):
+        """send parameters for matching to the microcontroler
+        """
         print("def send arduino")
         tune_value = self.Tune_U_max_input.get()
         match_value = self.Match_U_max_input.get()
@@ -935,6 +980,11 @@ class window_main(tk.Tk):
     # read and save input vales from GUI and save it to config.cfg file
 
     def get_values(self):
+        """read all input value form the manin window 
+
+        Returns:
+            dict: return parameters form the main window
+        """
         print("TEST get_values")
 
         print("get input_values from win_main ")
@@ -957,6 +1007,14 @@ class window_main(tk.Tk):
         return self.import_values
 
     def set_storage(self, path="test_path", experiment="test_exper", cycle="test_cycle"):
+        """initialise storage
+        log information to the main window 
+
+        Args:
+            path (str, optional): _description_. Defaults to "test_path".
+            experiment (str, optional): _description_. Defaults to "test_exper".
+            cycle (str, optional): _description_. Defaults to "test_cycle".
+        """
         # handling exported to variables.py in class File_Settings
         # self.file_path_input.delete("0", "end")
         # self.file_path_input.insert(0, path)
@@ -977,6 +1035,12 @@ class window_main(tk.Tk):
         logger_value.info(log_text)
 
     def debug_logtext(self, text="test"):
+        """Used in the development for showing text on the main window
+        It presents the workflow as an info in the main window
+
+        Args:
+            text (str, optional): Any text that want to be pushed to the window logger in the main window. Defaults to "test".
+        """
         # self.loglevel_console.set("INFO from debug_logtext")
         print(self.loglevel_console.get())
         if text == "test":
@@ -987,6 +1051,9 @@ class window_main(tk.Tk):
         self.logtext_area.see(tk.END)
 
     def autosave(self):
+        """repeatative loop to load and save parameters 
+        update the infobox in the main window
+        """
         print("autosave from win_main2")
         # self.set_storage(
         #    value_set.get_load[0], value_set.get_load[1], value_set.get_load[2])
@@ -1015,12 +1082,17 @@ class window_main(tk.Tk):
         # logger_value.info(log_text)
 
     def save_all(self):
+        """ routine sequence for securing and saving the set situation  
+        """
         # save all parameters to file
         self.save_measurment()
         print("save all")
+        self.debug_logtext("all parameters are saved")
 
     def save_quit_all(self):
-        print("test")
+        """ routine sequence for securing and saving the set situation  
+        and closing the window.
+        """
 
         # save all parameters to file
         self.save_measurment()
