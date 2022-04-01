@@ -615,10 +615,10 @@ class window_main(tk.Tk):
         freq_step = value_set.get_freq[2]
         freq_average = value_set.get_freq[3]
 
-        logger_value.info("freq_start" + str(freq_start))
-        logger_value.info("freq_end" + str(freq_end))
-        logger_value.info("freq_step" + str(freq_step))
-        logger_value.info("freq_average" + str(freq_average))
+        logger_value.info("freq_start" + str(freq_start)+" MHz")
+        logger_value.info("freq_end" + str(freq_end)+" MHz")
+        logger_value.info("freq_step" + str(freq_step)+" steps")
+        logger_value.info("freq_average" + str(freq_average)+" steps")
 
         self.set_measur(freq_start, freq_end, freq_step, freq_average)
         # set with pre set values for tuen and match
@@ -637,7 +637,7 @@ class window_main(tk.Tk):
         self.load_poup.after(2000, lambda: self.load_poup.grid_forget())
 
         # logger
-        log_text = "Measurment settig loadet from settings.cfg"+"\n"
+        log_text = "Measurment settig loadet from "+"\n" + str(path_settings)
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -655,10 +655,10 @@ class window_main(tk.Tk):
         freq_step = value_set.get_freq[2]
         freq_average = value_set.get_freq[3]
 
-        log_text = "freq_start" + str(freq_start) + "\n"
-        log_text += "freq_end" + str(freq_end) + "\n"
-        log_text += "freq_step" + str(freq_step) + "\n"
-        log_text += "freq_average" + str(freq_average)
+        log_text = "freq_start" + str(freq_start) + "MHz" + "\n"
+        log_text += "freq_end" + str(freq_end)+"MHz" + "\n"
+        log_text += "freq_step" + str(freq_step) + "steps" + "\n"
+        log_text += "freq_average" + str(freq_average) + "steps"
         logger_value.info(log_text)
 
         self.set_measur(freq_start, freq_end, freq_step, freq_average)
@@ -712,10 +712,10 @@ class window_main(tk.Tk):
         self.load_poup.after(2000, lambda: self.load_poup.grid_forget())
 
         # logging
-        logger_value.info("freq_start" + str(freq_start))
-        logger_value.info("freq_end" + str(freq_end))
-        logger_value.info("freq_step" + str(freq_step))
-        logger_value.info("freq_average" + str(freq_average))
+        logger_value.info("freq_start" + str(freq_start) + " MHz")
+        logger_value.info("freq_end" + str(freq_end)+" MHz")
+        logger_value.info("freq_step" + str(freq_step)+" steps")
+        logger_value.info("freq_average" + str(freq_average)+" steps")
 
         logging.info('Values were imported from last setting_last_run.cfg')
         return
@@ -744,10 +744,10 @@ class window_main(tk.Tk):
 
         # logger
         log_text = "Measurment settig loadet "+"\n"
-        log_text = log_text + " freq_start " + str(start) + "\n"
-        log_text = log_text + " freq_end " + str(stop) + "\n"
-        log_text = log_text + " freq_step " + str(step) + "\n"
-        log_text = log_text + " freq_average " + str(average) + "\n"
+        log_text = log_text + " freq_start " + str(start)+" MHz" + "\n"
+        log_text = log_text + " freq_end " + str(stop) + " MHz" + "\n"
+        log_text = log_text + " freq_step " + str(step) + " steps" + "\n"
+        log_text = log_text + " freq_average " + str(average) + " steps" + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -919,10 +919,10 @@ class window_main(tk.Tk):
         text = text+"\ntm_lut_value"+str(tm_lut_value)
         text = text + "\nfiel path: "+file
 
-        logger_value.info("tune_value" + str(tune_value))
-        logger_value.info("match_value" + str(match_value))
-        logger_value.info("tm_step_value" + str(tm_step_value))
-        logger_value.info("tm_lut_value" + str(tm_lut_value))
+        logger_value.info("tune_value" + str(tune_value) + " V")
+        logger_value.info("match_value" + str(match_value)+" V")
+        logger_value.info("tm_step_value" + str(tm_step_value)+" steps")
+        logger_value.info("tm_lut_value" + str(tm_lut_value)+" steps")
 
         logger_win_main.info("def read_tm "+text)
 
@@ -946,10 +946,10 @@ class window_main(tk.Tk):
 
         # logger
         log_text = "Tune and Match settings set "+"\n"
-        log_text = log_text + " tune " + str(tune) + "\n"
-        log_text = log_text + " match " + str(match) + "\n"
-        log_text = log_text + " tm_step " + str(tm_step) + "\n"
-        log_text = log_text + " lut " + str(lut) + "\n"
+        log_text = log_text + " tune " + str(tune) + " V"+"\n"
+        log_text = log_text + " match " + str(match)  +" V"+"\n"
+        log_text = log_text + " tm_step " + str(tm_step) + " steps" + "\n"
+        log_text = log_text + " lut " + str(lut) + " steps" + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
@@ -965,10 +965,12 @@ class window_main(tk.Tk):
 
         # logger
         log_text = "send to Arduino "+"\n"
-        log_text = log_text + " tune_value " + str(tune_value) + "\n"
-        log_text = log_text + " match_value " + str(match_value) + "\n"
-        log_text = log_text + " tm_step_value " + str(tm_step_value) + "\n"
-        log_text = log_text + " tm_lut_value " + str(tm_lut_value) + "\n"
+        log_text = log_text + " tune_value " + str(tune_value) + " V" + "\n"
+        log_text = log_text + " match_value " + str(match_value) + " v" + "\n"
+        log_text = log_text + " tm_step_value " + \
+            str(tm_step_value)+" steps" + "\n"
+        log_text = log_text + " tm_lut_value " + \
+            str(tm_lut_value)+" steps" + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)
         logger_value.info(log_text)
 
