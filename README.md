@@ -3,6 +3,8 @@
 An intuitive gaphical user interface (GUI) for a software defined radio (SDR), which is used for the nuclear quadrupole resonance [(NQR)](https://www.tugraz.at/institute/ibi/research/nuclear-quadrupole-resonance/)  spectroscopy, was developed. Additional a automatic data handling system was impplemented as it is essential for an efficient testing and measuring. A automated structured workflow minimises the risk of experiment errors an the loss of important acquired data. Additionally a Sequence generator was implemented with the ability to dynamic select, from one pulse up to ten pulses. The GUI is able to be used to set the represented Phases from φmin =0 up till φmax =2π for every pulse and all the hardware specific parameters.
 As one of the requirement was that the Software will be used for a lab exercise with students, it has a plausability check of inputvariabels and additionaly the ability to include warning statements for destructive settings to be run on the hardware. On the other hand for experienced users it has the ability to load standardised .cfg files from the system.
 
+![alt text](https://raw.githubusercontent.com/OE9NAT/bacharbeit/main/images/hardware_overview_named.jpg)
+
 How to check if the correct Python verison is on the system.
 ```
 >python --version
