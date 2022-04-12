@@ -947,7 +947,7 @@ class window_main(tk.Tk):
         # logger
         log_text = "Tune and Match settings set "+"\n"
         log_text = log_text + " tune " + str(tune) + " V"+"\n"
-        log_text = log_text + " match " + str(match)  +" V"+"\n"
+        log_text = log_text + " match " + str(match) + " V"+"\n"
         log_text = log_text + " tm_step " + str(tm_step) + " steps" + "\n"
         log_text = log_text + " lut " + str(lut) + " steps" + "\n"
         self.logtext_area.insert(tk.INSERT, log_text)

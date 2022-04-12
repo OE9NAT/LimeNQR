@@ -28,8 +28,9 @@ def string2array(value):
     # print("def string2array", value)
     return [float(i)for i in value]
 
-
 # sequenz selection
+
+
 def send_sdr(value_main, value_sequenz):
     """Execution of the sequence from the main window.
     It will hand over the parameters to the sequence what will send all parameterst to the sdr and will control the execution of the sequence.
