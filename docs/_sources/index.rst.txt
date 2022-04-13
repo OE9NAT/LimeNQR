@@ -3,82 +3,45 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to the "LimeNQR" documentation!
+Developer documentation for the LimeNQR software.
 ================================================
+Controlling an Lime SDR from Nuclear Quadrupole Resonance spectroscopie with a graphilcal user interface.
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+  
+
+Description of the Software
+------------------------------------
+.. toctree::
+	description
+.. image:: https://raw.githubusercontent.com/OE9NAT/bacharbeit/main/images/main_window_0.png
+  :width: 700
+  :alt: Main Window
+
+
+Developer code documentation
+------------------------------------
+.. toctree::
+	code_doc
+  
+
+  
+User guide Wiki
+------------------------------------
+`Github wiki   <https://github.com/OE9NAT/bacharbeit/wiki>`_
+
    
 	
 .. toctree::
    :hidden:
 
    index
-   description
-
-
-
-Developer documentation for the LimeNQR software.
-Controling an Lime SDR from Nuclear Quadrupole Resonance spectroscopie with a graphilcal user interface
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-* `More user infos in the Wiki  <https://github.com/OE9NAT/bacharbeit/wiki>`_
    
    
-
-start
-===================
-.. automodule:: start
-   :members:
    
-   
-Graphical User Interface
-===================
-.. automodule:: GUI
-   :members:
-   
-Main Window
-=====================
-.. automodule:: win_main2
-   :members:
-   
-File handling
-=================
-.. automodule:: win_load_file
-   :members:
-  
-Sequence handling
-=================
-.. automodule:: win_sequenz
-   :members:
-   
-Variables handling
-=================
-.. automodule:: variables
-   :members:
-   
-Run external hardware
-=================
-.. automodule:: run_external
-   :members:
-   
-Data ploting
-=================
-.. automodule:: win_plot
-   :members:
-   
-.. automodule:: data2plot
-   :members:
-  
-Helper funktions
-=================
-.. automodule:: function
-   :members:
-
-
 Indices and tables
 ==================
 
