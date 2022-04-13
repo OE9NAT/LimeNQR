@@ -2,6 +2,7 @@ import os
 import sys
 import configparser
 import PIL.Image as image
+import tkinter as tk
 
 
 import logging  # DEBUG INFO WARNING ERROR
@@ -32,6 +33,17 @@ class Puls:
 
 
 def save_file(path, experiment="test_experiment_1", data="test_data_11"):
+    """chech if folderstrukture for saving exist otherwise generate filestrukture
+
+    :param path: main storage path
+    :type path: str
+    :param experiment: sub folder path, defaults to "test_experiment_1"
+    :type experiment: str, optional
+    :param data: subsubfolder path, defaults to "test_data_11"
+    :type data: str, optional
+    :return: check if sucsessfull
+    :rtype: str
+    """
     data = path+"/"+experiment+"/"+data
 
     try:
@@ -47,6 +59,15 @@ def save_file(path, experiment="test_experiment_1", data="test_data_11"):
 
 
 def save_values(path="test_data", experiment="test_experiment", data="test_data"):
+    """save files to folderstructure 
+
+    :param path: main folder to save to, defaults to "test_data"
+    :type path: str, optional
+    :param experiment: subfolder to save to, defaults to "test_experiment"
+    :type experiment: str, optional
+    :param data: subsub folder to save to, defaults to "test_data"
+    :type data: str, optional
+    """
     cfg_section = "puls_sequenz"
     input_values = {}
     print("save to cfg_section: " + cfg_section)
@@ -109,8 +130,22 @@ def save_values(path="test_data", experiment="test_experiment", data="test_data"
 
 ### loading data from past experiments ####
 class win_load_file(tk.Tk):
+    """generate Window for Filehandeling
+
+    :param tk: import tkinter module
+    :type tk: tkinter
+    """
 
     def __init__(self, path="test_sample", experiment="test_experiment", data="test_data", *args, **kwargs):
+        """initialisation of file handeling strukture window. additional also the posibilit to add comments to the experiment
+
+        :param path: main path, defaults to "test_sample"
+        :type path: str, optional
+        :param experiment: subfolder path, defaults to "test_experiment"
+        :type experiment: str, optional
+        :param data: subsubfolder path, defaults to "test_data"
+        :type data: str, optional
+        """
         tk.Tk.__init__(self, *args, **kwargs)
         ######----- contant ------######
         frame_boarder = 4
@@ -235,6 +270,8 @@ class win_load_file(tk.Tk):
         close_button.place(x=410, y=450, width=140, height=50)
 
         def save_experiment():
+            """initialising the storage of the set parameters
+            """
 
             self.button_last_run.grid(row=7, column=0,
                                       padx=5, pady=5, sticky="ew")

@@ -1,0 +1,8 @@
+https://towardsdatascience.com/publish-python-project-documentation-on-confluence-html-using-sphinx-fad3a98b8eeb
+
+docstring format: sphinx
+https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
+
+how to generate html dokumentation
+1. comment all funktion with docsting in the format shinx
+2. run make.bat

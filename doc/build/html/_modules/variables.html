@@ -1,0 +1,981 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>variables &#8212; Sphinx documentation V0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for variables</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">configparser</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+
+<span class="n">logger_win_variables</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;win_variables&#39;</span><span class="p">)</span>
+<span class="n">logger_win_variables</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">())</span>
+<span class="n">logger_win_variables</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;logging from win_variables start up&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Value_Settings</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;initialising a standart sequence with all of its values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Value_Settings&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span> <span class="o">=</span> <span class="mi">00</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_tune</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_match</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_freq</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_lut</span> <span class="o">=</span> <span class="mi">00</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_sample</span> <span class="o">=</span> <span class="s2">&quot;tu-graz&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_experiment</span> <span class="o">=</span> <span class="s2">&quot;Bismut&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span> <span class="o">=</span> <span class="s2">&quot;FID&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="s2">&quot;NONE&quot;</span>
+
+        <span class="c1"># get size of screen</span>
+        <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="n">screen_width</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_screenwidth</span><span class="p">()</span>
+        <span class="n">screen_height</span> <span class="o">=</span> <span class="n">window</span><span class="o">.</span><span class="n">winfo_screenheight</span><span class="p">()</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;get Window size&quot;</span><span class="p">)</span>
+        <span class="c1"># window.geometry(&quot;400x400&quot;)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">screen_width</span><span class="p">))</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;breite: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">screen_width</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; hoehe: &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">screen_height</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="c1"># https://www.shareicon.net/stethoscope-medical-kit-clinic-hospital-medical-tool-medical-777051</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># for linux</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span> <span class="o">=</span> <span class="s2">&quot;@/&quot;</span> <span class="o">+</span> \
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot;/program/icon_logo.xbm&quot;</span>
+            <span class="n">window</span><span class="o">.</span><span class="n">wm_iconbitmap</span><span class="p">(</span><span class="n">bitmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># for windows</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot;\program\icon_logo.xbm&quot;</span>
+            <span class="n">window</span><span class="o">.</span><span class="n">wm_iconbitmap</span><span class="p">(</span><span class="n">bitmap</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="c1">#print(&quot;path of logo: &quot;, self._log_path)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">hallo_word</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hallo from variables.py class Value_settings&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">import_setting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;program/setting_last_run.cfg&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;reading the file and generating the settings to a dictonary</span>
+
+<span class="sd">        :param path: absolute path of where the system gets strated from, defaults to os.path.dirname(sys.argv[0])</span>
+<span class="sd">        :type path: os.path, optional</span>
+<span class="sd">        :param file: path of a setting *.cfg file , defaults to &quot;program/setting_last_run.cfg&quot;</span>
+<span class="sd">        :type file: str, optional</span>
+<span class="sd">        :return: read settings from the file</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># read settings form setting.cfg file</span>
+        <span class="c1"># path_settings = path+&quot;/&quot;+file</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;@property import_settings&quot;</span><span class="p">)</span>
+        <span class="n">path_settings</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="s2">&quot;program/setting_last_run.cfg&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_settings</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;file Setting not found&quot;</span><span class="p">)</span>
+            <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;function.py, def load_setting, path_settings not found&quot;</span><span class="p">)</span>
+            <span class="c1"># raise TypeError (&quot;file dose not exist \n&quot;+path_settings)</span>
+
+            <span class="c1"># look fore settings.cfg</span>
+            <span class="n">path_settings</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
+                <span class="n">initialdir</span><span class="o">=</span><span class="s1">&#39;/home/&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;select settings.cfg path&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+
+        <span class="n">configParser</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">configParser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)</span>
+        <span class="n">setting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">section</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">configParser</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">section</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">configParser</span><span class="o">.</span><span class="n">sections</span><span class="p">()}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">setting_dict</span><span class="p">,</span> <span class="o">*</span><span class="n">setting_dict</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_freq</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;xy&quot;</span><span class="p">]</span>  <span class="c1"># [tune, match, freq , lut]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_load</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="s2">&quot;xy&quot;</span><span class="p">]</span>  <span class="c1"># [sample, experiment, data]</span>
+
+        <span class="c1"># self._freq_start = 11</span>
+        <span class="c1"># self._freq_end = 11</span>
+        <span class="c1"># self._freq_step = 11</span>
+        <span class="c1"># self._freq_repetitions = 11</span>
+        <span class="c1">#</span>
+        <span class="c1"># self._tunematch_tune = 11</span>
+        <span class="c1"># self._tunematch_match = 11</span>
+        <span class="c1"># self._tunematch_freq = 11</span>
+        <span class="c1"># self._tunematch_lut = 11</span>
+        <span class="c1">#</span>
+        <span class="c1"># self._load_sample = &quot;sam&quot;</span>
+        <span class="c1"># self._load_experiment = &quot;exp&quot;</span>
+        <span class="c1"># self._load_data = &quot;Ech&quot;</span>
+
+        <span class="c1"># logging.info(&quot;Values loaded from load_setting&quot;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;freq_start&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span><span class="p">,</span> <span class="s2">&quot;freq_end&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span><span class="p">,</span>
+                                      <span class="s2">&quot;freq_step&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span><span class="p">,</span> <span class="s2">&quot;freq_repetitions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import_values&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">set_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;setter all frequency</span>
+
+<span class="sd">        :param value: Frequency in MHz</span>
+<span class="sd">        :type value: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setter value define_frequency&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># stop</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>  <span class="c1"># reps</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">getter</span>
+    <span class="k">def</span> <span class="nf">get_freq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;getter the set frequency </span>
+
+<span class="sd">        :return:  Frequency in MHz</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;getter variables.py get_freq&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span><span class="p">]</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">set_tunematch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;setter tune and match settings</span>
+
+<span class="sd">        :param value: tune and match parameters</span>
+<span class="sd">        :type value: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setter value set_tunematch&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_tune</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_match</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_freq</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_lut</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">getter</span>
+    <span class="k">def</span> <span class="nf">get_tunematch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;getter tune and match settings</span>
+
+<span class="sd">        :return: tuning and maching parameters</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;getter variables.py get_tunematch&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_tune</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_match</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_freq</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_lut</span><span class="p">]</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">set_load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;setter value of filestruktur</span>
+
+<span class="sd">        :param value: filestruktur</span>
+<span class="sd">        :type value: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setter value define_filestrukture&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_sample</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_experiment</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">getter</span>
+    <span class="k">def</span> <span class="nf">get_load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;getter filestruktur</span>
+
+<span class="sd">        :return: filestruktur</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;getter variables.py get_freq&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_load_sample</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_experiment</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span><span class="p">]</span>
+
+    <span class="c1"># self._sequence</span>
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">set_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;setter sequence type name</span>
+
+<span class="sd">        :param value: sequence parameters</span>
+<span class="sd">        :type value: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setter value define_filestrukture&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">getter</span>
+    <span class="k">def</span> <span class="nf">get_seq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;getter sequence type name</span>
+
+<span class="sd">        :return: sequence parameters</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;getter variables.py get_freq&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sequence</span>
+
+    <span class="c1"># logo path</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">getter</span>
+    <span class="k">def</span> <span class="nf">logo_path</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;path for logo of the window</span>
+
+<span class="sd">        :return: logo path</span>
+<span class="sd">        :rtype: os.path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_path</span>
+
+    <span class="c1"># read and save to settings.cfg</span>
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">set_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;read settings form setting_last_run.cfg file </span>
+
+<span class="sd">        :param path_settings: path to finde setting_last_run.cfg </span>
+<span class="sd">        :type path_settings: os.path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># def import_setting(self, path=os.path.dirname(sys.argv[0]), file=&quot;program/setting.cfg&quot;):</span>
+        <span class="c1"># read settings form setting_last_run.cfg file and set it ot ROM</span>
+        <span class="c1"># path_settings = path+&quot;/&quot;+file</span>
+        <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;logging from variable.py set settings start up&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;@property import_settings&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_settings</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;file Setting not found&quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+            <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;function.py, def load_setting, path_settings not found </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">path_settings</span><span class="p">)</span>
+            <span class="c1"># raise TypeError (&quot;file dose not exist \n&quot;+path_settings)</span>
+
+            <span class="n">storage_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;storage_path  &quot;</span><span class="p">,</span> <span class="n">storage_path</span><span class="p">)</span>
+
+            <span class="c1"># look fore settings.cfg</span>
+            <span class="n">path_settings</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
+                <span class="n">initialdir</span><span class="o">=</span><span class="n">storage_path</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;select settings.cfg path to save&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+
+            <span class="n">configParser_new</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">][</span><span class="s2">&quot;datum created:&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_settings</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+                <span class="n">configParser_new</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_settings</span> <span class="o">=</span> <span class="n">path_settings</span>
+        <span class="n">configParser</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="n">configParser</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)</span>
+        <span class="n">setting_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">section</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">configParser</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="n">section</span><span class="p">))</span>
+                        <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">configParser</span><span class="o">.</span><span class="n">sections</span><span class="p">()}</span>
+
+        <span class="nb">print</span><span class="p">((</span><span class="n">setting_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="nb">print</span><span class="p">((</span><span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_start&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_end&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_step&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_repetitions&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_tune</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tune_value&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_match</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;match_value&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_freq</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tm_step_value&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tunematch_lut</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tm_lut_value&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_sample</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_data&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_experiment</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_experiment&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_load_data</span> <span class="o">=</span> <span class="n">setting_dict</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_cycle&quot;</span><span class="p">]</span>
+
+        <span class="c1"># logging.info(&quot;Values loaded from load_setting&quot;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;freq_start&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_start</span><span class="p">,</span> <span class="s2">&quot;freq_end&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_end</span><span class="p">,</span>
+                                      <span class="s2">&quot;freq_step&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_step</span><span class="p">,</span> <span class="s2">&quot;freq_repetitions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_freq_repetitions</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;import_values&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span><span class="p">)</span>
+        <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;logging from win_variables start up&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">import_values</span>
+
+    <span class="nd">@import_setting</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">save_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;write settings to setting_last_run.cfg file </span>
+
+<span class="sd">        :param value: stored values</span>
+<span class="sd">        :type value: dict</span>
+<span class="sd">        :return: stored values after safing it to file</span>
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># save settings form ROM and save it to setting.cfg file</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;save_settings variables.py </span><span class="se">\n</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;********************************** save file *******************************&quot;</span><span class="p">)</span>
+        <span class="c1"># &lt;class &#39;dict&#39;&gt;</span>
+        <span class="c1"># {&#39;freq&#39;: {&#39;freq_start&#39;: &#39;1&#39;, &#39;freq_end&#39;: &#39;2&#39;, &#39;freq_step&#39;: &#39;3&#39;, &#39;freq_repetitions&#39;: &#39;4&#39;},</span>
+        <span class="c1"># &#39;tunematch&#39;: {&#39;tune&#39;: &#39;3.3&#39;, &#39;match&#39;: &#39;3.3&#39;, &#39;step&#39;: &#39;50&#39;, &#39;lut&#39;: &#39;50&#39;},</span>
+        <span class="c1"># &#39;load&#39;: {&#39;sample&#39;: &#39;test_Sample&#39;, &#39;experiment&#39;: &#39;test_Experiment&#39;, &#39;data&#39;: &#39;test_Experiment&#39;}}</span>
+
+        <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;logging from variable.py save ro settings.cfg&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;@property import_settings&quot;</span><span class="p">)</span>
+
+        <span class="c1"># saving settings.cfg to</span>
+        <span class="c1"># # old c:\Users\Malin\GIT\bacharbeit\program\setting.cfg</span>
+        <span class="c1"># path_settings = self.path_settings</span>
+
+        <span class="c1"># new &#39;load&#39;: {&#39;sample&#39;: &#39;test_Sample&#39;, &#39;experiment&#39;: &#39;test_Experiment&#39;, &#39;data&#39;: &#39;test_Experiment&#39;}</span>
+        <span class="n">path_settings</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">storage</span> <span class="o">=</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">main_data_path</span>  <span class="c1"># Storage_vault</span>
+        <span class="n">sample_path</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span>
+        <span class="n">exp_path</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;experiment&quot;</span><span class="p">]</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+        <span class="n">setting_name</span> <span class="o">=</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">settings_file</span>
+        <span class="n">path_settings</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">path_settings</span><span class="p">,</span> <span class="n">storage</span><span class="p">,</span> <span class="n">sample_path</span><span class="p">,</span> <span class="n">exp_path</span><span class="p">,</span> <span class="n">data_path</span><span class="p">,</span> <span class="n">setting_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+
+        <span class="c1"># if path not exist</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)):</span>
+            <span class="n">storage_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;storage_path&quot;</span><span class="p">,</span> <span class="n">storage_path</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">storage_path</span><span class="p">)</span>
+
+        <span class="c1"># if file not exist</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path_settings</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;file Setting not found&quot;</span><span class="p">)</span>
+
+            <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="s2">&quot;function.py, def load_setting, path_settings not found&quot;</span><span class="p">)</span>
+            <span class="c1"># raise TypeError (&quot;file dose not exist \n&quot;+path_settings)</span>
+            <span class="n">configParser_new</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">][</span><span class="s2">&quot;datum created:&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">configParser_new</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_settings</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+                <span class="n">configParser_new</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new settings.cfg generated&quot;</span><span class="p">)</span>
+
+            <span class="c1"># look fore settings.cfg</span>
+            <span class="c1"># option to select different storage location</span>
+            <span class="c1"># path = os.path.join(</span>
+            <span class="c1">#    path_settings, storage, sample_path, exp_path, data_path)</span>
+            <span class="c1"># path_settings = filedialog.askopenfilename(</span>
+            <span class="c1">#    initialdir=path, title=&#39;select settings.cfg path&#39;)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setting file: &quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+
+        <span class="n">config_file</span> <span class="o">=</span> <span class="n">configparser</span><span class="o">.</span><span class="n">ConfigParser</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;path_settings&quot;</span><span class="p">,</span> <span class="n">path_settings</span><span class="p">)</span>
+        <span class="n">config_file</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path_settings</span><span class="p">)</span>
+        <span class="n">config_section</span> <span class="o">=</span> <span class="n">config_file</span><span class="o">.</span><span class="n">sections</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;config_section&quot;</span><span class="p">,</span> <span class="n">config_section</span><span class="p">)</span>
+
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">][</span><span class="s2">&quot;freq_start&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">][</span><span class="s2">&quot;freq_end&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">][</span><span class="s2">&quot;freq_step&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;setting&quot;</span><span class="p">][</span><span class="s2">&quot;freq_repetitions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;freq&quot;</span><span class="p">][</span><span class="s2">&quot;freq_repetitions&quot;</span><span class="p">]</span>
+
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tune_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">][</span><span class="s2">&quot;tune&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;match_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">][</span><span class="s2">&quot;match&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tm_step_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">][</span><span class="s2">&quot;step&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;TandM_settings&quot;</span><span class="p">][</span><span class="s2">&quot;tm_lut_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;tunematch&quot;</span><span class="p">][</span><span class="s2">&quot;lut&quot;</span><span class="p">]</span>
+
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;main_storage&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">main_data_path</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;sample&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_experiment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;experiment&quot;</span><span class="p">]</span>
+        <span class="n">config_file</span><span class="p">[</span><span class="s2">&quot;storage_defalt&quot;</span><span class="p">][</span><span class="s2">&quot;seq_cycle&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="s2">&quot;load&quot;</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+
+        <span class="c1"># setting_dict = {section: dict(configParser.items(section))</span>
+        <span class="c1">#                for section in configParser.sections()}</span>
+
+        <span class="c1"># import_values = {}</span>
+        <span class="c1"># import_values[&quot;freq&quot;] = {&quot;freq_start&quot;: self._freq_start, &quot;freq_end&quot;: self._freq_end,</span>
+        <span class="c1">#                         &quot;freq_step&quot;: self._freq_step, &quot;freq_repetitions&quot;: self._freq_repetitions}</span>
+        <span class="c1"># import_values[&quot;tunematch&quot;] = {}</span>
+        <span class="c1"># import_values[&quot;load&quot;] = {}</span>
+        <span class="c1">#</span>
+        <span class="c1"># print(&quot;import_values&quot;, import_values)</span>
+        <span class="c1"># logger_win_variables.info(&quot;logging from win_variables start up&quot;)</span>
+
+        <span class="c1"># write to config.cfg</span>
+        <span class="c1"># try:</span>
+        <span class="c1">#    with open(&quot;config.cfg&quot;, &quot;r&quot;) as configfile:</span>
+        <span class="c1">#</span>
+        <span class="c1">#    print(&quot;_____________________ TEST pre ______________________&quot;)</span>
+        <span class="c1">#    print(&quot;types of sections avalibel ____ \n&quot;, config.sections())</span>
+        <span class="c1">#    print(&quot;types of options avalibel of option ___ &quot;,</span>
+        <span class="c1">#          config.has_option(cfg_section, &quot;file_path&quot;))</span>
+        <span class="c1">#    print(&quot;_____________________ TEST after ______________________&quot;)</span>
+        <span class="c1">#</span>
+        <span class="c1">#    # config.has_option(section, option)</span>
+        <span class="c1">#    if configParser.has_section(cfg_section):</span>
+        <span class="c1">#        print(&quot;.cfg section exist&quot;)</span>
+        <span class="c1">#        configParser[cfg_section] = input_values</span>
+        <span class="c1">#        #logging.info(&#39;Values were saved and overwritten&#39;)</span>
+        <span class="c1">#    else:</span>
+        <span class="c1">#        configParser.add_section(cfg_section)</span>
+        <span class="c1">#        configParser[cfg_section] = input_values</span>
+        <span class="c1">#        #logging.info(&#39;Values were saved and new written&#39;)</span>
+        <span class="c1"># except IOError:</span>
+        <span class="c1">#    print(&quot;generated new .cfg file&quot;)</span>
+        <span class="c1">#    configParser[cfg_section] = input_values</span>
+        <span class="c1">#    #logging.info(&#39;Values were saved and written to a new file&#39;)</span>
+
+        <span class="n">path_setting</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">path_setting</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">path_setting</span><span class="p">,</span> <span class="s2">&quot;program&quot;</span><span class="p">,</span> <span class="s2">&quot;setting_lastrun.cfg&quot;</span><span class="p">)</span>
+
+        <span class="c1"># save to settings.cfg</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path_settings</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">configfile</span><span class="p">:</span>
+            <span class="n">config_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">configfile</span><span class="p">)</span>
+
+        <span class="c1"># logging.info(&#39;save_values end &#39;)</span>
+
+        <span class="k">return</span> <span class="n">value</span>
+
+
+<div class="viewcode-block" id="Pulse_Settings"><a class="viewcode-back" href="../index.html#variables.Pulse_Settings">[docs]</a><span class="k">class</span> <span class="nc">Pulse_Settings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;arbituary pulse generator</span>
+<span class="sd">    !!!! more implementations is needet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pulse_Settings&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_puls_start</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_puls_length</span> <span class="o">=</span> <span class="mi">00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_puls_hight</span> <span class="o">=</span> <span class="mi">00</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">signal_shape</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;squaer&quot;</span><span class="p">,</span> <span class="s2">&quot;pulse&quot;</span><span class="p">,</span> <span class="s2">&quot;triang&quot;</span><span class="p">,</span> <span class="s2">&quot;trapets&quot;</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Pulse_Settings.parameter2Vektor"><a class="viewcode-back" href="../index.html#variables.Pulse_Settings.parameter2Vektor">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parameter2Vektor</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;squaer&quot;</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;arbituary puls shape generator</span>
+
+<span class="sd">        :param start: position of start pulse shape</span>
+<span class="sd">        :type start: int</span>
+<span class="sd">        :param stop: stop position of pulse shape</span>
+<span class="sd">        :type stop: int</span>
+<span class="sd">        :param shape: name of pulsshape, defaults to &quot;squaer&quot;</span>
+<span class="sd">        :type shape: str, optional</span>
+<span class="sd">        :param number: sampelpoints resolution, defaults to 100</span>
+<span class="sd">        :type number: int, optional</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspcae</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;squaer&quot;</span><span class="p">:</span>
+            <span class="n">signale</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">duty</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;pulse&quot;</span><span class="p">:</span>
+            <span class="n">signalse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">duty</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;triang&quot;</span><span class="p">:</span>
+            <span class="n">signalse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">duty</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">shape</span> <span class="o">==</span> <span class="s2">&quot;trapets&quot;</span><span class="p">:</span>
+            <span class="n">signalse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">duty</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape not implemented&quot;</span><span class="p">)</span>
+            <span class="n">signalse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspcae</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot; signale </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">signale</span><span class="p">)</span>
+        <span class="k">return</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">signale</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="File_Settings"><a class="viewcode-back" href="../index.html#variables.File_Settings">[docs]</a><span class="k">class</span> <span class="nc">File_Settings</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;main file handeler</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">main_data_path</span> <span class="o">=</span> <span class="s2">&quot;Storage_vault&quot;</span>
+    <span class="n">settings_file</span> <span class="o">=</span> <span class="s2">&quot;setting.cfg&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value_set</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File_Settings&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_absolute_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="s2">&quot;Test_Sample&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_experiment</span> <span class="o">=</span> <span class="s2">&quot;Test_experiment&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">main_data_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span> <span class="o">=</span> <span class="n">value_set</span>  <span class="c1"># import class Values_settings for paramter</span>
+
+<div class="viewcode-block" id="File_Settings.generate_folder"><a class="viewcode-back" href="../index.html#variables.File_Settings.generate_folder">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="s2">&quot;pre_sample&quot;</span><span class="p">,</span> <span class="n">experiment</span><span class="o">=</span><span class="s2">&quot;pre_experiment&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="s2">&quot;pre_data&quot;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;generate filestructure if not existing</span>
+
+<span class="sd">        :param sample: main folder name, defaults to &quot;pre_sample&quot;</span>
+<span class="sd">        :type sample: str, optional</span>
+<span class="sd">        :param experiment: usb folder name, defaults to &quot;pre_experiment&quot;</span>
+<span class="sd">        :type experiment: str, optional</span>
+<span class="sd">        :param data: subsub folder name, defaults to &quot;pre_data&quot;</span>
+<span class="sd">        :type data: str, optional</span>
+<span class="sd">        :return: storage path</span>
+<span class="sd">        :rtype: os.path</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sample&quot;</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;experiment&quot;</span><span class="p">,</span> <span class="n">experiment</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># if empy parameter ist handed over use last saved ones</span>
+        <span class="n">file_experiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">get_load</span>
+
+        <span class="k">if</span> <span class="n">sample</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">experiment</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">experiment</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">data</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># create file struckter if not exist as given</span>
+        <span class="n">absolute</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+        <span class="c1"># main folder for all Data</span>
+        <span class="n">file_doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">absolute</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">main_data_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_doc</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="c1"># folder for samples</span>
+        <span class="n">file_doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_doc</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_doc</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="c1"># folder for experiment</span>
+        <span class="n">file_doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_doc</span><span class="p">,</span> <span class="n">experiment</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_doc</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="c1"># folder for data</span>
+        <span class="n">file_doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_doc</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file_doc</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;storage path: &quot;</span><span class="p">,</span> <span class="n">file_doc</span><span class="p">)</span>
+        <span class="n">logger_win_variables</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;storage path: &quot;</span> <span class="o">+</span> <span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="c1"># save parameters to Filehandler</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">set_load</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample</span><span class="p">,</span> <span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">]</span>
+
+        <span class="c1"># update window</span>
+        <span class="n">File_Settings</span><span class="o">.</span><span class="n">update_set_Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">file_doc</span></div>
+
+<div class="viewcode-block" id="File_Settings.load_folder"><a class="viewcode-back" href="../index.html#variables.File_Settings.load_folder">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;get folder struktures form user input</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_doc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+
+        <span class="n">path_file</span> <span class="o">=</span> <span class="n">filedialog</span><span class="o">.</span><span class="n">askopenfilename</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;select settings.cfg file from Experimnet&#39;</span><span class="p">,</span> <span class="n">initialdir</span><span class="o">=</span><span class="n">file_doc</span><span class="p">)</span>
+
+        <span class="n">path</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">path_file</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;File&quot;</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+
+        <span class="n">sample</span> <span class="o">=</span> <span class="s2">&quot;sample test&quot;</span>
+        <span class="n">experiment</span> <span class="o">=</span> <span class="s2">&quot;experiment test&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;data test&quot;</span>
+
+        <span class="c1">#path_list = path.split(os.sep)</span>
+        <span class="n">path_list</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s2">&quot; path &quot;</span><span class="p">,</span> <span class="n">path_list</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">path_list</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">main_data_path</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">path_list</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ERROR file path not Filestrukture&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">path_list</span><span class="p">)</span>
+
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">path_list</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">experiment</span> <span class="o">=</span> <span class="n">path_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">path_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">set_load</span> <span class="o">=</span> <span class="p">[</span><span class="n">sample</span><span class="p">,</span> <span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">]</span>
+
+        <span class="n">File_Settings</span><span class="o">.</span><span class="n">update_set_Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="File_Settings.update_set_Parameters"><a class="viewcode-back" href="../index.html#variables.File_Settings.update_set_Parameters">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">update_set_Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;repedative update Parameters at a timed intervall</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ,sample,exp,data</span>
+
+        <span class="c1"># update labels</span>
+        <span class="c1"># Value_Settings.get_load())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_lable</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">get_load</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experiment_lable</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">get_load</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_lable</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">get_load</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="c1"># popup to show saved</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_poup</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;Updated Parameters!!&#39;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;chartreuse4&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_poup</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                             <span class="n">pady</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;ew&quot;</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_poup</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_poup</span><span class="o">.</span><span class="n">grid_forget</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="File_Settings.save_close"><a class="viewcode-back" href="../index.html#variables.File_Settings.save_close">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">save_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;sequenc of when closing the window</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># save files</span>
+        <span class="n">absolute_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">)</span>
+        <span class="n">file_experiment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">imp_value_set</span><span class="o">.</span><span class="n">get_load</span>
+        <span class="n">sample</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">experiment</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">file_experiment</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="c1">#sample = self.imp_value_set.get_load[0]</span>
+        <span class="c1">#experiment = self.imp_value_set.get_load[1]</span>
+        <span class="c1">#data = self.imp_value_set.get_load[2]</span>
+        <span class="n">file_save</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">absolute_path</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;stored in :&#39;</span><span class="p">,</span> <span class="n">file_save</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">file_save</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;file dose not exist jet&quot;</span><span class="p">)</span>
+            <span class="c1"># os.mkdir(file_save)</span>
+            <span class="n">File_Settings</span><span class="o">.</span><span class="n">generate_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">experiment</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># update on win_main</span>
+
+        <span class="c1"># minimum length of comment</span>
+        <span class="n">comment_exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt_experiment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_exp</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;comment to short 20&gt;&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_exp</span><span class="p">))</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Comment of the Experiment must be longer!! </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="n">comment_error</span> <span class="o">+</span> \
+                <span class="s2">&quot;add information about what was done,</span><span class="se">\n</span><span class="s2"> length of the comment is: &quot;</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="n">comment_error</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">comment_exp</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; &lt; 100&quot;</span>
+            <span class="n">tk</span><span class="o">.</span><span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="n">comment_error</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error sort comment&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_save</span><span class="p">,</span> <span class="s1">&#39;comment_experiment.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;*** comment from: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">+</span><span class="s2">&quot;  ***</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">comment_exp</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># &quot;1.0&quot;,&#39;end-1c&#39;</span>
+
+        <span class="n">comment_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">txt_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span> <span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;comment to short 20&gt;&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">comment_data</span><span class="p">))</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Comment of the Data must be longer!! </span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="n">comment_error</span> <span class="o">+</span> \
+                <span class="s2">&quot;add information about what was done,</span><span class="se">\n</span><span class="s2"> length of the comment is: &quot;</span>
+            <span class="n">comment_error</span> <span class="o">=</span> <span class="n">comment_error</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">comment_data</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; &lt; 100&quot;</span>
+            <span class="n">tk</span><span class="o">.</span><span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span>
+                <span class="n">message</span><span class="o">=</span><span class="n">comment_error</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Error sort comment&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">file_save</span><span class="p">,</span> <span class="s1">&#39;comment_data.txt&#39;</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;*** comment from: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span><span class="o">+</span><span class="s2">&quot;  ***</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">comment_data</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+
+        <span class="c1"># bring main window to the top</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">attributes</span><span class="p">(</span><span class="s1">&#39;-topmost&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="c1"># , path=&quot;pre_Sample&quot;, experiment=&quot;pre_Experiment&quot;, data=&quot;pre_Data&quot;):</span>
+    <span class="k">def</span> <span class="nf">save_experiment</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Window for Set Experiment Structure</span>
+
+<span class="sd">        :return: logging to the commandwindow that the window is closed </span>
+<span class="sd">        :rtype: print()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;save_experiment from variables.py&quot;</span><span class="p">)</span>
+        <span class="c1"># print(&quot;path: &quot;+str(path)+&quot;\nexperiment: &quot; +</span>
+        <span class="c1">#      str(experiment) + &quot;\nData: &quot; + str(data))</span>
+
+        <span class="c1"># ----- Setup of gui ------######l</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Experiment Filehandler&quot;</span><span class="p">)</span>
+        <span class="c1"># self.window_experiment.wm_iconbitmap(bitmap=&quot;@/home/pi/Bach_arbeit/stethoskop.xbm&quot;)</span>
+        <span class="c1"># self.window_experiment.wm_iconbitmap(bitmap=logo_path)</span>
+        <span class="c1"># Fensterbreite,hoehe, on secreen offset x, on screen offset y</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># for linux</span>
+            <span class="n">log_path</span> <span class="o">=</span> <span class="s2">&quot;@/&quot;</span> <span class="o">+</span> \
+                <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+                    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot;/program/stethoskop.xbm&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">wm_iconbitmap</span><span class="p">(</span><span class="n">bitmap</span><span class="o">=</span><span class="n">log_path</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># for windows</span>
+            <span class="n">log_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="s2">&quot;\program\icon_logo.ico&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">wm_iconbitmap</span><span class="p">(</span><span class="n">bitmap</span><span class="o">=</span><span class="n">log_path</span><span class="p">)</span>
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="c1"># self.window_experiment.geometry(&quot;800x750&quot;)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">option_add</span><span class="p">(</span>
+            <span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">)</span>  <span class="c1"># Frischart und groesse</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">resizable</span><span class="p">(</span>
+            <span class="n">width</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># False = no resize</span>
+        <span class="n">text_input_height</span> <span class="o">=</span> <span class="mi">30</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">main_frame</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="c1"># self.grid_rowconfigure(0, weight=1, minsize=240)  # splaten hoehe</span>
+        <span class="c1"># self.grid_columnconfigure(0, weight=1, minsize=280)  # spalten breite</span>
+
+        <span class="n">frame_boarder</span> <span class="o">=</span> <span class="mi">3</span>
+
+        <span class="c1"># Title</span>
+        <span class="n">lable_text</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Set Experiment Structure &quot;</span><span class="p">,</span>
+                              <span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;OliveDrab4&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Helvetica&quot;</span><span class="p">,</span> <span class="mi">30</span><span class="p">),)</span>
+        <span class="n">lable_text</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>  <span class="c1"># , columnspan=1)</span>
+
+        <span class="c1"># Parameters</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Selected Parameters&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># , minsize=480)  # spalten breite</span>
+
+        <span class="c1"># self.frame_parameter = tk.Frame(</span>
+        <span class="c1">#    self, bg=&#39;grey&#39;, padx=frame_boarder, pady=frame_boarder)</span>
+        <span class="c1"># self.frame_parameter.grid(row=0, column=0, sticky=&quot;nsew&quot;)</span>
+
+        <span class="n">path_lable_text</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Sample:&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="n">path_lable_text</span> <span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_lable</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Sample test </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_lable</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="n">experiment_lable_text</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Experiment:&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="n">experiment_lable_text</span> <span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experiment_lable</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Experiment test&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experiment_lable</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="n">cycle_lable_text</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Data:&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="n">cycle_lable_text</span> <span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;e&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_lable</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_parameter</span><span class="p">,</span>
+                                    <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Data test&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;gray50&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cycle_lable</span> <span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+        <span class="c1"># fill entery</span>
+        <span class="n">File_Settings</span><span class="o">.</span><span class="n">update_set_Parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># New Experiment parameter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;New Expeiment-Parameters&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">gray_light</span> <span class="o">=</span> <span class="s2">&quot;gray70&quot;</span>
+        <span class="n">path_lable_input</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Set Sample Folder Name: </span><span class="se">\n</span><span class="s2"> Example: TuGraz&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span>
+        <span class="n">path_lable_input</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span>
+                               <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                         <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">experiment_lable_input</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Set Experiment Folder Name: </span><span class="se">\n</span><span class="s2"> Example: Bismut&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span>
+        <span class="n">experiment_lable_input</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                             <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">cycle_lable_input</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Set Data Folder Name: </span><span class="se">\n</span><span class="s2"> Example: FID, Spin-Echo,&quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span>
+        <span class="n">cycle_lable_input</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span>
+                             <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                       <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">save_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Set Parameters&quot;</span><span class="p">,</span>
+                                <span class="n">background</span><span class="o">=</span><span class="s2">&quot;SkyBlue4&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">generate_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">experiment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">experiment</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">()))</span>
+        <span class="n">save_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Buttons</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Load Experiment-Parameters&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span>
+            <span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="o">.</span><span class="n">grid_columnconfigure</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">save_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Load Pre-Existing Settings&quot;</span><span class="p">,</span>
+                                <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span>  <span class="n">File_Settings</span><span class="o">.</span><span class="n">load_folder</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">save_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                         <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">save_close_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Save &amp; Close Window&quot;</span><span class="p">,</span>
+                                      <span class="n">background</span><span class="o">=</span><span class="s2">&quot;chartreuse4&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">File_Settings</span><span class="o">.</span><span class="n">save_close</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="n">save_close_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                               <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">close_button</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_buttens</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Close Window&quot;</span><span class="p">,</span>
+                                 <span class="n">background</span><span class="o">=</span><span class="s2">&quot;red3&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="o">.</span><span class="n">destroy</span><span class="p">)</span>
+        <span class="n">close_button</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">padx</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span>
+                          <span class="n">pady</span><span class="o">=</span><span class="n">frame_boarder</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="c1"># kommentare</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">LabelFrame</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">window_experiment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Comment for Experiment: &quot;</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="s2">&quot;nsew&quot;</span><span class="p">)</span>
+
+        <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Area to Comment on the Experiment&quot;</span><span class="p">,</span>
+                 <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_experiment</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span><span class="p">,</span>  <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="c1"># fill=&quot;Fill in comments for the eperiment &quot;,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_experiment</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_experiment</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span>
+            <span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="s2">&quot;Comments for the Experiment Collected:&quot;</span><span class="p">)</span>
+
+        <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Area to Comment on the Data&quot;</span><span class="p">,</span>
+                 <span class="n">background</span><span class="o">=</span><span class="n">gray_light</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_data</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame_comment</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                                <span class="n">bg</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_data</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">padx</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">txt_data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">END</span><span class="p">,</span> <span class="s2">&quot;Comments for the Data Collected:&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Closing load File&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Sphinx documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to the “LimeNQR” documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-start">start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#graphical-user-interface">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_main2">Main Window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_load_file">File handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_sequenz">Sequence handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#variables-handling">Variables handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#run-external-hardware">Run external hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_plot">Data ploting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-function">Helper funktions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, MALIN Philipp.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

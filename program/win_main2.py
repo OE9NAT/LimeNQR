@@ -723,11 +723,14 @@ class window_main(tk.Tk):
     def set_measur(self, start=11, stop=22, step=33, average=44):
         """set the frequency parameters into the GUI specified enterys
 
-        Args:
-            start (int, optional): start frequency. Defaults to 11.
-            stop (int, optional): stop frequency. Defaults to 22.
-            step (int, optional): frequency steps. Defaults to 33.
-            average (int, optional): number of averages per frequency step. Defaults to 44.
+        :param start: start frequency, defaults to 11
+        :type start: int, optional
+        :param stop: stop frequency, defaults to 22
+        :type stop: int, optional
+        :param step: frequency steps, defaults to 33
+        :type step: int, optional
+        :param average: number of averages per frequency step, defaults to 44
+        :type average: int, optional
         """
 
         # self.freq_start_input.config(text=start)
@@ -755,15 +758,18 @@ class window_main(tk.Tk):
         """initialising generating the plot on the main window.
         Handing over Time and Frequency data for the first generation of the plot. Later all changes will be made with the funktion def: plot_update()
 
-        Args:
-            s1 (str, optional): plot for timedomain the representative amplitude values. Defaults to "".
-            t1 (str, optional): plot for timedomain the representative interval time values. Defaults to "".
-            s2 (str, optional): plot for frequencydomain the representative amplitude values. Defaults to "".
-            t2 (str, optional): plot for frequencydomain the representative interval time values. Defaults to "".
-
-        Returns:
-            _type_: _description_
+        :param s1: plot for timedomain the representative amplitude values , defaults to ""
+        :type s1: str, optional
+        :param t1: plot for timedomain the representative interval time values, defaults to ""
+        :type t1: str, optional
+        :param s2: plot for frequencydomain the representative amplitude values, defaults to ""
+        :type s2: str, optional
+        :param t2: plot for frequencydomain the representative interval time values, defaults to ""
+        :type t2: str, optional
+        :return: initital setup of the plot in matplotlib
+        :rtype: figure
         """
+
         # plot data when first startet GUI
         t = np.arange(0.0, 2.0, 0.01)
         s1 = np.sin(20*np.pi*t)
@@ -817,6 +823,13 @@ class window_main(tk.Tk):
         return self.fig
 
     def plot_update(self, file_time=os.path.join("program", "scan_data_time.csv"), file_freq=os.path.join("program", "scan_data_freq.csv")):
+        """update the data what is shown in the plot from a filepath on pull request
+
+        :param file_time: time data from a *.csv file, defaults to os.path.join("program", "scan_data_time.csv")
+        :type file_time: str, optional
+        :param file_freq: frequency data from a*.csv, defaults to os.path.join("program", "scan_data_freq.csv")
+        :type file_freq: str, optional
+        """
         print("update plot")
         logger_win_main.info("update plot from main")
 
@@ -929,12 +942,16 @@ class window_main(tk.Tk):
     def set_tm(self, tune=5, match=100, tm_step=100, lut=50):
         """read from the main window tuning and matching parameters and set them in the system variabels for processing
 
-        Args:
-            tune (int, optional): maximum voltage for the tuning circuit to tune up to. Defaults to 5.
-            match (int, optional):  maximum voltage for the matching circuit to tune up to. Defaults to 100.
-            tm_step (int, optional): number of steps samples generated. Defaults to 100.
-            lut (int, optional): recoreded samples for interpolation. Defaults to 50.
+        :param tune: maximum voltage for the tuning circuit to tune up to, defaults to 5
+        :type tune: int, optional
+        :param match: maximum voltage for the matching circuit to tune up to, defaults to 100
+        :type match: int, optional
+        :param tm_step: number of steps samples generated, defaults to 100
+        :type tm_step: int, optional
+        :param lut: recoreded samples for interpolation, defaults to 50
+        :type lut: int, optional
         """
+
         self.Tune_U_max_input.delete("0", "end")
         self.Tune_U_max_input.insert(0, tune)
         self.Match_U_max_input.delete("0", "end")
@@ -984,9 +1001,11 @@ class window_main(tk.Tk):
     def get_values(self):
         """read all input value form the manin window 
 
-        Returns:
-            dict: return parameters form the main window
+
+        :return: returns parameters form the main window
+        :rtype: dict
         """
+
         print("TEST get_values")
 
         print("get input_values from win_main ")
@@ -1012,11 +1031,14 @@ class window_main(tk.Tk):
         """initialise storage
         log information to the main window 
 
-        Args:
-            path (str, optional): _description_. Defaults to "test_path".
-            experiment (str, optional): _description_. Defaults to "test_exper".
-            cycle (str, optional): _description_. Defaults to "test_cycle".
+        :param path: name of the ot the path, defaults to "test_path"
+        :type path: str, optional
+        :param experiment: name of the experiment, defaults to "test_exper"
+        :type experiment: str, optional
+        :param cycle: name of the cycle, defaults to "test_cycle"
+        :type cycle: str, optional
         """
+
         # handling exported to variables.py in class File_Settings
         # self.file_path_input.delete("0", "end")
         # self.file_path_input.insert(0, path)
@@ -1040,8 +1062,8 @@ class window_main(tk.Tk):
         """Used in the development for showing text on the main window
         It presents the workflow as an info in the main window
 
-        Args:
-            text (str, optional): Any text that want to be pushed to the window logger in the main window. Defaults to "test".
+        :param text: Any text that want to be pushed to the window logger in the main window, defaults to "test"
+        :type text: str, optional
         """
         # self.loglevel_console.set("INFO from debug_logtext")
         print(self.loglevel_console.get())

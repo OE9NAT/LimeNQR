@@ -34,7 +34,16 @@ def save_all():
     print("test!! not implemented")
 
 
-def load_setting(path="/home/pi/Bach_arbeit/program", file="setting.cfg"):
+def load_setting(path="/home/pi/Bach_arbeit/program", file="setting_last_run.cfg"):
+    """ load the settings file with all its variables for the experiment into a dictonary
+
+    :param path: abolute path of the file with the settings *.cfg, defaults to "/home/pi/Bach_arbeit/program"
+    :type path: str, optional
+    :param file: file with the saved settings, defaults to "setting_last_run.cfg"
+    :type file: str, optional
+    :return: Values from loaded fils settings
+    :rtype: dict
+    """
     # read settings form cfg file
     path_settings = path+"/"+file
     print("setting file: ", path_settings)
@@ -46,7 +55,7 @@ def load_setting(path="/home/pi/Bach_arbeit/program", file="setting.cfg"):
 
         # look fore settings.cfg
         path_settings = filedialog.askopenfilename(
-            initialdir='/home/', title='select settings.cfg path')
+            initialdir='/home/', title='select settings *.cfg path')
         print("setting file: ", path_settings)
 
     configParser = configparser.ConfigParser()
@@ -93,27 +102,6 @@ def RUN():
     window2.mainloop()
 
 
-def variable_input_windows():
-    window_var = tk.Tk()
-    window_var.title("Input of measurment settings")
-
-    exit = tk.Button(window_var, text="Close", command=window_var.quit)
-    # exit.pack#(side=RIGHT) #TOP (default), BOTTOM, LEFT, or RIGHT.
-    exit.grid(row=1, column=1)
-
-    # window.mainloop()
-
-
-def Varify_meas_set(variable="hallo"):
-    # print("Varify_meas_set")
-    logger_function.debug("Varify_meas_set from logging.debug")
-    logger_function.warning("Varify_meas_set from logging.debug")
-    #config = configparser.ConfigParser()
-    # variable=config.read("config.cfg")
-
-    # print(type(variable[0]))
-
-
 def simple_label(text_unit, column, row):
     lable_text = tk.Label(text=text_unit)
     lable_text.place(x=column, y=row, width=40, height=30)
@@ -133,6 +121,11 @@ def get_info_dialog():
 
 
 def error_window(text="TEST"):
+    """rais a window for presenting an info or error message to the user
+
+    :param text: Error message , defaults to "TEST"
+    :type text: str, optional
+    """
     m_tesxt = " \n ! ! ! ! ! ! ! ! ! !\n\
     wrong input of value\n\
     value should be \n \n"
@@ -142,6 +135,17 @@ def error_window(text="TEST"):
 
 
 def error_type_window(input_var, type_should=str, variable_name="", message_example="none"):
+    """rais a window for presenting an error message to the user with additional option
+
+    :param input_var: what parameter we are talking about
+    :type input_var: str
+    :param type_should: expected type for the varialbe, defaults to str
+    :type type_should: type , optional
+    :param variable_name: additonal description of the variable , defaults to ""
+    :type variable_name: str, optional
+    :param message_example: a message for a example for solving type colission , defaults to "none"
+    :type message_example: str, optional
+    """
     m_tesxt = " \n Wrong input type \n"
     m_tesxt += variable_name+" input: " + \
         input_var + " is type: " + str(type(input_var)) + "\n"
@@ -150,37 +154,6 @@ def error_type_window(input_var, type_should=str, variable_name="", message_exam
     m_tesxt += "example: "+message_example
 
     tk.messagebox.showerror(message=m_tesxt, title="input type Error")
-
-
-def round_rectangle(x1, y1, x2, y2, radius=25):
-    # draw a box
-
-    points = [x1+radius, y1,
-              x1+radius, y1,
-              x2-radius, y1,
-              x2-radius, y1,
-              x2, y1,
-              x2, y1+radius,
-              x2, y1+radius,
-              x2, y2-radius,
-              x2, y2-radius,
-              x2, y2,
-              x2-radius, y2,
-              x2-radius, y2,
-              x1+radius, y2,
-              x1+radius, y2,
-              x1, y2,
-              x1, y2-radius,
-              x1, y2-radius,
-              x1, y1+radius,
-              x1, y1+radius,
-              x1, y1]
-
-    #my_rectangle = round_rectangle(600, 600, 800, 800, radius=5)
-    #canvas.create_polygon(my_rectangle, smooth=True,fill="blue")
-
-    # return canvas.create_polygon(points, **kwargs, smooth=True)
-    return points
 
 
 if __name__ == "__main__":

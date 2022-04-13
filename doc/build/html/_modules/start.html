@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>start &#8212; Sphinx documentation V0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for start</h1><div class="highlight"><pre>
+<span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">pip</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span> <span class="nn">threading</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; import error in start.py&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>  <span class="c1"># DEBUG INFO WARNING ERROR</span>
+<span class="kn">from</span> <span class="nn">logging.handlers</span> <span class="kn">import</span> <span class="n">QueueHandler</span>
+
+
+<span class="c1"># handler = logging.FileHandler(&quot;log/Value_log.log&quot;)</span>
+<span class="c1"># handler = logging.handlers.RotatingFileHandler(&quot;log/Value_log.log&quot;)</span>
+<span class="c1"># formatter = logging.Formatter(&quot;____ %(name)s ____  %(asctime)s : %(levelname)s : \n %(message)s&quot;)</span>
+<span class="c1"># handler.setFormatter(formatter)</span>
+
+<span class="c1"># Check if log file exist</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if dh5_file file exist for saving all measured files</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s2">&quot;log/dh5_file&quot;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;log/dh5_file&quot;</span><span class="p">)</span>
+
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;log/DEFAULT_log.log&quot;</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>  <span class="c1"># &lt;- set logging level</span>
+                    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;______ </span><span class="si">%(name)s</span><span class="s2"> ______  </span><span class="si">%(asctime)s</span><span class="s2"> : </span><span class="si">%(levelname)s</span><span class="s2"> : </span><span class="se">\n</span><span class="s2"> </span><span class="si">%(message)s</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># set level</span>
+
+
+<span class="n">logger_start</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">)</span>
+<span class="n">logger_start</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">())</span>
+<span class="n">logger_start</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;logging from start up&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="test_version"><a class="viewcode-back" href="../index.html#start.test_version">[docs]</a><span class="k">def</span> <span class="nf">test_version</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verification of the installed and use Python syste version</span>
+
+<span class="sd">    :return: `True` = if tested verifications passes,  `False` = if tested verification fails</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># python system  check</span>
+    <span class="c1"># print(sys.version)</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Python version &quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">40</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Error </span><span class="se">\n</span><span class="s2"> installed python: &quot;</span><span class="p">,</span> <span class="s2">&quot;version &quot;</span><span class="p">,</span>
+              <span class="n">version</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="c1"># print(&quot;version available &quot;,sys.version_info)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> minimum requirements is python 3.7 </span><span class="se">\n</span><span class="s2"> ERROR end&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="n">logger_start</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;start test python version &quot;</span><span class="o">+</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="test_import"><a class="viewcode-back" href="../index.html#start.test_import">[docs]</a><span class="k">def</span> <span class="nf">test_import</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verification of all used modues what are used in the Projekt.</span>
+<span class="sd">    If the module is able to be imported.</span>
+
+<span class="sd">    :return: `True` = if tested verifications passes,  `False`  = if tested verification fails</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># print(&quot;\n python modulse avalibel: &quot;)</span>
+    <span class="c1"># os.system(&#39;pip list&#39;)</span>
+    <span class="c1"># print(&quot;\n end python modulse&quot;)</span>
+
+    <span class="c1"># print(&quot;eggs geladen: &quot;,&#39;eggs&#39; in sys.modules)</span>
+    <span class="c1"># print(&quot;numpy geladen: &quot;,&#39;numpy&#39; in sys.modules)</span>
+
+    <span class="c1"># print(&quot;INFO imported \n&quot;)</span>
+    <span class="c1"># print(*sys.modules.keys(),sep=&quot;\n&quot;)</span>
+
+    <span class="c1"># list of all necessery imports</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">numpy</span>
+        <span class="kn">import</span> <span class="nn">matplotlib</span>
+        <span class="kn">import</span> <span class="nn">tkinter</span>
+        <span class="kn">import</span> <span class="nn">tkinter.ttk</span>
+        <span class="c1"># from tkinter import scrolledtext</span>
+
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+        <span class="c1"># from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)</span>
+        <span class="kn">import</span> <span class="nn">configparser</span>
+        <span class="kn">import</span> <span class="nn">queue</span>
+        <span class="kn">import</span> <span class="nn">PIL</span>
+        <span class="kn">import</span> <span class="nn">logging</span>
+        <span class="kn">import</span> <span class="nn">h5py</span>
+
+        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="kn">import</span> <span class="nn">sys</span>
+        <span class="kn">import</span> <span class="nn">scipy</span>
+        <span class="kn">import</span> <span class="nn">csv</span>
+        <span class="kn">import</span> <span class="nn">serial</span>
+        <span class="kn">import</span> <span class="nn">time</span>
+
+        <span class="c1"># import RPi</span>
+
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+        <span class="c1"># Error handling</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> #### ERROR loading import ####</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">#### ERROR loading import #### </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># os.system(&#39;python -m pip install &#39;+str(err))</span>
+
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="test_settings"><a class="viewcode-back" href="../index.html#start.test_settings">[docs]</a><span class="k">def</span> <span class="nf">test_settings</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Space holder for additional requirement verification that want</span>
+<span class="sd">    to be thestet at startup</span>
+
+<span class="sd">    :return: `True` = if tested verifications passes, `False` = if tested verification fails</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="info_dialog"><a class="viewcode-back" href="../index.html#start.info_dialog">[docs]</a><span class="k">def</span> <span class="nf">info_dialog</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Info text for presenting on startup</span>
+
+<span class="sd">    :return:  message box of all of its information</span>
+<span class="sd">    :rtype: string</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;************************************************  </span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">    Autor: Philipp MALIN</span>
+<span class="s2">    Date: 01.07.2021</span>
+<span class="s2">    Version: 1.0</span>
+<span class="s2">    Description: Grapical user interface to control SDR</span>
+<span class="s2">                 for Nuclear Quadrupole Resonance spectroscopy.</span>
+<span class="s2">    </span><span class="se">\n</span><span class="s2">************************************************  &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">text</span></div>
+
+
+<span class="c1"># start main programm</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;start GUI&quot;</span><span class="p">)</span>
+    <span class="c1"># thread count form the system</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;number of treads running: &quot;</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">active_count</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current treads: &quot;</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">current_thread</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;list of all treads: &quot;</span><span class="p">,</span> <span class="n">threading</span><span class="o">.</span><span class="n">enumerate</span><span class="p">())</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">info_dialog</span><span class="p">())</span>
+
+    <span class="c1"># do all checks</span>
+    <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">test_dict</span><span class="p">[</span><span class="s2">&quot;test_version&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_version</span><span class="p">()</span>
+    <span class="n">test_dict</span><span class="p">[</span><span class="s2">&quot;test_import&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_import</span><span class="p">()</span>
+    <span class="n">test_dict</span><span class="p">[</span><span class="s2">&quot;test_settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_settings</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Check list:&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">test_dict</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="kc">False</span> <span class="ow">in</span> <span class="n">test_dict</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">test_import</span><span class="p">()</span>
+        <span class="c1"># print(&quot;ERROR \n problem with imports \n&quot;)</span>
+
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;imports are not satisfied&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">imports alles ok</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># start Progra</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;program&quot;</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">GUI</span>  <span class="c1"># start GUI</span>
+    <span class="n">GUI</span><span class="o">.</span><span class="n">GUI_start</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-_____END check start of GUI ____-&quot;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Sphinx documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Welcome to the “LimeNQR” documentation!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-start">start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#graphical-user-interface">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_main2">Main Window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#module-win_load_file">models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, MALIN Philipp.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

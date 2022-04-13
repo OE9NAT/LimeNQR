@@ -19,6 +19,8 @@ logger_win_variables.info("logging from win_variables start up")
 class Value_Settings:
 
     def __init__(self):
+        """initialising a standart sequence with all of its values
+        """
         print("Value_Settings")
         self._freq_start = 00
         self._freq_end = 00
@@ -72,14 +74,14 @@ class Value_Settings:
 
     @property
     def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting_last_run.cfg"):
-        """kijiojoijoijoijoi testS
+        """reading the file and generating the settings to a dictonary
 
-        Args:
-            path (_type_, optional): _description_. Defaults to os.path.dirname(sys.argv[0]).
-            file (str, optional): _description_. Defaults to "program/setting_last_run.cfg".
-
-        Returns:
-            _type_: _description_
+        :param path: absolute path of where the system gets strated from, defaults to os.path.dirname(sys.argv[0])
+        :type path: os.path, optional
+        :param file: path of a setting *.cfg file , defaults to "program/setting_last_run.cfg"
+        :type file: str, optional
+        :return: read settings from the file
+        :rtype: dict
         """
         # read settings form setting.cfg file
         # path_settings = path+"/"+file
@@ -136,6 +138,11 @@ class Value_Settings:
 
     @import_setting.setter
     def set_freq(self, value):
+        """setter all frequency
+
+        :param value: Frequency in MHz
+        :type value: list
+        """
         print("setter value define_frequency", type(value))
         self._freq_start = value[0]  # start
         self._freq_end = value[1]  # stop
@@ -144,11 +151,21 @@ class Value_Settings:
 
     @import_setting.getter
     def get_freq(self):
+        """getter the set frequency 
+
+        :return:  Frequency in MHz
+        :rtype: list
+        """
         print("getter variables.py get_freq")
         return [self._freq_start, self._freq_end, self._freq_step, self._freq_repetitions]
 
     @import_setting.setter
     def set_tunematch(self, value):
+        """setter tune and match settings
+
+        :param value: tune and match parameters
+        :type value: list
+        """
         print("setter value set_tunematch", value)
         self._tunematch_tune = value[0]
         self._tunematch_match = value[1]
@@ -157,11 +174,21 @@ class Value_Settings:
 
     @import_setting.getter
     def get_tunematch(self):
+        """getter tune and match settings
+
+        :return: tuning and maching parameters
+        :rtype: list
+        """
         print("getter variables.py get_tunematch")
         return [self._tunematch_tune, self._tunematch_match, self._tunematch_freq, self._tunematch_lut]
 
     @import_setting.setter
     def set_load(self, value):
+        """setter value of filestruktur
+
+        :param value: filestruktur
+        :type value: list
+        """
         print("setter value define_filestrukture", value)
         self._load_sample = value[0]
         self._load_experiment = value[1]
@@ -169,17 +196,32 @@ class Value_Settings:
 
     @import_setting.getter
     def get_load(self):
+        """getter filestruktur
+
+        :return: filestruktur
+        :rtype: list
+        """
         print("getter variables.py get_freq")
         return [self._load_sample, self._load_experiment, self._load_data]
 
     # self._sequence
     @import_setting.setter
     def set_seq(self, value):
+        """setter sequence type name
+
+        :param value: sequence parameters
+        :type value: str
+        """
         print("setter value define_filestrukture", value)
         self._sequence = value
 
     @import_setting.getter
     def get_seq(self):
+        """getter sequence type name
+
+        :return: sequence parameters
+        :rtype: str
+        """
         print("getter variables.py get_freq")
         return self._sequence
 
@@ -187,12 +229,22 @@ class Value_Settings:
 
     @import_setting.getter
     def logo_path(self):
+        """path for logo of the window
+
+        :return: logo path
+        :rtype: os.path
+        """
         print(self._log_path, "\n")
         return self._log_path
 
     # read and save to settings.cfg
     @import_setting.setter
     def set_settings(self, path_settings):
+        """read settings form setting_last_run.cfg file 
+
+        :param path_settings: path to finde setting_last_run.cfg 
+        :type path_settings: os.path
+        """
         # def import_setting(self, path=os.path.dirname(sys.argv[0]), file="program/setting.cfg"):
         # read settings form setting_last_run.cfg file and set it ot ROM
         # path_settings = path+"/"+file
@@ -260,6 +312,13 @@ class Value_Settings:
 
     @import_setting.setter
     def save_settings(self, value):
+        """write settings to setting_last_run.cfg file 
+
+        :param value: stored values
+        :type value: dict
+        :return: stored values after safing it to file
+        :rtype: dict
+        """
         # save settings form ROM and save it to setting.cfg file
         print("save_settings variables.py \n ", type(value), "\n", value)
         print(
@@ -393,6 +452,9 @@ class Value_Settings:
 
 
 class Pulse_Settings:
+    """arbituary pulse generator
+    !!!! more implementations is needet
+    """
 
     def __init__(self):
         print("Pulse_Settings")
@@ -404,6 +466,17 @@ class Pulse_Settings:
 
     @staticmethod
     def parameter2Vektor(start, stop, shape="squaer", number=100):
+        """arbituary puls shape generator
+
+        :param start: position of start pulse shape
+        :type start: int
+        :param stop: stop position of pulse shape
+        :type stop: int
+        :param shape: name of pulsshape, defaults to "squaer"
+        :type shape: str, optional
+        :param number: sampelpoints resolution, defaults to 100
+        :type number: int, optional
+        """
         t = np.linspcae(start, stop, number)
         if shape == "squaer":
             signale = scipy.signal.square(t, duty=1)
@@ -426,6 +499,9 @@ class Pulse_Settings:
 
 
 class File_Settings:
+    """main file handeler
+
+    """
     main_data_path = "Storage_vault"
     settings_file = "setting.cfg"
 
@@ -439,7 +515,17 @@ class File_Settings:
 
     @staticmethod
     def generate_folder(self, sample="pre_sample", experiment="pre_experiment", data="pre_data"):
-        """ test """
+        """generate filestructure if not existing
+
+        :param sample: main folder name, defaults to "pre_sample"
+        :type sample: str, optional
+        :param experiment: usb folder name, defaults to "pre_experiment"
+        :type experiment: str, optional
+        :param data: subsub folder name, defaults to "pre_data"
+        :type data: str, optional
+        :return: storage path
+        :rtype: os.path
+        """
         print("sample", sample)
         print("experiment", experiment)
         print("data", data)
@@ -490,6 +576,8 @@ class File_Settings:
 
     @staticmethod
     def load_folder(self):
+        """get folder struktures form user input
+        """
         file_doc = os.path.join(os.path.dirname(__file__), '..', self._data)
 
         path_file = filedialog.askopenfilename(
@@ -523,6 +611,8 @@ class File_Settings:
 
     @staticmethod
     def update_set_Parameters(self):
+        """repedative update Parameters at a timed intervall
+        """
         # ,sample,exp,data
 
         # update labels
@@ -540,6 +630,8 @@ class File_Settings:
 
     @staticmethod
     def save_close(self):
+        """sequenc of when closing the window
+        """
 
         # save files
         absolute_path = os.path.join(
@@ -599,6 +691,11 @@ class File_Settings:
     @property
     # , path="pre_Sample", experiment="pre_Experiment", data="pre_Data"):
     def save_experiment(self):
+        """Window for Set Experiment Structure
+
+        :return: logging to the commandwindow that the window is closed 
+        :rtype: print()
+        """
         print("save_experiment from variables.py")
         # print("path: "+str(path)+"\nexperiment: " +
         #      str(experiment) + "\nData: " + str(data))

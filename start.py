@@ -36,19 +36,10 @@ logger_start.info("logging from start up")
 
 def test_version():
     """
-    # Description:
-
     Verification of the installed and use Python syste version
 
-    # Args:
-
-    NONE
-
-    # Returns:
-
-    True = if tested verifications passes
-    False = if tested verification fails
-
+    :return: `True` = if tested verifications passes,  `False` = if tested verification fails
+    :rtype: bool
     """
 
     # python system  check
@@ -70,21 +61,13 @@ def test_version():
 
 def test_import():
     """
-    # Description:
-
     Verification of all used modues what are used in the Projekt.
     If the module is able to be imported.
 
-    # Args:
-
-    NONE
-
-    # Returns:
-
-    True = if tested verifications passes
-    False = if tested verification fails
-
+    :return: `True` = if tested verifications passes,  `False`  = if tested verification fails
+    :rtype: bool
     """
+
     # print("\n python modulse avalibel: ")
     # os.system('pip list')
     # print("\n end python modulse")
@@ -134,20 +117,11 @@ def test_import():
 
 def test_settings():
     """
-    # Description:
-
     Space holder for additional requirement verification that want
     to be thestet at startup
 
-    # Args:
-
-    NONE
-
-    # Returns:
-
-    True = if tested verifications passes
-    False = if tested verification fails
-
+    :return: `True` = if tested verifications passes, `False` = if tested verification fails
+    :rtype: bool
     """
 
     return True
@@ -155,17 +129,10 @@ def test_settings():
 
 def info_dialog():
     """
-    # Description:
-
     Info text for presenting on startup
 
-    # Args:
-
-    NONE
-
-    # Returns:
-
-    message box of all of its information
+    :return:  message box of all of its information
+    :rtype: string
 
     """
 

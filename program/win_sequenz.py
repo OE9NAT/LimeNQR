@@ -34,13 +34,12 @@ logo_path = value_set.logo_path
 
 # helper fuktion
 def string2array(value):
-    """covert a long string format into a list
+    """ covert a long string format into a list
 
-    Args:
-        value (string): long list of numbers
-
-    Returns:
-        array: an arrar of float numbers
+    :param value: a string that can be split by "," 
+    :type value: str
+    :return: the array of flaoting numbers from a sring 
+    :rtype: [float,float,....]
     """
     value = value.replace("[", "").replace("]", "")
     value = value.split(",")
@@ -61,6 +60,8 @@ class Window_seq:
     max_number_puls = 10
 
     def __init__(self):
+        """initial setting of all defalt parameters from the class Window_seq
+        """
         # tk.Tk.__init__(self, *args, **kwargs)
 
         # Sequenz
@@ -128,6 +129,19 @@ class Window_seq:
 
     # @staticmethod  # property
     def window_sequenz(self, seq_type="0", value_settings="1", puls_cylce="1", value_set="none"):
+        """initial setting the sequenc parameters
+
+        :param seq_type: sequence type that was selected, defaults to "0"
+        :type seq_type: str, optional
+        :param value_settings: initial setting parameters of parameters, defaults to "1"
+        :type value_settings: str, optional
+        :param puls_cylce: number of pulses, defaults to "1"
+        :type puls_cylce: str, optional
+        :param value_set: variabel handeling settings, defaults to "none"
+        :type value_set: str, optional
+        :return: _description_
+        :rtype: _type_
+        """
         print("type of sequenz: ", seq_type)
         value_settings["sequenz"]["sequenz"] = seq_type
         print("settings variables: \n \n", value_settings)
@@ -242,17 +256,22 @@ class Window_seq:
         def plot_sequenz(offset, puls, delay=20, window=40, frequency=100, amplitude=1):
             """generates a figure with the use of matplotlib.figure  for visualising the Sequenz generator.
 
-            Args:
-                offset (list of integer): A list of integers of each duration of the offset in arbitrary units
-                puls (list of integer): A list of integers of each duration of the pulse arbitrary units
-                delay (int, optional): time to delay the window off before the window time starts. Defaults to 20 arbitrary units.
-                window (int, optional): durationtime of aquisition time. Defaults to 40 arbitrary units.
-                frequency (int, optional): scale of frequency. Defaults to 100 arbitrary units.
-                amplitude (int, optional): deflection of the Signal. Defaults to 1 arbitrary units.
-
-            Returns:
-                figure: returne a figure of subplots for the use matplotlib.figure
+            :param offset: A list of integers of each duration of the offset in arbitrary units
+            :type offset: list
+            :param puls:  A list of integers of each duration of the pulse arbitrary units
+            :type puls: list
+            :param delay: time to delay the window off before the window time starts. Defaults to 20 arbitrary units
+            :type delay: int, optional
+            :param window: durationtime of aquisition time. Defaults to 40 arbitrary units
+            :type window: int, optional
+            :param frequency: scale of frequency, defaults to 100
+            :type frequency: int, optional
+            :param amplitude: deflection of the Signal. Defaults to 1 arbitrary units
+            :type amplitude: int, optional
+            :return: eturne a figure of subplots for the use matplotlib.figure
+            :rtype: figure
             """
+
             rest = 10  # end of puls
 
             duration = []
@@ -767,9 +786,10 @@ class Window_seq:
         def toggle(show_state):
             """toggle the SDR settings frame for a greater overview
 
-            Args:
-                show_state (boolien): state showing or hiding the window
+            :param show_state: state showing or hiding the window
+            :type show_state: bool
             """
+
             if bool(show_state):
                 print("toogle hide sdr Settings")
                 self.frame_sdr.grid_forget()
@@ -815,8 +835,8 @@ class Window_seq:
     def save_seq(self):
         """get input parameter and save to class variables
 
-        Returns:
-            dictionary: a dictionary of all variables of the sequence
+        :return:  a dictionary of all variables of the sequence
+        :rtype: dic
         """
 
         self.sequenz_type = self.sequenz_type_input.get()
@@ -892,12 +912,12 @@ class Window_seq:
     def save2cfg(self, file="program/setting_sequence.cfg", file_path=os.path.dirname(sys.argv[0])):
         """save all parameters to the file set.
 
-        Args:
-            file (str, optional): _description_. Defaults to "program/setting_sequence.cfg".
-            file_path (os.path, optional): _description_. Defaults to os.path.dirname(sys.argv[0]).
-
-        Returns:
-            dictonary : return all saved parameters
+        :param file: path where to save the *.cfg file to, defaults to "program/setting_sequence.cfg"
+        :type file: str, optional
+        :param file_path: abolute system file path, defaults to os.path.dirname(sys.argv[0])
+        :type file_path: os.path, optional
+        :return: return all saved parameters
+        :rtype: dict
         """
 
         print("save settings to .cfg file")
@@ -1001,9 +1021,10 @@ class Window_seq:
     def load_seq(self):
         """acquire saved data from storea and load into the file handler and visualise the data in the GUI
 
-        Returns:
-            dictonary: dictonray of all loaded parameters
+        :return:  dictonray of all loaded parameters
+        :rtype: dict
         """
+
         print("load all variabels from .cfg file")
 
         seq_variabels = Window_seq.read2cfg(self)
@@ -1120,12 +1141,12 @@ class Window_seq:
     def read2cfg(self, file_path=os.path.dirname(sys.argv[0]), file="program/setting_sequence.cfg"):
         """take the .cfg file and format it into a dictonray
 
-        Args:
-            file_path (filepath, optional): path of the program. Defaults to os.path.dirname(sys.argv[0]).
-            file (str, optional): path of the file to be loaded. Defaults to "program/setting_sequence.cfg".
-
-        Returns:
-            dictonray: hand over all parameters to be processed for loading into the system
+        :param file_path:  path of the program., defaults to os.path.dirname(sys.argv[0])
+        :type file_path: os.path, optional
+        :param file: path of the file to be loaded., defaults to "program/setting_sequence.cfg"
+        :type file: str, optional
+        :return: hand over all parameters to be processed for loading into the system
+        :rtype: dict
         """
 
         # popup filehandler
@@ -1153,14 +1174,16 @@ class Window_seq:
 def save_file(path, experiment="test_experiment_1", cycle="test_cycle_11"):
     """check if the storage strukture exist, othersise generate the correspondingly needed folders
 
-    Args:
-        path (string path): location of where to save the file
-        experiment (str, optional): subfolder for storage. Defaults to "test_experiment_1".
-        cycle (str, optional): subsubfolder for declaing the storage. Defaults to "test_cycle_11".
-    Returns:
-        boolean: True if folders could be found or were generated,
-                 False if not possible
+    :param path: location of where to save the file
+    :type path: str
+    :param experiment: subfolder for storage. Defaults to "test_experiment_1", defaults to "test_experiment_1"
+    :type experiment: str, optional
+    :param cycle: subsubfolder for declaing the storage, defaults to "test_cycle_11"
+    :type cycle: str, optional
+    :return: `True` if folders could be found or were generated, `False` if not possible
+    :rtype: bool
     """
+
     print("def save")
     print("experiment" + experiment + "cycle" + cycle)
 
@@ -1182,11 +1205,14 @@ def save_file(path, experiment="test_experiment_1", cycle="test_cycle_11"):
 def save_values(path="test_data", experiment="test_experiment", cycle="test_cycle"):
     """collect Parameters and save to handed over structure
 
-    Args:
-        path (str, optional): mainfolder to save acquire measurment data. Defaults to "test_data".
-        experiment (str, optional): subfolder to save acquire measurment data. Defaults to "test_experiment".
-        cycle (str, optional): subsubfolder to save acquire measurment data. Defaults to "test_cycle".
+    :param path: mainfolder to save acquire measurment data, defaults to "test_data"
+    :type path: str, optional
+    :param experiment: subfolder to save acquire measurment data, defaults to "test_experiment"
+    :type experiment: str, optional
+    :param cycle: subsubfolder to save acquire measurment data, defaults to "test_cycle"
+    :type cycle: str, optional
     """
+
     cfg_section = "puls_sequenz"
     input_values = {}
     print("save to cfg_section: " + cfg_section)
@@ -1251,14 +1277,16 @@ def save_values(path="test_data", experiment="test_experiment", cycle="test_cycl
 def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
     """load Parameters from storage to handed over to the sytem
 
-    Args:
-        path (str, optional): mainfolder to save acquire measurment data. Defaults to "test_data".
-        experiment (str, optional): subfolder to save acquire measurment data. Defaults to "test_experiment".
-        cycle (str, optional): subsubfolder to save acquire measurment data. Defaults to "test_cycle".
-
-    Returns:
-        boolean: True if files could be loaed
+    :param path: mainfolder to save acquire measurment data, defaults to "data"
+    :type path: str, optional
+    :param experiment:  subfolder to save acquire measurment data, defaults to "test_experiment"
+    :type experiment: str, optional
+    :param cycle: subsubfolder to save acquire measurment data, defaults to "test_cycle"
+    :type cycle: str, optional
+    :return: "True" if files could be loaed, "False" if files could not be loaed
+    :rtype: _type_
     """
+
     print("def: load_file: \n path"+path +
           "experiment" + experiment + "cycle" + cycle)
 
@@ -1358,10 +1386,14 @@ def load_file(path="data", experiment="test_experiment", cycle="test_cycle"):
 def windows_file(path="test_data", experiment="test_experiment", cycle="test_cycle"):
     """Window of setting the set Puls sequence from a funktion. Basic setupfor minimal settings. Update from thins Funktion is the class Window_seq
 
-    Args:
-        path (str, optional): main folder. Defaults to "test_data".
-        experiment (str, optional): subfolder. Defaults to "test_experiment".
-        cycle (str, optional): subsubfolder for saving the experiment Data. Defaults to "test_cycle".
+    :param path: ain folder, defaults to "test_data"
+    :type path: str, optional
+    :param experiment: subfolder, defaults to "test_experiment"
+    :type experiment: str, optional
+    :param cycle: subsubfolder for saving the experiment Data, defaults to "test_cycle"
+    :type cycle: str, optional
+    :return: none
+    :rtype: none
     """
 
     # helper function

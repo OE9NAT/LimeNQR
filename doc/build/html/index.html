@@ -1,0 +1,1036 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to the “LimeNQR” documentation! &#8212; Sphinx documentation V0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-the-limenqr-documentation">
+<h1>Welcome to the “LimeNQR” documentation!<a class="headerlink" href="#welcome-to-the-limenqr-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<p>Developer documentation for the LimeNQR software.
+Controling an Lime SDR from Nuclear Quadrupole Resonance spectroscopie with a graphilcal user interface</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+<li><p><a class="reference external" href="https://github.com/OE9NAT/bacharbeit/wiki">More user infos in the Wiki</a></p></li>
+</ul>
+</section>
+<section id="module-start">
+<span id="start"></span><h1>start<a class="headerlink" href="#module-start" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="start.info_dialog">
+<span class="sig-prename descclassname"><span class="pre">start.</span></span><span class="sig-name descname"><span class="pre">info_dialog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/start.html#info_dialog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#start.info_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Info text for presenting on startup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>message box of all of its information</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="start.test_import">
+<span class="sig-prename descclassname"><span class="pre">start.</span></span><span class="sig-name descname"><span class="pre">test_import</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/start.html#test_import"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#start.test_import" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verification of all used modues what are used in the Projekt.
+If the module is able to be imported.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>True</cite> = if tested verifications passes,  <cite>False</cite>  = if tested verification fails</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="start.test_settings">
+<span class="sig-prename descclassname"><span class="pre">start.</span></span><span class="sig-name descname"><span class="pre">test_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/start.html#test_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#start.test_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Space holder for additional requirement verification that want
+to be thestet at startup</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>True</cite> = if tested verifications passes, <cite>False</cite> = if tested verification fails</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="start.test_version">
+<span class="sig-prename descclassname"><span class="pre">start.</span></span><span class="sig-name descname"><span class="pre">test_version</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/start.html#test_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#start.test_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verification of the installed and use Python syste version</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><cite>True</cite> = if tested verifications passes,  <cite>False</cite> = if tested verification fails</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="graphical-user-interface">
+<h1>Graphical User Interface<a class="headerlink" href="#graphical-user-interface" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-GUI"></span><dl class="py function">
+<dt class="sig sig-object py" id="GUI.GUI_start">
+<span class="sig-prename descclassname"><span class="pre">GUI.</span></span><span class="sig-name descname"><span class="pre">GUI_start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/GUI.html#GUI_start"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#GUI.GUI_start" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will initialise the loggers
+After all imports it will start the main window</p>
+</dd></dl>
+
+</section>
+<section id="module-win_main2">
+<span id="main-window"></span><h1>Main Window<a class="headerlink" href="#module-win_main2" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="win_main2.window_main">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">win_main2.</span></span><span class="sig-name descname"><span class="pre">window_main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.autosave">
+<span class="sig-name descname"><span class="pre">autosave</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.autosave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.autosave" title="Permalink to this definition">¶</a></dt>
+<dd><p>repeatative loop to load and save parameters 
+update the infobox in the main window</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.debug_logtext">
+<span class="sig-name descname"><span class="pre">debug_logtext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.debug_logtext"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.debug_logtext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used in the development for showing text on the main window
+It presents the workflow as an info in the main window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – Any text that want to be pushed to the window logger in the main window, defaults to “test”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.get_values">
+<span class="sig-name descname"><span class="pre">get_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.get_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.get_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>read all input value form the manin window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>returns parameters form the main window</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.load_last_values2">
+<span class="sig-name descname"><span class="pre">load_last_values2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.load_last_values2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.load_last_values2" title="Permalink to this definition">¶</a></dt>
+<dd><p>load setting_last_run.cfg from folder program</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.load_settings">
+<span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.load_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.load_settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handels the loading from a  settings.cfg file into the system</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.load_settings2">
+<span class="sig-name descname"><span class="pre">load_settings2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.load_settings2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.load_settings2" title="Permalink to this definition">¶</a></dt>
+<dd><p>load setting_last_run.cfg from last saved from GUI</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.plot_live">
+<span class="sig-name descname"><span class="pre">plot_live</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.plot_live"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.plot_live" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialising generating the plot on the main window.
+Handing over Time and Frequency data for the first generation of the plot. Later all changes will be made with the funktion def: plot_update()</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s1</strong> (<em>str</em><em>, </em><em>optional</em>) – plot for timedomain the representative amplitude values , defaults to “”</p></li>
+<li><p><strong>t1</strong> (<em>str</em><em>, </em><em>optional</em>) – plot for timedomain the representative interval time values, defaults to “”</p></li>
+<li><p><strong>s2</strong> (<em>str</em><em>, </em><em>optional</em>) – plot for frequencydomain the representative amplitude values, defaults to “”</p></li>
+<li><p><strong>t2</strong> (<em>str</em><em>, </em><em>optional</em>) – plot for frequencydomain the representative interval time values, defaults to “”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>initital setup of the plot in matplotlib</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.plot_update">
+<span class="sig-name descname"><span class="pre">plot_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_time</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'program\\scan_data_time.csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'program\\scan_data_freq.csv'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.plot_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.plot_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>update the data what is shown in the plot from a filepath on pull request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_time</strong> (<em>str</em><em>, </em><em>optional</em>) – time data from a <a href="#id1"><span class="problematic" id="id2">*</span></a>.csv file, defaults to os.path.join(“program”, “scan_data_time.csv”)</p></li>
+<li><p><strong>file_freq</strong> (<em>str</em><em>, </em><em>optional</em>) – frequency data from a*.csv, defaults to os.path.join(“program”, “scan_data_freq.csv”)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.read_tm">
+<span class="sig-name descname"><span class="pre">read_tm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.read_tm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.read_tm" title="Permalink to this definition">¶</a></dt>
+<dd><p>read a tuning and matching file into the system for setting its parameters</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.save_all">
+<span class="sig-name descname"><span class="pre">save_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.save_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.save_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>routine sequence for securing and saving the set situation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.save_measurment">
+<span class="sig-name descname"><span class="pre">save_measurment</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.save_measurment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.save_measurment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handels the saving to a  settings.cfg file</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.save_quit_all">
+<span class="sig-name descname"><span class="pre">save_quit_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.save_quit_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.save_quit_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>routine sequence for securing and saving the set situation  
+and closing the window.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.send_arduino">
+<span class="sig-name descname"><span class="pre">send_arduino</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.send_arduino"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.send_arduino" title="Permalink to this definition">¶</a></dt>
+<dd><p>send parameters for matching to the microcontroler</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.set_measur">
+<span class="sig-name descname"><span class="pre">set_measur</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">11</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">22</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">33</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">44</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.set_measur"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.set_measur" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the frequency parameters into the GUI specified enterys</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em><em>, </em><em>optional</em>) – start frequency, defaults to 11</p></li>
+<li><p><strong>stop</strong> (<em>int</em><em>, </em><em>optional</em>) – stop frequency, defaults to 22</p></li>
+<li><p><strong>step</strong> (<em>int</em><em>, </em><em>optional</em>) – frequency steps, defaults to 33</p></li>
+<li><p><strong>average</strong> (<em>int</em><em>, </em><em>optional</em>) – number of averages per frequency step, defaults to 44</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.set_storage">
+<span class="sig-name descname"><span class="pre">set_storage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_path'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_exper'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_cycle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.set_storage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.set_storage" title="Permalink to this definition">¶</a></dt>
+<dd><p>initialise storage
+log information to the main window</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the ot the path, defaults to “test_path”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the experiment, defaults to “test_exper”</p></li>
+<li><p><strong>cycle</strong> (<em>str</em><em>, </em><em>optional</em>) – name of the cycle, defaults to “test_cycle”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_main2.window_main.set_tm">
+<span class="sig-name descname"><span class="pre">set_tm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tune</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tm_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_main2.html#window_main.set_tm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_main2.window_main.set_tm" title="Permalink to this definition">¶</a></dt>
+<dd><p>read from the main window tuning and matching parameters and set them in the system variabels for processing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tune</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum voltage for the tuning circuit to tune up to, defaults to 5</p></li>
+<li><p><strong>match</strong> (<em>int</em><em>, </em><em>optional</em>) – maximum voltage for the matching circuit to tune up to, defaults to 100</p></li>
+<li><p><strong>tm_step</strong> (<em>int</em><em>, </em><em>optional</em>) – number of steps samples generated, defaults to 100</p></li>
+<li><p><strong>lut</strong> (<em>int</em><em>, </em><em>optional</em>) – recoreded samples for interpolation, defaults to 50</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="win_main2.window_main.time_autosave">
+<span class="sig-name descname"><span class="pre">time_autosave</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5000</span></em><a class="headerlink" href="#win_main2.window_main.time_autosave" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gernerates the main window to call and handel all variabels and processes from a central position.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-win_load_file">
+<span id="file-handling"></span><h1>File handling<a class="headerlink" href="#module-win_load_file" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="win_load_file.save_file">
+<span class="sig-prename descclassname"><span class="pre">win_load_file.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data_11'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_load_file.html#save_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_load_file.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>chech if folderstrukture for saving exist otherwise generate filestrukture</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – main storage path</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – sub folder path, defaults to “test_experiment_1”</p></li>
+<li><p><strong>data</strong> (<em>str</em><em>, </em><em>optional</em>) – subsubfolder path, defaults to “test_data_11”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>check if sucsessfull</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_load_file.save_values">
+<span class="sig-prename descclassname"><span class="pre">win_load_file.</span></span><span class="sig-name descname"><span class="pre">save_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_load_file.html#save_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_load_file.save_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>save files to folderstructure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – main folder to save to, defaults to “test_data”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – subfolder to save to, defaults to “test_experiment”</p></li>
+<li><p><strong>data</strong> (<em>str</em><em>, </em><em>optional</em>) – subsub folder to save to, defaults to “test_data”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="win_load_file.win_load_file">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">win_load_file.</span></span><span class="sig-name descname"><span class="pre">win_load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_sample'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_load_file.html#win_load_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_load_file.win_load_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate Window for Filehandeling</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tk</strong> (<em>tkinter</em>) – import tkinter module</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-win_sequenz">
+<span id="sequence-handling"></span><h1>Sequence handling<a class="headerlink" href="#module-win_sequenz" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">Window_seq</span></span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>will launch the main window to enter the Variable.
+In the init, values will be pre-set.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>all values aquiriert will be saved to files as specified by the user.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq.load_seq">
+<span class="sig-name descname"><span class="pre">load_seq</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq.load_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq.load_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>acquire saved data from storea and load into the file handler and visualise the data in the GUI</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictonray of all loaded parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq.read2cfg">
+<span class="sig-name descname"><span class="pre">read2cfg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C:\\Users\\Malin\\AppData\\Local\\Programs\\Python\\Python39\\Scripts'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'program/setting_sequence.cfg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq.read2cfg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq.read2cfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>take the .cfg file and format it into a dictonray</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>os.path</em><em>, </em><em>optional</em>) – path of the program., defaults to os.path.dirname(sys.argv[0])</p></li>
+<li><p><strong>file</strong> (<em>str</em><em>, </em><em>optional</em>) – path of the file to be loaded., defaults to “program/setting_sequence.cfg”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>hand over all parameters to be processed for loading into the system</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq.save2cfg">
+<span class="sig-name descname"><span class="pre">save2cfg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'program/setting_sequence.cfg'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C:\\Users\\Malin\\AppData\\Local\\Programs\\Python\\Python39\\Scripts'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq.save2cfg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq.save2cfg" title="Permalink to this definition">¶</a></dt>
+<dd><p>save all parameters to the file set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em><em>, </em><em>optional</em>) – path where to save the <a href="#id3"><span class="problematic" id="id4">*</span></a>.cfg file to, defaults to “program/setting_sequence.cfg”</p></li>
+<li><p><strong>file_path</strong> (<em>os.path</em><em>, </em><em>optional</em>) – abolute system file path, defaults to os.path.dirname(sys.argv[0])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>return all saved parameters</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq.save_seq">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_seq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq.save_seq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq.save_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>get input parameter and save to class variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a dictionary of all variables of the sequence</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dic</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="win_sequenz.Window_seq.window_sequenz">
+<span class="sig-name descname"><span class="pre">window_sequenz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seq_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">puls_cylce</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_set</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#Window_seq.window_sequenz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.Window_seq.window_sequenz" title="Permalink to this definition">¶</a></dt>
+<dd><p>initial setting the sequenc parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seq_type</strong> (<em>str</em><em>, </em><em>optional</em>) – sequence type that was selected, defaults to “0”</p></li>
+<li><p><strong>value_settings</strong> (<em>str</em><em>, </em><em>optional</em>) – initial setting parameters of parameters, defaults to “1”</p></li>
+<li><p><strong>puls_cylce</strong> (<em>str</em><em>, </em><em>optional</em>) – number of pulses, defaults to “1”</p></li>
+<li><p><strong>value_set</strong> (<em>str</em><em>, </em><em>optional</em>) – variabel handeling settings, defaults to “none”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>_description_</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_sequenz.load_file">
+<span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_cycle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#load_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.load_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>load Parameters from storage to handed over to the sytem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – mainfolder to save acquire measurment data, defaults to “data”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – subfolder to save acquire measurment data, defaults to “test_experiment”</p></li>
+<li><p><strong>cycle</strong> (<em>str</em><em>, </em><em>optional</em>) – subsubfolder to save acquire measurment data, defaults to “test_cycle”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>“True” if files could be loaed, “False” if files could not be loaed</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>_type_</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_sequenz.save_file">
+<span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment_1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_cycle_11'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#save_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the storage strukture exist, othersise generate the correspondingly needed folders</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – location of where to save the file</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – subfolder for storage. Defaults to “test_experiment_1”, defaults to “test_experiment_1”</p></li>
+<li><p><strong>cycle</strong> (<em>str</em><em>, </em><em>optional</em>) – subsubfolder for declaing the storage, defaults to “test_cycle_11”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>True</cite> if folders could be found or were generated, <cite>False</cite> if not possible</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_sequenz.save_values">
+<span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">save_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_cycle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#save_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.save_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>collect Parameters and save to handed over structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – mainfolder to save acquire measurment data, defaults to “test_data”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – subfolder to save acquire measurment data, defaults to “test_experiment”</p></li>
+<li><p><strong>cycle</strong> (<em>str</em><em>, </em><em>optional</em>) – subsubfolder to save acquire measurment data, defaults to “test_cycle”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_sequenz.string2array">
+<span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">string2array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#string2array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.string2array" title="Permalink to this definition">¶</a></dt>
+<dd><p>covert a long string format into a list</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – a string that can be split by “,”</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the array of flaoting numbers from a sring</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>[float,float,….]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="win_sequenz.windows_file">
+<span class="sig-prename descclassname"><span class="pre">win_sequenz.</span></span><span class="sig-name descname"><span class="pre">windows_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_data'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test_cycle'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/win_sequenz.html#windows_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#win_sequenz.windows_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Window of setting the set Puls sequence from a funktion. Basic setupfor minimal settings. Update from thins Funktion is the class Window_seq</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – ain folder, defaults to “test_data”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – subfolder, defaults to “test_experiment”</p></li>
+<li><p><strong>cycle</strong> (<em>str</em><em>, </em><em>optional</em>) – subsubfolder for saving the experiment Data, defaults to “test_cycle”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>none</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="variables-handling">
+<h1>Variables handling<a class="headerlink" href="#variables-handling" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-variables"></span><dl class="py class">
+<dt class="sig sig-object py" id="variables.File_Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">variables.</span></span><span class="sig-name descname"><span class="pre">File_Settings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_set</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#File_Settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.File_Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>main file handeler</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="variables.File_Settings.generate_folder">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pre_sample'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pre_experiment'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pre_data'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#File_Settings.generate_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.File_Settings.generate_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>generate filestructure if not existing</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample</strong> (<em>str</em><em>, </em><em>optional</em>) – main folder name, defaults to “pre_sample”</p></li>
+<li><p><strong>experiment</strong> (<em>str</em><em>, </em><em>optional</em>) – usb folder name, defaults to “pre_experiment”</p></li>
+<li><p><strong>data</strong> (<em>str</em><em>, </em><em>optional</em>) – subsub folder name, defaults to “pre_data”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>storage path</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>os.path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="variables.File_Settings.load_folder">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load_folder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#File_Settings.load_folder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.File_Settings.load_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>get folder struktures form user input</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="variables.File_Settings.save_close">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#File_Settings.save_close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.File_Settings.save_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>sequenc of when closing the window</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="variables.File_Settings.save_experiment">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">save_experiment</span></span><a class="headerlink" href="#variables.File_Settings.save_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Window for Set Experiment Structure</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>logging to the commandwindow that the window is closed</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>print()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="variables.File_Settings.update_set_Parameters">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">update_set_Parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#File_Settings.update_set_Parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.File_Settings.update_set_Parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>repedative update Parameters at a timed intervall</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="variables.Pulse_Settings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">variables.</span></span><span class="sig-name descname"><span class="pre">Pulse_Settings</span></span><a class="reference internal" href="_modules/variables.html#Pulse_Settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.Pulse_Settings" title="Permalink to this definition">¶</a></dt>
+<dd><p>arbituary pulse generator
+!!!! more implementations is needet</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="variables.Pulse_Settings.parameter2Vektor">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parameter2Vektor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'squaer'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/variables.html#Pulse_Settings.parameter2Vektor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#variables.Pulse_Settings.parameter2Vektor" title="Permalink to this definition">¶</a></dt>
+<dd><p>arbituary puls shape generator</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<em>int</em>) – position of start pulse shape</p></li>
+<li><p><strong>stop</strong> (<em>int</em>) – stop position of pulse shape</p></li>
+<li><p><strong>shape</strong> (<em>str</em><em>, </em><em>optional</em>) – name of pulsshape, defaults to “squaer”</p></li>
+<li><p><strong>number</strong> (<em>int</em><em>, </em><em>optional</em>) – sampelpoints resolution, defaults to 100</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="run-external-hardware">
+<h1>Run external hardware<a class="headerlink" href="#run-external-hardware" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-run_external"></span><dl class="py function">
+<dt class="sig sig-object py" id="run_external.broad_seq_fid">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">broad_seq_fid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#broad_seq_fid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.broad_seq_fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>multi frequency Free Induction Decay (FID) sequence measurment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">broad_seq_fid</span><span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.send_sdr">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">send_sdr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#send_sdr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.send_sdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execution of the sequence from the main window.
+It will hand over the parameters to the sequence what will send all parameterst to the sdr and will control the execution of the sequence.
+It handels the returened data from the sequence and will save it to set filestrukture</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst structured from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters structured dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">run_external</span><span class="o">.</span><span class="n">send_sdr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_values</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">value_sequenz</span><span class="p">)</span>     
+<span class="go">value_main =</span>
+<span class="go"> {&#39;freq&#39;: {&#39;freq_start&#39;: &#39;80&#39;, &#39;freq_end&#39;: &#39;100&#39;, &#39;freq_step&#39;: &#39;100&#39;, &#39;freq_repetitions&#39;: &#39;10&#39;},</span>
+<span class="go"> &#39;tunematch&#39;: {&#39;tune&#39;: &#39;3.3&#39;, &#39;match&#39;: &#39;5&#39;, &#39;step&#39;: &#39;10&#39;, &#39;lut&#39;: &#39;10&#39;},</span>
+<span class="go"> &#39;load&#39;: {&#39;sample&#39;: &#39;_test_Sample&#39;, &#39;experiment&#39;: &#39;_test_Experiment&#39;, &#39;data&#39;: &#39;_test_Data&#39;}</span>
+<span class="go"> &#39;sequenz&#39;: {&#39;sequenz&#39;: &#39;fid&#39;}} # fid, spin, comp, spin_phase,own</span>
+<span class="go">sequenz_select = {&#39;start&#39;: {&#39;datum created:&#39;: &#39;2022-01-19 23:26:53.497312&#39;, &#39;user created:&#39;: &#39;User: laborPC&#39;, &#39;experiment:&#39;: &quot;[&#39;Experiment initialise&#39;]&quot;, &#39;experiment parameter:&#39;: &#39;[1.2]&#39;},</span>
+<span class="go"> &#39;setting&#39;: {&#39;sequenz_type&#39;: &#39;fid&#39;, &#39;target_freq&#39;: &#39;83.62&#39;, &#39;band_freq&#39;: &#39;1.2&#39;, &#39;lo_freq&#39;: &#39;82420000.0&#39;},</span>
+<span class="go"> &#39;SDR setting&#39;: {&#39;correction_tx_i_dc&#39;: &#39;-45&#39;, &#39;correction_tx_q_dc&#39;: &#39;0&#39;, &#39;correction_tx_i_gain&#39;: &#39;2047&#39;, &#39;correction_tx_q_gain&#39;: &#39;2039&#39;, &#39;correction_tx_pahse&#39;: &#39;3&#39;,    &#39;correction_rx_i_dc&#39;: &#39;0&#39;, &#39;correction_rx_q_dc&#39;: &#39;0&#39;, &#39;correction_rx_i_gain&#39;: &#39;2047&#39;, &#39;correction_rx_q_gain&#39;: &#39;2047&#39;, &#39;correction_rx_phase&#39;: &#39;0&#39;, &#39;low_pass_rx&#39;: &#39;3000000.0&#39;, &#39;low_pass_tx&#39;: &#39;130000000.0&#39;, &#39;gain_rx&#39;: &#39;55.0&#39;, &#39;gain_tx&#39;: &#39;40.0&#39;},</span>
+<span class="go"> &#39;Puls&#39;: {&#39;puls_freq&#39;: &#39;[1.2]&#39;, &#39;puls_duration&#39;: &#39;[3e-06]&#39;, &#39;puls_amplitude&#39;: &#39;[1]&#39;, &#39;puls_arangement&#39;: &#39;[300]&#39;, &#39;puls_count&#39;: &#39;1&#39;},</span>
+<span class="go"> &#39;Phase&#39;: {&#39;phase_number&#39;: &#39;[4, 1]&#39;, &#39;phase_level&#39;: &#39;[0, 1]&#39;, &#39;phase_puls&#39;: &#39;[0, 0.7853981633974483]&#39;, &#39;number_phase_level&#39;: &#39;1&#39;},</span>
+<span class="go"> &#39;Readout&#39;: {&#39;repetition_time&#39;: &#39;5&#39;, &#39;acquisition_time&#39;: &#39;82&#39;, &#39;gate_signal&#39;: &#39;[1, 0, 50, 10]&#39;}}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.send_tune_match">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">send_tune_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tune</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">match</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tm_step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tm_lut</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#send_tune_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.send_tune_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>provisions for development of a new tuning and matching system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tune</strong> (<em>float</em>) – max voltage range of tunig capacitor</p></li>
+<li><p><strong>match</strong> (<em>float</em>) – max voltage range of matching capacitor</p></li>
+<li><p><strong>tm_step</strong> (<em>int</em>) – step size of measured data</p></li>
+<li><p><strong>tm_lut</strong> (<em>int</em>) – resolution of saved measured data</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.seq_comp">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">seq_comp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#seq_comp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.seq_comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>composite pulse sequence with pulses that change their phase in time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq_comp</span> <span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.seq_fid">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">seq_fid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#seq_fid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.seq_fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>singel frequency Free Induction Decay (FID) sequence measurment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq_fid</span><span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.seq_own">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">seq_own</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#seq_own"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.seq_own" title="Permalink to this definition">¶</a></dt>
+<dd><p>own sequence can be used to desine a arbitrary sequence used with up to 10 pulses und all its dependet phases</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq_own</span><span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.seq_spin">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">seq_spin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#seq_spin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.seq_spin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spin-Echo sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq_spin</span><span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.seq_spin_phase">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">seq_spin_phase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value_main</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_sequenz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#seq_spin_phase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.seq_spin_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>spin-echo with phase-cycling  sequence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>value_main</strong> (<em>dict</em>) – all parameterst from the main window</p></li>
+<li><p><strong>value_sequenz</strong> (<em>dict</em>) – all parameters dependent on the sequence</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>Exception</strong> – Exception: if not possible to send to the hardware</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>steps time domain, amplitude time domain,steps frequency domain, amplitude frequency domain</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[list, list, list, list]</p>
+</dd>
+<dt class="field-odd">Example</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x_time</span><span class="p">,</span> <span class="n">y_time</span><span class="p">,</span> <span class="n">x_freq</span><span class="p">,</span> <span class="n">y_freq</span><span class="p">]</span> <span class="o">=</span> <span class="n">seq_spin_phase</span><span class="p">(</span><span class="n">value_main</span><span class="p">,</span> <span class="n">value_sequenz</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="run_external.string2array">
+<span class="sig-prename descclassname"><span class="pre">run_external.</span></span><span class="sig-name descname"><span class="pre">string2array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/run_external.html#string2array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#run_external.string2array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format string to a array which is seperated by a “,”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> (<em>str</em>) – a long string to be split</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>array of split of handed over sring</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array</p>
+</dd>
+<dt class="field-even">Example</dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mf">1.2</span> <span class="p">,</span><span class="mf">1.3</span> <span class="p">,</span><span class="mf">1.4</span> <span class="p">,</span><span class="mf">1.5</span> <span class="p">,</span><span class="mf">1.6</span> <span class="p">,</span><span class="mf">1.7</span>  <span class="p">]</span> <span class="o">=</span> <span class="n">string2array</span><span class="p">(</span><span class="s2">&quot;[1.2,1.3,1.4,1.5,1.6,1.7]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-win_plot">
+<span id="data-ploting"></span><h1>Data ploting<a class="headerlink" href="#module-win_plot" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-data2plot"></span><dl class="py function">
+<dt class="sig sig-object py" id="data2plot.plot">
+<span class="sig-prename descclassname"><span class="pre">data2plot.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/data2plot.html#plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#data2plot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Generates a figer from a file which has a predefined format. </dt><dd><p>The use is, to call saved files and generates plots for reevaluation in the GUI window</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – <a href="#id5"><span class="problematic" id="id6">*</span></a>.h5 file path with data to plot data</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>figure of a type matplotlib which can be ploted</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>figure</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-function">
+<span id="helper-funktions"></span><h1>Helper funktions<a class="headerlink" href="#module-function" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="function.error_type_window">
+<span class="sig-prename descclassname"><span class="pre">function.</span></span><span class="sig-name descname"><span class="pre">error_type_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_should=&lt;class</span> <span class="pre">'str'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variable_name=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message_example='none'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/function.html#error_type_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#function.error_type_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>rais a window for presenting an error message to the user with additional option</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_var</strong> (<em>str</em>) – what parameter we are talking about</p></li>
+<li><p><strong>type_should</strong> (<em>type</em><em> , </em><em>optional</em>) – expected type for the varialbe, defaults to str</p></li>
+<li><p><strong>variable_name</strong> (<em>str</em><em>, </em><em>optional</em>) – additonal description of the variable , defaults to “”</p></li>
+<li><p><strong>message_example</strong> (<em>str</em><em>, </em><em>optional</em>) – a message for a example for solving type colission , defaults to “none”</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="function.error_window">
+<span class="sig-prename descclassname"><span class="pre">function.</span></span><span class="sig-name descname"><span class="pre">error_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'TEST'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/function.html#error_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#function.error_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>rais a window for presenting an info or error message to the user</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>str</em><em>, </em><em>optional</em>) – Error message , defaults to “TEST”</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="function.load_setting">
+<span class="sig-prename descclassname"><span class="pre">function.</span></span><span class="sig-name descname"><span class="pre">load_setting</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/pi/Bach_arbeit/program'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'setting_last_run.cfg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/function.html#load_setting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#function.load_setting" title="Permalink to this definition">¶</a></dt>
+<dd><p>load the settings file with all its variables for the experiment into a dictonary</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – abolute path of the file with the settings <a href="#id7"><span class="problematic" id="id8">*</span></a>.cfg, defaults to “/home/pi/Bach_arbeit/program”</p></li>
+<li><p><strong>file</strong> (<em>str</em><em>, </em><em>optional</em>) – file with the saved settings, defaults to “setting_last_run.cfg”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Values from loaded fils settings</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Sphinx documentation</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Welcome to the “LimeNQR” documentation!</a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-start">start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#graphical-user-interface">Graphical User Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-win_main2">Main Window</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-win_load_file">File handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-win_sequenz">Sequence handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#variables-handling">Variables handling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#run-external-hardware">Run external hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-win_plot">Data ploting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#module-function">Helper funktions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, MALIN Philipp.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.5.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
