@@ -3,6 +3,12 @@ https://towardsdatascience.com/publish-python-project-documentation-on-confluenc
 docstring format: sphinx
 https://sphinx-rtd-tutorial.readthedocs.io/en/latest/docstrings.html
 
+settings are made in the source/conf.py file
+Information is saved in the index.rst file
+
 how to generate html dokumentation
 1. comment all funktion with docsting in the format shinx
 2. run make.bat
+3. check local if the build/html/indes.html fil works.
+4. copy all files from the html folder to the doc folder to be visiel online
+5. push to the server an veryfie if everything works
