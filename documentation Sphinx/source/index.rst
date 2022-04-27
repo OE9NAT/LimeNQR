@@ -5,7 +5,7 @@
 
 Developer documentation for the LimeNQR software.
 ================================================
-Controlling an Lime SDR from Nuclear Quadrupole Resonance spectroscopie with a graphilcal user interface.
+Controlling a Lime SDR for Nuclear Quadrupole Resonance spectroscopy with a graphical user interface.
 
 
 .. toctree::
