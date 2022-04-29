@@ -165,7 +165,7 @@ class Window_seq:
         # sequenz window
         logger_seq.info("start win_sequenz.py start class logger_seq init")
         self.win_seq = tk.Tk()
-        self.win_seq.title("LimeNQR - Sequenz Manager")
+        self.win_seq.title("LimeNQR - Sequence Manager")
         # self.win_seq.wm_iconbitmap(bitmap=logo_path)
         try:
             self.win_seq.wm_iconbitmap(
@@ -347,7 +347,7 @@ class Window_seq:
                                       textcoords="offset points", xytext=(2, -60), ha='left', rotation=90)
                     off_bool = False
                 else:
-                    fig_plot.annotate('Puls '+str(int((count+1)/2)), (point_summ, 1),
+                    fig_plot.annotate('Pulse '+str(int((count+1)/2)), (point_summ, 1),
                                       textcoords="offset points", xytext=(2, 10), ha='left')
                     off_bool = True
                 point_summ += point
@@ -359,7 +359,7 @@ class Window_seq:
 
             if amplitude < 1.5:
                 fig_plot.set_ylim(-1.2, 1.7)
-            fig_plot.set_title("Sequence of Pulssequence")
+            fig_plot.set_title("Sequence of Pulse Sequence")
             fig_plot.set_xlabel("Time in µs")
             fig_plot.set_ylabel("Amplitude")
             fig_plot.set_yticklabels([])
@@ -680,7 +680,7 @@ class Window_seq:
 
         # blank_time
         lable_blank_time = tk.Label(
-            frame_readout, text="Start acquisition in µs", bg='grey')
+            frame_readout, text="Start acquisition \n time in µs", bg='grey')
         lable_blank_time.grid(row=4, column=0, sticky="ew")
 
         self.blank_time_input = tk.Entry(
@@ -690,7 +690,7 @@ class Window_seq:
 
         # window_time
         lable_window_time = tk.Label(
-            frame_readout, text="Stop acquisition in µs", bg='grey')
+            frame_readout, text="Stop acquisition \n time in µs", bg='grey')
         lable_window_time.grid(row=5, column=0, sticky="ew")
 
         self.window_time_input = tk.Entry(
@@ -710,7 +710,7 @@ class Window_seq:
 
         # repetition_num
         lable_repetition_num = tk.Label(
-            frame_readout, text="number of Repetition", bg='grey')
+            frame_readout, text="number of Repetitions", bg='grey')
         lable_repetition_num.grid(row=7, column=0, sticky="ew")
 
         self.repetition_num_input = tk.Entry(
